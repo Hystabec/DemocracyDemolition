@@ -6,6 +6,8 @@ public class Projectile : MonoBehaviour
 {
    private CircleCollider2D col;
 
+    private int bounceCount = 0;
+
     void Start()
     {
         col = GetComponent<CircleCollider2D>();
@@ -14,5 +16,11 @@ public class Projectile : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("coconut collided");
+        bounceCount++;
+        if (bounceCount >= 3)
+        {
+            gameObject.SetActive(false);
+        }
+        
     }
 }
