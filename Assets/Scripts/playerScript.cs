@@ -28,8 +28,10 @@ public class playerScript : MonoBehaviour
     Quaternion selectedBlockRotation = new Quaternion(0, 0, 0, 0);
 
     Vector2 leftStickMoveVector = new Vector2(0,0);
-    Vector2 lastLeftStickMovementVector = new Vector2(0,0);
-    float stickSensitivityDampener = 40.0f;
+
+    float StickSensitivity = 10.0f;
+    float timeBetweenSwaps = 0.2f;
+    bool canSwap = true;
 
     public void AddBlockToList(GameObject blockToAdd)
     {
@@ -121,9 +123,13 @@ public class playerScript : MonoBehaviour
 
     public void OnLS(InputValue value)
     {
-        lastLeftStickMovementVector = leftStickMoveVector;
-
         leftStickMoveVector = value.Get<Vector2>();
+    }
+
+    private IEnumerator waitToSwap()
+    {
+        yield return new WaitForSeconds(timeBetweenSwaps);
+        canSwap = true;
     }
 
     void handleLeftStick()
@@ -134,7 +140,7 @@ public class playerScript : MonoBehaviour
 
         if (!hasBeenSelected)
         {
-            if (lastLeftStickMovementVector == new Vector2(0, 0))
+            if (canSwap)
             {
                 if (leftStickMoveVector.y != 0 && leftStickMoveVector.y > 0)
                 {
@@ -151,6 +157,10 @@ public class playerScript : MonoBehaviour
 
                     previousCol = sr.color; //save old color
                     sr.color = Color.black; //change colour of selected object
+
+                    canSwap = false;
+
+                    StartCoroutine(waitToSwap());
                 }
                 else if (leftStickMoveVector.y != 0 && leftStickMoveVector.y < 0)
                 {
@@ -167,12 +177,16 @@ public class playerScript : MonoBehaviour
 
                     previousCol = sr.color; //save old color
                     sr.color = Color.black; //change colour of selected object
+
+                    canSwap = false;
+
+                    StartCoroutine(waitToSwap());
                 }
             }
         }
         else
         {
-            selectableObjects[SelectedIndex].transform.position += new Vector3(leftStickMoveVector.x/stickSensitivityDampener, leftStickMoveVector.y/stickSensitivityDampener, 0);
+            selectableObjects[SelectedIndex].transform.position += (new Vector3(StickSensitivity*leftStickMoveVector.x, StickSensitivity*leftStickMoveVector.y, 0))*Time.deltaTime;
         }
     }
 
