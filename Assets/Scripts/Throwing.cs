@@ -12,9 +12,14 @@ public class Throwing : MonoBehaviour
 
     private Vector3 mousePos;
 
+    [SerializeField]
+    private List<GameObject> avaialableProjectiles;
+
+    private int thrownCount = 0;
+
     void Start()
     {
-        
+
     }
 
     void Update()
@@ -30,9 +35,16 @@ public class Throwing : MonoBehaviour
 
         if(Input.GetMouseButtonDown(0))
         {
-            GameObject proj = Instantiate(coconutProjectile, transform.position, Quaternion.identity);
+            if (thrownCount < 3)
+            {
+                GameObject proj = avaialableProjectiles[0];
+                avaialableProjectiles.Remove(avaialableProjectiles[0]);
+                proj.transform.position = transform.position;
+                proj.SetActive(true);
 
-            proj.GetComponent<Rigidbody2D>().velocity = new Vector2(rotation.x, rotation.y).normalized * 10;
+                proj.GetComponent<Rigidbody2D>().velocity = new Vector2(rotation.x, rotation.y).normalized * 10;
+                thrownCount++;
+            }
         }
     }
 }
