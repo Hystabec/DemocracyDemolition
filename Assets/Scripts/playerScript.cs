@@ -1,16 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class playerScript : MonoBehaviour
 {
     int SelectedIndex = 0;
     List<GameObject> selectableObjects = new List<GameObject>(4);
 
+    public Vector3 locationOne;
+    public Vector3 locationTwo;
+    public Vector3 locationThree;
+
+    bool locationOneFree = true;
+    bool locationTwoFree = true;
+    bool locationThreeFree = true;
+
     public GameObject tempObject1;
     public GameObject tempObject2;
     public GameObject tempObject3;
-    public GameObject tempObject4;
 
     Color previousCol;
 
@@ -18,6 +26,155 @@ public class playerScript : MonoBehaviour
 
     Vector3 selectedBlockLocation = new Vector3(0, 0, 0);
     Quaternion selectedBlockRotation = new Quaternion(0, 0, 0, 0);
+
+    Vector2 leftStickMoveVector = new Vector2(0,0);
+    Vector2 lastLeftStickMovementVector = new Vector2(0,0);
+    float stickSensitivityDampener = 40.0f;
+
+    public void AddBlockToList(GameObject blockToAdd)
+    {
+        selectableObjects.Add(blockToAdd);
+
+        //put the block in place - and sets locations to false
+        if(locationOneFree)
+        {
+            blockToAdd.transform.position = locationOne;
+            locationOneFree = false;
+            return;
+        }
+
+        if(locationTwoFree)
+        {
+            blockToAdd.transform.position = locationTwo;
+            locationTwoFree = false;
+            return;
+        }
+
+        if(locationThreeFree)
+        {
+            blockToAdd.transform.position = locationThree;
+            locationThreeFree = false;
+            return;
+        }
+    }
+
+    public void OnA()
+    {
+        if (!(selectableObjects.Count > 0))
+            return;
+
+        if (!hasBeenSelected)
+        {
+            hasBeenSelected = true;
+            selectedBlockLocation = selectableObjects[SelectedIndex].transform.position;
+            selectedBlockRotation = selectableObjects[SelectedIndex].transform.rotation;
+        }
+        else
+        {
+            //remvoe the selected object from the list - it has been placed
+            selectableObjects[SelectedIndex].GetComponent<SpriteRenderer>().color = previousCol;
+
+            selectableObjects.RemoveAt(SelectedIndex);
+
+            SelectedIndex = 0;
+
+            if (selectableObjects.Count != 0)
+            {
+                SpriteRenderer sr = selectableObjects[SelectedIndex].GetComponent<SpriteRenderer>();
+                previousCol = sr.color;
+                sr.color = Color.black;
+            }
+
+            hasBeenSelected = false;
+        }
+    }
+
+    public void OnB()
+    {
+        if (!(selectableObjects.Count > 0))
+            return;
+
+        if (hasBeenSelected)
+        {
+            selectableObjects[SelectedIndex].transform.position = selectedBlockLocation;
+            selectableObjects[SelectedIndex].transform.rotation = selectedBlockRotation;
+
+            hasBeenSelected = false;
+        }
+    }
+
+    public void OnRB()
+    {
+        if (!(selectableObjects.Count > 0))
+            return;
+
+        selectableObjects[SelectedIndex].transform.Rotate(new Vector3(0, 0, 90));
+    }
+
+    public void OnLB()
+    {
+        if (!(selectableObjects.Count > 0))
+            return;
+
+        selectableObjects[SelectedIndex].transform.Rotate(new Vector3(0, 0, 90));
+    }
+
+    public void OnLS(InputValue value)
+    {
+        lastLeftStickMovementVector = leftStickMoveVector;
+
+        leftStickMoveVector = value.Get<Vector2>();
+    }
+
+    void handleLeftStick()
+    {
+        if (!(selectableObjects.Count > 0))
+            return;
+
+
+        if (!hasBeenSelected)
+        {
+            if (lastLeftStickMovementVector == new Vector2(0, 0))
+            {
+                if (leftStickMoveVector.y != 0 && leftStickMoveVector.y > 0)
+                {
+                    selectableObjects[SelectedIndex].GetComponent<SpriteRenderer>().color = previousCol; //resets the color
+
+                    SelectedIndex--;
+
+                    if (SelectedIndex < 0)
+                    {
+                        SelectedIndex = selectableObjects.Count-1;
+                    }
+
+                    SpriteRenderer sr = selectableObjects[SelectedIndex].GetComponent<SpriteRenderer>();
+
+                    previousCol = sr.color; //save old color
+                    sr.color = Color.black; //change colour of selected object
+                }
+                else if (leftStickMoveVector.y != 0 && leftStickMoveVector.y < 0)
+                {
+                    selectableObjects[SelectedIndex].GetComponent<SpriteRenderer>().color = previousCol; //resets the color
+
+                    SelectedIndex++;
+
+                    if (SelectedIndex >= selectableObjects.Count)
+                    {
+                        SelectedIndex = 0;
+                    }
+
+                    SpriteRenderer sr = selectableObjects[SelectedIndex].GetComponent<SpriteRenderer>();
+
+                    previousCol = sr.color; //save old color
+                    sr.color = Color.black; //change colour of selected object
+                }
+            }
+        }
+        else
+        {
+            selectableObjects[SelectedIndex].transform.position += new Vector3(leftStickMoveVector.x/stickSensitivityDampener, leftStickMoveVector.y/stickSensitivityDampener, 0);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -27,120 +184,15 @@ public class playerScript : MonoBehaviour
         previousCol = sr.color;
         sr.color = Color.black;
 
-
         //populates the arrray with the gameObjects
-        selectableObjects.Add(tempObject1);
-        selectableObjects.Add(tempObject2);
-        selectableObjects.Add(tempObject3);
-        selectableObjects.Add(tempObject4);
+        AddBlockToList(tempObject1);
+        AddBlockToList(tempObject2);
+        AddBlockToList(tempObject3);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!(selectableObjects.Count > 0))
-            return;
-        
-        if (hasBeenSelected)
-        {
-            if (Input.GetKey(KeyCode.W))
-            {
-                //leftstick up
-
-                selectableObjects[SelectedIndex].transform.position += new Vector3(0,0.1f,0);
-            }
-
-            if (Input.GetKey(KeyCode.S))
-            {
-                //leftstick down
-
-                selectableObjects[SelectedIndex].transform.position += new Vector3(0, -0.1f, 0);
-            }
-
-            if (Input.GetKey(KeyCode.A))
-            {
-                //leftstick left
-
-                selectableObjects[SelectedIndex].transform.position += new Vector3(-0.1f, 0, 0);
-            }
-
-            if (Input.GetKey(KeyCode.D))
-            {
-                //leftstick right
-
-                selectableObjects[SelectedIndex].transform.position += new Vector3(0.1f, 0, 0);
-            }
-
-            if(Input.GetKeyUp(KeyCode.Q))
-            {
-                //leftbumper
-
-                selectableObjects[SelectedIndex].transform.Rotate(new Vector3(0, 0, 90)); 
-            }
-
-            if(Input.GetKeyUp(KeyCode.E))
-            {
-                //rightbumper
-
-                selectableObjects[SelectedIndex].transform.Rotate(new Vector3(0, 0, -90));
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            //this will mimic A being pressed
-            if (!hasBeenSelected)
-            {
-                hasBeenSelected = true;
-                selectedBlockLocation = selectableObjects[SelectedIndex].transform.position;
-                selectedBlockRotation = selectableObjects[SelectedIndex].transform.rotation;
-            }
-            else
-            {
-                //remvoe the selected object from the list - it has been placed
-                selectableObjects[SelectedIndex].GetComponent<SpriteRenderer>().color = previousCol;
-
-                selectableObjects.RemoveAt(SelectedIndex);
-
-                SelectedIndex=0;
-
-                if (selectableObjects.Count != 0)
-                {
-                    SpriteRenderer sr = selectableObjects[SelectedIndex].GetComponent<SpriteRenderer>();
-                    previousCol = sr.color;
-                    sr.color = Color.black;
-                }
-
-                hasBeenSelected = false;
-            }
-        }
-
-        if(Input.GetKeyDown(KeyCode.X) && hasBeenSelected)
-        {
-            //this will mimic B being pressed
-            selectableObjects[SelectedIndex].transform.position = selectedBlockLocation;
-            selectableObjects[SelectedIndex].transform.rotation = selectedBlockRotation;
-
-            hasBeenSelected = false;
-        }
-
-        if(Input.GetKeyUp(KeyCode.S) && !hasBeenSelected)   //old system, will need to use new system
-        {
-            //this will mimic the L stick down
-
-            selectableObjects[SelectedIndex].GetComponent<SpriteRenderer>().color = previousCol; //resets the color
-
-            SelectedIndex++;
-
-            if(SelectedIndex >= selectableObjects.Count)
-            {
-                SelectedIndex = 0;
-            }
-
-            SpriteRenderer sr = selectableObjects[SelectedIndex].GetComponent<SpriteRenderer>();
-
-            previousCol = sr.color; //save old color
-            sr.color = Color.black; //change colour of selected object
-        }  
+        handleLeftStick();   
     }
 }
