@@ -40,6 +40,13 @@ public class playerScript : MonoBehaviour
     float timeBetweenSwaps = 0.2f;
     bool canSwap = true;
 
+    [SerializeField]
+    private List<GameObject> avaialableProjectiles;
+    private int thrownCount = 0;
+
+    [SerializeField]
+    float throwForce = 10.0f;
+
     public void AddBlockToList(GameObject blockToAdd)
     {
         selectableObjects.Add(blockToAdd);
@@ -150,6 +157,18 @@ public class playerScript : MonoBehaviour
     void OnRT()
     {
         //shoot projectile
+        if (thrownCount < 3)
+        {
+            GameObject proj = avaialableProjectiles[0];
+            avaialableProjectiles.Remove(avaialableProjectiles[0]);
+            proj.transform.position = fireMarker.transform.GetChild(0).transform.position;
+            proj.SetActive(true);
+
+            Vector3 rotation = fireMarker.transform.GetChild(0).transform.position - fireMarker.transform.position;
+
+            proj.GetComponent<Rigidbody2D>().velocity = new Vector2(rotation.x, rotation.y).normalized * throwForce;
+            thrownCount++;
+        }
     }
 
     private IEnumerator waitToSwap()
@@ -163,7 +182,7 @@ public class playerScript : MonoBehaviour
         if (!(selectableObjects.Count > 0))
             return;
 
-
+        //this could probably be done better, but oh well it works :)
         if (!hasBeenSelected)
         {
             if (canSwap)
