@@ -1,35 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class playerScript : MonoBehaviour
 {
     int SelectedIndex = 0;
     List<GameObject> selectableObjects = new List<GameObject>(4);
 
-    public Vector3 locationOne;
-    public Vector3 locationTwo;
-    public Vector3 locationThree;
+    [SerializeField]
+    public GameObject tempObject1, tempObject2, tempObject3;
+
+    [SerializeField]
+    Vector3 locationOne, locationTwo, locationThree;
+
+    [SerializeField]
+    GameObject fireMarker;
 
     bool locationOneFree = true;
     bool locationTwoFree = true;
     bool locationThreeFree = true;
 
-    public GameObject tempObject1;
-    public GameObject tempObject2;
-    public GameObject tempObject3;
-
     Color previousCol;
 
     bool hasBeenSelected = false;
 
-    Vector3 selectedBlockLocation = new Vector3(0, 0, 0);
+    Vector3 selectedBlockLocation = Vector3.zero;
     Quaternion selectedBlockRotation = new Quaternion(0, 0, 0, 0);
 
-    Vector2 leftStickMoveVector = new Vector2(0,0);
+    Vector2 leftStickMoveVector = Vector2.zero;
+    Vector2 rightStickMoveVector = Vector2.zero;
 
-    float StickSensitivity = 10.0f;
+    float leftStickSensitivity = 10.0f;
+
+    Vector3 FireMarkerMoveVector = Vector3.zero;
+
     float timeBetweenSwaps = 0.2f;
     bool canSwap = true;
 
@@ -60,7 +67,16 @@ public class playerScript : MonoBehaviour
         }
     }
 
-    public void OnA()
+    public void clearBlockList()
+    {
+        selectableObjects.Clear();
+
+        locationOneFree = true;
+        locationTwoFree = true;
+        locationThreeFree = true;
+    }
+
+    void OnA()
     {
         if (!(selectableObjects.Count > 0))
             return;
@@ -91,7 +107,7 @@ public class playerScript : MonoBehaviour
         }
     }
 
-    public void OnB()
+    void OnB()
     {
         if (!(selectableObjects.Count > 0))
             return;
@@ -105,7 +121,7 @@ public class playerScript : MonoBehaviour
         }
     }
 
-    public void OnRB()
+    void OnRB()
     {
         if (!(selectableObjects.Count > 0))
             return;
@@ -113,7 +129,7 @@ public class playerScript : MonoBehaviour
         selectableObjects[SelectedIndex].transform.Rotate(new Vector3(0, 0, 90));
     }
 
-    public void OnLB()
+    void OnLB()
     {
         if (!(selectableObjects.Count > 0))
             return;
@@ -121,9 +137,19 @@ public class playerScript : MonoBehaviour
         selectableObjects[SelectedIndex].transform.Rotate(new Vector3(0, 0, 90));
     }
 
-    public void OnLS(InputValue value)
+    void OnLS(InputValue value)
     {
         leftStickMoveVector = value.Get<Vector2>();
+    }
+
+    void OnRS(InputValue value)
+    {
+        rightStickMoveVector = value.Get<Vector2>();
+    }
+
+    void OnRT()
+    {
+        //shoot projectile
     }
 
     private IEnumerator waitToSwap()
@@ -186,8 +212,16 @@ public class playerScript : MonoBehaviour
         }
         else
         {
-            selectableObjects[SelectedIndex].transform.position += (new Vector3(StickSensitivity*leftStickMoveVector.x, StickSensitivity*leftStickMoveVector.y, 0))*Time.deltaTime;
+            selectableObjects[SelectedIndex].transform.position += (new Vector3(leftStickSensitivity*leftStickMoveVector.x, leftStickSensitivity*leftStickMoveVector.y, 0))*Time.deltaTime;
         }
+    }
+
+    void handleRightStick()
+    {
+        FireMarkerMoveVector = (Vector3.up*rightStickMoveVector.x + Vector3.left*rightStickMoveVector.y);
+
+        if(rightStickMoveVector.x != 0 || rightStickMoveVector.y != 0)
+            fireMarker.transform.rotation = quaternion.LookRotation(Vector3.forward, FireMarkerMoveVector);
     }
 
     // Start is called before the first frame update
@@ -207,6 +241,7 @@ public class playerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        handleLeftStick();   
+        handleLeftStick();
+        handleRightStick();
     }
 }
