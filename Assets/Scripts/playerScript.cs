@@ -41,11 +41,21 @@ public class playerScript : MonoBehaviour
     bool canSwap = true;
 
     [SerializeField]
-    private List<GameObject> avaialableProjectiles;
-    private int thrownCount = 0;
+    GameObject projectile;
+
+    
+    int numOfProjectiles = 10;
+    List<GameObject> projectList;
 
     [SerializeField]
     float throwForce = 10.0f;
+
+    public void despawnProjectile(GameObject projectile)
+    {
+        projectile.SetActive(false);
+        projectile.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        projectList.Add(projectile);
+    }
 
     public void AddBlockToList(GameObject blockToAdd)
     {
@@ -157,18 +167,17 @@ public class playerScript : MonoBehaviour
     void OnRT()
     {
         //shoot projectile
-        if (thrownCount < 3)
-        {
-            GameObject proj = avaialableProjectiles[0];
-            avaialableProjectiles.Remove(avaialableProjectiles[0]);
-            proj.transform.position = fireMarker.transform.GetChild(0).transform.position;
-            proj.SetActive(true);
+        if (projectList.Count <= 0)
+            return; //projects are empty - do nothing
 
-            Vector3 rotation = fireMarker.transform.GetChild(0).transform.position - fireMarker.transform.position;
+        GameObject proj = projectList[0];
+        proj.transform.position = fireMarker.transform.GetChild(0).transform.position;
+        proj.SetActive(true);
 
-            proj.GetComponent<Rigidbody2D>().velocity = new Vector2(rotation.x, rotation.y).normalized * throwForce;
-            thrownCount++;
-        }
+        Vector3 rotation = fireMarker.transform.GetChild(0).transform.position - fireMarker.transform.position;
+
+        proj.GetComponent<Rigidbody2D>().velocity = new Vector2(rotation.x, rotation.y).normalized * throwForce;
+        projectList.Remove(proj);
     }
 
     private IEnumerator waitToSwap()
@@ -255,6 +264,18 @@ public class playerScript : MonoBehaviour
         AddBlockToList(tempObject1);
         AddBlockToList(tempObject2);
         AddBlockToList(tempObject3);
+
+        projectList = new List<GameObject>(numOfProjectiles);
+
+        GameObject temp;
+        for(int i = 0; i < numOfProjectiles; i++)
+        {
+            temp = Instantiate(projectile);
+            temp.transform.SetParent(this.transform);
+            temp.GetComponent<pooledProjectileScript>().owner = this;
+            projectList.Add(temp);
+            temp.SetActive(false);
+        }
     }
 
     // Update is called once per frame
