@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 public class playerScript : MonoBehaviour
 {
     int SelectedIndex = 0;
-    List<GameObject> selectableObjects = new List<GameObject>(4);
+    List<GameObject> selectableObjects = new List<GameObject>();
 
     [SerializeField]
     public GameObject tempObject1, tempObject2, tempObject3;
