@@ -6,45 +6,66 @@ using UnityEditor.TestTools;
 
 public class EditorBlockPrefabGen : EditorWindow
 {
-    
     [MenuItem("Assets/Gen Block Prefab")]
     private static void GenerateBlockPrefab()
     {
-        string prefabPath = "Assets/" + Selection.activeObject.name + ".prefab";
+        Object[] selectObjects = Selection.objects;
+        string lastPath = "";
 
-        GameObject go = new GameObject("temp");
-        go.layer = LayerMask.NameToLayer("Block");
+        foreach (Object obj in selectObjects)
+        {
+            string prefabPath = "Assets/" + obj + ".prefab";
 
-        go.AddComponent<SpriteRenderer>().sprite = Selection.activeObject as Sprite;
+            GameObject go = new GameObject("temp");
+            go.layer = LayerMask.NameToLayer("Block");
 
-        go.AddComponent<PolygonCollider2D>();
+            go.AddComponent<SpriteRenderer>().sprite = obj as Sprite;
 
-        Rigidbody2D rb2d = go.AddComponent<Rigidbody2D>();
-        rb2d.gravityScale = 0.0f;
-        rb2d.constraints = RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
+            go.AddComponent<PolygonCollider2D>();
 
-        go.AddComponent<blockScript>();
+            Rigidbody2D rb2d = go.AddComponent<Rigidbody2D>();
+            rb2d.gravityScale = 0.0f;
+            rb2d.constraints = RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
 
-        GameObject outline = new GameObject("outline");
-        outline.layer = LayerMask.NameToLayer("Block");
-        outline.AddComponent<SpriteRenderer>();
+            go.AddComponent<blockScript>();
 
-        outline.transform.parent = go.transform;
-        outline.SetActive(false);
+            GameObject outline = new GameObject("outline");
+            outline.layer = LayerMask.NameToLayer("Block");
+            outline.AddComponent<SpriteRenderer>();
 
-        PrefabUtility.SaveAsPrefabAsset(go, prefabPath);
-       
-        GameObject.DestroyImmediate(outline);
-        GameObject.DestroyImmediate(go);
+            outline.transform.parent = go.transform;
+            outline.SetActive(false);
 
-        AssetDatabase.OpenAsset(AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath));
+            PrefabUtility.SaveAsPrefabAsset(go, prefabPath);
 
-        EditorUtility.DisplayDialog("prefab created: " + prefabPath, "Check collider is correct\nAdd sprite to outline", "Ok");
+            GameObject.DestroyImmediate(outline);
+            GameObject.DestroyImmediate(go);
+
+            lastPath = prefabPath;
+        }
+
+        AssetDatabase.OpenAsset(AssetDatabase.LoadAssetAtPath<GameObject>(lastPath));
+
+        EditorUtility.DisplayDialog("prefab created: " + lastPath, "Check collider is correct\nAdd sprite to outline", "Ok");
     }
 
     [MenuItem("Assets/Gen Block Prefab", true)]
     private static bool Validation()
     {
-        return Selection.activeObject.GetType() == typeof(Sprite);
+        Object[] selected = Selection.objects;
+        bool canProceed = true;
+
+        if (selected.Length == 0)
+            return false;
+
+        foreach(Object obj in selected)
+        {
+            if (obj.GetType() != typeof(Sprite))
+                canProceed = false;
+        }
+
+        return canProceed;
     }
+
+    
 }
