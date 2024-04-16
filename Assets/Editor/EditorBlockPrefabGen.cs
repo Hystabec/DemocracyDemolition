@@ -6,7 +6,57 @@ using UnityEditor.TestTools;
 
 public class EditorBlockPrefabGen : EditorWindow
 {
-    [MenuItem("Assets/Gen Block Prefab")]
+    Sprite mSprite = null;
+    Sprite oSprite = null;
+
+    private void OnGUI()
+    {
+        mSprite = (Sprite)EditorGUILayout.ObjectField("Main Sprite", mSprite, typeof(Sprite), false);
+
+        oSprite = (Sprite)EditorGUILayout.ObjectField("Outline Sprite", oSprite, typeof(Sprite), false);
+
+        if(GUILayout.Button("Create") && mSprite != null)
+        { 
+            string prefabPath = "Assets/" + mSprite.name + ".prefab";
+
+            GameObject go = new GameObject("temp");
+            go.layer = LayerMask.NameToLayer("Block");
+
+            go.AddComponent<SpriteRenderer>().sprite = mSprite as Sprite;
+
+            go.AddComponent<PolygonCollider2D>();
+
+            Rigidbody2D rb2d = go.AddComponent<Rigidbody2D>();
+            rb2d.gravityScale = 0.0f;
+            rb2d.constraints = RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
+
+            go.AddComponent<blockScript>();
+
+            GameObject outline = new GameObject("outline");
+            outline.layer = LayerMask.NameToLayer("Block");
+
+            SpriteRenderer tempSR = outline.AddComponent<SpriteRenderer>();
+
+            if (oSprite != null)
+                tempSR.sprite = oSprite as Sprite;
+
+            outline.transform.parent = go.transform;
+            outline.SetActive(false);
+
+            PrefabUtility.SaveAsPrefabAsset(go, prefabPath);
+
+            GameObject.DestroyImmediate(outline);
+            GameObject.DestroyImmediate(go);
+        }
+    }
+
+    [MenuItem("Assets/Generate Block Prefab/Menu")]
+    private static void GenerateBlockPrefabMenu()
+    {
+        EditorWindow.GetWindow(typeof(EditorBlockPrefabGen));
+    }
+
+    [MenuItem("Assets/Generate Block Prefab/Selected Sprite")]
     private static void GenerateBlockPrefab()
     {
         Object[] selectObjects = Selection.objects;
@@ -49,7 +99,7 @@ public class EditorBlockPrefabGen : EditorWindow
         EditorUtility.DisplayDialog("prefab created: " + lastPath, "Check collider is correct\nAdd sprite to outline", "Ok");
     }
 
-    [MenuItem("Assets/Gen Block Prefab", true)]
+    [MenuItem("Assets/Generate Block Prefab/Selected Sprite", true)]
     private static bool Validation()
     {
         Object[] selected = Selection.objects;
@@ -67,5 +117,5 @@ public class EditorBlockPrefabGen : EditorWindow
         return canProceed;
     }
 
-    
+  
 }
