@@ -8,10 +8,13 @@ public class blockScript : MonoBehaviour
     int TotalBlockHealth = 3;
     int CurrentBlockHealth = 3;
 
+    private GameObject player;
+
     // Start is called before the first frame update
     void Start()
     {
         CurrentBlockHealth = TotalBlockHealth;
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
@@ -31,6 +34,32 @@ public class blockScript : MonoBehaviour
                 CurrentBlockHealth = TotalBlockHealth;
                 Debug.Log(gameObject.name + " destroyed");
             }
+        }
+
+        //Sets it in playerScript so the player cannot place the current block if its colliding with another block or the player
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("Block"))
+        {
+            player.GetComponent<playerScript>().canPlace = false;
+        }
+
+        if (other.gameObject.CompareTag("Player"))
+        {
+            player.GetComponent<playerScript>().canPlace = false;
+        }
+
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Block"))
+        {
+            player.GetComponent<playerScript>().canPlace = true;
+        }
+
+        if (other.gameObject.CompareTag("Player"))
+        {
+            player.GetComponent<playerScript>().canPlace = true;
         }
     }
 }
