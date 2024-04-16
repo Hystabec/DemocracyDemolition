@@ -50,6 +50,8 @@ public class playerScript : MonoBehaviour
     [SerializeField]
     float throwForce = 10.0f;
 
+    public bool canPlace = true;
+
     public void despawnProjectile(GameObject projectile)
     {
         projectile.SetActive(false);
@@ -104,7 +106,7 @@ public class playerScript : MonoBehaviour
             selectedBlockLocation = selectableObjects[SelectedIndex].transform.position;
             selectedBlockRotation = selectableObjects[SelectedIndex].transform.rotation;
         }
-        else
+        else if (canPlace)
         {
             //remvoe the selected object from the list - it has been placed
             selectableObjects[SelectedIndex].GetComponent<SpriteRenderer>().color = previousCol;
