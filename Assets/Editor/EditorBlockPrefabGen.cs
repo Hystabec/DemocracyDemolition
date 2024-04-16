@@ -47,6 +47,10 @@ public class EditorBlockPrefabGen : EditorWindow
 
             GameObject.DestroyImmediate(outline);
             GameObject.DestroyImmediate(go);
+
+            AssetDatabase.OpenAsset(AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath));
+
+            EditorUtility.DisplayDialog("prefab created: " + prefabPath, "Check collider is correct", "Ok");
         }
     }
 
