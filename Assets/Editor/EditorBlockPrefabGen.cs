@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.TestTools;
+using Unity.VisualScripting;
 
 public class EditorBlockPrefabGen : EditorWindow
 {
-    Sprite mSprite = null;
-    Sprite oSprite = null;
+    static Sprite mSprite = null;
+    static Sprite oSprite = null;
 
     private void OnGUI()
     {
@@ -54,11 +55,30 @@ public class EditorBlockPrefabGen : EditorWindow
         }
     }
 
+    //ran when the window is closed
+    void OnDestroy()
+    {
+        mSprite = null;
+        oSprite = null;
+    }
+
     [MenuItem("Assets/Generate Block Prefab/Menu")]
     private static void GenerateBlockPrefabMenu()
     {
+        //checks if a sprite is selected an adds it sprite to the menu if so
+        if (Selection.activeObject != null)
+        {
+            if (Selection.activeObject.GetType() == typeof(Sprite))
+            {
+                mSprite = (Sprite)Selection.activeObject;
+            }
+        }
+
+        //opens window
         EditorWindow.GetWindow(typeof(EditorBlockPrefabGen));
     }
+
+    
 
     [MenuItem("Assets/Generate Block Prefab/Selected Sprite")]
     private static void GenerateBlockPrefab()
