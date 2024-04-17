@@ -7,6 +7,9 @@ using UnityEngine.UIElements;
 
 public class playerScript : MonoBehaviour
 {
+    [SerializeField]
+    int thisPlayerIndex = 0;
+
     int SelectedIndex = 0;
     List<GameObject> selectableObjects = new List<GameObject>();
 
@@ -52,6 +55,11 @@ public class playerScript : MonoBehaviour
 
     public bool canPlace = true;
 
+    public int getPlayerIndex()
+    {
+        return thisPlayerIndex;
+    }
+
     public void despawnProjectile(GameObject projectile)
     {
         projectile.SetActive(false);
@@ -95,7 +103,7 @@ public class playerScript : MonoBehaviour
         locationThreeFree = true;
     }
 
-    void OnA()
+    public void A()
     {
         if (!(selectableObjects.Count > 0))
             return;
@@ -126,7 +134,7 @@ public class playerScript : MonoBehaviour
         }
     }
 
-    void OnB()
+    public void B()
     {
         if (!(selectableObjects.Count > 0))
             return;
@@ -140,7 +148,7 @@ public class playerScript : MonoBehaviour
         }
     }
 
-    void OnRB()
+    public void RB()
     {
         if (!(selectableObjects.Count > 0))
             return;
@@ -148,7 +156,7 @@ public class playerScript : MonoBehaviour
         selectableObjects[SelectedIndex].transform.Rotate(new Vector3(0, 0, 90));
     }
 
-    void OnLB()
+    public void LB()
     {
         if (!(selectableObjects.Count > 0))
             return;
@@ -156,17 +164,17 @@ public class playerScript : MonoBehaviour
         selectableObjects[SelectedIndex].transform.Rotate(new Vector3(0, 0, 90));
     }
 
-    void OnLS(InputValue value)
+    public void LS(InputValue value)
     {
         leftStickMoveVector = value.Get<Vector2>();
     }
 
-    void OnRS(InputValue value)
+    public void RS(InputValue value)
     {
         rightStickMoveVector = value.Get<Vector2>();
     }
 
-    void OnRT()
+    public void RT()
     {
         //shoot projectile
         if (projectList.Count <= 0)
@@ -254,7 +262,6 @@ public class playerScript : MonoBehaviour
             fireMarker.transform.rotation = quaternion.LookRotation(Vector3.forward, FireMarkerMoveVector);
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         SpriteRenderer sr = tempObject1.GetComponent<SpriteRenderer>();
@@ -280,7 +287,6 @@ public class playerScript : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         handleLeftStick();
