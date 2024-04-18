@@ -22,13 +22,15 @@ public class randomBlockSpawn : MonoBehaviour
         availableTraps = Resources.LoadAll<GameObject>("TrapPrefabs");
         spawnPos = new Vector3(-15, 2, 0);
 
-        SpawnBlock();
-        SpawnBlock();
-        SpawnBlock();
-        SpawnBlock();
-        SpawnBlock();
-        SpawnBlock();
+        //SpawnBlock();
+        //SpawnBlock();
+        //SpawnBlock();
+        //SpawnBlock();
+        //SpawnBlock();
+        //SpawnBlock();
 
+        spawnBlockIn(player1, 3);
+        spawnBlockIn(player2, 3);
     }
 
 
@@ -40,6 +42,35 @@ public class randomBlockSpawn : MonoBehaviour
        // thisBlock.SetActive(false);
     }
 
+    public void spawnTrapIn(GameObject ToGiveTo, int numberToGive)
+    {
+        for (int i = 0; i < numberToGive; i++)
+        {
+            GameObject thisBlock = Instantiate(randomTrap(), spawnPos, Quaternion.identity);
+            thisBlock.GetComponent<blockScript>().assignPlayer(ToGiveTo);
+            ToGiveTo.GetComponent<playerScript>().AddBlockToList(thisBlock);
+        }
+    }
+
+    public void spawnBlockIn(GameObject ToGiveTo, int numberToGive)
+    {
+        for(int i = 0; i < numberToGive; i++)
+        {
+            GameObject thisBlock = Instantiate(randomBlock(), spawnPos, Quaternion.identity);
+            thisBlock.GetComponent<blockScript>().assignPlayer(ToGiveTo);
+            ToGiveTo.GetComponent<playerScript>().AddBlockToList(thisBlock);
+        }
+    }
+
+    GameObject randomTrap()
+    {
+        return availableTraps[Random.Range(0, availableTraps.Length)];
+    }
+
+    GameObject randomBlock()
+    {
+        return availableBlocks[Random.Range(0, availableBlocks.Length)];
+    }
 
     GameObject ChooseBlock()
     {

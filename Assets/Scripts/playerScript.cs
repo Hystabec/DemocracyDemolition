@@ -353,4 +353,12 @@ public class playerScript : MonoBehaviour
         handleLeftStick();
         handleRightStick();
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("projectile"))
+        {
+            FindObjectOfType<InGameManagerScript>().playerKilled(this.gameObject);
+        }
+    }
 }

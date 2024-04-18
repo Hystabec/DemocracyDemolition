@@ -41,6 +41,10 @@ public class blockScript : MonoBehaviour
 
     }
 
+    public void assignPlayer(GameObject owningPlayer)
+    {
+        Player = owningPlayer;
+    }
 
 
     void OnCollisionEnter2D(Collision2D other)
