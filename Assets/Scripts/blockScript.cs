@@ -24,7 +24,7 @@ public class blockScript : MonoBehaviour
         CurrentBlockHealth = TotalBlockHealth;
 
         col = gameObject.GetComponent<Collider2D>();
-        col.enabled = false;
+       // col.enabled = false;
     }
 
     // Update is called once per frame
@@ -38,7 +38,7 @@ public class blockScript : MonoBehaviour
         Player = playerobj;
         chosenPlayerScript = Player.GetComponent<playerScript>();
         chosenPlayerScript.AddBlocks(gameObject);
-
+       // col.enabled = true;
     }
 
 
@@ -68,11 +68,12 @@ public class blockScript : MonoBehaviour
             {
                 canPlaceBlock = false;
                 chosenPlayerScript.CanPlaceBlock(false);
+                
 
             }
         }
 
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("playerArea"))
         {
             if (Player)
             {
@@ -94,7 +95,7 @@ public class blockScript : MonoBehaviour
             }
         }
 
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("playerArea"))
         {
             if (Player)
             {
