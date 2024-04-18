@@ -141,7 +141,7 @@ public class playerScript : MonoBehaviour
         else if (canPlace)
         {
             //remvoe the selected object from the list - it has been placed
-            selectableObjects[SelectedIndex].GetComponent<SpriteRenderer>().color = previousCol;
+            selectableObjects[SelectedIndex].GetComponent<blockScript>().ShowOutline(false);
 
             selectableObjects.RemoveAt(SelectedIndex);
 
@@ -149,9 +149,8 @@ public class playerScript : MonoBehaviour
 
             if (selectableObjects.Count != 0)
             {
-                SpriteRenderer sr = selectableObjects[SelectedIndex].GetComponent<SpriteRenderer>();
-                previousCol = sr.color;
-                sr.color = Color.black;
+                selectableObjects[SelectedIndex].GetComponent<blockScript>().ShowOutline(true);
+
             }
 
             hasBeenSelected = false;
@@ -255,7 +254,9 @@ public class playerScript : MonoBehaviour
             {
                 if (leftStickMoveVector.y != 0 && leftStickMoveVector.y > 0)
                 {
-                    selectableObjects[SelectedIndex].GetComponent<SpriteRenderer>().color = previousCol; //resets the color
+                    selectableObjects[SelectedIndex].GetComponent<blockScript>().ShowOutline(false);
+
+                  //  selectableObjects[SelectedIndex].GetComponent<SpriteRenderer>().color = previousCol; //resets the color
 
                     SelectedIndex--;
 
@@ -264,10 +265,7 @@ public class playerScript : MonoBehaviour
                         SelectedIndex = selectableObjects.Count-1;
                     }
 
-                    SpriteRenderer sr = selectableObjects[SelectedIndex].GetComponent<SpriteRenderer>();
-
-                    previousCol = sr.color; //save old color
-                    sr.color = Color.black; //change colour of selected object
+                    selectableObjects[SelectedIndex].GetComponent<blockScript>().ShowOutline(true);
 
                     canSwap = false;
 
@@ -275,7 +273,9 @@ public class playerScript : MonoBehaviour
                 }
                 else if (leftStickMoveVector.y != 0 && leftStickMoveVector.y < 0)
                 {
-                    selectableObjects[SelectedIndex].GetComponent<SpriteRenderer>().color = previousCol; //resets the color
+                    selectableObjects[SelectedIndex].GetComponent<blockScript>().ShowOutline(false);
+
+                  //  selectableObjects[SelectedIndex].GetComponent<SpriteRenderer>().color = previousCol; //resets the color
 
                     SelectedIndex++;
 
@@ -284,10 +284,8 @@ public class playerScript : MonoBehaviour
                         SelectedIndex = 0;
                     }
 
-                    SpriteRenderer sr = selectableObjects[SelectedIndex].GetComponent<SpriteRenderer>();
+                    selectableObjects[SelectedIndex].GetComponent<blockScript>().ShowOutline(true);
 
-                    previousCol = sr.color; //save old color
-                    sr.color = Color.black; //change colour of selected object
 
                     canSwap = false;
 
