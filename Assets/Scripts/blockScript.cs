@@ -17,6 +17,9 @@ public class blockScript : MonoBehaviour
 
     private bool canPlaceBlock = true;
 
+    [SerializeField]
+    private GameObject outline;
+
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +49,13 @@ public class blockScript : MonoBehaviour
         Player = owningPlayer;
         chosenPlayerScript = Player.GetComponent<playerScript>();
     }
+    public void ShowOutline(bool shouldShow)
+    {
+        outline.SetActive(shouldShow);
+
+    }
+
+
 
 
     void OnCollisionEnter2D(Collision2D other)
