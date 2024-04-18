@@ -2,6 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+class BAT
+{
+    public BAT()
+    {
+        numBlock = 0;
+        numTraps = 0;
+    }
+
+    public BAT(int block, int trap)
+    {
+        numBlock = block;
+        numTraps = trap;
+    }
+
+    public int numBlock;
+    public int numTraps;
+}
+
+
 public class InGameManagerScript : MonoBehaviour
 {
     /// <summary>
@@ -23,6 +42,8 @@ public class InGameManagerScript : MonoBehaviour
     void Start()
     {
         rbs = GetComponent<randomBlockSpawn>();
+
+        startRound();
     }
 
     public void playerKilled(GameObject callingPlayer)
@@ -37,46 +58,85 @@ public class InGameManagerScript : MonoBehaviour
         endRound();
     }
 
+    BAT blockTrapSplit(int total, int maxBlock, int maxTrap)
+    {
+        int MinBlocks = total - maxTrap;
+
+        int returnBlock = Random.Range(MinBlocks, maxBlock+1);
+
+        int returnTrap = total - returnBlock;
+
+        return new BAT(returnBlock, returnTrap);
+    }
+
     void startRound()
     {
+        BAT p1returnBat = new();
+        BAT p2returnBat = new();
+
         switch (currentRound)
         {
             case 1:
                 rbs.spawnBlockIn(player1, 1);
                 rbs.spawnBlockIn(player2, 1);
-                return;
+                break;
             case 2:
-
-                return;
+                p1returnBat = blockTrapSplit(1, 1, 1);
+                p2returnBat = blockTrapSplit(1, 1, 1);
+                break;
             case 3:
-
-                return;
+                p1returnBat = blockTrapSplit(2, 1, 1);
+                p2returnBat = blockTrapSplit(2, 1, 1);
+                break;
             case 4:
-
-                return;
+                p1returnBat = blockTrapSplit(2, 1, 1);
+                p2returnBat = blockTrapSplit(2, 1, 1);
+                break;
             case 5:
-
-                return;
+                p1returnBat = blockTrapSplit(3, 2, 2);
+                p2returnBat = blockTrapSplit(3, 2, 2);
+                break;
             case 6:
-
-                return;
+                p1returnBat = blockTrapSplit(3, 2, 2);
+                p2returnBat = blockTrapSplit(3, 2, 2);
+                break;
             case 7:
-
-                return;
+                p1returnBat = blockTrapSplit(3, 2, 2);
+                p2returnBat = blockTrapSplit(3, 2, 2);
+                break;
             case 8:
-
-                return;
+                p1returnBat = blockTrapSplit(3, 2, 2);
+                p2returnBat = blockTrapSplit(3, 2, 2);
+                break;
             case 9:
-
-                return;
+                p1returnBat = blockTrapSplit(3, 2, 2);
+                p2returnBat = blockTrapSplit(3, 2, 2);
+                break;
             default:
-                return;
+                p1returnBat = blockTrapSplit(3, 2, 2);
+                p2returnBat = blockTrapSplit(3, 2, 2);
+                break;
+        }
+
+        if(!(p1returnBat.numBlock == 0 && p1returnBat.numTraps == 0))
+        {
+            rbs.spawnBlockIn(player1, p1returnBat.numBlock);
+            rbs.spawnBlockIn(player2, p2returnBat.numBlock);
+
+            rbs.spawnTrapIn(player1, p1returnBat.numTraps);
+            rbs.spawnTrapIn(player2, p2returnBat.numTraps);
         }
     }
 
     void endRound()
     {
-        //despawn all held blocks
+        playerScript ps = player1.GetComponent<playerScript>();
+        ps.clearAndDeleteBlockList();
+        ps.resetAmmo();
+
+        ps = player2.GetComponent<playerScript>();
+        ps.clearAndDeleteBlockList();
+        ps.resetAmmo();
         currentRound++;
         //add a wait time between rounds
         startRound();

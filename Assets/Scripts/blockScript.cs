@@ -44,6 +44,7 @@ public class blockScript : MonoBehaviour
     public void assignPlayer(GameObject owningPlayer)
     {
         Player = owningPlayer;
+        chosenPlayerScript = Player.GetComponent<playerScript>();
     }
 
 

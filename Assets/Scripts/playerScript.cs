@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 public class playerScript : MonoBehaviour
 {
     [SerializeField]
+    int totalAmmo = 3;
     int RemainingAmmo = 3;
 
     [SerializeField]
@@ -66,7 +67,13 @@ public class playerScript : MonoBehaviour
 
     public void setAmmo(int amount)
     {
-        RemainingAmmo = amount;
+        totalAmmo = amount;
+        RemainingAmmo = totalAmmo;
+    }
+
+    public void resetAmmo()
+    {
+        RemainingAmmo = totalAmmo;
     }
 
     public int getPlayerIndex()
@@ -117,6 +124,18 @@ public class playerScript : MonoBehaviour
 
     public void clearBlockList()
     {
+        selectableObjects.Clear();
+
+        locationOneFree = true;
+        locationTwoFree = true;
+        locationThreeFree = true;
+    }
+
+    public void clearAndDeleteBlockList()
+    {
+        foreach (GameObject go in selectableObjects)
+            Destroy(go);
+
         selectableObjects.Clear();
 
         locationOneFree = true;
@@ -325,15 +344,17 @@ public class playerScript : MonoBehaviour
 
     void Start()
     {
-       // SpriteRenderer sr = tempObject1.GetComponent<SpriteRenderer>();
+        // SpriteRenderer sr = tempObject1.GetComponent<SpriteRenderer>();
 
-     //   previousCol = sr.color;
-     //   sr.color = Color.black;
+        //   previousCol = sr.color;
+        //   sr.color = Color.black;
 
         //populates the arrray with the gameObjects
         //AddBlockToList(tempObject1);
-       // AddBlockToList(tempObject2);
-       // AddBlockToList(tempObject3);
+        // AddBlockToList(tempObject2);
+        // AddBlockToList(tempObject3);
+
+        RemainingAmmo = totalAmmo;
 
         projectList = new List<GameObject>(numOfProjectiles);
 

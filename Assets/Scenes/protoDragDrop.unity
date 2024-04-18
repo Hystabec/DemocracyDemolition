@@ -1352,7 +1352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b72ccf37362159a4e8e05bddd5fa9549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RemainingAmmo: 3
+  totalAmmo: 3
   thisPlayerIndex: 0
   selectableObjectsNumber: 0
   blockObjects: []
@@ -1386,7 +1386,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1303902994}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a2f1df829cc07645abe01b5afce4d3c, type: 3}
   m_Name: 
@@ -1736,8 +1736,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab76d2bba9cbcfc4cbd89f78396a20eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1: {fileID: 0}
-  player2: {fileID: 0}
+  player1: {fileID: 1303902994}
+  player2: {fileID: 1865346978}
 --- !u!114 &1729778780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1974,7 +1974,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b72ccf37362159a4e8e05bddd5fa9549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RemainingAmmo: 3
+  totalAmmo: 3
   thisPlayerIndex: 1
   selectableObjectsNumber: 0
   blockObjects: []

@@ -29,8 +29,8 @@ public class randomBlockSpawn : MonoBehaviour
         //SpawnBlock();
         //SpawnBlock();
 
-        spawnBlockIn(player1, 3);
-        spawnBlockIn(player2, 3);
+        //spawnBlockIn(player1, 3);
+        //spawnBlockIn(player2, 3);
     }
 
 
