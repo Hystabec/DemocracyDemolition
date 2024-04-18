@@ -19,7 +19,9 @@ public class playerScript : MonoBehaviour
     public int selectableObjectsNumber = 0;
 
     [SerializeField]
-    public GameObject tempObject1, tempObject2, tempObject3;
+   // public GameObject tempObject1, tempObject2, tempObject3;
+
+    public List<GameObject> blockObjects;
 
     [SerializeField]
     Vector3 locationOne, locationTwo, locationThree;
@@ -58,7 +60,7 @@ public class playerScript : MonoBehaviour
     [SerializeField]
     float throwForce = 10.0f;
 
-    public bool canPlace = true;
+    private bool canPlace = true;
 
     bool playMode = false;
 
@@ -310,17 +312,28 @@ public class playerScript : MonoBehaviour
             fireMarker.transform.rotation = quaternion.LookRotation(Vector3.forward, FireMarkerMoveVector);
     }
 
+    public void AddBlocks(GameObject obj)
+    {
+        blockObjects.Add(obj);
+        AddBlockToList(obj);
+
+    }
+    public void CanPlaceBlock(bool canPlaceBlock)
+    {
+        canPlace = canPlaceBlock;
+    }
+
     void Start()
     {
-        SpriteRenderer sr = tempObject1.GetComponent<SpriteRenderer>();
+       // SpriteRenderer sr = tempObject1.GetComponent<SpriteRenderer>();
 
-        previousCol = sr.color;
-        sr.color = Color.black;
+     //   previousCol = sr.color;
+     //   sr.color = Color.black;
 
         //populates the arrray with the gameObjects
-        AddBlockToList(tempObject1);
-        AddBlockToList(tempObject2);
-        AddBlockToList(tempObject3);
+        //AddBlockToList(tempObject1);
+       // AddBlockToList(tempObject2);
+       // AddBlockToList(tempObject3);
 
         projectList = new List<GameObject>(numOfProjectiles);
 

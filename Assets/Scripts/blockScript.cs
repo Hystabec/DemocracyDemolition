@@ -10,16 +10,21 @@ public class blockScript : MonoBehaviour
     [SerializeField]
     bool breakable;
 
-    private GameObject[] players;
-    private GameObject chosenPlayer;
+    private GameObject Player;
+    private playerScript chosenPlayerScript;
+
+    Collider2D col;
+
+    private bool canPlaceBlock = true;
 
 
     // Start is called before the first frame update
     void Start()
     {
         CurrentBlockHealth = TotalBlockHealth;
-        players = GameObject.FindGameObjectsWithTag("Player");
-        ChosePlayer();
+
+        col = gameObject.GetComponent<Collider2D>();
+        col.enabled = false;
     }
 
     // Update is called once per frame
@@ -28,23 +33,15 @@ public class blockScript : MonoBehaviour
         
     }
 
-    void ChosePlayer()
+    public void ChosePlayer(GameObject playerobj)
     {
-        var p1Script = players[0].GetComponent<playerScript>();
-
-        if(p1Script.selectableObjectsNumber < 3)
-        {
-            chosenPlayer = players[0];
-        }
-
-        else
-        {
-            chosenPlayer = players[1];
-        }
-
-        Debug.Log(chosenPlayer);
+        Player = playerobj;
+        chosenPlayerScript = Player.GetComponent<playerScript>();
+        chosenPlayerScript.AddBlocks(gameObject);
 
     }
+
+
 
     void OnCollisionEnter2D(Collision2D other)
     {
@@ -67,12 +64,21 @@ public class blockScript : MonoBehaviour
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Block"))
         {
-            chosenPlayer.GetComponent<playerScript>().canPlace = false;
+            if (Player)
+            {
+                canPlaceBlock = false;
+                chosenPlayerScript.CanPlaceBlock(false);
+
+            }
         }
 
         if (other.gameObject.CompareTag("Player"))
         {
-            chosenPlayer.GetComponent<playerScript>().canPlace = false;
+            if (Player)
+            {
+                canPlaceBlock = false;
+                chosenPlayerScript.CanPlaceBlock(false);
+            }
         }
 
     }
@@ -81,12 +87,21 @@ public class blockScript : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Block"))
         {
-            chosenPlayer.GetComponent<playerScript>().canPlace = true;
+            if (Player)
+            {
+                canPlaceBlock = true;
+                chosenPlayerScript.CanPlaceBlock(true);
+            }
         }
 
         if (other.gameObject.CompareTag("Player"))
         {
-            chosenPlayer.GetComponent<playerScript>().canPlace = true;
+            if (Player)
+            {
+                canPlaceBlock = true;
+                chosenPlayerScript.CanPlaceBlock(true);
+
+            }
         }
     }
 }

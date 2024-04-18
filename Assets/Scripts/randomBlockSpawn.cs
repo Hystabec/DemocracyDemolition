@@ -12,6 +12,8 @@ public class randomBlockSpawn : MonoBehaviour
 
     private Vector3 spawnPos;
 
+    [SerializeField]
+    private GameObject player1, player2;
 
 
     void Start()
@@ -33,8 +35,9 @@ public class randomBlockSpawn : MonoBehaviour
     void SpawnBlock()
     {
         GameObject thisBlock = Instantiate(ChooseBlock(), spawnPos, Quaternion.identity);
-        thisBlock.SetActive(false);
-        Debug.Log(thisBlock);
+        var blockScript = thisBlock.GetComponent<blockScript>();
+        blockScript.ChosePlayer(ChoosePlayer());
+       // thisBlock.SetActive(false);
     }
 
 
@@ -53,7 +56,23 @@ public class randomBlockSpawn : MonoBehaviour
             return availableBlocks[Random.Range(0, availableBlocks.Length)];
 
         }
-
     }
-   
+
+    GameObject ChoosePlayer()
+    {
+        var p1Script = player1.GetComponent<playerScript>();
+
+        if (p1Script.blockObjects.Count < 3)
+        {
+            return player1;
+        }
+
+        else
+        {
+            return player2;
+
+        }
+    }
+
+
 }
