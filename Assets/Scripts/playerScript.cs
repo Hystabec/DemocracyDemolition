@@ -57,10 +57,18 @@ public class playerScript : MonoBehaviour
 
     public bool canPlace = true;
 
+    bool playMode = false;
+
     public int getPlayerIndex()
     {
         return thisPlayerIndex;
     }
+
+    public void switchMode()
+    {
+        playMode = !playMode;
+    }
+
 
     public void despawnProjectile(GameObject projectile)
     {
@@ -111,6 +119,9 @@ public class playerScript : MonoBehaviour
         if (!(selectableObjects.Count > 0))
             return;
 
+        if (!playMode)
+            return;
+
         if (!hasBeenSelected)
         {
             hasBeenSelected = true;
@@ -142,6 +153,9 @@ public class playerScript : MonoBehaviour
         if (!(selectableObjects.Count > 0))
             return;
 
+        if (!playMode)
+            return;
+
         if (hasBeenSelected)
         {
             selectableObjects[SelectedIndex].transform.position = selectedBlockLocation;
@@ -156,12 +170,18 @@ public class playerScript : MonoBehaviour
         if (!(selectableObjects.Count > 0))
             return;
 
+        if (!playMode)
+            return;
+
         selectableObjects[SelectedIndex].transform.Rotate(new Vector3(0, 0, 90));
     }
 
     public void LB()
     {
         if (!(selectableObjects.Count > 0))
+            return;
+
+        if (!playMode)
             return;
 
         selectableObjects[SelectedIndex].transform.Rotate(new Vector3(0, 0, 90));
@@ -183,6 +203,9 @@ public class playerScript : MonoBehaviour
         if (projectList.Count <= 0)
             return; //projects are empty - do nothing
 
+        if (!playMode)
+            return;
+
         GameObject proj = projectList[0];
         proj.transform.position = fireMarker.transform.GetChild(0).transform.position;
         proj.SetActive(true);
@@ -202,6 +225,9 @@ public class playerScript : MonoBehaviour
     void handleLeftStick()
     {
         if (!(selectableObjects.Count > 0))
+            return;
+
+        if (!playMode)
             return;
 
         //this could probably be done better, but oh well it works :)
@@ -259,6 +285,9 @@ public class playerScript : MonoBehaviour
 
     void handleRightStick()
     {
+        if (!playMode)
+            return;
+
         FireMarkerMoveVector = (Vector3.up*rightStickMoveVector.x + Vector3.left*rightStickMoveVector.y);
 
         if(rightStickMoveVector.x != 0 || rightStickMoveVector.y != 0)
