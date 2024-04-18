@@ -1041,6 +1041,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1303902996}
   - component: {fileID: 1303902995}
+  - component: {fileID: 1303902997}
   m_Layer: 9
   m_Name: playerOne
   m_TagString: Untagged
@@ -1088,6 +1089,21 @@ Transform:
   - {fileID: 16386616}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1303902997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1303902994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a2f1df829cc07645abe01b5afce4d3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pScript: {fileID: 1303902995}
+  mainCam: {fileID: 313012571}
+  fireMarker: {fileID: 16386615}
 --- !u!1 &1458128955
 GameObject:
   m_ObjectHideFlags: 0

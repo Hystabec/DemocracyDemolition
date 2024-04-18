@@ -58,5 +58,4 @@ public class playerInputHandler : MonoBehaviour
         if (PScript != null)
             PScript.RS(value);
     }
-    
 }

@@ -140,6 +140,4 @@ public class EditorBlockPrefabGen : EditorWindow
 
         return canProceed;
     }
-
-  
 }
