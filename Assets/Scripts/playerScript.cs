@@ -13,6 +13,8 @@ public class playerScript : MonoBehaviour
     int SelectedIndex = 0;
     List<GameObject> selectableObjects = new List<GameObject>();
 
+    public int selectableObjectsNumber = 0;
+
     [SerializeField]
     public GameObject tempObject1, tempObject2, tempObject3;
 
@@ -70,6 +72,7 @@ public class playerScript : MonoBehaviour
     public void AddBlockToList(GameObject blockToAdd)
     {
         selectableObjects.Add(blockToAdd);
+        selectableObjectsNumber++;
 
         //put the block in place - and sets locations to false
         if(locationOneFree)

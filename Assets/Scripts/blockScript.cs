@@ -10,20 +10,40 @@ public class blockScript : MonoBehaviour
     [SerializeField]
     bool breakable;
 
-    private GameObject player;
+    private GameObject[] players;
+    private GameObject chosenPlayer;
 
 
     // Start is called before the first frame update
     void Start()
     {
         CurrentBlockHealth = TotalBlockHealth;
-        player = GameObject.FindGameObjectWithTag("Player");
+        players = GameObject.FindGameObjectsWithTag("Player");
+        ChosePlayer();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    void ChosePlayer()
+    {
+        var p1Script = players[0].GetComponent<playerScript>();
+
+        if(p1Script.selectableObjectsNumber < 3)
+        {
+            chosenPlayer = players[0];
+        }
+
+        else
+        {
+            chosenPlayer = players[1];
+        }
+
+        Debug.Log(chosenPlayer);
+
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -47,12 +67,12 @@ public class blockScript : MonoBehaviour
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Block"))
         {
-            player.GetComponent<playerScript>().canPlace = false;
+            chosenPlayer.GetComponent<playerScript>().canPlace = false;
         }
 
         if (other.gameObject.CompareTag("Player"))
         {
-            player.GetComponent<playerScript>().canPlace = false;
+            chosenPlayer.GetComponent<playerScript>().canPlace = false;
         }
 
     }
@@ -61,12 +81,12 @@ public class blockScript : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Block"))
         {
-            player.GetComponent<playerScript>().canPlace = true;
+            chosenPlayer.GetComponent<playerScript>().canPlace = true;
         }
 
         if (other.gameObject.CompareTag("Player"))
         {
-            player.GetComponent<playerScript>().canPlace = true;
+            chosenPlayer.GetComponent<playerScript>().canPlace = true;
         }
     }
 }
