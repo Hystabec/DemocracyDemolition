@@ -12,9 +12,16 @@ public class controlPCOverride : MonoBehaviour
     [SerializeField]
     GameObject fireMarker;
 
-    private void Awake()
+    static Vector2 leftStick = Vector2.zero;
+
+    private void Start()
     {
+        pScript = gameObject.GetComponent<playerScript>();
+
         //pScript.PCOverride = true;
+        Debug.Log("PC control override");
+
+        pScript.switchMode();
     }
 
     private void Update()
@@ -51,6 +58,48 @@ public class controlPCOverride : MonoBehaviour
             //RT
             pScript.RT();
         }
+
+        if(Input.GetKeyDown(KeyCode.W))
+        {
+            leftStick += new Vector2(0, 1);
+        }
+
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+            leftStick += new Vector2(0, -1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            leftStick += new Vector2(-1, 0);
+        }
+
+        if (Input.GetKeyUp(KeyCode.A))
+        {
+            leftStick += new Vector2(1, 0);
+        }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            leftStick += new Vector2(0, -1);
+        }
+
+        if (Input.GetKeyUp(KeyCode.S))
+        {
+            leftStick += new Vector2(0, 1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            leftStick += new Vector2(1, 0);
+        }
+
+        if (Input.GetKeyUp(KeyCode.D))
+        {
+            leftStick += new Vector2(-1, 0);
+        }
+
+        pScript.fakeLS(leftStick);
 
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
 

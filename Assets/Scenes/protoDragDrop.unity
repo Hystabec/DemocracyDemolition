@@ -1423,7 +1423,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b72ccf37362159a4e8e05bddd5fa9549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RemainingAmmo: 3
   thisPlayerIndex: 0
+  selectableObjectsNumber: 0
   tempObject1: {fileID: 2078642467}
   tempObject2: {fileID: 1253463794}
   tempObject3: {fileID: 1947552911}
@@ -1463,7 +1465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a2f1df829cc07645abe01b5afce4d3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pScript: {fileID: 1303902995}
+  pScript: {fileID: 0}
   mainCam: {fileID: 313012571}
   fireMarker: {fileID: 16386615}
 --- !u!1 &1458128955
@@ -2010,7 +2012,7 @@ MonoBehaviour:
   m_NotificationBehavior: 2
   m_MaxPlayerCount: -1
   m_AllowJoining: 1
-  m_JoinBehavior: 0
+  m_JoinBehavior: 1
   m_PlayerJoinedEvent:
     m_PersistentCalls:
       m_Calls:
@@ -2030,9 +2032,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_JoinAction:
-    m_UseReference: 0
+    m_UseReference: 1
     m_Action:
-      m_Name: 
+      m_Name: Join
       m_Type: 0
       m_ExpectedControlType: 
       m_Id: 20cf0ba8-f8cb-4b21-86fe-228e20d6c59b
@@ -2040,7 +2042,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 0}
+    m_Reference: {fileID: -7133764984986048921, guid: b789a175eb6d4e7488c071cb4f881570, type: 3}
   m_PlayerPrefab: {fileID: 87203277073820754, guid: 620b7c2f3dd25644fac71ef8bf58fd3b, type: 3}
   m_SplitScreen: 0
   m_MaintainAspectRatioInSplitScreen: 0
@@ -2216,7 +2218,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b72ccf37362159a4e8e05bddd5fa9549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RemainingAmmo: 3
   thisPlayerIndex: 1
+  selectableObjectsNumber: 0
   tempObject1: {fileID: 1275256727}
   tempObject2: {fileID: 1610035894}
   tempObject3: {fileID: 11979785}

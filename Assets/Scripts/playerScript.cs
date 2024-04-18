@@ -8,6 +8,9 @@ using UnityEngine.UIElements;
 public class playerScript : MonoBehaviour
 {
     [SerializeField]
+    int RemainingAmmo = 3;
+
+    [SerializeField]
     int thisPlayerIndex = 0;
 
     int SelectedIndex = 0;
@@ -58,6 +61,11 @@ public class playerScript : MonoBehaviour
     public bool canPlace = true;
 
     bool playMode = false;
+
+    public void setAmmo(int amount)
+    {
+        RemainingAmmo = amount;
+    }
 
     public int getPlayerIndex()
     {
@@ -187,6 +195,12 @@ public class playerScript : MonoBehaviour
         selectableObjects[SelectedIndex].transform.Rotate(new Vector3(0, 0, 90));
     }
 
+    public void fakeLS(Vector2 value)
+    {
+        //used for PC control override
+        leftStickMoveVector = value;
+    }
+
     public void LS(InputValue value)
     {
         leftStickMoveVector = value.Get<Vector2>();
@@ -200,7 +214,7 @@ public class playerScript : MonoBehaviour
     public void RT()
     {
         //shoot projectile
-        if (projectList.Count <= 0)
+        if (projectList.Count <= 0 || RemainingAmmo <= 0)
             return; //projects are empty - do nothing
 
         if (!playMode)
@@ -214,6 +228,8 @@ public class playerScript : MonoBehaviour
 
         proj.GetComponent<Rigidbody2D>().velocity = new Vector2(rotation.x, rotation.y).normalized * throwForce;
         projectList.Remove(proj);
+
+        RemainingAmmo--;
     }
 
     private IEnumerator waitToSwap()

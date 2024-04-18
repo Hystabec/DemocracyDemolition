@@ -30,11 +30,13 @@ public class playerInputHandler : MonoBehaviour
         if (PScript != null)
             PScript.B();
     }
+
     void OnRB()
     {
         if (PScript != null)
             PScript.RB();
     }
+
     void OnLB()
     {
         if (PScript != null)
