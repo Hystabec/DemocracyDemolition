@@ -7,8 +7,11 @@ public class blockScript : MonoBehaviour
     [SerializeField]
     int TotalBlockHealth = 3;
     int CurrentBlockHealth = 3;
+    [SerializeField]
+    bool breakable;
 
     private GameObject player;
+
 
     // Start is called before the first frame update
     void Start()
@@ -27,12 +30,16 @@ public class blockScript : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("projectile"))
         {
-            CurrentBlockHealth--;
-
-            if(CurrentBlockHealth <= 0)
+            if (breakable)
             {
-                CurrentBlockHealth = TotalBlockHealth;
-                Debug.Log(gameObject.name + " destroyed");
+                CurrentBlockHealth--;
+
+                if (CurrentBlockHealth <= 0)
+                {
+                    CurrentBlockHealth = TotalBlockHealth;
+                    Debug.Log(gameObject.name + " destroyed");
+                    gameObject.SetActive(false);
+                }
             }
         }
 
