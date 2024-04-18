@@ -16,7 +16,7 @@ public class randomBlockSpawn : MonoBehaviour
     private GameObject player1, player2;
 
 
-    void Start()
+    void Awake()
     {
         availableBlocks = Resources.LoadAll<GameObject>("BlockPrefabs");
         availableTraps = Resources.LoadAll<GameObject>("TrapPrefabs");

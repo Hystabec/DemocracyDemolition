@@ -77,8 +77,8 @@ public class InGameManagerScript : MonoBehaviour
         switch (currentRound)
         {
             case 1:
-                rbs.spawnBlockIn(player1, 1);
-                rbs.spawnBlockIn(player2, 1);
+                p1returnBat = blockTrapSplit(1, 1, 0);
+                p2returnBat = blockTrapSplit(1, 1, 0);
                 break;
             case 2:
                 p1returnBat = blockTrapSplit(1, 1, 1);
@@ -137,8 +137,12 @@ public class InGameManagerScript : MonoBehaviour
         ps = player2.GetComponent<playerScript>();
         ps.clearAndDeleteBlockList();
         ps.resetAmmo();
+
+
         currentRound++;
+
         //add a wait time between rounds
+
         startRound();
     }
 }
