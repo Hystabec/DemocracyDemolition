@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 3275681827419440952}
   - component: {fileID: 6117183136824498622}
   m_Layer: 7
-  m_Name: Block Sprites_14
+  m_Name: stoneTriangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -274,4 +274,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TotalBlockHealth: 3
-  breakable: 0
+  breakable: 1
+  outline: {fileID: 1864976610501271131}

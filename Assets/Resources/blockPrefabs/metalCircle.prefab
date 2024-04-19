@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1087338688200613218}
   - component: {fileID: 7961846470148107009}
   m_Layer: 7
-  m_Name: Block Sprites_19
+  m_Name: metalCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -197,6 +197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TotalBlockHealth: 3
   breakable: 0
+  outline: {fileID: 7369578781479130876}
 --- !u!1 &7369578781479130876
 GameObject:
   m_ObjectHideFlags: 0
