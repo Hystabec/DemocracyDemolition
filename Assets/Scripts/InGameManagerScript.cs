@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 class BAT
@@ -29,9 +30,18 @@ public class InGameManagerScript : MonoBehaviour
     /// </summary>
 
 
+    int numNeededPlayers = 2;
+    int numJoinedPlayers = 0;
+
+    [SerializeField]
+    float roundTime = 20.0f;
+
     int currentRound = 1;
 
     int p1Score = 0, p2Score = 0;
+
+    [SerializeField]
+    int roundsNeededToWin = 4;
 
     [SerializeField]
     GameObject player1, player2;
@@ -42,8 +52,15 @@ public class InGameManagerScript : MonoBehaviour
     void Start()
     {
         rbs = GetComponent<randomBlockSpawn>();
+    }
 
-        startRound();
+    public void AddPlayer()
+    {
+        numJoinedPlayers++;
+
+
+        if(numJoinedPlayers >= numNeededPlayers)
+            startRound();
     }
 
     public void playerKilled(GameObject callingPlayer)
@@ -54,6 +71,14 @@ public class InGameManagerScript : MonoBehaviour
             p2Score++;
         else
             p1Score++;
+
+
+        if(p1Score >= roundsNeededToWin)
+            EndGame(player1);
+        else if(p2Score >= roundsNeededToWin)
+            EndGame(player2);
+
+        StopCoroutine("RoundTime");
 
         endRound();
     }
@@ -126,6 +151,11 @@ public class InGameManagerScript : MonoBehaviour
             rbs.spawnTrapIn(player1, p1returnBat.numTraps);
             rbs.spawnTrapIn(player2, p2returnBat.numTraps);
         }
+
+        player1.GetComponent<playerScript>().OnRoundStart();
+        player2.GetComponent<playerScript>().OnRoundStart();
+
+        StartCoroutine("RoundTime");
     }
 
     void endRound()
@@ -144,5 +174,19 @@ public class InGameManagerScript : MonoBehaviour
         //add a wait time between rounds
 
         startRound();
+    }
+
+    void EndGame(GameObject winningPlayer)
+    {
+        //DEBUG - ends playmode when winner is found
+        Debug.Log(winningPlayer.name + " wins");
+        UnityEditor.EditorApplication.isPlaying = false;
+    }
+
+    private IEnumerator RoundTime()
+    {
+        yield return new WaitForSecondsRealtime(roundTime);
+        Debug.Log("Rounded ended by timer");
+        endRound();
     }
 }

@@ -21,6 +21,15 @@ public class blockScript : MonoBehaviour
     private GameObject outline;
 
 
+    private void Awake()
+    {
+        //works as long as outline is first child
+        outline = transform.GetChild(0).gameObject;
+
+        //HERE FOR TESTING
+        outline.GetComponent<SpriteRenderer>().color = Color.red;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,11 +61,7 @@ public class blockScript : MonoBehaviour
     public void ShowOutline(bool shouldShow)
     {
         outline.SetActive(shouldShow);
-
     }
-
-
-
 
     void OnCollisionEnter2D(Collision2D other)
     {

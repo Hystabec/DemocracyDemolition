@@ -13,23 +13,18 @@ public class ReadyOverlay : MonoBehaviour
     GameObject player1, player2;
 
     public bool bothPlayersJoined = false;
-    
-
-
 
     public void PlayerJoined()
     {
         if (playersJoined == 1)
         {
             Destroy(player1Button);
-            Debug.Log("Player 1 Joined");
             Player1Joined();
         }
         
         else if (playersJoined == 2)
         {
             Destroy(player2Button);
-            Debug.Log("Player 2 Joined");
             Player2Joined();
             BothPlayersJoined();
         }

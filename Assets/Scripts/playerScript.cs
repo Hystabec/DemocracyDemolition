@@ -65,6 +65,16 @@ public class playerScript : MonoBehaviour
 
     bool playMode = false;
 
+    float timeBetweenBothPlayersJoiningAndInputsStarting = 0.2f;
+
+    public void OnRoundStart()
+    {
+        //called by the InGameManagerScript at the start of the round when blocks have been added - should probably do through unity events
+
+        SelectedIndex = 0;
+        selectableObjects[0].GetComponent<blockScript>().ShowOutline(true);
+    }
+
     public void setAmmo(int amount)
     {
         totalAmmo = amount;
@@ -83,9 +93,14 @@ public class playerScript : MonoBehaviour
 
     public void switchMode()
     {
-        playMode = !playMode;
+        StartCoroutine(SwitchEndOfFrame());
     }
 
+    IEnumerator SwitchEndOfFrame() 
+    {
+        yield return new WaitForSeconds(timeBetweenBothPlayersJoiningAndInputsStarting);
+        playMode = !playMode;
+    }
 
     public void despawnProjectile(GameObject projectile)
     {

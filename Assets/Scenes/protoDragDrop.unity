@@ -1556,7 +1556,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1303902994}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a2f1df829cc07645abe01b5afce4d3c, type: 3}
   m_Name: 
@@ -2074,6 +2074,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab76d2bba9cbcfc4cbd89f78396a20eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roundTime: 20
+  roundsNeededToWin: 4
   player1: {fileID: 1303902994}
   player2: {fileID: 1865346978}
 --- !u!114 &1729778780
@@ -2098,6 +2100,18 @@ MonoBehaviour:
       - m_Target: {fileID: 636991117}
         m_TargetAssemblyTypeName: ReadyOverlay, Assembly-CSharp
         m_MethodName: PlayerJoined
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1729778779}
+        m_TargetAssemblyTypeName: InGameManagerScript, Assembly-CSharp
+        m_MethodName: startGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
