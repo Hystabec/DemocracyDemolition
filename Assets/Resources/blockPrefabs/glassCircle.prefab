@@ -94,10 +94,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2792928960955207035}
   - component: {fileID: 8434477912041500366}
-  - component: {fileID: 1169663461849605329}
   - component: {fileID: 3574023439883946306}
   - component: {fileID: 4185677381852709593}
-  - component: {fileID: 5867611840187488596}
+  - component: {fileID: 1672012537992024431}
   m_Layer: 7
   m_Name: glassCircle
   m_TagString: Untagged
@@ -173,78 +172,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &1169663461849605329
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8351295440255992239}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.55, y: 1.55}
-    newSize: {x: 1.55, y: 1.55}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.7042854, y: -0.32281268}
-      - {x: 0.75209796, y: -0.18991065}
-      - {x: 0.7877233, y: -0.080538586}
-      - {x: 0.655, y: 0.48499998}
-      - {x: 0.525, y: 0.60499996}
-      - {x: 0.415, y: 0.685}
-      - {x: 0.285, y: 0.745}
-      - {x: 0.205, y: 0.775}
-      - {x: -0.205, y: 0.775}
-      - {x: -0.24973199, y: 0.75227666}
-      - {x: -0.41955334, y: 0.6622766}
-      - {x: -0.65700865, y: 0.39700866}
-      - {x: -0.75973195, y: 0.20991066}
-      - {x: -0.7775446, y: -0.038882032}
-      - {x: -0.76893747, y: -0.08902618}
-      - {x: -0.75425625, y: -0.14211175}
-      - {x: -0.7006909, y: -0.3357973}
-      - {x: -0.7006909, y: -0.3357973}
-      - {x: -0.7006908, y: -0.33579764}
-      - {x: -0.6995534, y: -0.33991066}
-      - {x: -0.555, y: -0.575}
-      - {x: -0.49061307, y: -0.62522626}
-      - {x: -0.415, y: -0.685}
-      - {x: -0.23062533, y: -0.7241066}
-      - {x: 0.205, y: -0.775}
-      - {x: 0.47991064, y: -0.62191933}
-      - {x: 0.6575447, y: -0.43955335}
-  m_UseDelaunayMesh: 0
 --- !u!50 &3574023439883946306
 Rigidbody2D:
   serializedVersion: 4
@@ -287,7 +214,7 @@ MonoBehaviour:
   TotalBlockHealth: 1
   breakable: 1
   outline: {fileID: 797117331629755399}
---- !u!58 &5867611840187488596
+--- !u!58 &1672012537992024431
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -321,4 +248,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.83
+  m_Radius: 0.775

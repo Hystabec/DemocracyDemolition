@@ -94,9 +94,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8727178466641541817}
   - component: {fileID: 6686903274475730531}
-  - component: {fileID: 7123642455498601282}
   - component: {fileID: 3111752495652059072}
   - component: {fileID: 8359435765871897576}
+  - component: {fileID: 8145432704304619800}
   m_Layer: 7
   m_Name: glassL
   m_TagString: Untagged
@@ -172,7 +172,49 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &7123642455498601282
+--- !u!50 &3111752495652059072
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6495792356670541214}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
+--- !u!114 &8359435765871897576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6495792356670541214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd4d6c8020f321743b24e10eef8a4cec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TotalBlockHealth: 1
+  breakable: 1
+  outline: {fileID: 2401372452973852888}
+--- !u!60 &8145432704304619800
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -220,48 +262,6 @@ PolygonCollider2D:
       - {x: -0.78499997, y: -0.78499997}
       - {x: 0.78499997, y: -0.78499997}
       - {x: 0.78499997, y: -0.285}
-      - {x: -0.29032958, y: -0.28630242}
+      - {x: -0.2866307, y: -0.2835481}
       - {x: -0.305, y: 0.78499997}
   m_UseDelaunayMesh: 0
---- !u!50 &3111752495652059072
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6495792356670541214}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
---- !u!114 &8359435765871897576
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6495792356670541214}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd4d6c8020f321743b24e10eef8a4cec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TotalBlockHealth: 1
-  breakable: 1
-  outline: {fileID: 2401372452973852888}
