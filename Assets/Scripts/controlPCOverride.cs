@@ -5,6 +5,8 @@ using UnityEngine;
 public class controlPCOverride : MonoBehaviour
 {
     [SerializeField]
+    InGameManagerScript igm;
+    [SerializeField]
     playerScript pScript;
     [SerializeField]
     Camera mainCam;
@@ -22,6 +24,7 @@ public class controlPCOverride : MonoBehaviour
         Debug.Log("PC control override");
 
         pScript.switchMode();
+        igm.pcControlOverride();
     }
 
     private void Update()

@@ -54,6 +54,12 @@ public class InGameManagerScript : MonoBehaviour
         rbs = GetComponent<randomBlockSpawn>();
     }
 
+    public void pcControlOverride()
+    {
+        //debug function
+        startRound();
+    }
+
     public void AddPlayer()
     {
         numJoinedPlayers++;
