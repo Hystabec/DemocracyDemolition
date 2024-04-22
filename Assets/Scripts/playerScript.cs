@@ -67,6 +67,8 @@ public class playerScript : MonoBehaviour
 
     float timeBetweenBothPlayersJoiningAndInputsStarting = 0.2f;
 
+    public Animator anim;
+
     public void OnRoundStart()
     {
         //called by the InGameManagerScript at the start of the round when blocks have been added - should probably do through unity events
@@ -258,6 +260,8 @@ public class playerScript : MonoBehaviour
         GameObject proj = projectList[0];
         proj.transform.position = fireMarker.transform.GetChild(0).transform.position;
         proj.SetActive(true);
+
+        anim.SetTrigger("Throw");
 
         Vector3 rotation = fireMarker.transform.GetChild(0).transform.position - fireMarker.transform.position;
 
