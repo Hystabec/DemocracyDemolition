@@ -181,7 +181,6 @@ public class InGameManagerScript : MonoBehaviour
         player2.GetComponent<playerScript>().OnRoundStart();
 
        StartCoroutine(TimeBeforeFighting());
-        StartCoroutine("RoundTime");
     }
 
     void endRound()
@@ -217,6 +216,7 @@ public class InGameManagerScript : MonoBehaviour
         Debug.Log("Start fighting");
         player1.GetComponent<playerScript>().CanFight(true);
         player2.GetComponent<playerScript>().CanFight(true);
+        StartCoroutine("RoundTime");
     }
 
 
