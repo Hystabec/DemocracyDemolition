@@ -48,6 +48,9 @@ public class InGameManagerScript : MonoBehaviour
 
     randomBlockSpawn rbs;
 
+    public Animator redAnim;
+    public Animator blueAnim;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -74,12 +77,22 @@ public class InGameManagerScript : MonoBehaviour
         Debug.Log(callingPlayer.name + " died");
 
         if (callingPlayer == player1)
+        {
             p2Score++;
+            blueAnim.SetTrigger("RoundWin");
+            redAnim.SetTrigger("Hit");
+        }
+
         else
+        {
             p1Score++;
+            redAnim.SetTrigger("RoundWin");
+        }
+            
+  
 
 
-        if(p1Score >= roundsNeededToWin)
+        if (p1Score >= roundsNeededToWin)
             EndGame(player1);
         else if(p2Score >= roundsNeededToWin)
             EndGame(player2);
@@ -88,6 +101,7 @@ public class InGameManagerScript : MonoBehaviour
 
         endRound();
     }
+
 
     BAT blockTrapSplit(int total, int maxBlock, int maxTrap)
     {
