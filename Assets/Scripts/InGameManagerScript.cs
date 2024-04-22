@@ -87,6 +87,7 @@ public class InGameManagerScript : MonoBehaviour
         {
             p1Score++;
             redAnim.SetTrigger("RoundWin");
+            blueAnim.SetTrigger("Hit");
         }
             
   
