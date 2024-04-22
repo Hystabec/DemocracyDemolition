@@ -63,6 +63,8 @@ public class playerScript : MonoBehaviour
 
     private bool canPlace = true;
 
+    private bool fightingStage = false;
+
     bool playMode = false;
 
     float timeBetweenBothPlayersJoiningAndInputsStarting = 0.2f;
@@ -176,6 +178,7 @@ public class playerScript : MonoBehaviour
         }
         else if (canPlace)
         {
+
             //remvoe the selected object from the list - it has been placed
             selectableObjects[SelectedIndex].GetComponent<blockScript>().ShowOutline(false);
 
@@ -191,6 +194,7 @@ public class playerScript : MonoBehaviour
 
             hasBeenSelected = false;
         }
+        
     }
 
     public void B()
@@ -250,25 +254,34 @@ public class playerScript : MonoBehaviour
 
     public void RT()
     {
-        //shoot projectile
-        if (projectList.Count <= 0 || RemainingAmmo <= 0)
-            return; //projects are empty - do nothing
+        if (fightingStage == true)
+        {
 
-        if (!playMode)
-            return;
+            //shoot projectile
+            if (projectList.Count <= 0 || RemainingAmmo <= 0)
+                return; //projects are empty - do nothing
 
-        GameObject proj = projectList[0];
-        proj.transform.position = fireMarker.transform.GetChild(0).transform.position;
-        proj.SetActive(true);
+            if (!playMode)
+                return;
 
-        anim.SetTrigger("Throw");
+            GameObject proj = projectList[0];
+            proj.transform.position = fireMarker.transform.GetChild(0).transform.position;
+            proj.SetActive(true);
 
-        Vector3 rotation = fireMarker.transform.GetChild(0).transform.position - fireMarker.transform.position;
+            anim.SetTrigger("Throw");
 
-        proj.GetComponent<Rigidbody2D>().velocity = new Vector2(rotation.x, rotation.y).normalized * throwForce;
-        projectList.Remove(proj);
+            Vector3 rotation = fireMarker.transform.GetChild(0).transform.position - fireMarker.transform.position;
 
-        RemainingAmmo--;
+            proj.GetComponent<Rigidbody2D>().velocity = new Vector2(rotation.x, rotation.y).normalized * throwForce;
+            projectList.Remove(proj);
+
+            RemainingAmmo--;
+        }
+    }
+
+    public void CanFight(bool canFight)
+    {
+        fightingStage = canFight;
     }
 
     private IEnumerator waitToSwap()

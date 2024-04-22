@@ -36,6 +36,9 @@ public class InGameManagerScript : MonoBehaviour
     [SerializeField]
     float roundTime = 20.0f;
 
+    [SerializeField]
+    float timeBeforeFighting = 5.0f;
+
     int currentRound = 1;
 
     int p1Score = 0, p2Score = 0;
@@ -51,8 +54,9 @@ public class InGameManagerScript : MonoBehaviour
     public Animator redAnim;
     public Animator blueAnim;
 
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rbs = GetComponent<randomBlockSpawn>();
     }
@@ -176,6 +180,7 @@ public class InGameManagerScript : MonoBehaviour
         player1.GetComponent<playerScript>().OnRoundStart();
         player2.GetComponent<playerScript>().OnRoundStart();
 
+       StartCoroutine(TimeBeforeFighting());
         StartCoroutine("RoundTime");
     }
 
@@ -203,6 +208,17 @@ public class InGameManagerScript : MonoBehaviour
         Debug.Log(winningPlayer.name + " wins");
         UnityEditor.EditorApplication.isPlaying = false;
     }
+
+    private IEnumerator TimeBeforeFighting()
+    {
+        player1.GetComponent<playerScript>().CanFight(false);
+        player2.GetComponent<playerScript>().CanFight(false);
+        yield return new WaitForSecondsRealtime(timeBeforeFighting);
+        Debug.Log("Start fighting");
+        player1.GetComponent<playerScript>().CanFight(true);
+        player2.GetComponent<playerScript>().CanFight(true);
+    }
+
 
     private IEnumerator RoundTime()
     {
