@@ -4,6 +4,8 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
+using UnityEngine.UI;
+using TMPro;
 
 public class playerScript : MonoBehaviour
 {
@@ -70,6 +72,9 @@ public class playerScript : MonoBehaviour
     float timeBetweenBothPlayersJoiningAndInputsStarting = 0.2f;
 
     public Animator anim;
+
+    [SerializeField]
+    TextMeshProUGUI currentAmmoText;
 
     public void OnRoundStart()
     {
@@ -264,9 +269,15 @@ public class playerScript : MonoBehaviour
             if (!playMode)
                 return;
 
+<<<<<<< Updated upstream
             GameObject proj = projectList[0];
             proj.transform.position = fireMarker.transform.GetChild(0).transform.position;
             proj.SetActive(true);
+=======
+        anim.SetTrigger("Throw");
+        updateAmmoText();
+;
+>>>>>>> Stashed changes
 
             anim.SetTrigger("Throw");
 
@@ -282,6 +293,11 @@ public class playerScript : MonoBehaviour
     public void CanFight(bool canFight)
     {
         fightingStage = canFight;
+    }
+
+    public void updateAmmoText()
+    {
+        currentAmmoText.text = "" + (RemainingAmmo - 1);
     }
 
     private IEnumerator waitToSwap()
