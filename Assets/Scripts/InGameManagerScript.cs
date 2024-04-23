@@ -105,9 +105,17 @@ public class InGameManagerScript : MonoBehaviour
 
 
         if (p1Score >= roundsNeededToWin)
+        {
+            redAnim.SetTrigger("GameWin");
             EndGame(player1);
+        }
+            
         else if(p2Score >= roundsNeededToWin)
+        {
+            blueAnim.SetTrigger("GameWin");
             EndGame(player2);
+        }
+            
 
         StopCoroutine("RoundTime");
 
@@ -212,7 +220,7 @@ public class InGameManagerScript : MonoBehaviour
     {
         //DEBUG - ends playmode when winner is found
         Debug.Log(winningPlayer.name + " wins");
-        UnityEditor.EditorApplication.isPlaying = false;
+        //UnityEditor.EditorApplication.isPlaying = false;
     }
 
     private IEnumerator TimeBeforeFighting()
