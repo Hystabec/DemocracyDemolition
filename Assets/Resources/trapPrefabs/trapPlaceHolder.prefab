@@ -258,3 +258,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TotalBlockHealth: 3
   breakable: 1
+  outline: {fileID: 3916387547860450745}

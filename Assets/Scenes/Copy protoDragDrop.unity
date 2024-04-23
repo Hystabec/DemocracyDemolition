@@ -813,8 +813,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab76d2bba9cbcfc4cbd89f78396a20eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roundTime: 20
+  timeBeforeFighting: 5
+  roundsNeededToWin: 4
   player1: {fileID: 1303902994}
   player2: {fileID: 1448209621}
+  redAnim: {fileID: 0}
+  blueAnim: {fileID: 0}
+  redProgressBar: {fileID: 0}
+  blueProgressBar: {fileID: 0}
 --- !u!114 &1729778780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1017,6 +1024,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7767627091617793165, guid: 344af892a8513fe47b9ba835a8700154, type: 3}
+      propertyPath: igm
+      value: 
+      objectReference: {fileID: 1729778779}
     - target: {fileID: 7767627091617793165, guid: 344af892a8513fe47b9ba835a8700154, type: 3}
       propertyPath: mainCam
       value: 
