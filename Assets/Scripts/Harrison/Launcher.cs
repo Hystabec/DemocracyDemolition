@@ -8,7 +8,7 @@ public class Launcher : MonoBehaviour
     {
         if(collision.gameObject.tag == "Launcher")
         {
-            float launch = collision.getComponent<playerScript>().launch;
+            //float launch = collision.getComponent<playerScript>().launch;
         }
     }
 }
