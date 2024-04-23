@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 class BAT
 {
@@ -54,12 +56,23 @@ public class InGameManagerScript : MonoBehaviour
     public Animator redAnim;
     public Animator blueAnim;
 
+<<<<<<< Updated upstream
+=======
+    public Image redProgressBar;
+    public Image blueProgressBar;
+
+
+
+    
+>>>>>>> Stashed changes
 
     // Start is called before the first frame update
     void Awake()
     {
         rbs = GetComponent<randomBlockSpawn>();
     }
+
+
 
     public void pcControlOverride()
     {
@@ -85,6 +98,7 @@ public class InGameManagerScript : MonoBehaviour
             p2Score++;
             blueAnim.SetTrigger("RoundWin");
             redAnim.SetTrigger("Hit");
+            blueProgressBar.fillAmount = blueProgressBar.fillAmount + 0.25f;
         }
 
         else
@@ -92,6 +106,7 @@ public class InGameManagerScript : MonoBehaviour
             p1Score++;
             redAnim.SetTrigger("RoundWin");
             blueAnim.SetTrigger("Hit");
+            redProgressBar.fillAmount = redProgressBar.fillAmount + 0.25f;
         }
             
   
