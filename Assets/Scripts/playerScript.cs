@@ -269,17 +269,12 @@ public class playerScript : MonoBehaviour
             if (!playMode)
                 return;
 
-<<<<<<< Updated upstream
             GameObject proj = projectList[0];
             proj.transform.position = fireMarker.transform.GetChild(0).transform.position;
             proj.SetActive(true);
-=======
-        anim.SetTrigger("Throw");
-        updateAmmoText();
-;
->>>>>>> Stashed changes
 
             anim.SetTrigger("Throw");
+            updateAmmoText();
 
             Vector3 rotation = fireMarker.transform.GetChild(0).transform.position - fireMarker.transform.position;
 
@@ -299,6 +294,7 @@ public class playerScript : MonoBehaviour
     {
         currentAmmoText.text = "" + (RemainingAmmo - 1);
     }
+
 
     private IEnumerator waitToSwap()
     {

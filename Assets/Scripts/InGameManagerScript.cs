@@ -56,23 +56,15 @@ public class InGameManagerScript : MonoBehaviour
     public Animator redAnim;
     public Animator blueAnim;
 
-<<<<<<< Updated upstream
-=======
     public Image redProgressBar;
     public Image blueProgressBar;
 
-
-
-    
->>>>>>> Stashed changes
 
     // Start is called before the first frame update
     void Awake()
     {
         rbs = GetComponent<randomBlockSpawn>();
     }
-
-
 
     public void pcControlOverride()
     {
