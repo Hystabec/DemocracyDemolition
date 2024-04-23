@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - playerArea
+  - Launcher
+  - explosive
   layers:
   - Default
   - TransparentFX
