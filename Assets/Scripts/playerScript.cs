@@ -76,6 +76,7 @@ public class playerScript : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI currentAmmoText;
 
+
     public void OnRoundStart()
     {
         //called by the InGameManagerScript at the start of the round when blocks have been added - should probably do through unity events
@@ -273,8 +274,7 @@ public class playerScript : MonoBehaviour
             proj.transform.position = fireMarker.transform.GetChild(0).transform.position;
             proj.SetActive(true);
 
-            anim.SetTrigger("Throw");
-            updateAmmoText();
+            anim.SetTrigger("Throw");   
 
             Vector3 rotation = fireMarker.transform.GetChild(0).transform.position - fireMarker.transform.position;
 
@@ -282,6 +282,7 @@ public class playerScript : MonoBehaviour
             projectList.Remove(proj);
 
             RemainingAmmo--;
+            updateAmmoText();
         }
     }
 
@@ -292,7 +293,7 @@ public class playerScript : MonoBehaviour
 
     public void updateAmmoText()
     {
-        currentAmmoText.text = "" + (RemainingAmmo - 1);
+        currentAmmoText.text = RemainingAmmo + "/3";
     }
 
 
@@ -397,6 +398,8 @@ public class playerScript : MonoBehaviour
         // AddBlockToList(tempObject3);
 
         RemainingAmmo = totalAmmo;
+
+        updateAmmoText();
 
         projectList = new List<GameObject>(numOfProjectiles);
 
