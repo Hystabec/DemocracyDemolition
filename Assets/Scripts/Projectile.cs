@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-   private CircleCollider2D col;
+   private PolygonCollider2D col;
 
     private int bounceCount = 0;
 
     void Start()
     {
-        col = GetComponent<CircleCollider2D>();
+        col = GetComponent<PolygonCollider2D>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
