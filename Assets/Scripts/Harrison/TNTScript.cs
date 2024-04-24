@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TNT : MonoBehaviour
+public class TNTScript : MonoBehaviour
 {
     private void OnCollisionEnter2D(Collision2D collision)
     {
