@@ -67,7 +67,7 @@ public class playerScript : MonoBehaviour
 
     private bool fightingStage = false;
 
-    bool playMode = true;
+    bool playMode = false;
 
     float timeBetweenBothPlayersJoiningAndInputsStarting = 0.2f;
 
@@ -387,7 +387,8 @@ public class playerScript : MonoBehaviour
     {
         if (!playMode)
             return;
-
+        
+        
         FireMarkerMoveVector = (Vector3.up*rightStickMoveVector.x + Vector3.left*rightStickMoveVector.y);
 
         Quaternion rot = quaternion.LookRotation(Vector3.forward, FireMarkerMoveVector);
