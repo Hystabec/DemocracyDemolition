@@ -266,7 +266,7 @@ MonoBehaviour:
   TotalBlockHealth: 1
   breakable: 1
   outline: {fileID: 5180227041303167095}
-  blockHitSound: {fileID: 0}
+  blockHitSound: {fileID: 8300000, guid: c15304448cd4d5d43b5bc3fc10ccf1a3, type: 3}
   aSource: {fileID: 1748384512860549705}
 --- !u!82 &1748384512860549705
 AudioSource:

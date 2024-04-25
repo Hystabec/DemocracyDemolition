@@ -274,11 +274,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd4d6c8020f321743b24e10eef8a4cec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
   cantPlaceColor: {r: 255, g: 0, b: 0, a: 1}
   TotalBlockHealth: 1
   breakable: 1
   outline: {fileID: 4954043773537301464}
-  blockHitSound: {fileID: 0}
+  blockHitSound: {fileID: 8300000, guid: c15304448cd4d5d43b5bc3fc10ccf1a3, type: 3}
   aSource: {fileID: -5547767417322684834}
 --- !u!82 &-5547767417322684834
 AudioSource:

@@ -113,9 +113,9 @@ public class controlPCOverride : MonoBehaviour
 
         float zrotation = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
 
-        fireMarker.transform.rotation = Quaternion.Euler(0, 0, zrotation);
+       // fireMarker.transform.rotation = Quaternion.Euler(0, 0, zrotation);
 
-        /*if((zrotation > posMinAngle) && (zrotation < posMaxAngle))
+        if((zrotation > posMinAngle) && (zrotation < posMaxAngle))
                 fireMarker.transform.rotation = Quaternion.Euler(0, 0, zrotation);
 
         else if ((zrotation < negMinAngle) && (zrotation > negMaxAngle))
@@ -125,7 +125,7 @@ public class controlPCOverride : MonoBehaviour
         else
         {
             Debug.Log(zrotation);
-        }*/
+        }
 
     }
 }

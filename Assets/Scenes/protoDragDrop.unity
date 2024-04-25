@@ -2594,9 +2594,9 @@ MonoBehaviour:
   mainCam: {fileID: 313012571}
   fireMarker: {fileID: 16386615}
   posMinAngle: 0
-  posMaxAngle: 0
+  posMaxAngle: 80
   negMinAngle: 0
-  negMaxAngle: 0
+  negMaxAngle: -30
 --- !u!61 &1303902998
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4259,10 +4259,10 @@ MonoBehaviour:
   pScript: {fileID: 1865346980}
   mainCam: {fileID: 313012571}
   fireMarker: {fileID: 231040011}
-  posMinAngle: 0
-  posMaxAngle: 0
-  negMinAngle: 0
-  negMaxAngle: 0
+  posMinAngle: 120
+  posMaxAngle: 180
+  negMinAngle: -150
+  negMaxAngle: -180
 --- !u!95 &1865346984
 Animator:
   serializedVersion: 5
