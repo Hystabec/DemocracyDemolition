@@ -35,37 +35,37 @@ public class controlPCOverride : MonoBehaviour
         if (pScript == null)
             return;
 
-        if(Input.GetKeyUp(KeyCode.F))
+        if (Input.GetKeyUp(KeyCode.F))
         {
             //A
             pScript.A();
         }
 
-        if(Input.GetKeyUp(KeyCode.V))
+        if (Input.GetKeyUp(KeyCode.V))
         {
             //B
             pScript.B();
         }
 
-        if(Input.GetKeyUp(KeyCode.Q))
+        if (Input.GetKeyUp(KeyCode.Q))
         {
             //LB
             pScript.LB();
         }
 
-        if(Input.GetKeyUp(KeyCode.E))
+        if (Input.GetKeyUp(KeyCode.E))
         {
             //RB
             pScript.RB();
         }
 
-        if(Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0))
         {
             //RT
             pScript.RT();
         }
 
-        if(Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W))
         {
             leftStick += new Vector2(0, 1);
         }
@@ -113,19 +113,18 @@ public class controlPCOverride : MonoBehaviour
 
         float zrotation = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
 
-       // fireMarker.transform.rotation = Quaternion.Euler(0, 0, zrotation);
+        // fireMarker.transform.rotation = Quaternion.Euler(0, 0, zrotation);
 
-        if((zrotation > posMinAngle) && (zrotation < posMaxAngle))
-                fireMarker.transform.rotation = Quaternion.Euler(0, 0, zrotation);
+
+
+        if ((zrotation > posMinAngle) && (zrotation < posMaxAngle))
+            fireMarker.transform.rotation = Quaternion.Euler(0, 0, zrotation);
 
         else if ((zrotation < negMinAngle) && (zrotation > negMaxAngle))
         {
             fireMarker.transform.rotation = Quaternion.Euler(0, 0, zrotation);
         }
-        else
-        {
-            Debug.Log(zrotation);
-        }
+
 
     }
 }
