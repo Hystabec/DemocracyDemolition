@@ -55,6 +55,7 @@ public class InGameManagerScript : MonoBehaviour
 
     public Animator redAnim;
     public Animator blueAnim;
+    public Animator camAnim;
 
     public Image redProgressBar;
     public Image blueProgressBar;
@@ -79,6 +80,11 @@ public class InGameManagerScript : MonoBehaviour
 
         if(numJoinedPlayers >= numNeededPlayers)
             startRound();
+    }
+
+    public void bothPlayersJoined()
+    {
+        startRound();
     }
 
     public void playerKilled(GameObject callingPlayer)
@@ -107,12 +113,14 @@ public class InGameManagerScript : MonoBehaviour
         if (p1Score >= roundsNeededToWin)
         {
             redAnim.SetTrigger("GameWin");
+            camAnim.SetTrigger("GameWinRed");
             EndGame(player1);
         }
             
         else if(p2Score >= roundsNeededToWin)
         {
             blueAnim.SetTrigger("GameWin");
+            camAnim.SetTrigger("GameWinBlue");
             EndGame(player2);
         }
             

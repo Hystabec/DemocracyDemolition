@@ -14,6 +14,9 @@ public class controlPCOverride : MonoBehaviour
     [SerializeField]
     GameObject fireMarker;
 
+    [SerializeField]
+    float posMinAngle, posMaxAngle, negMinAngle, negMaxAngle;
+
     static Vector2 leftStick = Vector2.zero;
 
     private void Start()
@@ -110,6 +113,12 @@ public class controlPCOverride : MonoBehaviour
 
         float zrotation = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
 
-        fireMarker.transform.rotation = Quaternion.Euler(0, 0, zrotation);
+       if((zrotation > posMinAngle) && (zrotation < posMaxAngle))
+                fireMarker.transform.rotation = Quaternion.Euler(0, 0, zrotation);
+
+        else if ((zrotation < negMinAngle) && (zrotation > negMaxAngle))
+        {
+            fireMarker.transform.rotation = Quaternion.Euler(0, 0, zrotation);
+        }
     }
 }

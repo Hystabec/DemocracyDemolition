@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class blockScript : MonoBehaviour
 {
+    Color defaultColour;
+
+    [SerializeField]
+    Color cantPlaceColor = new Color(255, 0, 0);
+
     [SerializeField]
     int TotalBlockHealth = 3;
     int CurrentBlockHealth = 3;
@@ -15,10 +20,17 @@ public class blockScript : MonoBehaviour
 
     Collider2D col;
 
+    bool isHovered = false;
     private bool canPlaceBlock = true;
 
     [SerializeField]
     private GameObject outline;
+
+    [SerializeField]
+    private AudioClip blockHitSound;
+
+    [SerializeField]
+    private AudioSource aSource;
 
 
     private void Awake()
@@ -28,6 +40,26 @@ public class blockScript : MonoBehaviour
 
         //HERE FOR TESTING
         //outline.GetComponent<SpriteRenderer>().color = Color.red;
+        outline.GetComponent<SpriteRenderer>().color = Color.red;
+
+        defaultColour = gameObject.GetComponent<SpriteRenderer>().color;
+
+        gameObject.GetComponent<PolygonCollider2D>().enabled = false;
+    }
+
+    public void Selected()
+    {
+        isHovered = true;
+    }
+
+    public void Deselected()
+    {
+        isHovered = false;
+    }
+
+    public void placed()
+    {
+        gameObject.GetComponent<PolygonCollider2D>().enabled = true;
     }
 
     // Start is called before the first frame update
@@ -67,6 +99,7 @@ public class blockScript : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("projectile"))
         {
+            aSource.PlayOneShot(blockHitSound);
             if (breakable)
             {
                 CurrentBlockHealth--;
@@ -80,6 +113,11 @@ public class blockScript : MonoBehaviour
             }
         }
 
+
+        //early return so placeing checks arent done;
+        if (!isHovered)
+            return;
+
         //Sets it in playerScript so the player cannot place the current block if its colliding with another block or the player
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Block"))
@@ -88,8 +126,8 @@ public class blockScript : MonoBehaviour
             {
                 canPlaceBlock = false;
                 chosenPlayerScript.CanPlaceBlock(false);
-                
 
+                gameObject.GetComponent<SpriteRenderer>().color = cantPlaceColor;
             }
         }
 
@@ -99,6 +137,8 @@ public class blockScript : MonoBehaviour
             {
                 canPlaceBlock = false;
                 chosenPlayerScript.CanPlaceBlock(false);
+
+                gameObject.GetComponent<SpriteRenderer>().color = cantPlaceColor;
             }
         }
 
@@ -106,12 +146,18 @@ public class blockScript : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D other)
     {
+        //early return so placeing checks arent done;
+        if (!isHovered)
+            return;
+
         if (other.gameObject.layer == LayerMask.NameToLayer("Block"))
         {
             if (Player)
             {
                 canPlaceBlock = true;
                 chosenPlayerScript.CanPlaceBlock(true);
+
+                gameObject.GetComponent<SpriteRenderer>().color = defaultColour;
             }
         }
 
@@ -122,6 +168,7 @@ public class blockScript : MonoBehaviour
                 canPlaceBlock = true;
                 chosenPlayerScript.CanPlaceBlock(true);
 
+                gameObject.GetComponent<SpriteRenderer>().color = defaultColour;
             }
         }
     }
