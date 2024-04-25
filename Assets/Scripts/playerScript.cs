@@ -67,7 +67,7 @@ public class playerScript : MonoBehaviour
 
     private bool fightingStage = false;
 
-    bool playMode = false;
+    bool playMode = true;
 
     float timeBetweenBothPlayersJoiningAndInputsStarting = 0.2f;
 
@@ -76,6 +76,11 @@ public class playerScript : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI currentAmmoText;
 
+
+
+    //angles for clamping controller input
+    [SerializeField]
+    float MinAngle, MaxAngle;
 
     public void OnRoundStart()
     {
@@ -170,6 +175,7 @@ public class playerScript : MonoBehaviour
 
     public void A()
     {
+        
         if (!(selectableObjects.Count > 0))
             return;
 
@@ -384,10 +390,20 @@ public class playerScript : MonoBehaviour
 
         FireMarkerMoveVector = (Vector3.up*rightStickMoveVector.x + Vector3.left*rightStickMoveVector.y);
 
-        if (rightStickMoveVector.x != 0 || rightStickMoveVector.y != 0)
-        { 
-            fireMarker.transform.rotation = quaternion.LookRotation(Vector3.forward, FireMarkerMoveVector);
+        Quaternion rot = quaternion.LookRotation(Vector3.forward, FireMarkerMoveVector);
 
+        var zAsDeg = rot.z * Mathf.Rad2Deg;
+
+        if (rightStickMoveVector.x != 0 || rightStickMoveVector.y != 0)
+        {
+            Debug.Log(zAsDeg);
+            if ((zAsDeg >= MinAngle) && (zAsDeg <= MaxAngle))
+            {
+                //clammping
+
+                fireMarker.transform.rotation = rot;
+            }
+            
         }
     }
 
