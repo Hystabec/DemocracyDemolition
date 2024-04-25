@@ -187,6 +187,7 @@ public class playerScript : MonoBehaviour
 
             //remvoe the selected object from the list - it has been placed
             selectableObjects[SelectedIndex].GetComponent<blockScript>().ShowOutline(false);
+            selectableObjects[SelectedIndex].GetComponent<blockScript>().placed();
 
             selectableObjects.RemoveAt(SelectedIndex);
 
@@ -195,7 +196,6 @@ public class playerScript : MonoBehaviour
             if (selectableObjects.Count != 0)
             {
                 selectableObjects[SelectedIndex].GetComponent<blockScript>().ShowOutline(true);
-
             }
 
             hasBeenSelected = false;
@@ -222,6 +222,9 @@ public class playerScript : MonoBehaviour
 
     public void RB()
     {
+        if (!hasBeenSelected)
+            return;
+
         if (!(selectableObjects.Count > 0))
             return;
 
@@ -233,6 +236,9 @@ public class playerScript : MonoBehaviour
 
     public void LB()
     {
+        if (!hasBeenSelected)
+            return;
+
         if (!(selectableObjects.Count > 0))
             return;
 
@@ -260,30 +266,30 @@ public class playerScript : MonoBehaviour
 
     public void RT()
     {
-        if (fightingStage == true)
-        {
+        if (!fightingStage)
+            return;
 
-            //shoot projectile
-            if (projectList.Count <= 0 || RemainingAmmo <= 0)
-                return; //projects are empty - do nothing
+        //shoot projectile
+        if (projectList.Count <= 0 || RemainingAmmo <= 0)
+            return; //projects are empty - do nothing
 
-            if (!playMode)
-                return;
+        if (!playMode)
+            return;
 
-            GameObject proj = projectList[0];
-            proj.transform.position = fireMarker.transform.GetChild(0).transform.position;
-            proj.SetActive(true);
+        GameObject proj = projectList[0];
+        proj.transform.position = fireMarker.transform.GetChild(0).transform.position;
+        proj.SetActive(true);
 
-            anim.SetTrigger("Throw");   
+        anim.SetTrigger("Throw");   
 
-            Vector3 rotation = fireMarker.transform.GetChild(0).transform.position - fireMarker.transform.position;
+        Vector3 rotation = fireMarker.transform.GetChild(0).transform.position - fireMarker.transform.position;
 
-            proj.GetComponent<Rigidbody2D>().velocity = new Vector2(rotation.x, rotation.y).normalized * throwForce;
-            projectList.Remove(proj);
+        proj.GetComponent<Rigidbody2D>().velocity = new Vector2(rotation.x, rotation.y).normalized * throwForce;
+        projectList.Remove(proj);
 
-            RemainingAmmo--;
-            updateAmmoText();
-        }
+        RemainingAmmo--;
+        updateAmmoText();
+        
     }
 
     public void CanFight(bool canFight)
@@ -318,9 +324,11 @@ public class playerScript : MonoBehaviour
             {
                 if (leftStickMoveVector.y != 0 && leftStickMoveVector.y > 0)
                 {
-                    selectableObjects[SelectedIndex].GetComponent<blockScript>().ShowOutline(false);
+                    blockScript bs = selectableObjects[SelectedIndex].GetComponent<blockScript>();
+                    bs.ShowOutline(false);
+                    bs.Deselected();
 
-                  //  selectableObjects[SelectedIndex].GetComponent<SpriteRenderer>().color = previousCol; //resets the color
+                    //selectableObjects[SelectedIndex].GetComponent<SpriteRenderer>().color = previousCol; //resets the color
 
                     SelectedIndex--;
 
@@ -329,7 +337,9 @@ public class playerScript : MonoBehaviour
                         SelectedIndex = selectableObjects.Count-1;
                     }
 
-                    selectableObjects[SelectedIndex].GetComponent<blockScript>().ShowOutline(true);
+                    bs =selectableObjects[SelectedIndex].GetComponent<blockScript>();
+                    bs.ShowOutline(true);
+                    bs.Selected();
 
                     canSwap = false;
 
@@ -337,7 +347,9 @@ public class playerScript : MonoBehaviour
                 }
                 else if (leftStickMoveVector.y != 0 && leftStickMoveVector.y < 0)
                 {
-                    selectableObjects[SelectedIndex].GetComponent<blockScript>().ShowOutline(false);
+                    blockScript bs =selectableObjects[SelectedIndex].GetComponent<blockScript>();
+                    bs.ShowOutline(false);
+                    bs.Deselected();
 
                   //  selectableObjects[SelectedIndex].GetComponent<SpriteRenderer>().color = previousCol; //resets the color
 
@@ -348,7 +360,9 @@ public class playerScript : MonoBehaviour
                         SelectedIndex = 0;
                     }
 
-                    selectableObjects[SelectedIndex].GetComponent<blockScript>().ShowOutline(true);
+                    bs = selectableObjects[SelectedIndex].GetComponent<blockScript>();
+                    bs.ShowOutline(true);
+                    bs.Selected();
 
 
                     canSwap = false;

@@ -81,6 +81,11 @@ public class InGameManagerScript : MonoBehaviour
             startRound();
     }
 
+    public void bothPlayersJoined()
+    {
+        startRound();
+    }
+
     public void playerKilled(GameObject callingPlayer)
     {
         Debug.Log(callingPlayer.name + " died");

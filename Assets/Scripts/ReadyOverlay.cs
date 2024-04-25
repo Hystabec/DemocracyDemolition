@@ -5,7 +5,10 @@ using UnityEngine;
 public class ReadyOverlay : MonoBehaviour
 {
     int playersJoined = 1;
-    
+
+    [SerializeField]
+    InGameManagerScript IGMS;
+
     [SerializeField]
     GameObject player1Button, player2Button;
     
@@ -52,5 +55,6 @@ public class ReadyOverlay : MonoBehaviour
         bothPlayersJoined = true;
         player1.GetComponent<playerScript>().switchMode();
         player2.GetComponent<playerScript>().switchMode();
+        IGMS.bothPlayersJoined();
     }
 }

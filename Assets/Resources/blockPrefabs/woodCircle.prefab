@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6705561526269789115}
   - component: {fileID: 2847071872825393176}
   - component: {fileID: 4496770277939946622}
-  - component: {fileID: 3117015122015800922}
+  - component: {fileID: 8344863335159481591}
   m_Layer: 7
   m_Name: woodCircle
   m_TagString: Untagged
@@ -127,11 +127,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd4d6c8020f321743b24e10eef8a4cec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cantPlaceColor: {r: 255, g: 0, b: 0, a: 1}
   TotalBlockHealth: 2
   breakable: 1
   outline: {fileID: 2031283439562527064}
---- !u!58 &3117015122015800922
-CircleCollider2D:
+--- !u!60 &8344863335159481591
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -163,8 +164,39 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.77
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.54, y: 1.54}
+    newSize: {x: 1.54, y: 1.54}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.77, y: -0.22}
+      - {x: 0.77, y: 0.22999999}
+      - {x: 0.68, y: 0.45}
+      - {x: 0.58, y: 0.55}
+      - {x: 0.39, y: 0.7}
+      - {x: 0.24, y: 0.77}
+      - {x: -0.25, y: 0.77}
+      - {x: -0.5, y: 0.64}
+      - {x: -0.66999996, y: 0.45999998}
+      - {x: -0.77, y: 0.21}
+      - {x: -0.77, y: -0.16}
+      - {x: -0.76, y: -0.21}
+      - {x: -0.72999996, y: -0.32}
+      - {x: -0.68, y: -0.42}
+      - {x: -0.48, y: -0.64}
+      - {x: -0.32, y: -0.72999996}
+      - {x: -0.22999999, y: -0.77}
+      - {x: 0.19, y: -0.77}
+      - {x: 0.31, y: -0.74}
+      - {x: 0.45, y: -0.68}
+      - {x: 0.71, y: -0.39999998}
+  m_UseDelaunayMesh: 0
 --- !u!1 &2031283439562527064
 GameObject:
   m_ObjectHideFlags: 0

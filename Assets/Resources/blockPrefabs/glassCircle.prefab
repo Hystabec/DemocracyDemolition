@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 8434477912041500366}
   - component: {fileID: 3574023439883946306}
   - component: {fileID: 4185677381852709593}
-  - component: {fileID: 1672012537992024431}
+  - component: {fileID: 2203784907647609460}
   m_Layer: 7
   m_Name: glassCircle
   m_TagString: Untagged
@@ -211,11 +211,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd4d6c8020f321743b24e10eef8a4cec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cantPlaceColor: {r: 255, g: 0, b: 0, a: 1}
   TotalBlockHealth: 1
   breakable: 1
   outline: {fileID: 797117331629755399}
---- !u!58 &1672012537992024431
-CircleCollider2D:
+--- !u!60 &2203784907647609460
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -247,5 +248,36 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.775
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.55, y: 1.55}
+    newSize: {x: 1.55, y: 1.55}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.745, y: -0.305}
+      - {x: 0.775, y: -0.195}
+      - {x: 0.775, y: 0.235}
+      - {x: 0.655, y: 0.48499998}
+      - {x: 0.525, y: 0.60499996}
+      - {x: 0.415, y: 0.685}
+      - {x: 0.285, y: 0.745}
+      - {x: 0.205, y: 0.775}
+      - {x: -0.205, y: 0.775}
+      - {x: -0.265, y: 0.765}
+      - {x: -0.445, y: 0.675}
+      - {x: -0.685, y: 0.42499998}
+      - {x: -0.775, y: 0.21499999}
+      - {x: -0.775, y: -0.24499999}
+      - {x: -0.72499996, y: -0.345}
+      - {x: -0.555, y: -0.575}
+      - {x: -0.415, y: -0.685}
+      - {x: -0.195, y: -0.775}
+      - {x: 0.205, y: -0.775}
+      - {x: 0.48499998, y: -0.655}
+      - {x: 0.655, y: -0.465}
+  m_UseDelaunayMesh: 0
