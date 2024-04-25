@@ -27,7 +27,7 @@ public class blockScript : MonoBehaviour
         outline = transform.GetChild(0).gameObject;
 
         //HERE FOR TESTING
-        outline.GetComponent<SpriteRenderer>().color = Color.red;
+        //outline.GetComponent<SpriteRenderer>().color = Color.red;
     }
 
     // Start is called before the first frame update

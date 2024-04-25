@@ -13,7 +13,7 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
-        if (roundTime > 0f)
+        if (roundTime >= 1f)
         {
             roundTime -= Time.deltaTime;
         }
