@@ -26,6 +26,12 @@ public class blockScript : MonoBehaviour
     [SerializeField]
     private GameObject outline;
 
+    [SerializeField]
+    private AudioClip blockHitSound;
+
+    [SerializeField]
+    private AudioSource aSource;
+
 
     private void Awake()
     {
@@ -93,6 +99,7 @@ public class blockScript : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("projectile"))
         {
+            aSource.PlayOneShot(blockHitSound);
             if (breakable)
             {
                 CurrentBlockHealth--;
