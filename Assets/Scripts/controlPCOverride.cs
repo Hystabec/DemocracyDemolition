@@ -120,9 +120,5 @@ public class controlPCOverride : MonoBehaviour
         {
             fireMarker.transform.rotation = Quaternion.Euler(0, 0, zrotation);
         }
-       else
-        {
-            Debug.Log(zrotation);
-        }
     }
 }

@@ -33,9 +33,7 @@ public class blockScript : MonoBehaviour
         outline = transform.GetChild(0).gameObject;
 
         //HERE FOR TESTING
-<<<<<<< Updated upstream
         //outline.GetComponent<SpriteRenderer>().color = Color.red;
-=======
         outline.GetComponent<SpriteRenderer>().color = Color.red;
 
         defaultColour = gameObject.GetComponent<SpriteRenderer>().color;
@@ -56,7 +54,6 @@ public class blockScript : MonoBehaviour
     public void placed()
     {
         gameObject.GetComponent<PolygonCollider2D>().enabled = true;
->>>>>>> Stashed changes
     }
 
     // Start is called before the first frame update
