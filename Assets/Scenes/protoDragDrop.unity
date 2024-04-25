@@ -2416,7 +2416,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1303902994}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a2f1df829cc07645abe01b5afce4d3c, type: 3}
   m_Name: 
@@ -2425,6 +2425,10 @@ MonoBehaviour:
   pScript: {fileID: 1303902995}
   mainCam: {fileID: 313012571}
   fireMarker: {fileID: 16386615}
+  posMinAngle: 0
+  posMaxAngle: 80
+  negMinAngle: 0
+  negMaxAngle: -30
 --- !u!61 &1303902998
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3907,7 +3911,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1865346978}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a2f1df829cc07645abe01b5afce4d3c, type: 3}
   m_Name: 
@@ -3916,6 +3920,10 @@ MonoBehaviour:
   pScript: {fileID: 1865346980}
   mainCam: {fileID: 313012571}
   fireMarker: {fileID: 231040011}
+  posMinAngle: 120
+  posMaxAngle: 180
+  negMinAngle: -150
+  negMaxAngle: -180
 --- !u!95 &1865346984
 Animator:
   serializedVersion: 5

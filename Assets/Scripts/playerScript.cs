@@ -370,8 +370,11 @@ public class playerScript : MonoBehaviour
 
         FireMarkerMoveVector = (Vector3.up*rightStickMoveVector.x + Vector3.left*rightStickMoveVector.y);
 
-        if(rightStickMoveVector.x != 0 || rightStickMoveVector.y != 0)
+        if (rightStickMoveVector.x != 0 || rightStickMoveVector.y != 0)
+        { 
             fireMarker.transform.rotation = quaternion.LookRotation(Vector3.forward, FireMarkerMoveVector);
+
+        }
     }
 
     public void AddBlocks(GameObject obj)
