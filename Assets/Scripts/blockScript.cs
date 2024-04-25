@@ -1,9 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+enum blockType
+{ 
+    Wood,
+    Stone,
+    Metal,
+    Glass
+}
 
 public class blockScript : MonoBehaviour
 {
+    [SerializeField]
+    blockType type;
+
     Color defaultColour;
 
     [SerializeField]
@@ -26,11 +36,14 @@ public class blockScript : MonoBehaviour
     [SerializeField]
     private GameObject outline;
 
+
     [SerializeField]
     private AudioClip blockHitSound;
 
     [SerializeField]
     private AudioSource aSource;
+
+    
 
 
     private void Awake()
@@ -40,6 +53,8 @@ public class blockScript : MonoBehaviour
 
         //HERE FOR TESTING
         //outline.GetComponent<SpriteRenderer>().color = Color.red;
+
+
         outline.GetComponent<SpriteRenderer>().color = Color.red;
 
         defaultColour = gameObject.GetComponent<SpriteRenderer>().color;

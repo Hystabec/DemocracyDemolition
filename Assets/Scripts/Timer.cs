@@ -6,23 +6,51 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
+    [SerializeField]
     float roundTime = 20f;
+
+    float currentTime = 20f;
+
+    bool timerRunning = false;
 
     [SerializeField]
     TextMeshProUGUI timerText;
 
+    public void timerReset()
+    {
+        currentTime = roundTime;
+    }
+
+    void Awake()
+    {
+        currentTime = roundTime;
+    }
+
+    public void StartTime()
+    {
+        timerRunning = true;
+    }
+
+    public void StopTimer()
+    {
+        timerRunning = false;
+    }
+
     void Update()
     {
-        if (roundTime >= 1f)
+        if (!timerRunning)
+            return;
+
+        if (currentTime >= 1f)
         {
-            roundTime -= Time.deltaTime;
+            currentTime -= Time.deltaTime;
         }
         UpdateTimerText();
     }
 
     void UpdateTimerText()
     {
-        int roundSeconds = Mathf.FloorToInt(roundTime % 60f);
+        int roundSeconds = Mathf.FloorToInt(currentTime % 60f);
 
         string timeString = string.Format("{0}", roundSeconds);
 

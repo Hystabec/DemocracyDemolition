@@ -52,6 +52,9 @@ public class InGameManagerScript : MonoBehaviour
     GameObject player1, player2;
 
     randomBlockSpawn rbs;
+    
+    [SerializeField]
+    Timer timerScript;
 
     public Animator redAnim;
     public Animator blueAnim;
@@ -204,6 +207,7 @@ public class InGameManagerScript : MonoBehaviour
         player2.GetComponent<playerScript>().OnRoundStart();
 
        StartCoroutine(TimeBeforeFighting());
+       timerScript.StartTime();
     }
 
     void endRound()
@@ -220,6 +224,8 @@ public class InGameManagerScript : MonoBehaviour
         currentRound++;
 
         //add a wait time between rounds
+        timerScript.StopTimer();
+        timerScript.timerReset();
 
         startRound();
     }
