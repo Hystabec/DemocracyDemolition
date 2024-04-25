@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-enum blockType
+public enum blockType
 { 
     Wood,
     Stone,
@@ -45,6 +45,10 @@ public class blockScript : MonoBehaviour
 
     
 
+    public blockType getBlockType()
+    {
+        return type;
+    }
 
     private void Awake()
     {

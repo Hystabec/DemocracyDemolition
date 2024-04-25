@@ -92,7 +92,6 @@ public class InGameManagerScript : MonoBehaviour
 
     public void playerKilled(GameObject callingPlayer)
     {
-        Debug.Log(callingPlayer.name + " died");
 
         if (callingPlayer == player1)
         {

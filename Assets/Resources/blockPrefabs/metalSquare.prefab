@@ -261,6 +261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd4d6c8020f321743b24e10eef8a4cec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 2
   cantPlaceColor: {r: 255, g: 0, b: 0, a: 1}
   TotalBlockHealth: 3
   breakable: 0
