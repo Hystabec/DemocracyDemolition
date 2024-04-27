@@ -49,8 +49,6 @@ public class pooledProjectileScript : MonoBehaviour
 
                 default: Debug.Log("Block has no type"); break;
             }
-
-
         }
     }
 }
