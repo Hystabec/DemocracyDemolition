@@ -56,9 +56,15 @@ public class InGameManagerScript : MonoBehaviour
     [SerializeField]
     Timer timerScript;
 
-    public Animator redAnim;
+    [SerializeField]
+    Animator redAnim, blueAnim, camAnim, redGroup1Anim, redGroup2Anim, redGroup3Anim, blueGroup1Anim, blueGroup2Anim, blueGroup3Anim;
+
+    /*public Animator redAnim;
     public Animator blueAnim;
     public Animator camAnim;
+    public Animator redGroup1Anim;
+    public Animator redGroup2Anim;
+    public Animator redGroup3Anim; */
 
     public Image redProgressBar;
     public Image blueProgressBar;
@@ -97,6 +103,9 @@ public class InGameManagerScript : MonoBehaviour
         {
             p2Score++;
             blueAnim.SetTrigger("RoundWin");
+            blueGroup1Anim.SetTrigger("RoundWin");
+            blueGroup2Anim.SetTrigger("RoundWin");
+            blueGroup3Anim.SetTrigger("RoundWin");
             redAnim.SetTrigger("Hit");
             blueProgressBar.fillAmount = blueProgressBar.fillAmount + 0.25f;
         }
@@ -105,6 +114,9 @@ public class InGameManagerScript : MonoBehaviour
         {
             p1Score++;
             redAnim.SetTrigger("RoundWin");
+            redGroup1Anim.SetTrigger("RoundWin");
+            redGroup2Anim.SetTrigger("RoundWin");
+            redGroup3Anim.SetTrigger("RoundWin");
             blueAnim.SetTrigger("Hit");
             redProgressBar.fillAmount = redProgressBar.fillAmount + 0.25f;
         }
@@ -115,6 +127,9 @@ public class InGameManagerScript : MonoBehaviour
         if (p1Score >= roundsNeededToWin)
         {
             redAnim.SetTrigger("GameWin");
+            redGroup1Anim.SetTrigger("GameWin");
+            redGroup2Anim.SetTrigger("GameWin");
+            redGroup3Anim.SetTrigger("GameWin");
             camAnim.SetTrigger("GameWinRed");
             EndGame(player1);
         }
@@ -122,6 +137,9 @@ public class InGameManagerScript : MonoBehaviour
         else if(p2Score >= roundsNeededToWin)
         {
             blueAnim.SetTrigger("GameWin");
+            blueGroup1Anim.SetTrigger("GameWin");
+            blueGroup2Anim.SetTrigger("GameWin");
+            blueGroup3Anim.SetTrigger("GameWin");
             camAnim.SetTrigger("GameWinBlue");
             EndGame(player2);
         }

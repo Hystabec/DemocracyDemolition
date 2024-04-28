@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 6904126309626076785}
   - component: {fileID: 3331335234354423013}
   - component: {fileID: 6398472801041767676}
-  - component: {fileID: -5562052015888469111}
   - component: {fileID: -2784249416038002205}
   m_Layer: 0
   m_Name: Coconut
@@ -77,9 +76,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1423235079
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 81c60e79b45d2394cb8dc0a82b57e589, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -299,18 +298,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32d6055d72104da45a42a0c4d800b14f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &-5562052015888469111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8970706318663081833}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c065c50c10bfe9b4ea106af35768c2f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &-2784249416038002205
