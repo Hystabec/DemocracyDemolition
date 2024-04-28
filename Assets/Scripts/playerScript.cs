@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 using UnityEngine.UI;
 using TMPro;
-
+using System;
 
 public enum modes
 {
@@ -179,7 +179,6 @@ public class playerScript : MonoBehaviour
 
     public void A()
     {
-        
         if (!(selectableObjects.Count > 0))
             return;
 
@@ -281,6 +280,11 @@ public class playerScript : MonoBehaviour
     public void LS(InputValue value)
     {
         leftStickMoveVector = value.Get<Vector2>();
+    }
+
+    public void fakeRS(Vector2 value)
+    {
+        rightStickMoveVector = value;
     }
 
     public void RS(InputValue value)
@@ -416,23 +420,19 @@ public class playerScript : MonoBehaviour
         }
         else if (currentMode == modes.Play)
         {
-
-            FireMarkerMoveVector = (Vector3.up * rightStickMoveVector.x + Vector3.left * rightStickMoveVector.y);
-
-            Quaternion rot = quaternion.LookRotation(Vector3.forward, FireMarkerMoveVector);
-
-            var zAsDeg = rot.z * Mathf.Rad2Deg;
-
             if (rightStickMoveVector.x != 0 || rightStickMoveVector.y != 0)
             {
-                Debug.Log(zAsDeg);
-                if ((zAsDeg >= MinAngle) && (zAsDeg <= MaxAngle))
+                FireMarkerMoveVector = (Vector3.up * rightStickMoveVector.x + Vector3.left * rightStickMoveVector.y);
+
+                Quaternion rot = quaternion.LookRotation(Vector3.forward, FireMarkerMoveVector);
+
+                var temp = Mathf.Atan2(FireMarkerMoveVector.y - 0, FireMarkerMoveVector.x - 0);
+
+                if ((temp >= MinAngle*Mathf.Deg2Rad) && (temp <= MaxAngle * Mathf.Deg2Rad))
                 {
                     //clammping
-
                     fireMarker.transform.rotation = rot;
                 }
-
             }
         }
     }

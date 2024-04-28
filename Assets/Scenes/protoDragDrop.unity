@@ -42201,8 +42201,8 @@ MonoBehaviour:
   throwForce: 10
   anim: {fileID: 1303902999}
   currentAmmoText: {fileID: 1869428362}
-  MinAngle: -20
-  MaxAngle: 20
+  MinAngle: 20
+  MaxAngle: 160
 --- !u!4 &1303902996
 Transform:
   m_ObjectHideFlags: 0
@@ -42232,6 +42232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a2f1df829cc07645abe01b5afce4d3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stickVisualArea: {fileID: 2879806560169589419, guid: 3a294558ff7cbbb4f87fb53a1ad53e3f, type: 3}
   igm: {fileID: 1729778779}
   pScript: {fileID: 1303902995}
   mainCam: {fileID: 313012571}
@@ -42240,6 +42241,7 @@ MonoBehaviour:
   posMaxAngle: 80
   negMinAngle: 0
   negMaxAngle: -30
+  rightStickVisualMarkerLcation: {x: -8, y: -4}
 --- !u!61 &1303902998
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -60582,7 +60584,7 @@ MonoBehaviour:
   throwForce: 10
   anim: {fileID: 1865346984}
   currentAmmoText: {fileID: 298309877}
-  MinAngle: 20
+  MinAngle: -160
   MaxAngle: -20
 --- !u!4 &1865346981
 Transform:
@@ -60658,6 +60660,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a2f1df829cc07645abe01b5afce4d3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stickVisualArea: {fileID: 2879806560169589419, guid: 3a294558ff7cbbb4f87fb53a1ad53e3f, type: 3}
   igm: {fileID: 1729778779}
   pScript: {fileID: 1865346980}
   mainCam: {fileID: 313012571}
@@ -60666,6 +60669,7 @@ MonoBehaviour:
   posMaxAngle: 180
   negMinAngle: -150
   negMaxAngle: -180
+  rightStickVisualMarkerLcation: {x: 8, y: -4}
 --- !u!95 &1865346984
 Animator:
   serializedVersion: 5
