@@ -43200,7 +43200,7 @@ MonoBehaviour:
   posMaxAngle: 80
   negMinAngle: 0
   negMaxAngle: -30
-  rightStickVisualMarkerLcation: {x: -8, y: -4}
+  rightStickVisualMarkerLcation: {x: -7.75, y: -2}
 --- !u!61 &1303902998
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -61991,7 +61991,7 @@ MonoBehaviour:
   posMaxAngle: 180
   negMinAngle: -150
   negMaxAngle: -180
-  rightStickVisualMarkerLcation: {x: 8, y: -4}
+  rightStickVisualMarkerLcation: {x: 7.75, y: -2}
 --- !u!95 &1865346984
 Animator:
   serializedVersion: 5
