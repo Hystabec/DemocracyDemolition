@@ -44,3 +44,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Crowd
+    uniqueID: 2860990463
+    locked: 0
