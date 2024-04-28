@@ -109,7 +109,6 @@ public class InGameManagerScript : MonoBehaviour
             redAnim.SetTrigger("Hit");
             blueProgressBar.fillAmount = blueProgressBar.fillAmount + 0.25f;
         }
-
         else
         {
             p1Score++;
@@ -132,8 +131,7 @@ public class InGameManagerScript : MonoBehaviour
             redGroup3Anim.SetTrigger("GameWin");
             camAnim.SetTrigger("GameWinRed");
             EndGame(player1);
-        }
-            
+        } 
         else if(p2Score >= roundsNeededToWin)
         {
             blueAnim.SetTrigger("GameWin");
@@ -251,7 +249,10 @@ public class InGameManagerScript : MonoBehaviour
     {
         //DEBUG - ends playmode when winner is found
         Debug.Log(winningPlayer.name + " wins");
-        //UnityEditor.EditorApplication.isPlaying = false;
+
+        //when game ends player go to UI mode
+        player1.GetComponent<playerScript>().switchMode(modes.UI);
+        player2.GetComponent<playerScript>().switchMode(modes.UI);
     }
 
     private IEnumerator TimeBeforeFighting()
