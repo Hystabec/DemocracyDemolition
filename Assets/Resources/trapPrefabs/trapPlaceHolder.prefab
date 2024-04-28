@@ -158,8 +158,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1423235079
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 1158391615, guid: 57fa2719f859f4643afdf80ef3a16e5c, type: 3}
   m_Color: {r: 1, g: 0, b: 0.36963177, a: 1}
@@ -211,10 +211,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd4d6c8020f321743b24e10eef8a4cec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
   cantPlaceColor: {r: 255, g: 0, b: 0, a: 1}
   TotalBlockHealth: 3
   breakable: 1
   outline: {fileID: 3916387547860450745}
+  blockHitSound: {fileID: 0}
+  aSource: {fileID: 0}
 --- !u!60 &5739684249007014494
 PolygonCollider2D:
   m_ObjectHideFlags: 0
