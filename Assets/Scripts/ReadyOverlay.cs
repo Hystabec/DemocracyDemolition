@@ -53,8 +53,8 @@ public class ReadyOverlay : MonoBehaviour
     public void BothPlayersJoined()
     {
         bothPlayersJoined = true;
-        player1.GetComponent<playerScript>().switchMode();
-        player2.GetComponent<playerScript>().switchMode();
+        player1.GetComponent<playerScript>().switchMode(modes.Play);
+        player2.GetComponent<playerScript>().switchMode(modes.Play);
         IGMS.bothPlayersJoined();
     }
 }

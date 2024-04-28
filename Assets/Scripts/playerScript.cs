@@ -7,8 +7,18 @@ using UnityEngine.UIElements;
 using UnityEngine.UI;
 using TMPro;
 
+
+public enum modes
+{
+    UI,
+    Play,
+    None
+}
+
 public class playerScript : MonoBehaviour
 {
+    modes currentMode = modes.None;
+
     [SerializeField]
     int totalAmmo = 3;
     int RemainingAmmo = 3;
@@ -35,8 +45,6 @@ public class playerScript : MonoBehaviour
     bool locationOneFree = true;
     bool locationTwoFree = true;
     bool locationThreeFree = true;
-
-    Color previousCol;
 
     bool hasBeenSelected = false;
 
@@ -66,8 +74,6 @@ public class playerScript : MonoBehaviour
     private bool canPlace = true;
 
     private bool fightingStage = false;
-
-    bool playMode = false;
 
     float timeBetweenBothPlayersJoiningAndInputsStarting = 0.2f;
 
@@ -106,15 +112,15 @@ public class playerScript : MonoBehaviour
         return thisPlayerIndex;
     }
 
-    public void switchMode()
+    public void switchMode(modes newMode)
     {
-        StartCoroutine(SwitchEndOfFrame());
+        StartCoroutine(SwitchEndOfFrame(newMode));
     }
 
-    IEnumerator SwitchEndOfFrame() 
+    IEnumerator SwitchEndOfFrame(modes newMode) 
     {
         yield return new WaitForSeconds(timeBetweenBothPlayersJoiningAndInputsStarting);
-        playMode = !playMode;
+        currentMode = newMode;
     }
 
     public void despawnProjectile(GameObject projectile)
@@ -179,34 +185,37 @@ public class playerScript : MonoBehaviour
         if (!(selectableObjects.Count > 0))
             return;
 
-        if (!playMode)
-            return;
-
-        if (!hasBeenSelected)
+        if(currentMode == modes.UI)
         {
-            hasBeenSelected = true;
-            selectedBlockLocation = selectableObjects[SelectedIndex].transform.position;
-            selectedBlockRotation = selectableObjects[SelectedIndex].transform.rotation;
+
         }
-        else if (canPlace)
+        else if (currentMode == modes.Play)
         {
-
-            //remvoe the selected object from the list - it has been placed
-            selectableObjects[SelectedIndex].GetComponent<blockScript>().ShowOutline(false);
-            selectableObjects[SelectedIndex].GetComponent<blockScript>().placed();
-
-            selectableObjects.RemoveAt(SelectedIndex);
-
-            SelectedIndex = 0;
-
-            if (selectableObjects.Count != 0)
+            if (!hasBeenSelected)
             {
-                selectableObjects[SelectedIndex].GetComponent<blockScript>().ShowOutline(true);
+                hasBeenSelected = true;
+                selectedBlockLocation = selectableObjects[SelectedIndex].transform.position;
+                selectedBlockRotation = selectableObjects[SelectedIndex].transform.rotation;
             }
+            else if (canPlace)
+            {
 
-            hasBeenSelected = false;
+                //remvoe the selected object from the list - it has been placed
+                selectableObjects[SelectedIndex].GetComponent<blockScript>().ShowOutline(false);
+                selectableObjects[SelectedIndex].GetComponent<blockScript>().placed();
+
+                selectableObjects.RemoveAt(SelectedIndex);
+
+                SelectedIndex = 0;
+
+                if (selectableObjects.Count != 0)
+                {
+                    selectableObjects[SelectedIndex].GetComponent<blockScript>().ShowOutline(true);
+                }
+
+                hasBeenSelected = false;
+            }
         }
-        
     }
 
     public void B()
@@ -214,15 +223,19 @@ public class playerScript : MonoBehaviour
         if (!(selectableObjects.Count > 0))
             return;
 
-        if (!playMode)
-            return;
-
-        if (hasBeenSelected)
+        if (currentMode == modes.UI)
         {
-            selectableObjects[SelectedIndex].transform.position = selectedBlockLocation;
-            selectableObjects[SelectedIndex].transform.rotation = selectedBlockRotation;
 
-            hasBeenSelected = false;
+        }
+        else if (currentMode == modes.Play)
+        {
+            if (hasBeenSelected)
+            {
+                selectableObjects[SelectedIndex].transform.position = selectedBlockLocation;
+                selectableObjects[SelectedIndex].transform.rotation = selectedBlockRotation;
+
+                hasBeenSelected = false;
+            }
         }
     }
 
@@ -234,10 +247,14 @@ public class playerScript : MonoBehaviour
         if (!(selectableObjects.Count > 0))
             return;
 
-        if (!playMode)
-            return;
+        if (currentMode == modes.UI)
+        {
 
-        selectableObjects[SelectedIndex].transform.Rotate(new Vector3(0, 0, 90));
+        }
+        else if (currentMode == modes.Play)
+        {
+            selectableObjects[SelectedIndex].transform.Rotate(new Vector3(0, 0, 90));
+        }
     }
 
     public void LB()
@@ -248,10 +265,14 @@ public class playerScript : MonoBehaviour
         if (!(selectableObjects.Count > 0))
             return;
 
-        if (!playMode)
-            return;
+        if (currentMode == modes.UI)
+        {
 
-        selectableObjects[SelectedIndex].transform.Rotate(new Vector3(0, 0, 90));
+        }
+        else if (currentMode == modes.Play)
+        {
+            selectableObjects[SelectedIndex].transform.Rotate(new Vector3(0, 0, 90));
+        }
     }
 
     public void fakeLS(Vector2 value)
@@ -279,23 +300,26 @@ public class playerScript : MonoBehaviour
         if (projectList.Count <= 0 || RemainingAmmo <= 0)
             return; //projects are empty - do nothing
 
-        if (!playMode)
-            return;
+        if (currentMode == modes.UI)
+        {
 
-        GameObject proj = projectList[0];
-        proj.transform.position = fireMarker.transform.GetChild(0).transform.position;
-        proj.SetActive(true);
+        }
+        else if (currentMode == modes.Play)
+        {
+            GameObject proj = projectList[0];
+            proj.transform.position = fireMarker.transform.GetChild(0).transform.position;
+            proj.SetActive(true);
 
-        anim.SetTrigger("Throw");   
+            anim.SetTrigger("Throw");
 
-        Vector3 rotation = fireMarker.transform.GetChild(0).transform.position - fireMarker.transform.position;
+            Vector3 rotation = fireMarker.transform.GetChild(0).transform.position - fireMarker.transform.position;
 
-        proj.GetComponent<Rigidbody2D>().velocity = new Vector2(rotation.x, rotation.y).normalized * throwForce;
-        projectList.Remove(proj);
+            proj.GetComponent<Rigidbody2D>().velocity = new Vector2(rotation.x, rotation.y).normalized * throwForce;
+            projectList.Remove(proj);
 
-        RemainingAmmo--;
-        updateAmmoText();
-        
+            RemainingAmmo--;
+            updateAmmoText();
+        }
     }
 
     public void CanFight(bool canFight)
@@ -320,91 +344,99 @@ public class playerScript : MonoBehaviour
         if (!(selectableObjects.Count > 0))
             return;
 
-        if (!playMode)
-            return;
-
-        //this could probably be done better, but oh well it works :)
-        if (!hasBeenSelected)
+        if (currentMode == modes.UI)
         {
-            if (canSwap)
+
+        }
+        else if (currentMode == modes.Play)
+        {
+            //this could probably be done better, but oh well it works :)
+            if (!hasBeenSelected)
             {
-                if (leftStickMoveVector.y != 0 && leftStickMoveVector.y > 0)
+                if (canSwap)
                 {
-                    blockScript bs = selectableObjects[SelectedIndex].GetComponent<blockScript>();
-                    bs.ShowOutline(false);
-                    bs.Deselected();
-
-                    //selectableObjects[SelectedIndex].GetComponent<SpriteRenderer>().color = previousCol; //resets the color
-
-                    SelectedIndex--;
-
-                    if (SelectedIndex < 0)
+                    if (leftStickMoveVector.y != 0 && leftStickMoveVector.y > 0)
                     {
-                        SelectedIndex = selectableObjects.Count-1;
+                        blockScript bs = selectableObjects[SelectedIndex].GetComponent<blockScript>();
+                        bs.ShowOutline(false);
+                        bs.Deselected();
+
+                        //selectableObjects[SelectedIndex].GetComponent<SpriteRenderer>().color = previousCol; //resets the color
+
+                        SelectedIndex--;
+
+                        if (SelectedIndex < 0)
+                        {
+                            SelectedIndex = selectableObjects.Count - 1;
+                        }
+
+                        bs = selectableObjects[SelectedIndex].GetComponent<blockScript>();
+                        bs.ShowOutline(true);
+                        bs.Selected();
+
+                        canSwap = false;
+
+                        StartCoroutine(waitToSwap());
                     }
-
-                    bs =selectableObjects[SelectedIndex].GetComponent<blockScript>();
-                    bs.ShowOutline(true);
-                    bs.Selected();
-
-                    canSwap = false;
-
-                    StartCoroutine(waitToSwap());
-                }
-                else if (leftStickMoveVector.y != 0 && leftStickMoveVector.y < 0)
-                {
-                    blockScript bs =selectableObjects[SelectedIndex].GetComponent<blockScript>();
-                    bs.ShowOutline(false);
-                    bs.Deselected();
-
-                  //  selectableObjects[SelectedIndex].GetComponent<SpriteRenderer>().color = previousCol; //resets the color
-
-                    SelectedIndex++;
-
-                    if (SelectedIndex >= selectableObjects.Count)
+                    else if (leftStickMoveVector.y != 0 && leftStickMoveVector.y < 0)
                     {
-                        SelectedIndex = 0;
+                        blockScript bs = selectableObjects[SelectedIndex].GetComponent<blockScript>();
+                        bs.ShowOutline(false);
+                        bs.Deselected();
+
+                        //  selectableObjects[SelectedIndex].GetComponent<SpriteRenderer>().color = previousCol; //resets the color
+
+                        SelectedIndex++;
+
+                        if (SelectedIndex >= selectableObjects.Count)
+                        {
+                            SelectedIndex = 0;
+                        }
+
+                        bs = selectableObjects[SelectedIndex].GetComponent<blockScript>();
+                        bs.ShowOutline(true);
+                        bs.Selected();
+
+
+                        canSwap = false;
+
+                        StartCoroutine(waitToSwap());
                     }
-
-                    bs = selectableObjects[SelectedIndex].GetComponent<blockScript>();
-                    bs.ShowOutline(true);
-                    bs.Selected();
-
-
-                    canSwap = false;
-
-                    StartCoroutine(waitToSwap());
                 }
             }
-        }
-        else
-        {
-            selectableObjects[SelectedIndex].transform.position += (new Vector3(leftStickSensitivity*leftStickMoveVector.x, leftStickSensitivity*leftStickMoveVector.y, 0))*Time.deltaTime;
+            else
+            {
+                selectableObjects[SelectedIndex].transform.position += (new Vector3(leftStickSensitivity * leftStickMoveVector.x, leftStickSensitivity * leftStickMoveVector.y, 0)) * Time.deltaTime;
+            }
         }
     }
 
     void handleRightStick()
     {
-        if (!playMode)
-            return;
-        
-        
-        FireMarkerMoveVector = (Vector3.up*rightStickMoveVector.x + Vector3.left*rightStickMoveVector.y);
-
-        Quaternion rot = quaternion.LookRotation(Vector3.forward, FireMarkerMoveVector);
-
-        var zAsDeg = rot.z * Mathf.Rad2Deg;
-
-        if (rightStickMoveVector.x != 0 || rightStickMoveVector.y != 0)
+        if (currentMode == modes.UI)
         {
-            Debug.Log(zAsDeg);
-            if ((zAsDeg >= MinAngle) && (zAsDeg <= MaxAngle))
-            {
-                //clammping
 
-                fireMarker.transform.rotation = rot;
+        }
+        else if (currentMode == modes.Play)
+        {
+
+            FireMarkerMoveVector = (Vector3.up * rightStickMoveVector.x + Vector3.left * rightStickMoveVector.y);
+
+            Quaternion rot = quaternion.LookRotation(Vector3.forward, FireMarkerMoveVector);
+
+            var zAsDeg = rot.z * Mathf.Rad2Deg;
+
+            if (rightStickMoveVector.x != 0 || rightStickMoveVector.y != 0)
+            {
+                Debug.Log(zAsDeg);
+                if ((zAsDeg >= MinAngle) && (zAsDeg <= MaxAngle))
+                {
+                    //clammping
+
+                    fireMarker.transform.rotation = rot;
+                }
+
             }
-            
         }
     }
 
