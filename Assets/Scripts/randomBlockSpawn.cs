@@ -38,7 +38,6 @@ public class randomBlockSpawn : MonoBehaviour
     {
         GameObject thisBlock = Instantiate(ChooseBlock(), spawnPos, Quaternion.identity);
         var blockScript = thisBlock.GetComponent<blockScript>();
-        blockScript.ChosePlayer(ChoosePlayer());
        // thisBlock.SetActive(false);
     }
 
@@ -47,7 +46,6 @@ public class randomBlockSpawn : MonoBehaviour
         for (int i = 0; i < numberToGive; i++)
         {
             GameObject thisBlock = Instantiate(randomTrap(), spawnPos, Quaternion.identity);
-            thisBlock.GetComponent<blockScript>().assignPlayer(ToGiveTo);
             ToGiveTo.GetComponent<playerScript>().AddBlockToList(thisBlock);
         }
     }
@@ -57,7 +55,6 @@ public class randomBlockSpawn : MonoBehaviour
         for(int i = 0; i < numberToGive; i++)
         {
             GameObject thisBlock = Instantiate(randomBlock(), spawnPos, Quaternion.identity);
-            thisBlock.GetComponent<blockScript>().assignPlayer(ToGiveTo);
             ToGiveTo.GetComponent<playerScript>().AddBlockToList(thisBlock);
         }
     }
@@ -104,6 +101,4 @@ public class randomBlockSpawn : MonoBehaviour
 
         }
     }
-
-
 }

@@ -25,9 +25,6 @@ public class blockScript : MonoBehaviour
     [SerializeField]
     bool breakable;
 
-    private GameObject Player;
-    private playerScript chosenPlayerScript;
-
     Collider2D col;
 
     bool isHovered = false;
@@ -90,25 +87,17 @@ public class blockScript : MonoBehaviour
        // col.enabled = false;
     }
 
+    public bool CanPlaceBlock() 
+    {
+        return canPlaceBlock;    
+    }
+
     // Update is called once per frame
     void Update()
     {
         
     }
 
-    public void ChosePlayer(GameObject playerobj)
-    {
-        Player = playerobj;
-        chosenPlayerScript = Player.GetComponent<playerScript>();
-        chosenPlayerScript.AddBlocks(gameObject);
-       // col.enabled = true;
-    }
-
-    public void assignPlayer(GameObject owningPlayer)
-    {
-        Player = owningPlayer;
-        chosenPlayerScript = Player.GetComponent<playerScript>();
-    }
     public void ShowOutline(bool shouldShow)
     {
         outline.SetActive(shouldShow);
@@ -141,26 +130,16 @@ public class blockScript : MonoBehaviour
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Block"))
         {
-            if (Player)
-            {
-                canPlaceBlock = false;
-                chosenPlayerScript.CanPlaceBlock(false);
-
-                gameObject.GetComponent<SpriteRenderer>().color = cantPlaceColor;
-            }
+            canPlaceBlock = false;
+            gameObject.GetComponent<SpriteRenderer>().color = cantPlaceColor;
+            
         }
 
         if (other.gameObject.CompareTag("playerArea"))
         {
-            if (Player)
-            {
-                canPlaceBlock = false;
-                chosenPlayerScript.CanPlaceBlock(false);
-
-                gameObject.GetComponent<SpriteRenderer>().color = cantPlaceColor;
-            }
+            canPlaceBlock = false;
+            gameObject.GetComponent<SpriteRenderer>().color = cantPlaceColor;
         }
-
     }
 
     private void OnCollisionExit2D(Collision2D other)
@@ -171,24 +150,14 @@ public class blockScript : MonoBehaviour
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Block"))
         {
-            if (Player)
-            {
-                canPlaceBlock = true;
-                chosenPlayerScript.CanPlaceBlock(true);
-
-                gameObject.GetComponent<SpriteRenderer>().color = defaultColour;
-            }
+            canPlaceBlock = true;
+            gameObject.GetComponent<SpriteRenderer>().color = defaultColour;    
         }
 
         if (other.gameObject.CompareTag("playerArea"))
         {
-            if (Player)
-            {
-                canPlaceBlock = true;
-                chosenPlayerScript.CanPlaceBlock(true);
-
-                gameObject.GetComponent<SpriteRenderer>().color = defaultColour;
-            }
+            canPlaceBlock = true;
+            gameObject.GetComponent<SpriteRenderer>().color = defaultColour;
         }
     }
 }

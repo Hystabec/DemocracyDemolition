@@ -71,8 +71,6 @@ public class playerScript : MonoBehaviour
     [SerializeField]
     float throwForce = 10.0f;
 
-    private bool canPlace = true;
-
     private bool fightingStage = false;
 
     float timeBetweenBothPlayersJoiningAndInputsStarting = 0.2f;
@@ -197,9 +195,8 @@ public class playerScript : MonoBehaviour
                 selectedBlockLocation = selectableObjects[SelectedIndex].transform.position;
                 selectedBlockRotation = selectableObjects[SelectedIndex].transform.rotation;
             }
-            else if (canPlace)
+            else if (selectableObjects[SelectedIndex].GetComponent<blockScript>().CanPlaceBlock())
             {
-
                 //remvoe the selected object from the list - it has been placed
                 selectableObjects[SelectedIndex].GetComponent<blockScript>().ShowOutline(false);
                 selectableObjects[SelectedIndex].GetComponent<blockScript>().placed();
@@ -445,10 +442,6 @@ public class playerScript : MonoBehaviour
         blockObjects.Add(obj);
         AddBlockToList(obj);
 
-    }
-    public void CanPlaceBlock(bool canPlaceBlock)
-    {
-        canPlace = canPlaceBlock;
     }
 
     void Start()
