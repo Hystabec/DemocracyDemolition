@@ -30717,13 +30717,14 @@ GameObject:
   - component: {fileID: 802356845}
   - component: {fileID: 802356844}
   - component: {fileID: 802356843}
+  - component: {fileID: 802356847}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &802356843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30809,6 +30810,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!95 &802356847
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 802356842}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4ebde59e36f971c45a59c79db6d6037b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &815667277
 GameObject:
   m_ObjectHideFlags: 0
@@ -49668,6 +49690,7 @@ GameObject:
   - component: {fileID: 1543693434}
   - component: {fileID: 1543693436}
   - component: {fileID: 1543693435}
+  - component: {fileID: 1543693437}
   m_Layer: 5
   m_Name: RedProgressHolder
   m_TagString: Untagged
@@ -49733,6 +49756,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1543693433}
   m_CullTransparentMesh: 1
+--- !u!95 &1543693437
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543693433}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d1b3a2d4fd51e3941946313fe5d83afe, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1552513915
 GameObject:
   m_ObjectHideFlags: 0
@@ -51120,6 +51164,7 @@ MonoBehaviour:
   blueGroup1Anim: {fileID: 787600937}
   blueGroup2Anim: {fileID: 1596552083}
   blueGroup3Anim: {fileID: 1444048572}
+  progressBarAnim: {fileID: 802356847}
   redProgressBar: {fileID: 1776949178}
   blueProgressBar: {fileID: 1590926355}
 --- !u!114 &1729778780
