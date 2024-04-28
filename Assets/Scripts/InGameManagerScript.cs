@@ -57,14 +57,8 @@ public class InGameManagerScript : MonoBehaviour
     Timer timerScript;
 
     [SerializeField]
-    Animator redAnim, blueAnim, camAnim, redGroup1Anim, redGroup2Anim, redGroup3Anim, blueGroup1Anim, blueGroup2Anim, blueGroup3Anim;
+    Animator redAnim, blueAnim, camAnim, redGroup1Anim, redGroup2Anim, redGroup3Anim, blueGroup1Anim, blueGroup2Anim, blueGroup3Anim, progressBarAnim;
 
-    /*public Animator redAnim;
-    public Animator blueAnim;
-    public Animator camAnim;
-    public Animator redGroup1Anim;
-    public Animator redGroup2Anim;
-    public Animator redGroup3Anim; */
 
     public Image redProgressBar;
     public Image blueProgressBar;
@@ -107,6 +101,7 @@ public class InGameManagerScript : MonoBehaviour
             blueGroup2Anim.SetTrigger("RoundWin");
             blueGroup3Anim.SetTrigger("RoundWin");
             redAnim.SetTrigger("Hit");
+            progressBarAnim.SetTrigger("BlueRoundWin");
             blueProgressBar.fillAmount = blueProgressBar.fillAmount + 0.25f;
         }
         else
@@ -117,6 +112,7 @@ public class InGameManagerScript : MonoBehaviour
             redGroup2Anim.SetTrigger("RoundWin");
             redGroup3Anim.SetTrigger("RoundWin");
             blueAnim.SetTrigger("Hit");
+            progressBarAnim.SetTrigger("RedRoundWin");
             redProgressBar.fillAmount = redProgressBar.fillAmount + 0.25f;
         }
             

@@ -111,8 +111,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d67bf63bc9fc6844da919cdf13ff31ea
-      internalID: 1410427325
+      spriteID: 15e5831bf7a76a24a807e0b75f771adf
+      internalID: 766999749
       vertices: []
       indices: 
       edges: []
@@ -132,8 +132,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2986177e5dd33064eb910e9aa52703ef
-      internalID: -1810206989
+      spriteID: 89cb4b56c1c0566469013c5d19c629e0
+      internalID: -3270325
       vertices: []
       indices: 
       edges: []
@@ -153,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d9e98a8f25c042a4d96ba96a645418ab
-      internalID: -2144547892
+      spriteID: e26f769b299d6ea4cadbf6382cb59937
+      internalID: 195898810
       vertices: []
       indices: 
       edges: []
@@ -174,8 +174,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce5d7dfdf26b65243812cafad036ef5f
-      internalID: 1624518185
+      spriteID: 2e3fb90b1f0868e41a4013a607c590bd
+      internalID: -786743514
       vertices: []
       indices: 
       edges: []
@@ -195,8 +195,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a24e0b270861ffc45a51fdedd097d282
-      internalID: 2011625630
+      spriteID: c5ba1c4bb14ae944c9c86087e101c1ff
+      internalID: 885068533
       vertices: []
       indices: 
       edges: []
@@ -216,8 +216,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4e2602540d3c40042ab389fda7f6cf20
-      internalID: 14611108
+      spriteID: be7eeb8f5c17f58469ac34cece6df7cb
+      internalID: -1174018744
       vertices: []
       indices: 
       edges: []
@@ -233,12 +233,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      ArenaCrowd_0: 1410427325
-      ArenaCrowd_1: -1810206989
-      ArenaCrowd_2: -2144547892
-      ArenaCrowd_3: 1624518185
-      ArenaCrowd_4: 2011625630
-      ArenaCrowd_5: 14611108
+      ArenaCrowd_0: 766999749
+      ArenaCrowd_1: -3270325
+      ArenaCrowd_2: 195898810
+      ArenaCrowd_3: -786743514
+      ArenaCrowd_4: 885068533
+      ArenaCrowd_5: -1174018744
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
