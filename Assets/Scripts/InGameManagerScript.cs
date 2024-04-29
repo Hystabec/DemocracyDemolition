@@ -62,13 +62,15 @@ public class InGameManagerScript : MonoBehaviour
     Animator[] redAnimArray, blueAnimArray;
 
     [SerializeField]
-    GameObject[] elementToHideWhenGameEnds, elementToShowWhenGameEnds;
+    GameObject[] elementToHideWhenGameEnds, EndUIButtons;
+
+    [SerializeField]
+    float endButtonOffset = 266.0f;
 
     public Image redProgressBar;
     public Image blueProgressBar;
 
     bool gameHasEnded = false;
-
 
     // Start is called before the first frame update
     void Awake()
@@ -110,7 +112,7 @@ public class InGameManagerScript : MonoBehaviour
             go.SetActive(true);
         }
 
-        foreach(GameObject go in elementToShowWhenGameEnds)
+        foreach(GameObject go in EndUIButtons)
         { 
             go.SetActive(false);
         }
@@ -273,7 +275,7 @@ public class InGameManagerScript : MonoBehaviour
         player1.GetComponent<playerScript>().switchMode(modes.UI);
         player2.GetComponent<playerScript>().switchMode(modes.UI);
 
-        string winningTrigger = "";
+        int winner = -1;
 
         foreach(GameObject go in elementToHideWhenGameEnds) 
         {
@@ -288,9 +290,8 @@ public class InGameManagerScript : MonoBehaviour
             {
                 ani.SetTrigger("GameWin");
             }
-
+            winner = 1;
             camAnim.SetTrigger("GameWinRed");
-            winningTrigger = "GameWinRed";
         }
         else if(winningPlayer == player2) 
         {
@@ -301,9 +302,8 @@ public class InGameManagerScript : MonoBehaviour
                 ani.SetTrigger("GameWin");
                 
             }
-
+            winner = 2;
             camAnim.SetTrigger("GameWinBlue");
-            winningTrigger = "GameWinBlue";
         }
         else 
         {
@@ -311,13 +311,21 @@ public class InGameManagerScript : MonoBehaviour
             Debug.Log("No winner, when endgame called");
         }
 
-        StartCoroutine(waitForEndCamPan(winningTrigger));
+        StartCoroutine(waitForEndCamPan(winner));
     }
 
-    IEnumerator waitForEndCamPan(string triggerName)
+    IEnumerator waitForEndCamPan(int winner)
     {
-        if (triggerName == "")
-            yield return new(); //not entirly sure what this will do - shouldn't trigger it anyway
+        float finalOffset = 0;
+
+        if (winner == 1)
+        {
+            finalOffset = endButtonOffset;
+        }
+        else if(winner == 2)
+        {
+            finalOffset = -endButtonOffset;
+        }
 
         //yield return new WaitUntil(() => camAnim.GetCurrentAnimatorStateInfo(0).IsName(triggerName));
         //yield return new WaitForSeconds(camAnim.GetCurrentAnimatorClipInfo(0).Length);
@@ -325,12 +333,11 @@ public class InGameManagerScript : MonoBehaviour
         //had to hard code the anim length - no ideal didnt work with the other ways i tried
         yield return new WaitForSeconds(4.2f);
 
-        
-
         //showButtons
-        foreach(GameObject go in elementToShowWhenGameEnds)
+        foreach(GameObject go in EndUIButtons)
         {
             go.SetActive(true);
+            go.transform.localPosition = new Vector3(finalOffset, go.transform.localPosition.y, go.transform.localPosition.z);
         }
     }
 
