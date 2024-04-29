@@ -31,9 +31,6 @@ public class playerScript : MonoBehaviour
 
     public int selectableObjectsNumber = 0;
 
-    [SerializeField]
-   // public GameObject tempObject1, tempObject2, tempObject3;
-
     public List<GameObject> blockObjects;
 
     [SerializeField]
@@ -85,6 +82,44 @@ public class playerScript : MonoBehaviour
     //angles for clamping controller input
     [SerializeField]
     float MinAngle, MaxAngle;
+
+    public void ResetData()
+    {
+        //this should be called by "InGameManagerScript"
+
+        currentMode = modes.None;
+        RemainingAmmo = totalAmmo;
+        SelectedIndex = 0;
+
+        foreach(GameObject go in selectableObjects)
+        {
+            Destroy(go);
+        }
+        selectableObjects.Clear();
+
+        foreach(GameObject go in blockObjects)
+        {
+            Destroy(go);
+        }
+        blockObjects.Clear();
+
+        selectableObjectsNumber = 0;
+
+        locationOneFree = true;
+        locationTwoFree = true;
+        locationThreeFree = true;
+        hasBeenSelected = false;
+
+        selectedBlockLocation = Vector3.zero;
+        selectedBlockRotation = new Quaternion(0, 0, 0, 0);
+
+        leftStickMoveVector = Vector2.zero;
+        rightStickMoveVector = Vector2.zero;
+
+        FireMarkerMoveVector = Vector3.zero;
+
+        canSwap = true;
+    }
 
     public void OnRoundStart()
     {
@@ -441,7 +476,6 @@ public class playerScript : MonoBehaviour
     {
         blockObjects.Add(obj);
         AddBlockToList(obj);
-
     }
 
     void Start()
