@@ -55,9 +55,6 @@ public class blockScript : MonoBehaviour
         //HERE FOR TESTING
         //outline.GetComponent<SpriteRenderer>().color = Color.red;
 
-
-        outline.GetComponent<SpriteRenderer>().color = Color.red;
-
         defaultColour = gameObject.GetComponent<SpriteRenderer>().color;
 
         gameObject.GetComponent<PolygonCollider2D>().enabled = false;
