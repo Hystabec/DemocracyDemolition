@@ -50938,7 +50938,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roundTime: 20
-  timeBeforeFighting: 5
+  timeBeforeFighting: 6
   roundsNeededToWin: 4
   player1: {fileID: 1303902994}
   player2: {fileID: 1865346978}
@@ -51059,7 +51059,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1f672149b05f08469e32629323f63f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roundTime: 20
+  roundTime: 21
   timerText: {fileID: 4271247}
 --- !u!1 &1736693201
 GameObject:

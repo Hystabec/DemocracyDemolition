@@ -138,11 +138,13 @@ public class playerScript : MonoBehaviour
     {
         totalAmmo = amount;
         RemainingAmmo = totalAmmo;
+        updateAmmoText();
     }
 
     public void resetAmmo()
     {
         RemainingAmmo = totalAmmo;
+        updateAmmoText();
     }
 
     public int getPlayerIndex()
