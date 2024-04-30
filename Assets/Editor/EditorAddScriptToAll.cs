@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.TestTools;
 using Unity.VisualScripting;
+using System;
 
-public class EditorAddComponentToAll : EditorWindow
+public class EditorAddScriptToAll : EditorWindow
 {
     static GameObject[] selObject = null;
 
@@ -16,30 +17,42 @@ public class EditorAddComponentToAll : EditorWindow
             selObject[i] = EditorGUILayout.ObjectField("GameObject " + i.ToString(), selObject[i], typeof(GameObject), false) as GameObject;
         }
 
-        Component compToAdd = null;
-        compToAdd =  EditorGUILayout.ObjectField("Component to add", compToAdd, typeof(Component), false) as Component;
+        EditorGUILayout.Space();
 
-        if(GUILayout.Button("Add") && compToAdd != null )
+        MonoBehaviour scriptToAdd = null;
+        scriptToAdd =  EditorGUILayout.ObjectField("Component to add", scriptToAdd, typeof(MonoBehaviour), false) as MonoBehaviour;
+        //System.Type m_scriptClass = scriptToAdd.GetType();
+        //Component tempComp = (scriptToAdd as Component); 
+
+        if(GUILayout.Button("Add") && scriptToAdd != null )
         {
             foreach(GameObject go in selObject)
             {
-                PrefabUtility.ApplyAddedComponent(compToAdd, PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot(go), InteractionMode.AutomatedAction);
+                string path = PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot(go);
+           
+                PrefabUtility.ApplyAddedComponent(scriptToAdd, path, InteractionMode.AutomatedAction);
+
+                //UnityEngine.Object temp = PrefabUtility.GetPrefabInstanceHandle(go);
+                //temp.AddComponent(m_scriptClass);
             }
         }
     }
 
     private void OnDestroy()
     {
+
         selObject = null;
     }
 
-    [MenuItem("Tools/Add Component to selected")]
+    [MenuItem("Tools/Add Script to selected Prefab")]
     private static void AddCompToObjects()
     {
-        EditorWindow.GetWindow(typeof(EditorAddComponentToAll));
+        selObject = Selection.gameObjects;
+
+        EditorWindow.GetWindow(typeof(EditorAddScriptToAll));
     }
 
-    [MenuItem("Tools/Add Component to selected", true)]
+    [MenuItem("Tools/Add Script to selected Prefab", true)]
     private static bool Validation()
     {
         GameObject[] selected = Selection.gameObjects;
