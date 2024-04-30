@@ -56,13 +56,14 @@ public class InGameManagerScript : MonoBehaviour
     Timer timerScript;
 
     [SerializeField]
-    Animator redAnim, blueAnim, camAnim, progressBarAnim;
+    Animator redAnim, blueAnim, camAnim, progressBarAnim, rematchAnim, menuButtonAnim;
 
     [SerializeField]
     Animator[] redAnimArray, blueAnimArray;
 
     [SerializeField]
     GameObject[] elementToHideWhenGameEnds, EndUIButtons;
+    
 
     [SerializeField]
     float endButtonOffset = 266.0f;
@@ -282,14 +283,15 @@ public class InGameManagerScript : MonoBehaviour
             go.SetActive(false);
         }
 
-        if(winningPlayer == player1)
+        if (winningPlayer == player1)
         {
             redAnim.SetTrigger("GameWin");
-
+            
             foreach (Animator ani in redAnimArray)
             {
                 ani.SetTrigger("GameWin");
             }
+
             winner = 1;
             camAnim.SetTrigger("GameWinRed");
         }
@@ -338,7 +340,10 @@ public class InGameManagerScript : MonoBehaviour
         {
             go.SetActive(true);
             go.transform.localPosition = new Vector3(finalOffset, go.transform.localPosition.y, go.transform.localPosition.z);
+            rematchAnim.SetTrigger("RematchFadeIn");
+            menuButtonAnim.SetTrigger("MenuButtonFadeIn");
         }
+
     }
 
     private IEnumerator TimeBeforeFighting()
