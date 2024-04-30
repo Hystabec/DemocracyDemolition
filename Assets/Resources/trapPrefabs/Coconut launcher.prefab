@@ -44,7 +44,6 @@ GameObject:
   - component: {fileID: 8699249013717836952}
   - component: {fileID: 3999575493204402383}
   - component: {fileID: 6850949384467072940}
-  - component: {fileID: 2237290836465717217}
   - component: {fileID: -2348921197900577600}
   m_Layer: 10
   m_Name: Coconut launcher
@@ -225,25 +224,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabProjectile: {fileID: 4210951342825297463, guid: 53190b426f572d64f80801dd6540c2fc, type: 3}
   launchForce: 10
---- !u!114 &2237290836465717217
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9013891271956302817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd4d6c8020f321743b24e10eef8a4cec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 0
-  cantPlaceColor: {r: 255, g: 0, b: 0, a: 1}
-  TotalBlockHealth: 3
-  breakable: 0
-  outline: {fileID: 0}
-  blockHitSound: {fileID: 0}
-  aSource: {fileID: 0}
 --- !u!114 &-2348921197900577600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,3 +239,29 @@ MonoBehaviour:
   colliders:
   - {fileID: 8699249013717836952}
   - {fileID: 3999575493204402383}
+  cantPlaceColor: {r: 255, g: 0, b: 0, a: 1}
+  outline: {fileID: 0}
+  onCollisionEnterFunc:
+    m_PersistentCalls:
+      m_Calls: []
+  onCollisionExitFunc:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerEnterFunc:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6850949384467072940}
+        m_TargetAssemblyTypeName: LauncherTrapScript, Assembly-CSharp
+        m_MethodName: CustomOnTriggerEnter2D
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onTriggerExitFunc:
+    m_PersistentCalls:
+      m_Calls: []

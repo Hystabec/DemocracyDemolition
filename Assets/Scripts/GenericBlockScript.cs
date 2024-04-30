@@ -26,7 +26,7 @@ public class GenericBlockScript : MonoBehaviour
 
     void Awake()
     {
-        outline = transform.Find("outline").gameObject;
+        outline = gameObject.transform.Find("outline")?.gameObject;
 
         defaultColour = gameObject.GetComponent<SpriteRenderer>().color;
 

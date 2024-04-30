@@ -30,7 +30,6 @@ public class EditorAddScriptToAll : EditorWindow
        
         //Converting monoscripts to components - seems impossible
 
-
         //MonoBehaviour temp = scriptToAdd.GetType();
         //MonoBehaviour temp = scriptToAdd.GetType();
         //System.Type m_scriptClass = scriptToAdd.GetType();

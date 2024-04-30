@@ -40,7 +40,21 @@ public class LauncherTrapScript : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public void CustomOnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("projectile") && canFire)
+        {
+            spawnedProj.transform.position = firePosition.transform.position + (firePosition.transform.right * projectileRadius);
+
+            //find the normal of firePosition and apply force in that direction
+            spawnedProj.SetActive(true);
+            spawnedProj.GetComponent<Rigidbody2D>().velocity = firePosition.transform.right.normalized * launchForce;
+
+            canFire = false;
+        }
+    }
+
+    /*private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.gameObject.layer == LayerMask.NameToLayer("projectile") && canFire)
         {
@@ -52,5 +66,5 @@ public class LauncherTrapScript : MonoBehaviour
 
             canFire = false;
         }
-    }
+    }*/
 }
