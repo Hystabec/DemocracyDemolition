@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6438537052682893201}
   - component: {fileID: 7168277657318019588}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 3525508853443954654}
   - component: {fileID: 358732629288088837}
   - component: {fileID: 5739684249007014494}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: trapPlaceHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
