@@ -5,40 +5,43 @@ using UnityEditor;
 using UnityEditor.TestTools;
 using Unity.VisualScripting;
 using System;
-using Codice.Utils;
 
 public class EditorAddScriptToAll : EditorWindow
 {
     static GameObject[] selObject = null;
-    static MonoScript scriptToAdd = null;
+    static UnityEngine.Component compToAdd = null;
 
     private void OnGUI()
     {
+        if (selObject == null)
+            return;
+
         for(int i = 0; i < selObject.Length; i++)
         {
             selObject[i] = EditorGUILayout.ObjectField("GameObject " + i.ToString(), selObject[i], typeof(GameObject), false) as GameObject;
         }
 
         EditorGUILayout.Space();
-        
-        scriptToAdd =  EditorGUILayout.ObjectField("Script to add", scriptToAdd, typeof(MonoScript), false) as MonoScript;
-        System.Type type = scriptToAdd.GetType();
 
+        compToAdd =  EditorGUILayout.ObjectField("Script to add", compToAdd, typeof(UnityEngine.Component), false) as UnityEngine.Component;
+       
         //MonoBehaviour temp = scriptToAdd.GetType();
         //MonoBehaviour temp = scriptToAdd.GetType();
         //System.Type m_scriptClass = scriptToAdd.GetType();
         //Component tempComp = (scriptToAdd as Component); 
 
-        if (GUILayout.Button("Add") && scriptToAdd != null )
+        if (GUILayout.Button("Add") && compToAdd != null )
         {
             foreach(GameObject go in selObject)
             {
                 string path = PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot(go);
 
-                GameObject tempGO = new GameObject("temp");
-                Component tempComp = tempGO.AddComponent(type);
+                GameObject tempGO = new();
+                tempGO = PrefabUtility.LoadPrefabContents(path);
 
-                PrefabUtility.ApplyAddedComponent(tempComp, path, InteractionMode.AutomatedAction);
+                tempGO.AddComponent(compToAdd.GetType());
+
+                PrefabUtility.SaveAsPrefabAsset(tempGO, path);
 
                 DestroyImmediate(tempGO);
 
@@ -50,7 +53,7 @@ public class EditorAddScriptToAll : EditorWindow
 
     private void OnDestroy()
     {
-        scriptToAdd = null;
+        compToAdd = null;
         selObject = null;
     }
 
