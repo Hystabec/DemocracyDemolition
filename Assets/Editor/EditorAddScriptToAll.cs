@@ -5,10 +5,12 @@ using UnityEditor;
 using UnityEditor.TestTools;
 using Unity.VisualScripting;
 using System;
+using Codice.Utils;
 
 public class EditorAddScriptToAll : EditorWindow
 {
     static GameObject[] selObject = null;
+    static MonoScript scriptToAdd = null;
 
     private void OnGUI()
     {
@@ -18,19 +20,27 @@ public class EditorAddScriptToAll : EditorWindow
         }
 
         EditorGUILayout.Space();
+        
+        scriptToAdd =  EditorGUILayout.ObjectField("Script to add", scriptToAdd, typeof(MonoScript), false) as MonoScript;
+        System.Type type = scriptToAdd.GetType();
 
-        MonoBehaviour scriptToAdd = null;
-        scriptToAdd =  EditorGUILayout.ObjectField("Component to add", scriptToAdd, typeof(MonoBehaviour), false) as MonoBehaviour;
+        //MonoBehaviour temp = scriptToAdd.GetType();
+        //MonoBehaviour temp = scriptToAdd.GetType();
         //System.Type m_scriptClass = scriptToAdd.GetType();
         //Component tempComp = (scriptToAdd as Component); 
 
-        if(GUILayout.Button("Add") && scriptToAdd != null )
+        if (GUILayout.Button("Add") && scriptToAdd != null )
         {
             foreach(GameObject go in selObject)
             {
                 string path = PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot(go);
-           
-                PrefabUtility.ApplyAddedComponent(scriptToAdd, path, InteractionMode.AutomatedAction);
+
+                GameObject tempGO = new GameObject("temp");
+                Component tempComp = tempGO.AddComponent(type);
+
+                PrefabUtility.ApplyAddedComponent(tempComp, path, InteractionMode.AutomatedAction);
+
+                DestroyImmediate(tempGO);
 
                 //UnityEngine.Object temp = PrefabUtility.GetPrefabInstanceHandle(go);
                 //temp.AddComponent(m_scriptClass);
@@ -40,7 +50,7 @@ public class EditorAddScriptToAll : EditorWindow
 
     private void OnDestroy()
     {
-
+        scriptToAdd = null;
         selObject = null;
     }
 
