@@ -131,7 +131,7 @@ public class playerScript : MonoBehaviour
         //called by the InGameManagerScript at the start of the round when blocks have been added - should probably do through unity events
 
         SelectedIndex = 0;
-        selectableObjects[0].GetComponent<blockScript>().ShowOutline(true);
+        selectableObjects[0].GetComponent<GenericBlockScript>().ShowOutline(true);
     }
 
     public void setAmmo(int amount)
@@ -236,11 +236,11 @@ public class playerScript : MonoBehaviour
                 selectedBlockLocation = selectableObjects[SelectedIndex].transform.position;
                 selectedBlockRotation = selectableObjects[SelectedIndex].transform.rotation;
             }
-            else if (selectableObjects[SelectedIndex].GetComponent<blockScript>().CanPlaceBlock())
+            else if (selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().CanPlaceBlock())
             {
                 //remvoe the selected object from the list - it has been placed
-                selectableObjects[SelectedIndex].GetComponent<blockScript>().ShowOutline(false);
-                selectableObjects[SelectedIndex].GetComponent<blockScript>().placed();
+                selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().ShowOutline(false);
+                selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().Placed();
 
                 selectableObjects.RemoveAt(SelectedIndex);
 
@@ -248,7 +248,7 @@ public class playerScript : MonoBehaviour
 
                 if (selectableObjects.Count != 0)
                 {
-                    selectableObjects[SelectedIndex].GetComponent<blockScript>().ShowOutline(true);
+                    selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().ShowOutline(true);
                 }
 
                 hasBeenSelected = false;
@@ -415,7 +415,7 @@ public class playerScript : MonoBehaviour
                 {
                     if (leftStickMoveVector.y != 0 && leftStickMoveVector.y > 0)
                     {
-                        blockScript bs = selectableObjects[SelectedIndex].GetComponent<blockScript>();
+                        GenericBlockScript bs = selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>();
                         bs.ShowOutline(false);
                         bs.Deselected();
 
@@ -428,7 +428,7 @@ public class playerScript : MonoBehaviour
                             SelectedIndex = selectableObjects.Count - 1;
                         }
 
-                        bs = selectableObjects[SelectedIndex].GetComponent<blockScript>();
+                        bs = selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>();
                         bs.ShowOutline(true);
                         bs.Selected();
 
@@ -438,7 +438,7 @@ public class playerScript : MonoBehaviour
                     }
                     else if (leftStickMoveVector.y != 0 && leftStickMoveVector.y < 0)
                     {
-                        blockScript bs = selectableObjects[SelectedIndex].GetComponent<blockScript>();
+                        GenericBlockScript bs = selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>();
                         bs.ShowOutline(false);
                         bs.Deselected();
 
@@ -451,7 +451,7 @@ public class playerScript : MonoBehaviour
                             SelectedIndex = 0;
                         }
 
-                        bs = selectableObjects[SelectedIndex].GetComponent<blockScript>();
+                        bs = selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>();
                         bs.ShowOutline(true);
                         bs.Selected();
 
