@@ -83,6 +83,11 @@ public class playerScript : MonoBehaviour
     [SerializeField]
     float MinAngle, MaxAngle;
 
+    [SerializeField]
+    float throwCooldown = 1.5f;
+
+    private bool canThrow = true;
+
     public void ResetData()
     {
         //this should be called by "InGameManagerScript"
@@ -342,21 +347,34 @@ public class playerScript : MonoBehaviour
         }
         else if (currentMode == modes.Play)
         {
-            GameObject proj = projectList[0];
-            proj.transform.position = fireMarker.transform.GetChild(0).transform.position;
-            proj.SetActive(true);
+            if (canThrow)
+            {
+                GameObject proj = projectList[0];
+                proj.transform.position = fireMarker.transform.GetChild(0).transform.position;
+                proj.SetActive(true);
 
-            anim.SetTrigger("Throw");
+                anim.SetTrigger("Throw");
 
-            Vector3 rotation = fireMarker.transform.GetChild(0).transform.position - fireMarker.transform.position;
+                Vector3 rotation = fireMarker.transform.GetChild(0).transform.position - fireMarker.transform.position;
 
-            proj.GetComponent<Rigidbody2D>().velocity = new Vector2(rotation.x, rotation.y).normalized * throwForce;
-            projectList.Remove(proj);
+                proj.GetComponent<Rigidbody2D>().velocity = new Vector2(rotation.x, rotation.y).normalized * throwForce;
+                projectList.Remove(proj);
 
-            RemainingAmmo--;
-            updateAmmoText();
+                RemainingAmmo--;
+                updateAmmoText();
+                StartCoroutine(ThrowCooldown());
+
+
+            }
         }
     }
+    private IEnumerator ThrowCooldown()
+    {
+        canThrow = false;
+        yield return new WaitForSeconds(throwCooldown);
+        canThrow = true;
+    }
+
 
     public void CanFight(bool canFight)
     {
@@ -374,6 +392,8 @@ public class playerScript : MonoBehaviour
         yield return new WaitForSeconds(timeBetweenSwaps);
         canSwap = true;
     }
+
+    
 
     void handleLeftStick()
     {

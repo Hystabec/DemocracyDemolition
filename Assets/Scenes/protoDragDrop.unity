@@ -43083,8 +43083,9 @@ MonoBehaviour:
   throwForce: 10
   anim: {fileID: 1303902999}
   currentAmmoText: {fileID: 1869428362}
-  MinAngle: 20
+  MinAngle: 50
   MaxAngle: 160
+  throwCooldown: 1.5
 --- !u!4 &1303902996
 Transform:
   m_ObjectHideFlags: 0
@@ -43109,7 +43110,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1303902994}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a2f1df829cc07645abe01b5afce4d3c, type: 3}
   m_Name: 
@@ -61702,7 +61703,8 @@ MonoBehaviour:
   anim: {fileID: 1865346984}
   currentAmmoText: {fileID: 298309877}
   MinAngle: -160
-  MaxAngle: -20
+  MaxAngle: -50
+  throwCooldown: 1.5
 --- !u!4 &1865346981
 Transform:
   m_ObjectHideFlags: 0
