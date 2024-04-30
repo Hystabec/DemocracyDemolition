@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+
 public enum blockType
 { 
     Wood,
@@ -14,10 +16,10 @@ public class blockScript : MonoBehaviour
     [SerializeField]
     blockType type;
 
-    Color defaultColour;
+    //Color defaultColour;
 
-    [SerializeField]
-    Color cantPlaceColor = new Color(255, 0, 0);
+    //[SerializeField]
+    //Color cantPlaceColor = new Color(255, 0, 0);
 
     [SerializeField]
     int TotalBlockHealth = 3;
@@ -25,13 +27,13 @@ public class blockScript : MonoBehaviour
     [SerializeField]
     bool breakable;
 
-    Collider2D col;
+    //Collider2D col;
 
-    bool isHovered = false;
-    private bool canPlaceBlock = true;
+    //bool isHovered = false;
+    //private bool canPlaceBlock = true;
 
-    [SerializeField]
-    private GameObject outline;
+    //[SerializeField]
+    //private GameObject outline;
 
 
     [SerializeField]
@@ -39,8 +41,6 @@ public class blockScript : MonoBehaviour
 
     [SerializeField]
     private AudioSource aSource;
-
-    
 
     public blockType getBlockType()
     {
@@ -50,17 +50,17 @@ public class blockScript : MonoBehaviour
     private void Awake()
     {
         //works as long as outline is first child
-        outline = transform.GetChild(0).gameObject;
+        //outline = transform.GetChild(0).gameObject;
 
         //HERE FOR TESTING
         //outline.GetComponent<SpriteRenderer>().color = Color.red;
 
-        defaultColour = gameObject.GetComponent<SpriteRenderer>().color;
+        //defaultColour = gameObject.GetComponent<SpriteRenderer>().color;
 
-        gameObject.GetComponent<PolygonCollider2D>().enabled = false;
+        //gameObject.GetComponent<PolygonCollider2D>().enabled = false;
     }
 
-    public void Selected()
+    /*public void Selected()
     {
         isHovered = true;
     }
@@ -73,34 +73,48 @@ public class blockScript : MonoBehaviour
     public void placed()
     {
         gameObject.GetComponent<PolygonCollider2D>().enabled = true;
-    }
+    }*/
 
     // Start is called before the first frame update
     void Start()
     {
         CurrentBlockHealth = TotalBlockHealth;
 
-        col = gameObject.GetComponent<Collider2D>();
-       // col.enabled = false;
+        //col = gameObject.GetComponent<Collider2D>();
+        //col.enabled = false;
     }
 
-    public bool CanPlaceBlock() 
+    /*public bool CanPlaceBlock() 
     {
         return canPlaceBlock;    
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void ShowOutline(bool shouldShow)
     {
         outline.SetActive(shouldShow);
+    }*/
+
+
+    public void CustomOnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("projectile"))
+        {
+            aSource.PlayOneShot(blockHitSound);
+            if (breakable)
+            {
+                CurrentBlockHealth--;
+
+                if (CurrentBlockHealth <= 0)
+                {
+                    CurrentBlockHealth = TotalBlockHealth;
+                    Debug.Log(gameObject.name + " destroyed");
+                    gameObject.SetActive(false);
+                }
+            }
+        }
     }
 
-    void OnCollisionEnter2D(Collision2D other)
+    /*void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("projectile"))
         {
@@ -156,5 +170,5 @@ public class blockScript : MonoBehaviour
             canPlaceBlock = true;
             gameObject.GetComponent<SpriteRenderer>().color = defaultColour;
         }
-    }
+    }*/
 }

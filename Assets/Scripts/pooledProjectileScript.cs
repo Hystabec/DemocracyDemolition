@@ -24,7 +24,7 @@ public class pooledProjectileScript : MonoBehaviour
                 gameObject.SetActive(false);
         }
 
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Block"))
+        /*if (collision.gameObject.layer == LayerMask.NameToLayer("Block"))
         {
             blockType type = collision.gameObject.GetComponent<blockScript>().getBlockType();
             Debug.Log(type);
@@ -49,6 +49,6 @@ public class pooledProjectileScript : MonoBehaviour
 
                 default: Debug.Log("Block has no type"); break;
             }
-        }
+        }*/
     }
 }
