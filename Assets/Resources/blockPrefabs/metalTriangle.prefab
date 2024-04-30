@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7482099145321377367}
   - component: {fileID: 2776257465431391193}
   - component: {fileID: 6683717365227996539}
+  - component: {fileID: 3149587652336761287}
   m_Layer: 7
   m_Name: metalTriangle
   m_TagString: Untagged
@@ -190,10 +191,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
-  cantPlaceColor: {r: 255, g: 0, b: 0, a: 1}
   TotalBlockHealth: 3
   breakable: 0
-  outline: {fileID: 7566134946648081412}
   blockHitSound: {fileID: 8300000, guid: b5fe751ceb3e6aa42aeae4da279181d3, type: 3}
   aSource: {fileID: 6683717365227996539}
 --- !u!82 &6683717365227996539
@@ -292,6 +291,33 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3149587652336761287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3362555225081531336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9038b75acd0f34a4fa9a8e3df8d202de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliders: []
+  cantPlaceColor: {r: 255, g: 0, b: 0, a: 1}
+  outline: {fileID: 0}
+  onCollisionEnterFunc:
+    m_PersistentCalls:
+      m_Calls: []
+  onCollisionExitFunc:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerEnterFunc:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerExitFunc:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7566134946648081412
 GameObject:
   m_ObjectHideFlags: 0

@@ -4928,6 +4928,7 @@ GameObject:
   - component: {fileID: 3275681827419440952}
   - component: {fileID: 6117183136824498622}
   - component: {fileID: -2264276207124409586}
+  - component: {fileID: 6662477117655575205}
   m_Layer: 7
   m_Name: stoneTriangle
   m_TagString: Untagged
@@ -5106,10 +5107,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  cantPlaceColor: {r: 255, g: 0, b: 0, a: 1}
   TotalBlockHealth: 3
   breakable: 1
-  outline: {fileID: 1864976610501271131}
   blockHitSound: {fileID: 8300000, guid: 787827a9f77b59640b75d0d2f3fce776, type: 3}
   aSource: {fileID: -2264276207124409586}
 --- !u!82 &-2264276207124409586
@@ -5208,3 +5207,30 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6662477117655575205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7333671756611277092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9038b75acd0f34a4fa9a8e3df8d202de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliders: []
+  cantPlaceColor: {r: 255, g: 0, b: 0, a: 1}
+  outline: {fileID: 0}
+  onCollisionEnterFunc:
+    m_PersistentCalls:
+      m_Calls: []
+  onCollisionExitFunc:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerEnterFunc:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerExitFunc:
+    m_PersistentCalls:
+      m_Calls: []

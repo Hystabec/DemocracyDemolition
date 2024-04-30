@@ -4928,6 +4928,7 @@ GameObject:
   - component: {fileID: 3309158312330642249}
   - component: {fileID: 6037511954382980273}
   - component: {fileID: 5183473885850358030}
+  - component: {fileID: 5688018031588238651}
   m_Layer: 7
   m_Name: woodSquare
   m_TagString: Untagged
@@ -5093,10 +5094,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  cantPlaceColor: {r: 255, g: 0, b: 0, a: 1}
   TotalBlockHealth: 2
   breakable: 1
-  outline: {fileID: 2765755125643707820}
   blockHitSound: {fileID: 8300000, guid: 2f7dc3eb36770d949b07af555e48d848, type: 3}
   aSource: {fileID: 5183473885850358030}
 --- !u!82 &5183473885850358030
@@ -5195,3 +5194,30 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5688018031588238651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4819483860298876228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9038b75acd0f34a4fa9a8e3df8d202de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliders: []
+  cantPlaceColor: {r: 255, g: 0, b: 0, a: 1}
+  outline: {fileID: 0}
+  onCollisionEnterFunc:
+    m_PersistentCalls:
+      m_Calls: []
+  onCollisionExitFunc:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerEnterFunc:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerExitFunc:
+    m_PersistentCalls:
+      m_Calls: []

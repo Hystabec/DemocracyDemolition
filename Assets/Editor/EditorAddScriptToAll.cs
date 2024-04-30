@@ -16,7 +16,10 @@ public class EditorAddScriptToAll : EditorWindow
         if (selObject == null)
             return;
 
-        for(int i = 0; i < selObject.Length; i++)
+        EditorGUILayout.LabelField("This tool isnt great - i wouldnt use it if i were you.");
+        EditorGUILayout.Space();
+
+        for (int i = 0; i < selObject.Length; i++)
         {
             selObject[i] = EditorGUILayout.ObjectField("GameObject " + i.ToString(), selObject[i], typeof(GameObject), false) as GameObject;
         }
@@ -25,6 +28,9 @@ public class EditorAddScriptToAll : EditorWindow
 
         compToAdd =  EditorGUILayout.ObjectField("Script to add", compToAdd, typeof(UnityEngine.Component), false) as UnityEngine.Component;
        
+        //Converting monoscripts to components - seems impossible
+
+
         //MonoBehaviour temp = scriptToAdd.GetType();
         //MonoBehaviour temp = scriptToAdd.GetType();
         //System.Type m_scriptClass = scriptToAdd.GetType();
@@ -43,7 +49,7 @@ public class EditorAddScriptToAll : EditorWindow
 
                 PrefabUtility.SaveAsPrefabAsset(tempGO, path);
 
-                DestroyImmediate(tempGO);
+                GameObject.DestroyImmediate(tempGO);
 
                 //UnityEngine.Object temp = PrefabUtility.GetPrefabInstanceHandle(go);
                 //temp.AddComponent(m_scriptClass);

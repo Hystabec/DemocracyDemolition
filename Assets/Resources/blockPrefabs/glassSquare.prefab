@@ -4928,6 +4928,7 @@ GameObject:
   - component: {fileID: 5086083362939153029}
   - component: {fileID: 7664837504464711192}
   - component: {fileID: 1748384512860549705}
+  - component: {fileID: 954218772819081358}
   m_Layer: 7
   m_Name: glassSquare
   m_TagString: Untagged
@@ -5093,10 +5094,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 3
-  cantPlaceColor: {r: 255, g: 0, b: 0, a: 1}
   TotalBlockHealth: 1
   breakable: 1
-  outline: {fileID: 5180227041303167095}
   blockHitSound: {fileID: 8300000, guid: c15304448cd4d5d43b5bc3fc10ccf1a3, type: 3}
   aSource: {fileID: 1748384512860549705}
 --- !u!82 &1748384512860549705
@@ -5195,3 +5194,30 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &954218772819081358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7144643443083509939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9038b75acd0f34a4fa9a8e3df8d202de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliders: []
+  cantPlaceColor: {r: 255, g: 0, b: 0, a: 1}
+  outline: {fileID: 0}
+  onCollisionEnterFunc:
+    m_PersistentCalls:
+      m_Calls: []
+  onCollisionExitFunc:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerEnterFunc:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerExitFunc:
+    m_PersistentCalls:
+      m_Calls: []
