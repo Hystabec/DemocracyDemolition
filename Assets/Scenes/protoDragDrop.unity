@@ -43084,8 +43084,6 @@ MonoBehaviour:
   throwForce: 10
   anim: {fileID: 1303902999}
   currentAmmoText: {fileID: 1869428362}
-  playerAudio: {fileID: 1303903003}
-  playerThrow: {fileID: 8300000, guid: 989b91043c38e0b4b82853a3aaeed7b9, type: 3}
   MinAngle: 50
   MaxAngle: 160
   throwCooldown: 1.5
@@ -43326,8 +43324,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 989b91043c38e0b4b82853a3aaeed7b9, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -61902,8 +61900,6 @@ MonoBehaviour:
   throwForce: 10
   anim: {fileID: 1865346984}
   currentAmmoText: {fileID: 298309877}
-  playerAudio: {fileID: 1865346987}
-  playerThrow: {fileID: 8300000, guid: 989b91043c38e0b4b82853a3aaeed7b9, type: 3}
   MinAngle: -160
   MaxAngle: -50
   throwCooldown: 1.5
@@ -62092,8 +62088,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 989b91043c38e0b4b82853a3aaeed7b9, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

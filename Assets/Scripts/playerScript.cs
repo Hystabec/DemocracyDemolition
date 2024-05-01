@@ -77,11 +77,7 @@ public class playerScript : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI currentAmmoText;
 
-    [SerializeField]
-    AudioSource playerAudio;
-
-    [SerializeField]
-    AudioClip playerThrow;
+    private AudioSource playerThrowSound;
 
 
 
@@ -362,7 +358,7 @@ public class playerScript : MonoBehaviour
                 proj.SetActive(true);
 
                 anim.SetTrigger("Throw");
-                playerAudio.PlayOneShot(playerThrow);
+                playerThrowSound.Play();
 
                 Vector3 rotation = fireMarker.transform.GetChild(0).transform.position - fireMarker.transform.position;
 
@@ -518,7 +514,7 @@ public class playerScript : MonoBehaviour
         //AddBlockToList(tempObject1);
         // AddBlockToList(tempObject2);
         // AddBlockToList(tempObject3);
-
+        playerThrowSound = GetComponent<AudioSource>();
         RemainingAmmo = totalAmmo;
 
         updateAmmoText();
