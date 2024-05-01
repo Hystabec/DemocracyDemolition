@@ -27,7 +27,7 @@ public class EditorAddScriptToAll : EditorWindow
         EditorGUILayout.Space();
 
         compToAdd =  EditorGUILayout.ObjectField("Script to add", compToAdd, typeof(UnityEngine.Component), false) as UnityEngine.Component;
-       
+        
         //Converting monoscripts to components - seems impossible
 
         //MonoBehaviour temp = scriptToAdd.GetType();
