@@ -77,6 +77,12 @@ public class playerScript : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI currentAmmoText;
 
+    [SerializeField]
+    AudioSource playerAudio;
+
+    [SerializeField]
+    AudioClip playerThrow;
+
 
 
     //angles for clamping controller input
@@ -356,6 +362,7 @@ public class playerScript : MonoBehaviour
                 proj.SetActive(true);
 
                 anim.SetTrigger("Throw");
+                playerAudio.PlayOneShot(playerThrow);
 
                 Vector3 rotation = fireMarker.transform.GetChild(0).transform.position - fireMarker.transform.position;
 

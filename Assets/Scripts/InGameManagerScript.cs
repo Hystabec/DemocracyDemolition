@@ -71,6 +71,12 @@ public class InGameManagerScript : MonoBehaviour
     public Image redProgressBar;
     public Image blueProgressBar;
 
+    [SerializeField]
+    AudioSource roundVictorySound;
+
+    [SerializeField]
+    AudioClip crowdCheer, playerHit;
+
     bool gameHasEnded = false;
 
     // Start is called before the first frame update
@@ -150,7 +156,9 @@ public class InGameManagerScript : MonoBehaviour
             progressBarAnim.SetTrigger("RedRoundWin");
             redProgressBar.fillAmount = redProgressBar.fillAmount + 0.25f;
         }
-            
+
+        roundVictorySound.PlayOneShot(crowdCheer);
+        roundVictorySound.PlayOneShot(playerHit);
 
         if (p1Score >= roundsNeededToWin)
         {
