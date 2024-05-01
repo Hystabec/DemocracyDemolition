@@ -94,8 +94,14 @@ public class GenericBlockScript : MonoBehaviour
 
         if (other.gameObject.CompareTag("playerArea"))
         {
+
             canPlaceBlock = false;
             gameObject.GetComponent<SpriteRenderer>().color = cantPlaceColor;
+            
+            if (other.gameObject.GetComponent<SpriteRenderer>())
+            {
+                other.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            }
         }
     }
 
@@ -117,18 +123,55 @@ public class GenericBlockScript : MonoBehaviour
         {
             canPlaceBlock = true;
             gameObject.GetComponent<SpriteRenderer>().color = defaultColour;
+
+            if (other.gameObject.GetComponent<SpriteRenderer>())
+            {
+                other.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            }
         }
+
+      
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if(onTriggerEnterFunc != null)
             onTriggerEnterFunc.Invoke(other);
+
+        if (!isHovered)
+            return;
+
+        if (other.gameObject.CompareTag("playerArea"))
+        {
+
+            canPlaceBlock = false;
+            gameObject.GetComponent<SpriteRenderer>().color = cantPlaceColor;
+
+            if (other.gameObject.GetComponent<SpriteRenderer>())
+            {
+                other.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            }
+        }
     }
+
 
     void OnTriggerExit2D(Collider2D other)
     {
         if(onTriggerExitFunc != null)
             onTriggerExitFunc.Invoke(other);
+
+        if (!isHovered)
+            return;
+
+        if (other.gameObject.CompareTag("playerArea"))
+        {
+            canPlaceBlock = true;
+            gameObject.GetComponent<SpriteRenderer>().color = defaultColour;
+
+            if (other.gameObject.GetComponent<SpriteRenderer>())
+            {
+                other.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            }
+        }
     }
 }
