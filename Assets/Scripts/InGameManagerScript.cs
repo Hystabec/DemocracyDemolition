@@ -109,6 +109,8 @@ public class InGameManagerScript : MonoBehaviour
         player1.GetComponent<playerScript>().ResetData();
         player2.GetComponent<playerScript>().ResetData();
 
+        camAnim.SetTrigger("ReturnCamera");
+
         currentRound = 1;
         p1Score = 0;
         p2Score = 0;
@@ -123,6 +125,7 @@ public class InGameManagerScript : MonoBehaviour
         { 
             go.SetActive(false);
         }
+        //Reset progress bars
     }
 
     public void playerKilled(GameObject callingPlayer)
@@ -156,6 +159,14 @@ public class InGameManagerScript : MonoBehaviour
             progressBarAnim.SetTrigger("RedRoundWin");
             redProgressBar.fillAmount = redProgressBar.fillAmount + 0.25f;
         }
+
+        var projectileScritps = FindObjectsOfType<pooledProjectileScript>();
+        
+        foreach(pooledProjectileScript pooledProj in projectileScritps)
+        {
+            pooledProj.owner.despawnProjectile(pooledProj.gameObject);
+        }
+
 
         roundVictorySound.PlayOneShot(crowdCheer);
         roundVictorySound.PlayOneShot(playerHit);
