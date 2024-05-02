@@ -16,6 +16,8 @@ public class GenericBlockScript : MonoBehaviour
     [SerializeField]
     Color cantPlaceColor = new Color(255, 0, 0);
 
+    bool placed = false;
+
     bool isHovered = false;
     private bool canPlaceBlock = true;
 
@@ -70,6 +72,8 @@ public class GenericBlockScript : MonoBehaviour
         {
             collider.enabled = true;
         }
+
+        placed = true;
     }
 
     public bool CanPlaceBlock()
@@ -89,6 +93,9 @@ public class GenericBlockScript : MonoBehaviour
             onCollisionEnterFunc.Invoke(other);
 
         if (!isHovered)
+            return;
+
+        if (placed)
             return;
 
         //Sets it in playerScript so the player cannot place the current block if its colliding with another block or the player
@@ -122,6 +129,9 @@ public class GenericBlockScript : MonoBehaviour
         if (!isHovered)
             return;
 
+        if (placed)
+            return;
+
         if (other.gameObject.layer == LayerMask.NameToLayer("Block"))
         {
             canPlaceBlock = true;
@@ -150,6 +160,9 @@ public class GenericBlockScript : MonoBehaviour
         if (!isHovered)
             return;
 
+        if (placed)
+            return;
+
         if (other.gameObject.CompareTag("playerArea"))
         {
 
@@ -170,6 +183,9 @@ public class GenericBlockScript : MonoBehaviour
             onTriggerExitFunc.Invoke(other);
 
         if (!isHovered)
+            return;
+
+        if (placed)
             return;
 
         if (other.gameObject.CompareTag("playerArea"))
