@@ -265,6 +265,7 @@ MonoBehaviour:
   type: 2
   TotalBlockHealth: 3
   breakable: 0
+  hitEffect: {fileID: 0}
   blockHitSound: {fileID: 8300000, guid: b5fe751ceb3e6aa42aeae4da279181d3, type: 3}
   aSource: {fileID: -6424996553481133590}
 --- !u!82 &-6424996553481133590

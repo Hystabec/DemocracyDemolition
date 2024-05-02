@@ -157,6 +157,14 @@ public class InGameManagerScript : MonoBehaviour
             redProgressBar.fillAmount = redProgressBar.fillAmount + 0.25f;
         }
 
+        var projectileScritps = FindObjectsOfType<pooledProjectileScript>();
+        
+        foreach(pooledProjectileScript pooledProj in projectileScritps)
+        {
+            pooledProj.owner.despawnProjectile(pooledProj.gameObject);
+        }
+
+
         roundVictorySound.PlayOneShot(crowdCheer);
         roundVictorySound.PlayOneShot(playerHit);
 
