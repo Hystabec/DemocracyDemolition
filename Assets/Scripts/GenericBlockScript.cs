@@ -21,17 +21,19 @@ public class GenericBlockScript : MonoBehaviour
     bool isHovered = false;
     private bool canPlaceBlock = true;
 
-    [SerializeField]
-    private GameObject outline;
+    private GameObject outline = null;
 
     [SerializeField]
     UnityEvent<Collision2D> onCollisionEnterFunc, onCollisionExitFunc;
     [SerializeField]
     UnityEvent<Collider2D> onTriggerEnterFunc, onTriggerExitFunc;
 
+    ParticleSystem placeEffect = null;
+
     void Awake()
     {
         outline = gameObject.transform.Find("outline")?.gameObject;
+        placeEffect = gameObject.transform.Find("PlaceEffect")?.gameObject.GetComponent<ParticleSystem>();
 
         defaultColour = gameObject.GetComponent<SpriteRenderer>().color;
 
@@ -72,8 +74,22 @@ public class GenericBlockScript : MonoBehaviour
         {
             collider.enabled = true;
         }
+<<<<<<< Updated upstream
 
         placed = true;
+=======
+<<<<<<< HEAD
+        //This is where particle effect happens, check for particle effect before 
+        if (placeEffect != null)
+        {
+            placeEffect.Play();
+            Debug.Log("ya");
+        }
+=======
+
+        placed = true;
+>>>>>>> 72c62aa981c7b405cc7103f3d33d869019ecdf01
+>>>>>>> Stashed changes
     }
 
     public bool CanPlaceBlock()
