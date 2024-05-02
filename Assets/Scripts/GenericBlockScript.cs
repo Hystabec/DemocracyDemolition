@@ -6,6 +6,9 @@ using UnityEngine.Events;
 public class GenericBlockScript : MonoBehaviour
 {
     [SerializeField]
+    float RotationAmount = 90.0f;
+
+    [SerializeField]
     Collider2D[] colliders;
 
     Color defaultColour;
@@ -44,6 +47,11 @@ public class GenericBlockScript : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public float GetRotationAmount()
+    {
+        return RotationAmount;
     }
 
     public void Selected()

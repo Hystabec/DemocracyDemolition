@@ -236,6 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9038b75acd0f34a4fa9a8e3df8d202de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RotationAmount: 45
   colliders:
   - {fileID: 8699249013717836952}
   - {fileID: 3999575493204402383}
