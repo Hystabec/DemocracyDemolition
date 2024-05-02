@@ -61,6 +61,9 @@ public class playerScript : MonoBehaviour
     [SerializeField]
     GameObject projectile;
 
+    [SerializeField]
+    private SpriteRenderer projInHand;
+
     
     int numOfProjectiles = 10;
     List<GameObject> projectList;
@@ -221,6 +224,11 @@ public class playerScript : MonoBehaviour
         locationThreeFree = true;
     }
 
+    private void ProjInHandVisible(bool show)
+    {
+        projInHand.enabled = show;
+    }
+
     public void A()
     {
         if (!(selectableObjects.Count > 0))
@@ -356,6 +364,7 @@ public class playerScript : MonoBehaviour
                 GameObject proj = projectList[0];
                 proj.transform.position = fireMarker.transform.GetChild(0).transform.position;
                 proj.SetActive(true);
+                ProjInHandVisible(false);
 
                 anim.SetTrigger("Throw");
                 playerThrowSound.Play();
@@ -367,7 +376,9 @@ public class playerScript : MonoBehaviour
 
                 RemainingAmmo--;
                 updateAmmoText();
+
                 StartCoroutine(ThrowCooldown());
+            
 
 
             }
@@ -377,6 +388,10 @@ public class playerScript : MonoBehaviour
     {
         canThrow = false;
         yield return new WaitForSeconds(throwCooldown);
+        if (RemainingAmmo > 0)
+        {
+            ProjInHandVisible(true);
+        }
         canThrow = true;
     }
 
