@@ -160,11 +160,12 @@ public class InGameManagerScript : MonoBehaviour
             redProgressBar.fillAmount = redProgressBar.fillAmount + 0.25f;
         }
 
-        var projectileScritps = FindObjectsOfType<pooledProjectileScript>();
-        
-        foreach(pooledProjectileScript pooledProj in projectileScritps)
+        var projectileScripts = FindObjectsOfType<pooledProjectileScript>();
+
+        foreach (pooledProjectileScript pooledProj in projectileScripts)
         {
-            pooledProj.owner.despawnProjectile(pooledProj.gameObject);
+            playerScript ps = pooledProj.owner;
+            ps.despawnProjectile(pooledProj.gameObject);
         }
 
 
