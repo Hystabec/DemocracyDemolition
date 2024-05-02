@@ -67,7 +67,10 @@ public class blockScript : MonoBehaviour
             aSource.PlayOneShot(blockHitSound);
             if (breakable)
             {
-                hitEffect.Play();
+                if (hitEffect != null)
+                {
+                    hitEffect.Play();
+                }
                 Debug.Log("hit");
 
                 CurrentBlockHealth--;
