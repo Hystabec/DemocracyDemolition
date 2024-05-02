@@ -120,11 +120,13 @@ public class InGameManagerScript : MonoBehaviour
         {
             go.SetActive(true);
         }
-
+        
         foreach(GameObject go in EndUIButtons)
-        { 
+        {
             go.SetActive(false);
         }
+        rematchAnim.SetTrigger("RematchFadeOut");
+        menuButtonAnim.SetTrigger("MenuButtonFadeOut");
         redProgressBar.fillAmount = 0;
         blueProgressBar.fillAmount = 0;
     }

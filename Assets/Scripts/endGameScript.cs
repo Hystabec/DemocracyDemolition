@@ -8,7 +8,7 @@ public class endGameScript : MonoBehaviour
     InGameManagerScript IGMS;
 
     [SerializeField]
-    Animator camAnim;
+    Animator camAnim, rematchAnim, menuButtonAnim;
 
     private void Awake()
     {
@@ -18,10 +18,20 @@ public class endGameScript : MonoBehaviour
     public void Retry()
     {
         Debug.Log("Rest game");
+        rematchAnim.SetTrigger("RematchFadeOut");
+        menuButtonAnim.SetTrigger("MenuButtonFadeOut");
 
-        IGMS.ResetGame();
+        StartCoroutine(ButtonFadeOut());
+        //IGMS.ResetGame();
 
         //zoom out camra - reverse zoom in anim?
+    }
+
+    private IEnumerator ButtonFadeOut()
+    {
+        //Delay for animation
+        yield return new WaitForSeconds(1.2f);
+        IGMS.ResetGame();
     }
 
     public void Exit()

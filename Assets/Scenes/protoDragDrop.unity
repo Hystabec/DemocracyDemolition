@@ -50042,8 +50042,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -2.8900146, y: -0.19999695}
+  m_SizeDelta: {x: -37.65, y: -29.09}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1590926355
 MonoBehaviour:
@@ -50058,14 +50058,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.3443396, g: 0.43161052, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -985979068, guid: fd44ee27fc03550478db5eb3ad1310a4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f29dbee5d57dc4e45934ec081fd3575d, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -51412,6 +51412,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IGMS: {fileID: 1729778779}
   camAnim: {fileID: 313012574}
+  rematchAnim: {fileID: 758440084}
+  menuButtonAnim: {fileID: 137084088}
 --- !u!1 &1736693201
 GameObject:
   m_ObjectHideFlags: 0
@@ -51950,8 +51952,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -2.8900146, y: -0.19999695}
+  m_SizeDelta: {x: -37.65001, y: -29.09}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1776949178
 MonoBehaviour:
@@ -51966,14 +51968,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.2971698, b: 0.2971698, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2065396686, guid: fd44ee27fc03550478db5eb3ad1310a4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f29dbee5d57dc4e45934ec081fd3575d, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
