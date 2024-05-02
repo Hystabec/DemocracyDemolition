@@ -7,6 +7,9 @@ public class endGameScript : MonoBehaviour
     [SerializeField]
     InGameManagerScript IGMS;
 
+    [SerializeField]
+    Animator camAnim;
+
     private void Awake()
     {
        
