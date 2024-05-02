@@ -2,15 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class screenShake : MonoBehaviour
+public class ohGod : MonoBehaviour
 {
     public bool start = false;
     public AnimationCurve curve;
     public float shakeDuration = 1;
-
-    [SerializeField]
-    Animator camAnim;
-
+    public float elapsedTime = 0;
+    public Quaternion currentTransform;
 
     void Update()
     {
@@ -23,20 +21,20 @@ public class screenShake : MonoBehaviour
 
     IEnumerator Shaking()
     {
-        Vector3 startPosition = transform.position;
-        float elapsedTime = 0;
-        camAnim.enabled = false;
+        Quaternion startPosition = transform.rotation;
+
 
         while (elapsedTime < shakeDuration)
         {
             elapsedTime += Time.deltaTime;
             Vector3 randomRotation = Random.insideUnitSphere;
-            float strength = curve.Evaluate(elapsedTime / shakeDuration);
-            transform.position = startPosition + Random.insideUnitSphere * strength;
+            //float strength = curve.Evaluate(elapsedTime / shakeDuration);
+            transform.rotation = startPosition * Quaternion.Euler(randomRotation * 1000);
+            currentTransform = transform.rotation;
             yield return null;
         }
 
-        transform.position = startPosition;
-        camAnim.enabled = true;
+        transform.rotation = startPosition;
+        elapsedTime = 0;
     }
 }
