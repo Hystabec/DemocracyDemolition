@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2814859544400420157}
   - component: {fileID: 65519266985343941}
-  - component: {fileID: 2944471860668499656}
-  - component: {fileID: 8766573490319399116}
+  - component: {fileID: 4409045771858838709}
+  - component: {fileID: 556300839721160670}
+  - component: {fileID: 1924388832511643047}
   - component: {fileID: 5525443773517606490}
   - component: {fileID: 6235062293522369941}
   m_Layer: 0
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 6412431008632115462}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.27, y: 0.07, z: -0.52578}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.7610926, y: 0.653649, z: 0.653649}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -74,8 +75,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1756578479
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 1971183653, guid: 70b00c330706c714787829c303e3a3f1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -88,8 +89,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &2944471860668499656
-BoxCollider2D:
+--- !u!60 &4409045771858838709
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -97,7 +98,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 6412431008632115462}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: eef863e5341ff41469c33cf1ac4736a5, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -117,10 +118,10 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0010576248, y: 0.16367248}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -130,10 +131,14 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.6121154, y: 0.3626551}
-  m_EdgeRadius: 0
---- !u!61 &8766573490319399116
+  m_Points:
+    m_Paths:
+    - - {x: 0.51195574, y: -0.036121555}
+      - {x: 0.51540375, y: 0.15553972}
+      - {x: -0.46184626, y: 0.1551775}
+      - {x: -0.44475666, y: -0.0512126}
+  m_UseDelaunayMesh: 0
+--- !u!61 &556300839721160670
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -165,7 +170,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.18213178}
+  m_Offset: {x: -0.7907835, y: -0.101529524}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -176,7 +181,52 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.61, y: 0.32573637}
+  m_Size: {x: 0.0816105, y: 0.4869409}
+  m_EdgeRadius: 0
+--- !u!61 &1924388832511643047
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6412431008632115462}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.78655136, y: -0.09367394}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.61, y: 0.69}
+    newSize: {x: 1.61, y: 0.69}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.094165325, y: 0.50265205}
   m_EdgeRadius: 0
 --- !u!114 &5525443773517606490
 MonoBehaviour:
@@ -202,21 +252,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9038b75acd0f34a4fa9a8e3df8d202de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RotationAmount: 45
   colliders: []
   cantPlaceColor: {r: 255, g: 0, b: 0, a: 1}
   outline: {fileID: 0}
   onCollisionEnterFunc:
     m_PersistentCalls:
-      m_Calls: []
-  onCollisionExitFunc:
-    m_PersistentCalls:
-      m_Calls: []
-  onTriggerEnterFunc:
-    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5525443773517606490}
         m_TargetAssemblyTypeName: TrampolineScript, Assembly-CSharp
-        m_MethodName: CustomOnTriggerEnter2D
+        m_MethodName: CustomOnCollisionEnter2D
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -226,6 +271,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onCollisionExitFunc:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerEnterFunc:
+    m_PersistentCalls:
+      m_Calls: []
   onTriggerExitFunc:
     m_PersistentCalls:
       m_Calls: []
