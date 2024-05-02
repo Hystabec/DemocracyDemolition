@@ -23,6 +23,9 @@ public class blockScript : MonoBehaviour
     bool breakable;
 
     [SerializeField]
+    private ParticleSystem hitEffect = null;
+
+    [SerializeField]
     private AudioClip blockHitSound;
 
     [SerializeField]
@@ -42,6 +45,20 @@ public class blockScript : MonoBehaviour
         //col.enabled = false;
     }
 
+    void DestroyBlock()
+    {
+        if(GetComponent<Collider2D>())
+        {
+            GetComponent<Collider2D>().enabled = false;
+        }
+
+        if(GetComponent<SpriteRenderer>())
+        {
+            GetComponent<SpriteRenderer>().enabled = false;
+        }
+
+    }
+
 
     public void CustomOnCollisionEnter2D(Collision2D other)
     {
@@ -50,13 +67,17 @@ public class blockScript : MonoBehaviour
             aSource.PlayOneShot(blockHitSound);
             if (breakable)
             {
+                hitEffect.Play();
+                Debug.Log("hit");
+
                 CurrentBlockHealth--;
 
                 if (CurrentBlockHealth <= 0)
                 {
                     CurrentBlockHealth = TotalBlockHealth;
                     Debug.Log(gameObject.name + " destroyed");
-                    gameObject.SetActive(false);
+                    DestroyBlock();
+                    //gameObject.SetActive(false);
                 }
             }
         }

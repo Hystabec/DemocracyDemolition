@@ -214,7 +214,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   TotalBlockHealth: 3
-  breakable: 1
+  breakable: 0
+  hitEffect: {fileID: 0}
   blockHitSound: {fileID: 0}
   aSource: {fileID: 0}
 --- !u!114 &358732629288088837

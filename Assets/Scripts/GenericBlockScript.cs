@@ -103,6 +103,7 @@ public class GenericBlockScript : MonoBehaviour
                 other.gameObject.GetComponent<SpriteRenderer>().enabled = true;
             }
         }
+
     }
 
     void OnCollisionExit2D(Collision2D other)
