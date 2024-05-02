@@ -74,22 +74,18 @@ public class GenericBlockScript : MonoBehaviour
         {
             collider.enabled = true;
         }
-<<<<<<< Updated upstream
+
 
         placed = true;
-=======
-<<<<<<< HEAD
-        //This is where particle effect happens, check for particle effect before 
+
         if (placeEffect != null)
         {
             placeEffect.Play();
             Debug.Log("ya");
         }
-=======
+
 
         placed = true;
->>>>>>> 72c62aa981c7b405cc7103f3d33d869019ecdf01
->>>>>>> Stashed changes
     }
 
     public bool CanPlaceBlock()
