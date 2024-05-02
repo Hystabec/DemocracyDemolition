@@ -293,7 +293,7 @@ public class playerScript : MonoBehaviour
         }
         else if (currentMode == modes.Play)
         {
-            selectableObjects[SelectedIndex].transform.Rotate(new Vector3(0, 0, 90));
+            selectableObjects[SelectedIndex].transform.Rotate(new Vector3(0, 0, -selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().GetRotationAmount()));
         }
     }
 
@@ -311,7 +311,7 @@ public class playerScript : MonoBehaviour
         }
         else if (currentMode == modes.Play)
         {
-            selectableObjects[SelectedIndex].transform.Rotate(new Vector3(0, 0, 90));
+            selectableObjects[SelectedIndex].transform.Rotate(new Vector3(0, 0, selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().GetRotationAmount()));
         }
     }
 
