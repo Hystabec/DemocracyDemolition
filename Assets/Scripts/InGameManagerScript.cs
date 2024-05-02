@@ -161,12 +161,29 @@ public class InGameManagerScript : MonoBehaviour
             redProgressBar.fillAmount = redProgressBar.fillAmount + 0.25f;
         }
 
-        var projectileScripts = FindObjectsOfType<pooledProjectileScript>();
+        var p1Script = player1.GetComponent<playerScript>();
 
-        foreach (pooledProjectileScript pooledProj in projectileScripts)
+        if (p1Script.thrownProjectiles.Count > 0)
         {
-            playerScript ps = pooledProj.owner;
-            ps.despawnProjectile(pooledProj.gameObject);
+            List<GameObject> thrownProjectiles = p1Script.thrownProjectiles;
+
+            foreach (GameObject pooledProj in thrownProjectiles)
+            {
+                p1Script.despawnProjectile(pooledProj.gameObject);
+            }
+
+        }
+
+        var p2Script = player2.GetComponent<playerScript>();
+
+        if (p2Script.thrownProjectiles.Count > 0)
+        {
+            List<GameObject> thrownProjectiles2 = p2Script.thrownProjectiles;
+            foreach (GameObject pooledProj in thrownProjectiles2)
+            {
+                p2Script.despawnProjectile(pooledProj.gameObject);
+            }
+
         }
 
 
@@ -187,6 +204,7 @@ public class InGameManagerScript : MonoBehaviour
         StopCoroutine("RoundTime");
 
         endRound();
+       
     }
 
     BAT blockTrapSplit(int total, int maxBlock, int maxTrap)
@@ -260,8 +278,13 @@ public class InGameManagerScript : MonoBehaviour
         player1.GetComponent<playerScript>().OnRoundStart();
         player2.GetComponent<playerScript>().OnRoundStart();
 
-       StartCoroutine(TimeBeforeFighting());
+        player1.GetComponent<playerScript>().thrownProjectiles.Clear();
+        player2.GetComponent<playerScript>().thrownProjectiles.Clear();
+
+        StartCoroutine(TimeBeforeFighting());
        timerScript.StartTime();
+
+
     }
 
     void endRound()
@@ -270,9 +293,11 @@ public class InGameManagerScript : MonoBehaviour
         ps.clearAndDeleteBlockList();
         ps.resetAmmo();
 
+
         ps = player2.GetComponent<playerScript>();
         ps.clearAndDeleteBlockList();
         ps.resetAmmo();
+
 
         timerScript.StopTimer();
 

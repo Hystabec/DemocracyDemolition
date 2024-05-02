@@ -43219,6 +43219,7 @@ MonoBehaviour:
   fireMarker: {fileID: 16386615}
   projectile: {fileID: 4210951342825297463, guid: 53190b426f572d64f80801dd6540c2fc, type: 3}
   projInHand: {fileID: 5739765002891803303}
+  thrownProjectiles: []
   throwForce: 10
   anim: {fileID: 1303902999}
   currentAmmoText: {fileID: 1869428362}
@@ -62051,6 +62052,7 @@ MonoBehaviour:
   fireMarker: {fileID: 231040011}
   projectile: {fileID: 4210951342825297463, guid: 53190b426f572d64f80801dd6540c2fc, type: 3}
   projInHand: {fileID: 0}
+  thrownProjectiles: []
   throwForce: 10
   anim: {fileID: 1865346984}
   currentAmmoText: {fileID: 298309877}

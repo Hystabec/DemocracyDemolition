@@ -68,8 +68,12 @@ public class playerScript : MonoBehaviour
     int numOfProjectiles = 10;
     List<GameObject> projectList;
 
+
+    public List<GameObject> thrownProjectiles;
+
     [SerializeField]
     float throwForce = 10.0f;
+
 
     private bool fightingStage = false;
 
@@ -173,6 +177,8 @@ public class playerScript : MonoBehaviour
         projectile.SetActive(false);
         projectile.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         projectList.Add(projectile);
+       // thrownProjectiles.Remove(projectile);
+
     }
 
     public void AddBlockToList(GameObject blockToAdd)
@@ -364,6 +370,8 @@ public class playerScript : MonoBehaviour
                 GameObject proj = projectList[0];
                 proj.transform.position = fireMarker.transform.GetChild(0).transform.position;
                 proj.SetActive(true);
+                thrownProjectiles.Add(proj);
+
                 ProjInHandVisible(false);
 
                 anim.SetTrigger("Throw");
