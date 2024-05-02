@@ -125,7 +125,8 @@ public class InGameManagerScript : MonoBehaviour
         { 
             go.SetActive(false);
         }
-        //Reset progress bars
+        redProgressBar.fillAmount = 0;
+        blueProgressBar.fillAmount = 0;
     }
 
     public void playerKilled(GameObject callingPlayer)
@@ -333,6 +334,7 @@ public class InGameManagerScript : MonoBehaviour
             Debug.Log("No winner, when endgame called");
         }
 
+        
         StartCoroutine(waitForEndCamPan(winner));
     }
 
