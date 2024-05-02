@@ -63025,7 +63025,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1925082076}
   - component: {fileID: 1925082078}
-  - component: {fileID: 1925082077}
   m_Layer: 0
   m_Name: coconut
   m_TagString: Untagged
@@ -63048,20 +63047,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 231040012}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1925082077
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1925082075}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bf4affd4ea7f4042b965e12d54480ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  owner: {fileID: 0}
-  maxBounceCount: 3
 --- !u!212 &1925082078
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -64444,7 +64429,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5486576573307395388}
   - component: {fileID: 5739765002891803303}
-  - component: {fileID: 2507697838720409159}
   m_Layer: 0
   m_Name: coconut
   m_TagString: Untagged
@@ -64452,20 +64436,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2507697838720409159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2489839484672342526}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bf4affd4ea7f4042b965e12d54480ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  owner: {fileID: 0}
-  maxBounceCount: 3
 --- !u!4 &5486576573307395388
 Transform:
   m_ObjectHideFlags: 0
