@@ -174,10 +174,13 @@ public class playerScript : MonoBehaviour
 
     public void despawnProjectile(GameObject projectile)
     {
-        projectile.SetActive(false);
-        projectile.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        projectList.Add(projectile);
-       // thrownProjectiles.Remove(projectile);
+        if (projectile != null)
+        {
+            projectile.SetActive(false);
+            projectile.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            projectList.Add(projectile);
+            // thrownProjectiles.Remove(projectile);
+        }
 
     }
 
@@ -220,11 +223,11 @@ public class playerScript : MonoBehaviour
 
     public void clearAndDeleteBlockList()
     {
+        B();
         foreach (GameObject go in selectableObjects)
             Destroy(go);
 
         selectableObjects.Clear();
-
         locationOneFree = true;
         locationTwoFree = true;
         locationThreeFree = true;
@@ -251,6 +254,8 @@ public class playerScript : MonoBehaviour
                 hasBeenSelected = true;
                 selectedBlockLocation = selectableObjects[SelectedIndex].transform.position;
                 selectedBlockRotation = selectableObjects[SelectedIndex].transform.rotation;
+                selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().CurrentlyPlacing(true);
+
             }
             else if (selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().CanPlaceBlock())
             {

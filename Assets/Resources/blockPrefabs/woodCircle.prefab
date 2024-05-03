@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3612080798820891401}
   - component: {fileID: 6705561526269789115}
+  - component: {fileID: 8344863335159481591}
   - component: {fileID: 2847071872825393176}
   - component: {fileID: 4496770277939946622}
-  - component: {fileID: 8344863335159481591}
   - component: {fileID: -6511680084664741854}
   - component: {fileID: 2212442969744371485}
   m_Layer: 7
@@ -92,51 +92,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &2847071872825393176
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 266259012491975969}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
---- !u!114 &4496770277939946622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 266259012491975969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd4d6c8020f321743b24e10eef8a4cec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 0
-  TotalBlockHealth: 2
-  breakable: 1
-  hitEffect: {fileID: 4044688329063055299}
-  blockHitSound: {fileID: 8300000, guid: 2f7dc3eb36770d949b07af555e48d848, type: 3}
-  aSource: {fileID: -6511680084664741854}
 --- !u!60 &8344863335159481591
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -203,6 +158,51 @@ PolygonCollider2D:
       - {x: 0.45, y: -0.68}
       - {x: 0.71, y: -0.39999998}
   m_UseDelaunayMesh: 0
+--- !u!50 &2847071872825393176
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 266259012491975969}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
+--- !u!114 &4496770277939946622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 266259012491975969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd4d6c8020f321743b24e10eef8a4cec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
+  TotalBlockHealth: 2
+  breakable: 1
+  hitEffect: {fileID: 4044688329063055299}
+  blockHitSound: {fileID: 8300000, guid: 2f7dc3eb36770d949b07af555e48d848, type: 3}
+  aSource: {fileID: -6511680084664741854}
 --- !u!82 &-6511680084664741854
 AudioSource:
   m_ObjectHideFlags: 0
