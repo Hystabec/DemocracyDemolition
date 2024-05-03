@@ -125,6 +125,16 @@ public class InGameManagerScript : MonoBehaviour
         {
             go.SetActive(false);
         }
+
+        foreach(Animator ani in redAnimArray)
+        {
+            ani.SetTrigger("Idle");
+        }
+        
+        foreach (Animator ani in blueAnimArray)
+        {
+            ani.SetTrigger("Idle");
+        }
         rematchAnim.SetTrigger("RematchFadeOut");
         menuButtonAnim.SetTrigger("MenuButtonFadeOut");
         redProgressBar.fillAmount = 0;

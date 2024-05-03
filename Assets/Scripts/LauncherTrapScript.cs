@@ -18,6 +18,9 @@ public class LauncherTrapScript : MonoBehaviour
     [SerializeField]
     float launchForce = 10.0f;
 
+    [SerializeField]
+    Animator launcherAnim;
+
     private void Awake()
     {
         firePosition = gameObject.transform.Find("firePosition").gameObject;
@@ -51,6 +54,8 @@ public class LauncherTrapScript : MonoBehaviour
             spawnedProj.GetComponent<Rigidbody2D>().velocity = firePosition.transform.right.normalized * launchForce;
 
             canFire = false;
+
+            launcherAnim.SetTrigger("Launch");
         }
     }
 

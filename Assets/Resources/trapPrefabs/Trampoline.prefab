@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 5525443773517606490}
   - component: {fileID: 6235062293522369941}
   - component: {fileID: 8777198692702805276}
+  - component: {fileID: 6213589489332192321}
   m_Layer: 10
   m_Name: Trampoline
   m_TagString: Untagged
@@ -327,6 +328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 255f52d7bbf961e4aa482be6fa4b1d87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trampolineAnim: {fileID: 6213589489332192321}
 --- !u!114 &6235062293522369941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -393,6 +395,27 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!95 &6213589489332192321
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6412431008632115462}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e6f09e29cf0f89142b7945d5dfa3d1a9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6842071650208388605
 GameObject:
   m_ObjectHideFlags: 0
