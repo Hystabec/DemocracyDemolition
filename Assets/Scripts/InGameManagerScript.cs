@@ -104,12 +104,17 @@ public class InGameManagerScript : MonoBehaviour
         startRound();
     }
 
-    public void ResetGame()
+    public void CallResetGame()
     {
+        StartCoroutine(ResetGame());
+    }
+
+    public IEnumerator ResetGame()
+    {
+        camAnim.SetTrigger("ReturnCamera");
+
         player1.GetComponent<playerScript>().ResetData();
         player2.GetComponent<playerScript>().ResetData();
-
-        camAnim.SetTrigger("ReturnCamera");
 
         currentRound = 1;
         p1Score = 0;
@@ -139,7 +144,22 @@ public class InGameManagerScript : MonoBehaviour
         menuButtonAnim.SetTrigger("MenuButtonFadeOut");
         redProgressBar.fillAmount = 0;
         blueProgressBar.fillAmount = 0;
+
+        player1.GetComponent<Animator>().SetBool("ResetGame", true);
+        player2.GetComponent<Animator>().SetBool("ResetGame", true);
+
+        timerScript.timerReset();
+
+        player1.GetComponent<playerScript>().switchMode(modes.Play);
+        player2.GetComponent<playerScript>().switchMode(modes.Play);
+
+
+        yield return new WaitForSeconds(4f);
+        startRound();
+
     }
+
+
 
     public void playerKilled(GameObject callingPlayer)
     {

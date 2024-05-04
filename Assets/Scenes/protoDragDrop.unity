@@ -51377,7 +51377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1f672149b05f08469e32629323f63f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roundTime: 21
+  roundTime: 26
   timerText: {fileID: 4271247}
 --- !u!82 &1729778783
 AudioSource:

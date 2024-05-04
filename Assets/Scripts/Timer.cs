@@ -7,9 +7,9 @@ using UnityEngine.UI;
 public class Timer : MonoBehaviour
 {
     [SerializeField]
-    float roundTime = 20f;
+    float roundTime = 26f;
 
-    float currentTime = 20f;
+    float currentTime = 26f;
 
     bool timerRunning = false;
 
@@ -19,6 +19,7 @@ public class Timer : MonoBehaviour
     public void timerReset()
     {
         currentTime = roundTime;
+        UpdateTimerText();
     }
 
     void Awake()

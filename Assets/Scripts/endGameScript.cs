@@ -31,7 +31,7 @@ public class endGameScript : MonoBehaviour
     {
         //Delay for animation
         yield return new WaitForSeconds(1.2f);
-        IGMS.ResetGame();
+        IGMS.CallResetGame();
     }
 
     public void Exit()

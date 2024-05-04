@@ -100,7 +100,7 @@ public class playerScript : MonoBehaviour
     public void ResetData()
     {
         //this should be called by "InGameManagerScript"
-
+        
         currentMode = modes.None;
         RemainingAmmo = totalAmmo;
         SelectedIndex = 0;

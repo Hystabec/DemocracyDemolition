@@ -64,7 +64,6 @@ public class GenericBlockScript : MonoBehaviour
 
     public void CurrentlyPlacing(bool placing)
     {
-        Debug.Log(placing);
         isPlacing = placing;
 
         if (placing == true)
@@ -140,7 +139,6 @@ public class GenericBlockScript : MonoBehaviour
 
         if (other.gameObject.CompareTag("playerArea"))
         {
-            Debug.Log("playerareaC");
             canPlaceBlock = false;
             gameObject.GetComponent<SpriteRenderer>().color = cantPlaceColor;
             
