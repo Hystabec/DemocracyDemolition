@@ -27,9 +27,9 @@ public class GenericBlockScript : MonoBehaviour
     private GameObject outline = null;
 
     [SerializeField]
-    UnityEvent<Collision2D> onCollisionEnterFunc, onCollisionExitFunc;
+    UnityEvent<Collision2D> onCollisionEnterFunc, onCollisionExitFunc, onCollisionStayFunc;
     [SerializeField]
-    UnityEvent<Collider2D> onTriggerEnterFunc, onTriggerExitFunc;
+    UnityEvent<Collider2D> onTriggerEnterFunc, onTriggerExitFunc, onTriggerStayFunc;
 
     ParticleSystem placeEffect = null;
 
@@ -134,8 +134,12 @@ public class GenericBlockScript : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if(onCollisionEnterFunc != null)
-            onCollisionEnterFunc.Invoke(other);
+        onCollisionEnterFunc?.Invoke(other);
+    }
+
+    void OnCollisionStay2D(Collision2D other)
+    {
+        onCollisionStayFunc?.Invoke(other);
 
         if (placed)
             return;
@@ -160,19 +164,17 @@ public class GenericBlockScript : MonoBehaviour
         {
             canPlaceBlock = false;
             gameObject.GetComponent<SpriteRenderer>().color = cantPlaceColor;
-            
+
             if (other.gameObject.GetComponent<SpriteRenderer>())
             {
                 other.gameObject.GetComponent<SpriteRenderer>().enabled = true;
             }
         }
-
     }
 
     void OnCollisionExit2D(Collision2D other)
     {
-        if(onCollisionExitFunc != null)
-            onCollisionExitFunc.Invoke(other);
+        onCollisionExitFunc?.Invoke(other);
 
         if (placed)
             return;
@@ -206,40 +208,13 @@ public class GenericBlockScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(onTriggerEnterFunc != null)
-            onTriggerEnterFunc.Invoke(other);
-
-        if (placed)
-            return;
-
-        if (other.gameObject.layer == LayerMask.NameToLayer("Block"))
-        {
-            canPlaceBlock = false;
-            gameObject.GetComponent<SpriteRenderer>().color = cantPlaceColor;
-        }
-
-        if (other.gameObject.layer == LayerMask.NameToLayer("Trap"))
-        {
-            canPlaceBlock = false;
-            gameObject.GetComponent<SpriteRenderer>().color = cantPlaceColor;
-
-        }
-
-        if (other.gameObject.CompareTag("playerArea"))
-        {
-            Debug.Log("playerareaT");
-            canPlaceBlock = false;
-            gameObject.GetComponent<SpriteRenderer>().color = cantPlaceColor;
-
-            if (other.gameObject.GetComponent<SpriteRenderer>())
-            {
-                other.gameObject.GetComponent<SpriteRenderer>().enabled = true;
-            }
-        }
+        onTriggerEnterFunc?.Invoke(other);
     }
 
     private void OnTriggerStay2D(Collider2D other)
     {
+        onTriggerStayFunc?.Invoke(other);
+
         if (placed)
             return;
 
@@ -258,7 +233,8 @@ public class GenericBlockScript : MonoBehaviour
 
         if (other.gameObject.CompareTag("playerArea"))
         {
-            Debug.Log("playerareaT");
+            //Debug.Log("playerareaT");
+
             canPlaceBlock = false;
             gameObject.GetComponent<SpriteRenderer>().color = cantPlaceColor;
 
@@ -270,11 +246,9 @@ public class GenericBlockScript : MonoBehaviour
 
     }
 
-
     void OnTriggerExit2D(Collider2D other)
     {
-        if(onTriggerExitFunc != null)
-            onTriggerExitFunc.Invoke(other);
+        onTriggerExitFunc?.Invoke(other);
 
         if (placed)
             return;

@@ -62268,7 +62268,7 @@ MonoBehaviour:
   locationThree: {x: 1.5, y: -4.2, z: 0}
   fireMarker: {fileID: 231040011}
   projectile: {fileID: 4210951342825297463, guid: 53190b426f572d64f80801dd6540c2fc, type: 3}
-  projInHand: {fileID: 0}
+  projInHand: {fileID: 1925082078}
   thrownProjectiles: []
   throwForce: 10
   anim: {fileID: 1865346984}
