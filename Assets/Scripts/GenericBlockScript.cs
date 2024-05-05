@@ -35,7 +35,7 @@ public class GenericBlockScript : MonoBehaviour
 
     private bool isPlacing;
 
-    
+    SpriteRenderer affectPlayArea = null;
 
     void Awake()
     {
@@ -78,6 +78,16 @@ public class GenericBlockScript : MonoBehaviour
             foreach (var collider in colliders)
             {
                 collider.enabled = true;
+            }
+        }
+        else if(placing == false)
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = defaultColour;
+
+            if (affectPlayArea != null)
+            {
+                affectPlayArea.enabled = false;
+                affectPlayArea = null;  
             }
         }
     }
@@ -144,8 +154,10 @@ public class GenericBlockScript : MonoBehaviour
         if (placed)
             return;
 
-        //Sets it in playerScript so the player cannot place the current block if its colliding with another block or the player
+        if (!isPlacing)
+            return;
 
+        //Sets it in playerScript so the player cannot place the current block if its colliding with another block or the player
         if (other.gameObject.layer == LayerMask.NameToLayer("Block"))
         {
             canPlaceBlock = false;
@@ -164,10 +176,13 @@ public class GenericBlockScript : MonoBehaviour
         {
             canPlaceBlock = false;
             gameObject.GetComponent<SpriteRenderer>().color = cantPlaceColor;
+            
 
             if (other.gameObject.GetComponent<SpriteRenderer>())
             {
-                other.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+                var temp = other.gameObject.GetComponent<SpriteRenderer>();
+                temp.enabled = true;
+                affectPlayArea = temp;
             }
         }
     }
@@ -177,6 +192,9 @@ public class GenericBlockScript : MonoBehaviour
         onCollisionExitFunc?.Invoke(other);
 
         if (placed)
+            return;
+
+        if (!isPlacing)
             return;
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Block"))
@@ -200,6 +218,7 @@ public class GenericBlockScript : MonoBehaviour
             if (other.gameObject.GetComponent<SpriteRenderer>())
             {
                 other.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+                affectPlayArea = null;
             }
         }
 
@@ -216,6 +235,9 @@ public class GenericBlockScript : MonoBehaviour
         onTriggerStayFunc?.Invoke(other);
 
         if (placed)
+            return;
+
+        if (!isPlacing)
             return;
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Block"))
@@ -240,7 +262,9 @@ public class GenericBlockScript : MonoBehaviour
 
             if (other.gameObject.GetComponent<SpriteRenderer>())
             {
-                other.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+                var temp = other.gameObject.GetComponent<SpriteRenderer>();
+                temp.enabled = true;
+                affectPlayArea = temp;
             }
         }
 
@@ -251,6 +275,9 @@ public class GenericBlockScript : MonoBehaviour
         onTriggerExitFunc?.Invoke(other);
 
         if (placed)
+            return;
+
+        if (!isPlacing)
             return;
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Block"))
@@ -274,6 +301,7 @@ public class GenericBlockScript : MonoBehaviour
             if (other.gameObject.GetComponent<SpriteRenderer>())
             {
                 other.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+                affectPlayArea = null;
             }
         }
     }

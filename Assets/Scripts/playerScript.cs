@@ -296,6 +296,7 @@ public class playerScript : MonoBehaviour
             {
                 selectableObjects[SelectedIndex].transform.position = selectedBlockLocation;
                 selectableObjects[SelectedIndex].transform.rotation = selectedBlockRotation;
+                selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().CurrentlyPlacing(false);
 
                 hasBeenSelected = false;
             }
