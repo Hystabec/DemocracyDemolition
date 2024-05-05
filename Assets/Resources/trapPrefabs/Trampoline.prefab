@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4089511163338112351}
   - component: {fileID: 4187537791345970117}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 6235062293522369941}
   - component: {fileID: 8777198692702805276}
   - component: {fileID: 6213589489332192321}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: Trampoline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,6 +343,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RotationAmount: 45
   colliders: []
+  placedLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   cantPlaceColor: {r: 255, g: 0, b: 0, a: 1}
   onCollisionEnterFunc:
     m_PersistentCalls:
@@ -427,7 +430,7 @@ GameObject:
   - component: {fileID: 2033673765178455384}
   - component: {fileID: 8904519464313882932}
   - component: {fileID: 1831366495116288159}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: PlaceEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}

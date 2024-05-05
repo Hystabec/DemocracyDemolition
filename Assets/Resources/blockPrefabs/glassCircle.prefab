@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1242802294126268550}
   - component: {fileID: 8479057527074389527}
   - component: {fileID: 8077980967624295809}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: PlaceEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4840,7 +4840,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7681731741055469777}
   - component: {fileID: 5863749968962465496}
-  m_Layer: 7
+  m_Layer: 12
   m_Name: outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4929,7 +4929,7 @@ GameObject:
   - component: {fileID: -7533151419684920314}
   - component: {fileID: 4185677381852709593}
   - component: {fileID: -5859951993428983591}
-  m_Layer: 7
+  m_Layer: 12
   m_Name: glassCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5138,6 +5138,9 @@ MonoBehaviour:
   onTriggerExitFunc:
     m_PersistentCalls:
       m_Calls: []
+  placedLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &4185677381852709593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5303,6 +5306,10 @@ PrefabInstance:
     - target: {fileID: 5831688748182206077, guid: ab1614f24de195946ad79e929c3d3d34, type: 3}
       propertyPath: m_Name
       value: GlassHitEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 5831688748182206077, guid: ab1614f24de195946ad79e929c3d3d34, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

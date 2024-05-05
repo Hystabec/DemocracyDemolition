@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7873759152004961950}
   - component: {fileID: 4244810331303081658}
-  m_Layer: 7
+  m_Layer: 12
   m_Name: outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 5174787800900956018}
   - component: {fileID: -8754529125025624596}
   - component: {fileID: 1289787400771221808}
-  m_Layer: 7
+  m_Layer: 12
   m_Name: stoneSquare
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -405,6 +405,9 @@ MonoBehaviour:
   onTriggerExitFunc:
     m_PersistentCalls:
       m_Calls: []
+  placedLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &5164755172547611935
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,7 +419,7 @@ GameObject:
   - component: {fileID: 8701544414802492596}
   - component: {fileID: 4697811505591824544}
   - component: {fileID: 8387230772100500567}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: PlaceEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5286,6 +5289,10 @@ PrefabInstance:
     - target: {fileID: 9153114444592934204, guid: 6a50e3e0548337a4383d068474afb8f0, type: 3}
       propertyPath: m_Name
       value: StoneHitEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 9153114444592934204, guid: 6a50e3e0548337a4383d068474afb8f0, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

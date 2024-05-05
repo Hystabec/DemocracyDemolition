@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2776257465431391193}
   - component: {fileID: 6683717365227996539}
   - component: {fileID: 3149587652336761287}
-  m_Layer: 7
+  m_Layer: 12
   m_Name: metalTriangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -332,6 +332,9 @@ MonoBehaviour:
   onTriggerExitFunc:
     m_PersistentCalls:
       m_Calls: []
+  placedLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &6073503205943918485
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,7 +346,7 @@ GameObject:
   - component: {fileID: 869686134023041828}
   - component: {fileID: 4865907134978700336}
   - component: {fileID: 3717328272483160219}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: PlaceEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5172,7 +5175,7 @@ GameObject:
   m_Component:
   - component: {fileID: 451262503501842809}
   - component: {fileID: 5672379451831695929}
-  m_Layer: 7
+  m_Layer: 12
   m_Name: outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7841768618450096584}
   - component: {fileID: 6805413591757792289}
   - component: {fileID: 1625109480987739966}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: PlaceEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4839,7 +4839,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8520259098184790663}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: firePosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4871,7 +4871,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8207653630194799835}
   - component: {fileID: 9030880172789216669}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4961,7 +4961,7 @@ GameObject:
   - component: {fileID: -2348921197900577600}
   - component: {fileID: 6628034045995502314}
   - component: {fileID: 2936485352273430607}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: Coconut launcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5159,6 +5159,9 @@ MonoBehaviour:
   colliders:
   - {fileID: 8699249013717836952}
   - {fileID: 3999575493204402383}
+  placedLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   cantPlaceColor: {r: 255, g: 0, b: 0, a: 1}
   onCollisionEnterFunc:
     m_PersistentCalls:

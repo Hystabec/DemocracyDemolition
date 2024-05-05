@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4496770277939946622}
   - component: {fileID: -6511680084664741854}
   - component: {fileID: 2212442969744371485}
-  m_Layer: 7
+  m_Layer: 12
   m_Name: woodCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -338,6 +338,9 @@ MonoBehaviour:
   onTriggerExitFunc:
     m_PersistentCalls:
       m_Calls: []
+  placedLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &2031283439562527064
 GameObject:
   m_ObjectHideFlags: 0
@@ -348,7 +351,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3333730259831954784}
   - component: {fileID: 3631314236779530954}
-  m_Layer: 7
+  m_Layer: 12
   m_Name: outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -433,7 +436,7 @@ GameObject:
   - component: {fileID: 4402376607581311159}
   - component: {fileID: 774823930573638965}
   - component: {fileID: 515576218748666797}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: PlaceEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5263,6 +5266,10 @@ PrefabInstance:
     - target: {fileID: 2210098148973115003, guid: 920bd956a28b04d40aca2d81464d1d8b, type: 3}
       propertyPath: m_Name
       value: WoodHitEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 2210098148973115003, guid: 920bd956a28b04d40aca2d81464d1d8b, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2352343507322390009, guid: 920bd956a28b04d40aca2d81464d1d8b, type: 3}
       propertyPath: m_LocalPosition.x

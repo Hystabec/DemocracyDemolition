@@ -86,8 +86,6 @@ public class playerScript : MonoBehaviour
 
     private AudioSource playerThrowSound;
 
-
-
     //angles for clamping controller input
     [SerializeField]
     float MinAngle, MaxAngle;
@@ -223,7 +221,9 @@ public class playerScript : MonoBehaviour
 
     public void clearAndDeleteBlockList()
     {
+        //probably not a great idea calling the B() method
         B();
+
         foreach (GameObject go in selectableObjects)
             Destroy(go);
 
@@ -255,7 +255,6 @@ public class playerScript : MonoBehaviour
                 selectedBlockLocation = selectableObjects[SelectedIndex].transform.position;
                 selectedBlockRotation = selectableObjects[SelectedIndex].transform.rotation;
                 selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().CurrentlyPlacing(true);
-
             }
             else if (selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().CanPlaceBlock())
             {

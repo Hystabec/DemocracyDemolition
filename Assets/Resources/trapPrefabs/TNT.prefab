@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3894994261108539134}
   - component: {fileID: 4865881963425507080}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: -1002868500279694946}
   - component: {fileID: -1057947384533784497}
   - component: {fileID: 8585537266684121296}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: TNT
   m_TagString: explosive
   m_Icon: {fileID: 0}
@@ -233,6 +233,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RotationAmount: 90
   colliders: []
+  placedLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   cantPlaceColor: {r: 255, g: 0, b: 0, a: 1}
   onCollisionEnterFunc:
     m_PersistentCalls:
@@ -309,7 +312,7 @@ GameObject:
   - component: {fileID: 6332130437627958206}
   - component: {fileID: 8598090352461315495}
   - component: {fileID: 2550704802162017905}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: PlaceEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}

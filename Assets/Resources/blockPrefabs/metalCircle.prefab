@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3252875446647938927}
   - component: {fileID: 1487467925412025820}
   - component: {fileID: 8472020666689351954}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: PlaceEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4845,7 +4845,7 @@ GameObject:
   - component: {fileID: 7961846470148107009}
   - component: {fileID: 1971380527023230103}
   - component: {fileID: 181887377249170214}
-  m_Layer: 7
+  m_Layer: 12
   m_Name: metalCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5169,6 +5169,9 @@ MonoBehaviour:
   onTriggerExitFunc:
     m_PersistentCalls:
       m_Calls: []
+  placedLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &7369578781479130876
 GameObject:
   m_ObjectHideFlags: 0
@@ -5179,7 +5182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4141548321465540684}
   - component: {fileID: 4541657494032343623}
-  m_Layer: 7
+  m_Layer: 12
   m_Name: outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -14,6 +14,9 @@ public class GenericBlockScript : MonoBehaviour
     Color defaultColour;
 
     [SerializeField]
+    LayerMask placedLayer;
+
+    [SerializeField]
     Color cantPlaceColor = new Color(255, 0, 0);
 
     bool placed = false;
@@ -32,6 +35,8 @@ public class GenericBlockScript : MonoBehaviour
 
     private bool isPlacing;
 
+    
+
     void Awake()
     {
         outline = gameObject.transform.Find("outline")?.gameObject;
@@ -45,6 +50,7 @@ public class GenericBlockScript : MonoBehaviour
         {
             collider.enabled = false;
         }
+
     }
 
     void Start()
@@ -68,6 +74,7 @@ public class GenericBlockScript : MonoBehaviour
 
         if (placing == true)
         {
+            //this is a problem
             foreach (var collider in colliders)
             {
                 collider.enabled = true;
@@ -107,6 +114,7 @@ public class GenericBlockScript : MonoBehaviour
             placeEffect.Play();
         }
 
+        gameObject.layer = placedLayer;
 
         placed = true;
     }
