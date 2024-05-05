@@ -221,8 +221,13 @@ public class playerScript : MonoBehaviour
 
     public void clearAndDeleteBlockList()
     {
-        //probably not a great idea calling the B() method
-        B();
+        if (hasBeenSelected)
+        {
+            selectableObjects[SelectedIndex].transform.position = selectedBlockLocation;
+            selectableObjects[SelectedIndex].transform.rotation = selectedBlockRotation;
+
+            hasBeenSelected = false;
+        }
 
         foreach (GameObject go in selectableObjects)
             Destroy(go);
