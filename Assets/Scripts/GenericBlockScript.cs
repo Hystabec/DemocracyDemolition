@@ -114,7 +114,8 @@ public class GenericBlockScript : MonoBehaviour
             placeEffect.Play();
         }
 
-        gameObject.layer = placedLayer;
+        //convers the layerMask into a usable layer int
+        gameObject.layer = (int)Mathf.Log(placedLayer.value, 2);
 
         placed = true;
     }
