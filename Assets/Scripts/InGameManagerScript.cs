@@ -56,6 +56,12 @@ public class InGameManagerScript : MonoBehaviour
     Timer timerScript;
 
     [SerializeField]
+    TextMeshProUGUI roundText;
+
+    [SerializeField]
+    TextMeshProUGUI roundTypeText;
+
+    [SerializeField]
     Animator redAnim, blueAnim, camAnim, progressBarAnim, rematchAnim, menuButtonAnim;
 
     [SerializeField]
@@ -307,6 +313,8 @@ public class InGameManagerScript : MonoBehaviour
             rbs.spawnTrapIn(player2, p2returnBat.numTraps);
         }
 
+        StartCoroutine(RoundText());
+
         player1.GetComponent<playerScript>().OnRoundStart();
         player2.GetComponent<playerScript>().OnRoundStart();
 
@@ -314,7 +322,8 @@ public class InGameManagerScript : MonoBehaviour
         player2.GetComponent<playerScript>().thrownProjectiles.Clear();
 
         StartCoroutine(TimeBeforeFighting());
-       timerScript.StartTime();
+
+        timerScript.StartTime();
 
 
     }
@@ -425,14 +434,34 @@ public class InGameManagerScript : MonoBehaviour
 
     }
 
+    private IEnumerator RoundText()
+    {
+        roundText.alpha = 1;
+        roundText.SetText("Round " + currentRound.ToString());
+        yield return new WaitForSeconds(5.25f);
+        roundText.alpha = 0;
+    }
+    private IEnumerator RoundTypeText(string text)
+    {
+        roundTypeText.alpha = 1;
+        roundTypeText.SetText(text);
+        yield return new WaitForSeconds(2f);
+      //  roundTypeText.alpha = 0;
+    }
+
+
+
     private IEnumerator TimeBeforeFighting()
     {
+        StartCoroutine(RoundTypeText("Build!"));
         player1.GetComponent<playerScript>().CanFight(false);
         player2.GetComponent<playerScript>().CanFight(false);
         yield return new WaitForSecondsRealtime(timeBeforeFighting);
 
         player1.GetComponent<playerScript>().CanFight(true);
         player2.GetComponent<playerScript>().CanFight(true);
+        StartCoroutine(RoundTypeText("Fight!"));
+
         StartCoroutine("RoundTime");
     }
 
