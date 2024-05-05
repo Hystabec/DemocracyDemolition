@@ -19,7 +19,23 @@ public class TNTScript : MonoBehaviour
                     col.gameObject.layer == LayerMask.NameToLayer("Block") || 
                     col.gameObject.layer == LayerMask.NameToLayer("Trap"))
                 {
-                    Destroy(col.gameObject);
+                    GenericBlockScript GBS;
+                    col.gameObject.TryGetComponent<GenericBlockScript>(out GBS);
+
+                    if(GBS != null)
+                    {
+                        //if its a block checks its placed
+
+                        //if its placed it can be deleted
+                        if(GBS.IsPlaced())
+                            Destroy(col.gameObject);
+                    }
+                    else
+                    {
+                        //if its anything else delete it 
+
+                        Destroy(col.gameObject);
+                    }  
                 }
             }
         }

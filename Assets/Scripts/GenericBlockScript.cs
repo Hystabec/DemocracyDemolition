@@ -75,6 +75,11 @@ public class GenericBlockScript : MonoBehaviour
         }
     }
 
+    public bool IsPlaced()
+    {
+        return placed;
+    }
+
     public void Selected()
     {
         isHovered = true;
@@ -83,6 +88,11 @@ public class GenericBlockScript : MonoBehaviour
     public void Deselected()
     {
         isHovered = false;
+    }
+
+    public bool GetIsHovered()
+    {
+        return isHovered;
     }
 
     public void Placed()
