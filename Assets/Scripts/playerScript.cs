@@ -95,6 +95,9 @@ public class playerScript : MonoBehaviour
 
     private bool canThrow = true;
 
+    [SerializeField]
+    private GameObject cantThrowIcon;
+
     public void ResetData()
     {
         //this should be called by "InGameManagerScript"
@@ -405,12 +408,15 @@ public class playerScript : MonoBehaviour
     private IEnumerator ThrowCooldown()
     {
         canThrow = false;
+        cantThrowIcon.SetActive(true);
         yield return new WaitForSeconds(throwCooldown);
         if (RemainingAmmo > 0)
         {
             ProjInHandVisible(true);
         }
         canThrow = true;
+        cantThrowIcon.SetActive(false);
+
     }
 
 
