@@ -83,6 +83,12 @@ public class InGameManagerScript : MonoBehaviour
     [SerializeField]
     AudioClip crowdCheer, playerHit;
 
+    [SerializeField]
+    private GameObject buildIcons;
+
+    [SerializeField]
+    private GameObject fightIcons;
+
     bool gameHasEnded = false;
 
     // Start is called before the first frame update
@@ -454,6 +460,8 @@ public class InGameManagerScript : MonoBehaviour
     private IEnumerator TimeBeforeFighting()
     {
         StartCoroutine(RoundTypeText("Build!"));
+        buildIcons.SetActive(true);
+        fightIcons.SetActive(false);
         player1.GetComponent<playerScript>().CanFight(false);
         player2.GetComponent<playerScript>().CanFight(false);
         yield return new WaitForSecondsRealtime(timeBeforeFighting);
@@ -461,6 +469,8 @@ public class InGameManagerScript : MonoBehaviour
         player1.GetComponent<playerScript>().CanFight(true);
         player2.GetComponent<playerScript>().CanFight(true);
         StartCoroutine(RoundTypeText("Fight!"));
+        fightIcons.SetActive(true);
+        buildIcons.SetActive(false);
 
         StartCoroutine("RoundTime");
     }
