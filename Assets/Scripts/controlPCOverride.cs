@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class controlPCOverride : MonoBehaviour
 {
+    [SerializeField]
+    GameObject stickVisualArea;
+
     [SerializeField]
     InGameManagerScript igm;
     [SerializeField]
@@ -19,6 +23,14 @@ public class controlPCOverride : MonoBehaviour
 
     static Vector2 leftStick = Vector2.zero;
 
+    [SerializeField]
+    Vector2 rightStickVisualMarkerLcation;
+
+    Vector2 centreStick;
+    Vector2 rightStickScreenPos;
+    Vector2 lastRightStickScreenPos;
+    float stickRadius;
+
     private void Start()
     {
         pScript = gameObject.GetComponent<playerScript>();
@@ -26,14 +38,25 @@ public class controlPCOverride : MonoBehaviour
         //pScript.PCOverride = true;
         Debug.Log("PC control override");
 
-        pScript.switchMode();
+        pScript.switchMode(modes.Play);
         igm.pcControlOverride();
+
+        rightStickScreenPos = mainCam.WorldToScreenPoint(rightStickVisualMarkerLcation);
+        lastRightStickScreenPos = rightStickScreenPos;
+        centreStick = rightStickScreenPos;
+
+        var temp = Instantiate(stickVisualArea, new Vector3(rightStickVisualMarkerLcation.x, rightStickVisualMarkerLcation.y, 0), new());
+        Mouse.current.WarpCursorPosition(rightStickScreenPos);
+
+        stickRadius = temp.GetComponent<CircleCollider2D>().radius*temp.transform.localScale.x;
     }
 
     private void Update()
     {
         if (pScript == null)
             return;
+
+        rightStickScreenPos = Input.mousePosition;
 
         if (Input.GetKeyUp(KeyCode.F))
         {
@@ -107,24 +130,18 @@ public class controlPCOverride : MonoBehaviour
 
         pScript.fakeLS(leftStick);
 
-        mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
-
-        Vector3 rotation = mousePos - fireMarker.transform.position;
-
-        float zrotation = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
-
-        // fireMarker.transform.rotation = Quaternion.Euler(0, 0, zrotation);
-
-
-
-        if ((zrotation > posMinAngle) && (zrotation < posMaxAngle))
-            fireMarker.transform.rotation = Quaternion.Euler(0, 0, zrotation);
-
-        else if ((zrotation < negMinAngle) && (zrotation > negMaxAngle))
+        //below mimics the right contoller stick
+        if(rightStickScreenPos != lastRightStickScreenPos) 
         {
-            fireMarker.transform.rotation = Quaternion.Euler(0, 0, zrotation);
+            if(Vector2.Distance(mainCam.ScreenToWorldPoint(rightStickScreenPos), mainCam.ScreenToWorldPoint(centreStick)) <= stickRadius) 
+            {
+                Vector2 diff = centreStick - rightStickScreenPos;
+                diff = diff.normalized;
+
+                pScript.fakeRS(-diff);
+            }
         }
 
-
+        lastRightStickScreenPos = rightStickScreenPos;
     }
 }

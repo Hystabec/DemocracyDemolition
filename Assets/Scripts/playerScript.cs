@@ -6,9 +6,19 @@ using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 using UnityEngine.UI;
 using TMPro;
+using System;
+
+public enum modes
+{
+    UI,
+    Play,
+    None
+}
 
 public class playerScript : MonoBehaviour
 {
+    modes currentMode = modes.None;
+
     [SerializeField]
     int totalAmmo = 3;
     int RemainingAmmo = 3;
@@ -21,9 +31,6 @@ public class playerScript : MonoBehaviour
 
     public int selectableObjectsNumber = 0;
 
-    [SerializeField]
-   // public GameObject tempObject1, tempObject2, tempObject3;
-
     public List<GameObject> blockObjects;
 
     [SerializeField]
@@ -35,8 +42,6 @@ public class playerScript : MonoBehaviour
     bool locationOneFree = true;
     bool locationTwoFree = true;
     bool locationThreeFree = true;
-
-    Color previousCol;
 
     bool hasBeenSelected = false;
 
@@ -56,18 +61,21 @@ public class playerScript : MonoBehaviour
     [SerializeField]
     GameObject projectile;
 
+    [SerializeField]
+    private SpriteRenderer projInHand;
+
     
     int numOfProjectiles = 10;
     List<GameObject> projectList;
 
+
+    public List<GameObject> thrownProjectiles;
+
     [SerializeField]
     float throwForce = 10.0f;
 
-    private bool canPlace = true;
 
     private bool fightingStage = false;
-
-    bool playMode = false;
 
     float timeBetweenBothPlayersJoiningAndInputsStarting = 0.2f;
 
@@ -76,29 +84,74 @@ public class playerScript : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI currentAmmoText;
 
-
+    private AudioSource playerThrowSound;
 
     //angles for clamping controller input
     [SerializeField]
     float MinAngle, MaxAngle;
+
+    [SerializeField]
+    float throwCooldown = 1.5f;
+
+    private bool canThrow = true;
+
+    public void ResetData()
+    {
+        //this should be called by "InGameManagerScript"
+        
+        currentMode = modes.None;
+        RemainingAmmo = totalAmmo;
+        SelectedIndex = 0;
+
+        foreach(GameObject go in selectableObjects)
+        {
+            Destroy(go);
+        }
+        selectableObjects.Clear();
+
+        foreach(GameObject go in blockObjects)
+        {
+            Destroy(go);
+        }
+        blockObjects.Clear();
+
+        selectableObjectsNumber = 0;
+
+        locationOneFree = true;
+        locationTwoFree = true;
+        locationThreeFree = true;
+        hasBeenSelected = false;
+
+        selectedBlockLocation = Vector3.zero;
+        selectedBlockRotation = new Quaternion(0, 0, 0, 0);
+
+        leftStickMoveVector = Vector2.zero;
+        rightStickMoveVector = Vector2.zero;
+
+        FireMarkerMoveVector = Vector3.zero;
+
+        canSwap = true;
+    }
 
     public void OnRoundStart()
     {
         //called by the InGameManagerScript at the start of the round when blocks have been added - should probably do through unity events
 
         SelectedIndex = 0;
-        selectableObjects[0].GetComponent<blockScript>().ShowOutline(true);
+        selectableObjects[0].GetComponent<GenericBlockScript>().ShowOutline(true);
     }
 
     public void setAmmo(int amount)
     {
         totalAmmo = amount;
         RemainingAmmo = totalAmmo;
+        updateAmmoText();
     }
 
     public void resetAmmo()
     {
         RemainingAmmo = totalAmmo;
+        updateAmmoText();
     }
 
     public int getPlayerIndex()
@@ -106,22 +159,27 @@ public class playerScript : MonoBehaviour
         return thisPlayerIndex;
     }
 
-    public void switchMode()
+    public void switchMode(modes newMode)
     {
-        StartCoroutine(SwitchEndOfFrame());
+        StartCoroutine(SwitchEndOfFrame(newMode));
     }
 
-    IEnumerator SwitchEndOfFrame() 
+    IEnumerator SwitchEndOfFrame(modes newMode) 
     {
         yield return new WaitForSeconds(timeBetweenBothPlayersJoiningAndInputsStarting);
-        playMode = !playMode;
+        currentMode = newMode;
     }
 
     public void despawnProjectile(GameObject projectile)
     {
-        projectile.SetActive(false);
-        projectile.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        projectList.Add(projectile);
+        if (projectile != null)
+        {
+            projectile.SetActive(false);
+            projectile.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            projectList.Add(projectile);
+            // thrownProjectiles.Remove(projectile);
+        }
+
     }
 
     public void AddBlockToList(GameObject blockToAdd)
@@ -163,50 +221,64 @@ public class playerScript : MonoBehaviour
 
     public void clearAndDeleteBlockList()
     {
+        if (hasBeenSelected)
+        {
+            selectableObjects[SelectedIndex].transform.position = selectedBlockLocation;
+            selectableObjects[SelectedIndex].transform.rotation = selectedBlockRotation;
+
+            hasBeenSelected = false;
+        }
+
         foreach (GameObject go in selectableObjects)
             Destroy(go);
 
         selectableObjects.Clear();
-
         locationOneFree = true;
         locationTwoFree = true;
         locationThreeFree = true;
     }
 
+    private void ProjInHandVisible(bool show)
+    {
+        projInHand.enabled = show;
+    }
+
     public void A()
     {
-        
         if (!(selectableObjects.Count > 0))
             return;
 
-        if (!playMode)
-            return;
-
-        if (!hasBeenSelected)
+        if(currentMode == modes.UI)
         {
-            hasBeenSelected = true;
-            selectedBlockLocation = selectableObjects[SelectedIndex].transform.position;
-            selectedBlockRotation = selectableObjects[SelectedIndex].transform.rotation;
+
         }
-        else if (canPlace)
+        else if (currentMode == modes.Play)
         {
-
-            //remvoe the selected object from the list - it has been placed
-            selectableObjects[SelectedIndex].GetComponent<blockScript>().ShowOutline(false);
-            selectableObjects[SelectedIndex].GetComponent<blockScript>().placed();
-
-            selectableObjects.RemoveAt(SelectedIndex);
-
-            SelectedIndex = 0;
-
-            if (selectableObjects.Count != 0)
+            if (!hasBeenSelected)
             {
-                selectableObjects[SelectedIndex].GetComponent<blockScript>().ShowOutline(true);
+                hasBeenSelected = true;
+                selectedBlockLocation = selectableObjects[SelectedIndex].transform.position;
+                selectedBlockRotation = selectableObjects[SelectedIndex].transform.rotation;
+                selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().CurrentlyPlacing(true);
             }
+            else if (selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().CanPlaceBlock())
+            {
+                //remvoe the selected object from the list - it has been placed
+                selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().ShowOutline(false);
+                selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().Placed();
 
-            hasBeenSelected = false;
+                selectableObjects.RemoveAt(SelectedIndex);
+
+                SelectedIndex = 0;
+
+                if (selectableObjects.Count != 0)
+                {
+                    selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().ShowOutline(true);
+                }
+
+                hasBeenSelected = false;
+            }
         }
-        
     }
 
     public void B()
@@ -214,15 +286,20 @@ public class playerScript : MonoBehaviour
         if (!(selectableObjects.Count > 0))
             return;
 
-        if (!playMode)
-            return;
-
-        if (hasBeenSelected)
+        if (currentMode == modes.UI)
         {
-            selectableObjects[SelectedIndex].transform.position = selectedBlockLocation;
-            selectableObjects[SelectedIndex].transform.rotation = selectedBlockRotation;
 
-            hasBeenSelected = false;
+        }
+        else if (currentMode == modes.Play)
+        {
+            if (hasBeenSelected)
+            {
+                selectableObjects[SelectedIndex].transform.position = selectedBlockLocation;
+                selectableObjects[SelectedIndex].transform.rotation = selectedBlockRotation;
+                selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().CurrentlyPlacing(false);
+
+                hasBeenSelected = false;
+            }
         }
     }
 
@@ -234,10 +311,14 @@ public class playerScript : MonoBehaviour
         if (!(selectableObjects.Count > 0))
             return;
 
-        if (!playMode)
-            return;
+        if (currentMode == modes.UI)
+        {
 
-        selectableObjects[SelectedIndex].transform.Rotate(new Vector3(0, 0, 90));
+        }
+        else if (currentMode == modes.Play)
+        {
+            selectableObjects[SelectedIndex].transform.Rotate(new Vector3(0, 0, -selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().GetRotationAmount()));
+        }
     }
 
     public void LB()
@@ -248,10 +329,14 @@ public class playerScript : MonoBehaviour
         if (!(selectableObjects.Count > 0))
             return;
 
-        if (!playMode)
-            return;
+        if (currentMode == modes.UI)
+        {
 
-        selectableObjects[SelectedIndex].transform.Rotate(new Vector3(0, 0, 90));
+        }
+        else if (currentMode == modes.Play)
+        {
+            selectableObjects[SelectedIndex].transform.Rotate(new Vector3(0, 0, selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().GetRotationAmount()));
+        }
     }
 
     public void fakeLS(Vector2 value)
@@ -263,6 +348,11 @@ public class playerScript : MonoBehaviour
     public void LS(InputValue value)
     {
         leftStickMoveVector = value.Get<Vector2>();
+    }
+
+    public void fakeRS(Vector2 value)
+    {
+        rightStickMoveVector = value;
     }
 
     public void RS(InputValue value)
@@ -279,24 +369,50 @@ public class playerScript : MonoBehaviour
         if (projectList.Count <= 0 || RemainingAmmo <= 0)
             return; //projects are empty - do nothing
 
-        if (!playMode)
-            return;
+        if (currentMode == modes.UI)
+        {
 
-        GameObject proj = projectList[0];
-        proj.transform.position = fireMarker.transform.GetChild(0).transform.position;
-        proj.SetActive(true);
+        }
+        else if (currentMode == modes.Play)
+        {
+            if (canThrow)
+            {
+                GameObject proj = projectList[0];
+                proj.transform.position = fireMarker.transform.GetChild(0).transform.position;
+                proj.SetActive(true);
+                thrownProjectiles.Add(proj);
 
-        anim.SetTrigger("Throw");   
+                ProjInHandVisible(false);
 
-        Vector3 rotation = fireMarker.transform.GetChild(0).transform.position - fireMarker.transform.position;
+                anim.SetTrigger("Throw");
+                playerThrowSound.Play();
 
-        proj.GetComponent<Rigidbody2D>().velocity = new Vector2(rotation.x, rotation.y).normalized * throwForce;
-        projectList.Remove(proj);
+                Vector3 rotation = fireMarker.transform.GetChild(0).transform.position - fireMarker.transform.position;
 
-        RemainingAmmo--;
-        updateAmmoText();
-        
+                proj.GetComponent<Rigidbody2D>().velocity = new Vector2(rotation.x, rotation.y).normalized * throwForce;
+                projectList.Remove(proj);
+
+                RemainingAmmo--;
+                updateAmmoText();
+
+                StartCoroutine(ThrowCooldown());
+            
+
+
+            }
+        }
     }
+    private IEnumerator ThrowCooldown()
+    {
+        canThrow = false;
+        yield return new WaitForSeconds(throwCooldown);
+        if (RemainingAmmo > 0)
+        {
+            ProjInHandVisible(true);
+        }
+        canThrow = true;
+    }
+
 
     public void CanFight(bool canFight)
     {
@@ -315,96 +431,102 @@ public class playerScript : MonoBehaviour
         canSwap = true;
     }
 
+    
+
     void handleLeftStick()
     {
         if (!(selectableObjects.Count > 0))
             return;
 
-        if (!playMode)
-            return;
-
-        //this could probably be done better, but oh well it works :)
-        if (!hasBeenSelected)
+        if (currentMode == modes.UI)
         {
-            if (canSwap)
+
+        }
+        else if (currentMode == modes.Play)
+        {
+            //this could probably be done better, but oh well it works :)
+            if (!hasBeenSelected)
             {
-                if (leftStickMoveVector.y != 0 && leftStickMoveVector.y > 0)
+                if (canSwap)
                 {
-                    blockScript bs = selectableObjects[SelectedIndex].GetComponent<blockScript>();
-                    bs.ShowOutline(false);
-                    bs.Deselected();
-
-                    //selectableObjects[SelectedIndex].GetComponent<SpriteRenderer>().color = previousCol; //resets the color
-
-                    SelectedIndex--;
-
-                    if (SelectedIndex < 0)
+                    if (leftStickMoveVector.y != 0 && leftStickMoveVector.y > 0)
                     {
-                        SelectedIndex = selectableObjects.Count-1;
+                        GenericBlockScript bs = selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>();
+                        bs.ShowOutline(false);
+                        bs.Deselected();
+
+                        //selectableObjects[SelectedIndex].GetComponent<SpriteRenderer>().color = previousCol; //resets the color
+
+                        SelectedIndex--;
+
+                        if (SelectedIndex < 0)
+                        {
+                            SelectedIndex = selectableObjects.Count - 1;
+                        }
+
+                        bs = selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>();
+                        bs.ShowOutline(true);
+                        bs.Selected();
+
+                        canSwap = false;
+
+                        StartCoroutine(waitToSwap());
                     }
-
-                    bs =selectableObjects[SelectedIndex].GetComponent<blockScript>();
-                    bs.ShowOutline(true);
-                    bs.Selected();
-
-                    canSwap = false;
-
-                    StartCoroutine(waitToSwap());
-                }
-                else if (leftStickMoveVector.y != 0 && leftStickMoveVector.y < 0)
-                {
-                    blockScript bs =selectableObjects[SelectedIndex].GetComponent<blockScript>();
-                    bs.ShowOutline(false);
-                    bs.Deselected();
-
-                  //  selectableObjects[SelectedIndex].GetComponent<SpriteRenderer>().color = previousCol; //resets the color
-
-                    SelectedIndex++;
-
-                    if (SelectedIndex >= selectableObjects.Count)
+                    else if (leftStickMoveVector.y != 0 && leftStickMoveVector.y < 0)
                     {
-                        SelectedIndex = 0;
+                        GenericBlockScript bs = selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>();
+                        bs.ShowOutline(false);
+                        bs.Deselected();
+
+                        //  selectableObjects[SelectedIndex].GetComponent<SpriteRenderer>().color = previousCol; //resets the color
+
+                        SelectedIndex++;
+
+                        if (SelectedIndex >= selectableObjects.Count)
+                        {
+                            SelectedIndex = 0;
+                        }
+
+                        bs = selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>();
+                        bs.ShowOutline(true);
+                        bs.Selected();
+
+
+                        canSwap = false;
+
+                        StartCoroutine(waitToSwap());
                     }
-
-                    bs = selectableObjects[SelectedIndex].GetComponent<blockScript>();
-                    bs.ShowOutline(true);
-                    bs.Selected();
-
-
-                    canSwap = false;
-
-                    StartCoroutine(waitToSwap());
                 }
             }
-        }
-        else
-        {
-            selectableObjects[SelectedIndex].transform.position += (new Vector3(leftStickSensitivity*leftStickMoveVector.x, leftStickSensitivity*leftStickMoveVector.y, 0))*Time.deltaTime;
+            else
+            {
+                selectableObjects[SelectedIndex].transform.position += (new Vector3(leftStickSensitivity * leftStickMoveVector.x, leftStickSensitivity * leftStickMoveVector.y, 0)) * Time.deltaTime;
+            }
         }
     }
 
     void handleRightStick()
     {
-        if (!playMode)
-            return;
-        
-        
-        FireMarkerMoveVector = (Vector3.up*rightStickMoveVector.x + Vector3.left*rightStickMoveVector.y);
-
-        Quaternion rot = quaternion.LookRotation(Vector3.forward, FireMarkerMoveVector);
-
-        var zAsDeg = rot.z * Mathf.Rad2Deg;
-
-        if (rightStickMoveVector.x != 0 || rightStickMoveVector.y != 0)
+        if (currentMode == modes.UI)
         {
-            Debug.Log(zAsDeg);
-            if ((zAsDeg >= MinAngle) && (zAsDeg <= MaxAngle))
-            {
-                //clammping
 
-                fireMarker.transform.rotation = rot;
+        }
+        else if (currentMode == modes.Play)
+        {
+            if (rightStickMoveVector.x != 0 || rightStickMoveVector.y != 0)
+            {
+                FireMarkerMoveVector = (Vector3.up * rightStickMoveVector.x + Vector3.left * rightStickMoveVector.y);
+
+                Quaternion rot = quaternion.LookRotation(Vector3.forward, FireMarkerMoveVector);
+
+                var temp = Mathf.Atan2(FireMarkerMoveVector.y - 0, FireMarkerMoveVector.x - 0);
+
+                if ((temp >= MinAngle*Mathf.Deg2Rad) && (temp <= MaxAngle * Mathf.Deg2Rad))
+                {
+                    //clammping
+                    fireMarker.transform.rotation = rot;
+                }
             }
-            
         }
     }
 
@@ -412,11 +534,6 @@ public class playerScript : MonoBehaviour
     {
         blockObjects.Add(obj);
         AddBlockToList(obj);
-
-    }
-    public void CanPlaceBlock(bool canPlaceBlock)
-    {
-        canPlace = canPlaceBlock;
     }
 
     void Start()
@@ -430,7 +547,7 @@ public class playerScript : MonoBehaviour
         //AddBlockToList(tempObject1);
         // AddBlockToList(tempObject2);
         // AddBlockToList(tempObject3);
-
+        playerThrowSound = GetComponent<AudioSource>();
         RemainingAmmo = totalAmmo;
 
         updateAmmoText();

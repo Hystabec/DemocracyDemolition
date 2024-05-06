@@ -31,7 +31,6 @@ public class InGameManagerScript : MonoBehaviour
     /// when not selected block should have its outline hidden, when selected enable outline
     /// </summary>
 
-
     int numNeededPlayers = 2;
     int numJoinedPlayers = 0;
 
@@ -56,13 +55,35 @@ public class InGameManagerScript : MonoBehaviour
     [SerializeField]
     Timer timerScript;
 
-    public Animator redAnim;
-    public Animator blueAnim;
-    public Animator camAnim;
+    [SerializeField]
+    TextMeshProUGUI roundText;
+
+    [SerializeField]
+    TextMeshProUGUI roundTypeText;
+
+    [SerializeField]
+    Animator redAnim, blueAnim, camAnim, progressBarAnim, rematchAnim, menuButtonAnim;
+
+    [SerializeField]
+    Animator[] redAnimArray, blueAnimArray;
+
+    [SerializeField]
+    GameObject[] elementToHideWhenGameEnds, EndUIButtons;
+    
+
+    [SerializeField]
+    float endButtonOffset = 266.0f;
 
     public Image redProgressBar;
     public Image blueProgressBar;
 
+    [SerializeField]
+    AudioSource roundVictorySound;
+
+    [SerializeField]
+    AudioClip crowdCheer, playerHit;
+
+    bool gameHasEnded = false;
 
     // Start is called before the first frame update
     void Awake()
@@ -84,11 +105,67 @@ public class InGameManagerScript : MonoBehaviour
         if(numJoinedPlayers >= numNeededPlayers)
             startRound();
     }
-
     public void bothPlayersJoined()
     {
         startRound();
     }
+
+    public void CallResetGame()
+    {
+        StartCoroutine(ResetGame());
+    }
+
+    public IEnumerator ResetGame()
+    {
+        camAnim.SetTrigger("ReturnCamera");
+
+        player1.GetComponent<playerScript>().ResetData();
+        player2.GetComponent<playerScript>().ResetData();
+
+        currentRound = 1;
+        p1Score = 0;
+        p2Score = 0;
+        gameHasEnded = false;
+
+        foreach(GameObject go in elementToHideWhenGameEnds)
+        {
+            go.SetActive(true);
+        }
+        
+        foreach(GameObject go in EndUIButtons)
+        {
+            go.SetActive(false);
+        }
+
+        foreach(Animator ani in redAnimArray)
+        {
+            ani.SetTrigger("Idle");
+        }
+        
+        foreach (Animator ani in blueAnimArray)
+        {
+            ani.SetTrigger("Idle");
+        }
+        rematchAnim.SetTrigger("RematchFadeOut");
+        menuButtonAnim.SetTrigger("MenuButtonFadeOut");
+        redProgressBar.fillAmount = 0;
+        blueProgressBar.fillAmount = 0;
+
+        player1.GetComponent<Animator>().SetBool("ResetGame", true);
+        player2.GetComponent<Animator>().SetBool("ResetGame", true);
+
+        timerScript.timerReset();
+
+        player1.GetComponent<playerScript>().switchMode(modes.Play);
+        player2.GetComponent<playerScript>().switchMode(modes.Play);
+
+
+        yield return new WaitForSeconds(4f);
+        startRound();
+
+    }
+
+
 
     public void playerKilled(GameObject callingPlayer)
     {
@@ -97,41 +174,76 @@ public class InGameManagerScript : MonoBehaviour
         {
             p2Score++;
             blueAnim.SetTrigger("RoundWin");
+
+            foreach (Animator ani in blueAnimArray)
+            {
+                ani.SetTrigger("RoundWin");
+            }
+
             redAnim.SetTrigger("Hit");
+            progressBarAnim.SetTrigger("BlueRoundWin");
             blueProgressBar.fillAmount = blueProgressBar.fillAmount + 0.25f;
         }
-
         else
         {
             p1Score++;
             redAnim.SetTrigger("RoundWin");
+
+            foreach (Animator ani in redAnimArray)
+            {
+                ani.SetTrigger("RoundWin");
+            }
+
             blueAnim.SetTrigger("Hit");
+            progressBarAnim.SetTrigger("RedRoundWin");
             redProgressBar.fillAmount = redProgressBar.fillAmount + 0.25f;
         }
-            
-  
 
+        var p1Script = player1.GetComponent<playerScript>();
+
+        if (p1Script.thrownProjectiles.Count > 0)
+        {
+            List<GameObject> thrownProjectiles = p1Script.thrownProjectiles;
+
+            foreach (GameObject pooledProj in thrownProjectiles)
+            {
+                p1Script.despawnProjectile(pooledProj.gameObject);
+            }
+
+        }
+
+        var p2Script = player2.GetComponent<playerScript>();
+
+        if (p2Script.thrownProjectiles.Count > 0)
+        {
+            List<GameObject> thrownProjectiles2 = p2Script.thrownProjectiles;
+            foreach (GameObject pooledProj in thrownProjectiles2)
+            {
+                p2Script.despawnProjectile(pooledProj.gameObject);
+            }
+
+        }
+
+
+        roundVictorySound.PlayOneShot(crowdCheer);
+        roundVictorySound.PlayOneShot(playerHit);
 
         if (p1Score >= roundsNeededToWin)
         {
-            redAnim.SetTrigger("GameWin");
-            camAnim.SetTrigger("GameWinRed");
             EndGame(player1);
-        }
-            
+            gameHasEnded = true;
+        } 
         else if(p2Score >= roundsNeededToWin)
         {
-            blueAnim.SetTrigger("GameWin");
-            camAnim.SetTrigger("GameWinBlue");
             EndGame(player2);
-        }
-            
+            gameHasEnded = true;
+        }  
 
         StopCoroutine("RoundTime");
 
         endRound();
+       
     }
-
 
     BAT blockTrapSplit(int total, int maxBlock, int maxTrap)
     {
@@ -143,7 +255,6 @@ public class InGameManagerScript : MonoBehaviour
 
         return new BAT(returnBlock, returnTrap);
     }
-
     void startRound()
     {
         BAT p1returnBat = new();
@@ -202,11 +313,19 @@ public class InGameManagerScript : MonoBehaviour
             rbs.spawnTrapIn(player2, p2returnBat.numTraps);
         }
 
+        StartCoroutine(RoundText());
+
         player1.GetComponent<playerScript>().OnRoundStart();
         player2.GetComponent<playerScript>().OnRoundStart();
 
-       StartCoroutine(TimeBeforeFighting());
-       timerScript.StartTime();
+        player1.GetComponent<playerScript>().thrownProjectiles.Clear();
+        player2.GetComponent<playerScript>().thrownProjectiles.Clear();
+
+        StartCoroutine(TimeBeforeFighting());
+
+        timerScript.StartTime();
+
+
     }
 
     void endRound()
@@ -215,43 +334,141 @@ public class InGameManagerScript : MonoBehaviour
         ps.clearAndDeleteBlockList();
         ps.resetAmmo();
 
+
         ps = player2.GetComponent<playerScript>();
         ps.clearAndDeleteBlockList();
         ps.resetAmmo();
 
 
-        currentRound++;
-
-        //add a wait time between rounds
         timerScript.StopTimer();
-        timerScript.timerReset();
 
-        startRound();
+        if (!gameHasEnded)
+        {
+            currentRound++;
+
+            //add a wait time between rounds
+            
+            timerScript.timerReset();
+
+            startRound();
+        }
     }
 
     void EndGame(GameObject winningPlayer)
     {
         //DEBUG - ends playmode when winner is found
-        Debug.Log(winningPlayer.name + " wins");
-        //UnityEditor.EditorApplication.isPlaying = false;
+        //Debug.Log(winningPlayer.name + " wins");
+
+        //when game ends player go to UI mode
+        player1.GetComponent<playerScript>().switchMode(modes.UI);
+        player2.GetComponent<playerScript>().switchMode(modes.UI);
+
+        int winner = -1;
+
+        foreach(GameObject go in elementToHideWhenGameEnds) 
+        {
+            go.SetActive(false);
+        }
+
+        if (winningPlayer == player1)
+        {
+            redAnim.SetTrigger("GameWin");
+            
+            foreach (Animator ani in redAnimArray)
+            {
+                ani.SetTrigger("GameWin");
+            }
+
+            winner = 1;
+            camAnim.SetTrigger("GameWinRed");
+        }
+        else if(winningPlayer == player2) 
+        {
+            blueAnim.SetTrigger("GameWin");
+
+            foreach(Animator ani in blueAnimArray)
+            {
+                ani.SetTrigger("GameWin");
+                
+            }
+            winner = 2;
+            camAnim.SetTrigger("GameWinBlue");
+        }
+        else 
+        {
+            //catch all - if you got here something is VERY wrong
+            Debug.Log("No winner, when endgame called");
+        }
+
+        
+        StartCoroutine(waitForEndCamPan(winner));
     }
+
+    IEnumerator waitForEndCamPan(int winner)
+    {
+        float finalOffset = 0;
+
+        if (winner == 1)
+        {
+            finalOffset = endButtonOffset;
+        }
+        else if(winner == 2)
+        {
+            finalOffset = -endButtonOffset;
+        }
+
+        //yield return new WaitUntil(() => camAnim.GetCurrentAnimatorStateInfo(0).IsName(triggerName));
+        //yield return new WaitForSeconds(camAnim.GetCurrentAnimatorClipInfo(0).Length);
+
+        //had to hard code the anim length - no ideal didnt work with the other ways i tried
+        yield return new WaitForSeconds(4.2f);
+
+        //showButtons
+        foreach(GameObject go in EndUIButtons)
+        {
+            go.SetActive(true);
+            go.transform.localPosition = new Vector3(finalOffset, go.transform.localPosition.y, go.transform.localPosition.z);
+            rematchAnim.SetTrigger("RematchFadeIn");
+            menuButtonAnim.SetTrigger("MenuButtonFadeIn");
+        }
+
+    }
+
+    private IEnumerator RoundText()
+    {
+        roundText.alpha = 1;
+        roundText.SetText("Round " + currentRound.ToString());
+        yield return new WaitForSeconds(5.25f);
+        roundText.alpha = 0;
+    }
+    private IEnumerator RoundTypeText(string text)
+    {
+        roundTypeText.alpha = 1;
+        roundTypeText.SetText(text);
+        yield return new WaitForSeconds(2f);
+      //  roundTypeText.alpha = 0;
+    }
+
+
 
     private IEnumerator TimeBeforeFighting()
     {
+        StartCoroutine(RoundTypeText("Build!"));
         player1.GetComponent<playerScript>().CanFight(false);
         player2.GetComponent<playerScript>().CanFight(false);
         yield return new WaitForSecondsRealtime(timeBeforeFighting);
-        Debug.Log("Start fighting");
+
         player1.GetComponent<playerScript>().CanFight(true);
         player2.GetComponent<playerScript>().CanFight(true);
+        StartCoroutine(RoundTypeText("Fight!"));
+
         StartCoroutine("RoundTime");
     }
-
 
     private IEnumerator RoundTime()
     {
         yield return new WaitForSecondsRealtime(roundTime);
-        Debug.Log("Rounded ended by timer");
+        //Debug.Log("Rounded ended by timer");
         endRound();
     }
 }

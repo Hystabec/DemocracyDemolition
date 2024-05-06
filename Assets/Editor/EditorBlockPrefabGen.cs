@@ -62,7 +62,7 @@ public class EditorBlockPrefabGen : EditorWindow
         oSprite = null;
     }
 
-    [MenuItem("Assets/Generate Block Prefab/Menu")]
+    [MenuItem("Assets/Generate Block Prefab/Menu"), MenuItem("Tools/Generate Block Prefab Menu")]
     private static void GenerateBlockPrefabMenu()
     {
         //checks if a sprite is selected an adds it sprite to the menu if so

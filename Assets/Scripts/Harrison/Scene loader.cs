@@ -6,11 +6,16 @@ public class Sceneloader : MonoBehaviour
 {
     public void PlayGame()
     {
-        SceneManager.LoadScene("Proto Drag Drop");
+        Debug.Log("play");
+        SceneManager.LoadScene("protoDragDrop");
     }
     public void QuitGame()
     {
-        Debug.Log("Exit");
+        Debug.Log("Quit");
         Application.Quit();
+    }
+    public void Menu()
+    {
+        SceneManager.LoadScene("Harrison 2");
     }
 }

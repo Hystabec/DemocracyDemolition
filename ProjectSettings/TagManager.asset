@@ -18,10 +18,10 @@ TagManager:
   - Block
   - Map
   - Player
-  - 
-  - 
-  - 
-  - 
+  - Trap
+  - Particles
+  - UnplacedBlock
+  - UnplacedTrap
   - 
   - 
   - 
@@ -43,4 +43,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2860990463
+    locked: 0
+  - name: Foreground
+    uniqueID: 1423235079
+    locked: 0
+  - name: Super Foreground
+    uniqueID: 1756578479
     locked: 0

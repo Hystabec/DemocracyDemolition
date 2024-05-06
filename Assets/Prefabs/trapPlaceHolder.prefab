@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6438537052682893201}
   - component: {fileID: 7168277657318019588}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,8 +96,9 @@ GameObject:
   - component: {fileID: 7682758290575299226}
   - component: {fileID: 7678696572877670826}
   - component: {fileID: 3525508853443954654}
+  - component: {fileID: 358732629288088837}
   - component: {fileID: 5739684249007014494}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: trapPlaceHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,9 +159,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1756578479
+  m_SortingLayer: 3
+  m_SortingOrder: 10
   m_Sprite: {fileID: 1158391615, guid: 57fa2719f859f4643afdf80ef3a16e5c, type: 3}
   m_Color: {r: 1, g: 0, b: 0.36963177, a: 1}
   m_FlipX: 0
@@ -211,10 +212,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd4d6c8020f321743b24e10eef8a4cec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cantPlaceColor: {r: 255, g: 0, b: 0, a: 1}
+  type: 0
   TotalBlockHealth: 3
-  breakable: 1
-  outline: {fileID: 3916387547860450745}
+  breakable: 0
+  hitEffect: {fileID: 0}
+  blockHitSound: {fileID: 0}
+  aSource: {fileID: 0}
+--- !u!114 &358732629288088837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4203143742992145556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9038b75acd0f34a4fa9a8e3df8d202de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RotationAmount: 90
+  colliders: []
+  cantPlaceColor: {r: 255, g: 0, b: 0, a: 1}
+  outline: {fileID: 0}
+  onCollisionEnterFunc:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3525508853443954654}
+        m_TargetAssemblyTypeName: blockScript, Assembly-CSharp
+        m_MethodName: CustomOnCollisionEnter2D
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onCollisionExitFunc:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerEnterFunc:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerExitFunc:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!60 &5739684249007014494
 PolygonCollider2D:
   m_ObjectHideFlags: 0
