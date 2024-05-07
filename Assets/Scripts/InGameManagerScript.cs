@@ -62,7 +62,7 @@ public class InGameManagerScript : MonoBehaviour
     TextMeshProUGUI roundTypeText;
 
     [SerializeField]
-    Animator redAnim, blueAnim, camAnim, progressBarAnim, rematchAnim, menuButtonAnim, fightAnim, buildAnim;
+    Animator redAnim, blueAnim, camAnim, progressBarAnim, rematchAnim, menuButtonAnim, fightAnim, buildAnim, roundTextAnim, roundTypeAnim;
 
     [SerializeField]
     Animator[] redAnimArray, blueAnimArray;
@@ -444,6 +444,7 @@ public class InGameManagerScript : MonoBehaviour
     {
         roundText.alpha = 1;
         roundText.SetText("Round " + currentRound.ToString());
+        roundTextAnim.SetTrigger("RoundBegin");
         yield return new WaitForSeconds(5.25f);
         roundText.alpha = 0;
     }
@@ -460,6 +461,7 @@ public class InGameManagerScript : MonoBehaviour
     private IEnumerator TimeBeforeFighting()
     {
         StartCoroutine(RoundTypeText("Build!"));
+        roundTypeAnim.SetTrigger("BuildBegin");
         buildIcons.SetActive(true);
         fightIcons.SetActive(false);
         buildAnim.SetTrigger("Build");
@@ -470,6 +472,7 @@ public class InGameManagerScript : MonoBehaviour
         player1.GetComponent<playerScript>().CanFight(true);
         player2.GetComponent<playerScript>().CanFight(true);
         StartCoroutine(RoundTypeText("Fight!"));
+        roundTypeAnim.SetTrigger("FightBegin");
         fightIcons.SetActive(true);
         buildIcons.SetActive(false);
         fightAnim.SetTrigger("Fight");
