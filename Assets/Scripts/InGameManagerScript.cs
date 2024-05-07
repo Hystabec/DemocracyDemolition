@@ -62,7 +62,7 @@ public class InGameManagerScript : MonoBehaviour
     TextMeshProUGUI roundTypeText;
 
     [SerializeField]
-    Animator redAnim, blueAnim, camAnim, progressBarAnim, rematchAnim, menuButtonAnim;
+    Animator redAnim, blueAnim, camAnim, progressBarAnim, rematchAnim, menuButtonAnim, fightAnim, buildAnim;
 
     [SerializeField]
     Animator[] redAnimArray, blueAnimArray;
@@ -462,6 +462,7 @@ public class InGameManagerScript : MonoBehaviour
         StartCoroutine(RoundTypeText("Build!"));
         buildIcons.SetActive(true);
         fightIcons.SetActive(false);
+        buildAnim.SetTrigger("Build");
         player1.GetComponent<playerScript>().CanFight(false);
         player2.GetComponent<playerScript>().CanFight(false);
         yield return new WaitForSecondsRealtime(timeBeforeFighting);
@@ -471,6 +472,7 @@ public class InGameManagerScript : MonoBehaviour
         StartCoroutine(RoundTypeText("Fight!"));
         fightIcons.SetActive(true);
         buildIcons.SetActive(false);
+        fightAnim.SetTrigger("Fight");
 
         StartCoroutine("RoundTime");
     }
