@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 1688247569, guid: 6bfdbd29e67d57f4684cf8cc47764b8b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.13725491, g: 1, b: 0.20784314, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -365,10 +365,16 @@ MonoBehaviour:
   onCollisionExitFunc:
     m_PersistentCalls:
       m_Calls: []
+  onCollisionStayFunc:
+    m_PersistentCalls:
+      m_Calls: []
   onTriggerEnterFunc:
     m_PersistentCalls:
       m_Calls: []
   onTriggerExitFunc:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerStayFunc:
     m_PersistentCalls:
       m_Calls: []
 --- !u!50 &8777198692702805276

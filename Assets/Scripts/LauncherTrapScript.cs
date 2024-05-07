@@ -21,6 +21,9 @@ public class LauncherTrapScript : MonoBehaviour
     [SerializeField]
     Animator launcherAnim;
 
+    [SerializeField]
+    ParticleSystem smokeEffect;
+
     private void Awake()
     {
         firePosition = gameObject.transform.Find("firePosition").gameObject;
@@ -56,6 +59,7 @@ public class LauncherTrapScript : MonoBehaviour
             canFire = false;
 
             launcherAnim.SetTrigger("Launch");
+            smokeEffect.Play();
         }
     }
 
