@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 58c12327e4178ba49b52ea4465100eda
+guid: 407d7f0a2f5ba9445a86435604cbb3dc
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SelectionMenus_0
+      name: SelectionMenus 1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 340
-        height: 847
+        width: 317
+        height: 789
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,20 +111,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d56b5205dc0d14b4689b3104499f0b91
-      internalID: 1370340078
+      spriteID: 00aad4165436b4c478336355a7a93979
+      internalID: 1364706484
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SelectionMenus_1
+      name: SelectionMenus 1_1
       rect:
         serializedVersion: 2
-        x: 400
+        x: 372
         y: 0
-        width: 340
-        height: 847
+        width: 317
+        height: 789
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,8 +132,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b40d25db0661b1440b04c17616e885f1
-      internalID: -1415068458
+      spriteID: ff1ebfdf329b35a469958b4487d4ccc6
+      internalID: -731295050
       vertices: []
       indices: 
       edges: []
@@ -149,8 +149,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      SelectionMenus_0: 1370340078
-      SelectionMenus_1: -1415068458
+      SelectionMenus 1_0: 1364706484
+      SelectionMenus 1_1: -731295050
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
