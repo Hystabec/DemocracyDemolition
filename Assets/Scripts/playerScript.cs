@@ -98,6 +98,11 @@ public class playerScript : MonoBehaviour
     [SerializeField]
     private GameObject cantThrowIcon;
 
+    [SerializeField]
+    private UnityEngine.UI.Image cooldownbar;
+
+    private bool onCooldown;
+
     public void ResetData()
     {
         //this should be called by "InGameManagerScript"
@@ -407,6 +412,7 @@ public class playerScript : MonoBehaviour
     }
     private IEnumerator ThrowCooldown()
     {
+        onCooldown = true;
         canThrow = false;
         cantThrowIcon.SetActive(true);
         yield return new WaitForSeconds(throwCooldown);
@@ -416,7 +422,26 @@ public class playerScript : MonoBehaviour
         }
         canThrow = true;
         cantThrowIcon.SetActive(false);
+        onCooldown = false;
 
+    }
+
+    void CooldownBar() 
+    {
+        if (onCooldown) 
+        {
+            cooldownbar.fillAmount = Mathf.Lerp(cooldownbar.fillAmount, 1, throwCooldown * Time.deltaTime);
+        }
+
+        if(!onCooldown)
+        {
+            if(cooldownbar.fillAmount > 0) 
+            {
+
+                cooldownbar.fillAmount = 0;
+            }
+
+        }
     }
 
 
@@ -575,6 +600,7 @@ public class playerScript : MonoBehaviour
     {
         handleLeftStick();
         handleRightStick();
+        CooldownBar();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
