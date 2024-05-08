@@ -62,14 +62,15 @@ public class InGameManagerScript : MonoBehaviour
     TextMeshProUGUI roundTypeText;
 
     [SerializeField]
-    Animator redAnim, blueAnim, camAnim, progressBarAnim, rematchAnim, menuButtonAnim, fightAnim, buildAnim, roundTextAnim, roundTypeAnim;
+    Animator redAnim, blueAnim, camAnim, progressBarAnim, rematchAnim, menuButtonAnim, fightAnim, buildAnim, roundTextAnim, roundTypeAnim, timerAnim;
 
     [SerializeField]
     Animator[] redAnimArray, blueAnimArray;
 
     [SerializeField]
     GameObject[] elementToHideWhenGameEnds, EndUIButtons;
-    
+
+
 
     [SerializeField]
     float endButtonOffset = 266.0f;
@@ -331,6 +332,8 @@ public class InGameManagerScript : MonoBehaviour
 
         timerScript.StartTime();
 
+        timerScript.animTriggered = false;
+
 
     }
 
@@ -465,6 +468,7 @@ public class InGameManagerScript : MonoBehaviour
         buildIcons.SetActive(true);
         fightIcons.SetActive(false);
         buildAnim.SetTrigger("Build");
+        timerAnim.SetTrigger("Pop");
         player1.GetComponent<playerScript>().CanFight(false);
         player2.GetComponent<playerScript>().CanFight(false);
         yield return new WaitForSecondsRealtime(timeBeforeFighting);
@@ -473,6 +477,7 @@ public class InGameManagerScript : MonoBehaviour
         player2.GetComponent<playerScript>().CanFight(true);
         StartCoroutine(RoundTypeText("Fight!"));
         roundTypeAnim.SetTrigger("FightBegin");
+        timerAnim.SetTrigger("Pop");
         fightIcons.SetActive(true);
         buildIcons.SetActive(false);
         fightAnim.SetTrigger("Fight");

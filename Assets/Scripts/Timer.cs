@@ -12,9 +12,13 @@ public class Timer : MonoBehaviour
     float currentTime = 26f;
 
     bool timerRunning = false;
+    public bool animTriggered = false;
 
     [SerializeField]
     TextMeshProUGUI timerText;
+
+    [SerializeField]
+    Animator timeText;
 
     public void timerReset()
     {
@@ -47,6 +51,15 @@ public class Timer : MonoBehaviour
             currentTime -= Time.deltaTime;
         }
         UpdateTimerText();
+
+        if (currentTime <= 6f)
+        {
+            if (animTriggered == false)
+            {
+                timeText.SetTrigger("RunningOut");
+                animTriggered = true;
+            }
+        }
     }
 
     void UpdateTimerText()
