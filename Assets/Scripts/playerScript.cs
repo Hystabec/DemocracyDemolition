@@ -108,6 +108,8 @@ public class playerScript : MonoBehaviour
 
     public bool gameEnded;
 
+    float moveTime = 0;
+
     public void ResetData()
     {
         //this should be called by "InGameManagerScript"
@@ -457,7 +459,9 @@ public class playerScript : MonoBehaviour
     {
         if (onCooldown) 
         {
-            cooldownbar.fillAmount = Mathf.Lerp(cooldownbar.fillAmount, 1, throwCooldown * Time.deltaTime);
+            moveTime += Time.deltaTime * 0.1f;
+
+            cooldownbar.fillAmount = Mathf.Lerp(cooldownbar.fillAmount, 1, moveTime);
         }
 
         if(!onCooldown)
@@ -466,6 +470,7 @@ public class playerScript : MonoBehaviour
             {
 
                 cooldownbar.fillAmount = 0;
+                moveTime = 0;
             }
 
         }
