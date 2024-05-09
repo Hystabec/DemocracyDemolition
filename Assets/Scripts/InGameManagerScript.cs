@@ -59,10 +59,10 @@ public class InGameManagerScript : MonoBehaviour
     Timer timerScript;
 
     [SerializeField]
-    TextMeshProUGUI roundText;
+    TextMeshProUGUI roundText, roundTypeText;
 
     [SerializeField]
-    TextMeshProUGUI roundTypeText;
+    TextMeshProUGUI[] playersAmmoText;
 
     [SerializeField]
     Animator redAnim, blueAnim, camAnim, progressBarAnim, rematchAnim, menuButtonAnim, fightAnim, buildAnim, roundTextAnim, roundTypeAnim, timerAnim;
@@ -526,6 +526,12 @@ public class InGameManagerScript : MonoBehaviour
         timerAnim.SetTrigger("Pop");
         player1.GetComponent<playerScript>().CanFight(false);
         player2.GetComponent<playerScript>().CanFight(false);
+        
+        foreach (TextMeshProUGUI text in playersAmmoText)
+        {
+            text.gameObject.SetActive(false);
+        }
+
         yield return new WaitForSecondsRealtime(timeBeforeFighting);
 
         player1.GetComponent<playerScript>().ProjInHandVisible(true);
@@ -539,6 +545,11 @@ public class InGameManagerScript : MonoBehaviour
         fightIcons.SetActive(true);
         buildIcons.SetActive(false);
         fightAnim.SetTrigger("Fight");
+        
+        foreach (TextMeshProUGUI text in playersAmmoText)
+        {
+            text.gameObject.SetActive(true);
+        }
 
         StartCoroutine("RoundTime");
 
