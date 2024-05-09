@@ -64,6 +64,7 @@ public class InGameManagerScript : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI[] playersAmmoText;
 
+    //Feel free to unhide anything, just wanted to tidy up the inspector a bit
     [HideInInspector, SerializeField]
     Animator redAnim, blueAnim, camAnim, progressBarAnim, rematchAnim, menuButtonAnim, fightAnim, buildAnim, roundTextAnim, roundTypeAnim, timerAnim;
 
