@@ -11,6 +11,17 @@ public class screenShake : MonoBehaviour
     [SerializeField]
     Animator camAnim;
 
+    bool complete = false;
+
+    public bool IsComplete()
+    {
+        return complete;
+    }
+
+    public void reset()
+    {
+        complete = false;
+    }
 
     void Update()
     {
@@ -36,6 +47,7 @@ public class screenShake : MonoBehaviour
             yield return null;
         }
 
+        complete = true;
         transform.position = startPosition;
         camAnim.enabled = true;
     }

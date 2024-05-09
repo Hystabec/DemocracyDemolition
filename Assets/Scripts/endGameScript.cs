@@ -18,8 +18,8 @@ public class endGameScript : MonoBehaviour
     public void Retry()
     {
         Debug.Log("Rest game");
-        rematchAnim.SetTrigger("RematchFadeOut");
-        menuButtonAnim.SetTrigger("MenuButtonFadeOut");
+        //rematchAnim.SetTrigger("RematchFadeOut");
+        //menuButtonAnim.SetTrigger("MenuButtonFadeOut");
 
         StartCoroutine(ButtonFadeOut());
         //IGMS.ResetGame();

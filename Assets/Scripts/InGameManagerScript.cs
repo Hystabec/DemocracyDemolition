@@ -134,15 +134,32 @@ public class InGameManagerScript : MonoBehaviour
         p2Score = 0;
         gameHasEnded = false;
 
+        
+
+        rematchAnim.SetTrigger("RematchFadeOut");
+        menuButtonAnim.SetTrigger("MenuButtonFadeOut");
+        redProgressBar.fillAmount = 0;
+        blueProgressBar.fillAmount = 0;
+
+        yield return new WaitForSeconds(4f);
+
+        player1.GetComponent<Animator>().SetBool("ResetGame", true);
+        player2.GetComponent<Animator>().SetBool("ResetGame", true);
+
+        timerScript.timerReset();
+
+        player1.GetComponent<playerScript>().switchMode(modes.Play);
+        player2.GetComponent<playerScript>().switchMode(modes.Play);
+
         foreach(GameObject go in elementToHideWhenGameEnds)
         {
             go.SetActive(true);
         }
         
-        foreach(GameObject go in EndUIButtons)
-        {
-            go.SetActive(false);
-        }
+        //foreach(GameObject go in EndUIButtons)
+        //{
+        //    go.SetActive(false);
+        //}
 
         foreach(Animator ani in redAnimArray)
         {
@@ -153,23 +170,8 @@ public class InGameManagerScript : MonoBehaviour
         {
             ani.SetTrigger("Idle");
         }
-        rematchAnim.SetTrigger("RematchFadeOut");
-        menuButtonAnim.SetTrigger("MenuButtonFadeOut");
-        redProgressBar.fillAmount = 0;
-        blueProgressBar.fillAmount = 0;
 
-        player1.GetComponent<Animator>().SetBool("ResetGame", true);
-        player2.GetComponent<Animator>().SetBool("ResetGame", true);
-
-        timerScript.timerReset();
-
-        player1.GetComponent<playerScript>().switchMode(modes.Play);
-        player2.GetComponent<playerScript>().switchMode(modes.Play);
-
-
-        yield return new WaitForSeconds(4f);
         startRound();
-
     }
 
 
