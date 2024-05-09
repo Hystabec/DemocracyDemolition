@@ -7,6 +7,8 @@ public class TNTScript : MonoBehaviour
     [SerializeField]
     float explosionRadius = 1.0f;
 
+    GameObject radiusOutline;
+
     public void CustomOnCollisionEnter2D(Collision2D other)
     {
         if(other.gameObject.layer == LayerMask.NameToLayer("projectile"))
