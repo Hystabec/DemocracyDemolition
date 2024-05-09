@@ -52203,10 +52203,7 @@ MonoBehaviour:
   redFireworks: {fileID: 344264825}
   blueConfetti: {fileID: 454447933}
   blueFireworks: {fileID: 899616763}
-<<<<<<< Updated upstream
   screenShakeScript: {fileID: 313012575}
-=======
->>>>>>> Stashed changes
 --- !u!114 &1729778780
 MonoBehaviour:
   m_ObjectHideFlags: 0
