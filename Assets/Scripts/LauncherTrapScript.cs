@@ -56,7 +56,7 @@ public class LauncherTrapScript : MonoBehaviour
             spawnedProj.SetActive(true);
             spawnedProj.GetComponent<Rigidbody2D>().velocity = firePosition.transform.right.normalized * launchForce;
 
-            canFire = false;
+            //canFire = false;
 
             launcherAnim.SetTrigger("Launch");
             smokeEffect.Play();
