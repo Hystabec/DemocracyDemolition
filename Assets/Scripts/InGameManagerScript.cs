@@ -390,9 +390,18 @@ public class InGameManagerScript : MonoBehaviour
         //DEBUG - ends playmode when winner is found
         //Debug.Log(winningPlayer.name + " wins");
 
+        var player1Script = player1.GetComponent<playerScript>();
+        var player2Script = player2.GetComponent<playerScript>();
+
         //when game ends player go to UI mode
-        player1.GetComponent<playerScript>().switchMode(modes.UI);
-        player2.GetComponent<playerScript>().switchMode(modes.UI);
+        player1Script.switchMode(modes.UI);
+        player1Script.ProjInHandVisible(false);
+        player1Script.gameEnded = true;
+
+
+        player2Script.switchMode(modes.UI);
+        player2Script.ProjInHandVisible(false);
+        player2Script.gameEnded = true;
 
         int winner = -1;
 

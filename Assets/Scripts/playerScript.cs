@@ -103,6 +103,9 @@ public class playerScript : MonoBehaviour
 
     private bool onCooldown;
 
+
+    public bool gameEnded;
+
     public void ResetData()
     {
         //this should be called by "InGameManagerScript"
@@ -246,9 +249,12 @@ public class playerScript : MonoBehaviour
         locationThreeFree = true;
     }
 
-    private void ProjInHandVisible(bool show)
+    public void ProjInHandVisible(bool show)
     {
-        projInHand.enabled = show;
+        if (!gameEnded)
+        {
+            projInHand.enabled = show;
+        }
     }
 
     public void A()

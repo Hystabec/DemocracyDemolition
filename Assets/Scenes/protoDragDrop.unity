@@ -44147,6 +44147,7 @@ MonoBehaviour:
   throwCooldown: 1.5
   cantThrowIcon: {fileID: 143768506}
   cooldownbar: {fileID: 762285704}
+  gameEnded: 0
 --- !u!4 &1303902996
 Transform:
   m_ObjectHideFlags: 0
@@ -63061,6 +63062,7 @@ MonoBehaviour:
   throwCooldown: 1.5
   cantThrowIcon: {fileID: 1252791283}
   cooldownbar: {fileID: 1056711462}
+  gameEnded: 0
 --- !u!4 &1865346981
 Transform:
   m_ObjectHideFlags: 0
