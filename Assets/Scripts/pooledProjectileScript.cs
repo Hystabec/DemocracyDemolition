@@ -11,9 +11,15 @@ public class pooledProjectileScript : MonoBehaviour
 
     int bounceCount = 0;
 
+    [SerializeField]
+    GameObject coconutParticles;
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         bounceCount++;
+
+        coconutParticles.SetActive(true);
+
         if (bounceCount >= maxBounceCount)
         {
             bounceCount = 0;
@@ -23,6 +29,8 @@ public class pooledProjectileScript : MonoBehaviour
             else
                 gameObject.SetActive(false);
         }
+
+        
 
         /*if (collision.gameObject.layer == LayerMask.NameToLayer("Block"))
         {
@@ -50,5 +58,10 @@ public class pooledProjectileScript : MonoBehaviour
                 default: Debug.Log("Block has no type"); break;
             }
         }*/
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        
     }
 }
