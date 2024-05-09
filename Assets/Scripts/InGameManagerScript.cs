@@ -531,6 +531,9 @@ public class InGameManagerScript : MonoBehaviour
         player2.GetComponent<playerScript>().CanFight(false);
         yield return new WaitForSecondsRealtime(timeBeforeFighting);
 
+        player1.GetComponent<playerScript>().ProjInHandVisible(true);
+        player2.GetComponent<playerScript>().ProjInHandVisible(true);
+
         player1.GetComponent<playerScript>().CanFight(true);
         player2.GetComponent<playerScript>().CanFight(true);
         StartCoroutine(RoundTypeText("Fight!"));
@@ -541,6 +544,7 @@ public class InGameManagerScript : MonoBehaviour
         fightAnim.SetTrigger("Fight");
 
         StartCoroutine("RoundTime");
+
     }
 
     private IEnumerator RoundTime()
