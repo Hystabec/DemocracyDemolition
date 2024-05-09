@@ -25,14 +25,12 @@ public class cameraAnimationStatus : MonoBehaviour
 
     public void animationStart()
     {
-        Debug.Log("anim start");
         isInAnimation = true;
         hasStarted = true;
     }
 
     public void animationFinish()
     {
-        Debug.Log("anim stop");
         isInAnimation = false;
     }
 }

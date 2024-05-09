@@ -130,6 +130,8 @@ public class InGameManagerScript : MonoBehaviour
         StartCoroutine(ResetGame());
     }
 
+
+
     public IEnumerator ResetGame()
     {
         player1.GetComponent<playerScript>().ResetData();
@@ -154,12 +156,7 @@ public class InGameManagerScript : MonoBehaviour
 
         yield return new WaitUntil(() => CAS.Started() == true);
         yield return new WaitUntil(() => CAS.isAnimating() == false);
-
-        //while(camAnim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
-        //{
-        //    yield return null;
-        //}
-
+        
         CAS.Reset();
 
         player1.GetComponent<Animator>().SetBool("ResetGame", true);
