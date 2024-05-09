@@ -33,7 +33,8 @@ public class GenericBlockScript : MonoBehaviour
 
     ParticleSystem placeEffect = null;
 
-    private bool isPlacing;
+    [HideInInspector]
+    public bool isPlacing;
 
     SpriteRenderer affectPlayArea = null;
 

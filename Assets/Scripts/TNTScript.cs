@@ -7,11 +7,47 @@ public class TNTScript : MonoBehaviour
     [SerializeField]
     float explosionRadius = 1.0f;
 
-    GameObject radiusOutline;
+    [SerializeField]
+    private GameObject aoe;
+
+    private bool aoeActive;
+
+    private screenShake screenShakeScript;
+
+    private GenericBlockScript gbs;
+
+    private void Awake()
+    {
+        screenShakeScript = FindAnyObjectByType<screenShake>();
+        gbs = GetComponent<GenericBlockScript>();
+    }
+
+    private void Update()
+    {
+        if (gbs.isPlacing)
+        {
+            if (!aoeActive)
+            {
+                aoe.SetActive(true);
+                aoeActive = true;
+            }
+        }
+
+        if (gbs.IsPlaced())
+        {
+            if(aoeActive)
+            {
+                aoe.SetActive(false);
+                aoeActive = false;
+            }
+        }
+    }
 
     public void CustomOnCollisionEnter2D(Collision2D other)
     {
-        if(other.gameObject.layer == LayerMask.NameToLayer("projectile"))
+        screenShakeScript.TriggerShake();
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("projectile"))
         {
             Collider2D[] goInRadius = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
 

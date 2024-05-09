@@ -352,6 +352,7 @@ MonoBehaviour:
   onTriggerStayFunc:
     m_PersistentCalls:
       m_Calls: []
+  isPlacing: 0
 --- !u!114 &-1057947384533784497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -365,6 +366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionRadius: 2
+  aoe: {fileID: 107330722128182832}
 --- !u!50 &8585537266684121296
 Rigidbody2D:
   serializedVersion: 4

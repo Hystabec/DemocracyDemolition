@@ -23,6 +23,12 @@ public class screenShake : MonoBehaviour
         complete = false;
     }
 
+    public void TriggerShake()
+    {
+        StartCoroutine(Shaking());
+
+    }
+
     void Update()
     {
         if (start)

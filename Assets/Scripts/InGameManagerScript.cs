@@ -94,6 +94,9 @@ public class InGameManagerScript : MonoBehaviour
     [SerializeField]
     private GameObject redConfetti, redFireworks, blueConfetti, blueFireworks;
 
+    [SerializeField]
+    private screenShake screenShakeScript;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -193,6 +196,7 @@ public class InGameManagerScript : MonoBehaviour
 
     public void playerKilled(GameObject callingPlayer)
     {
+        screenShakeScript.TriggerShake();
 
         if (callingPlayer == player1)
         {

@@ -2463,7 +2463,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &230222520
 Transform:
   m_ObjectHideFlags: 0
@@ -3287,7 +3287,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!199 &344264826
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -9171,7 +9171,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!199 &454447934
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -14608,7 +14608,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &548952884
 Transform:
   m_ObjectHideFlags: 0
@@ -20706,7 +20706,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!199 &677515836
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -20798,7 +20798,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -32240,7 +32240,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!199 &899616764
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -52196,6 +52196,11 @@ MonoBehaviour:
   playerHit: {fileID: 8300000, guid: 1cd7c064ca54580488cc40216cc13385, type: 3}
   buildIcons: {fileID: 677556400}
   fightIcons: {fileID: 1696836642}
+  redConfetti: {fileID: 677515835}
+  redFireworks: {fileID: 344264825}
+  blueConfetti: {fileID: 454447933}
+  blueFireworks: {fileID: 899616763}
+  screenShakeScript: {fileID: 313012575}
 --- !u!114 &1729778780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52291,6 +52296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roundTime: 26
+  animTriggered: 0
   timerText: {fileID: 4271247}
   timeText: {fileID: 4271249}
 --- !u!82 &1729778783
