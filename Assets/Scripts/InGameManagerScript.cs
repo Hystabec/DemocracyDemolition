@@ -71,7 +71,6 @@ public class InGameManagerScript : MonoBehaviour
     GameObject[] elementToHideWhenGameEnds, EndUIButtons;
 
 
-
     [SerializeField]
     float endButtonOffset = 266.0f;
 
@@ -91,6 +90,9 @@ public class InGameManagerScript : MonoBehaviour
     private GameObject fightIcons;
 
     bool gameHasEnded = false;
+
+    [SerializeField]
+    private GameObject redConfetti, redFireworks, blueConfetti, blueFireworks;
 
     // Start is called before the first frame update
     void Awake()
@@ -170,6 +172,19 @@ public class InGameManagerScript : MonoBehaviour
         {
             ani.SetTrigger("Idle");
         }
+
+
+        if (redConfetti.activeSelf == true)
+            redConfetti.SetActive(false);
+
+        if (redFireworks.activeSelf == true)
+            redFireworks.SetActive(false);
+
+        if (blueConfetti.activeSelf == true)
+            blueConfetti.SetActive(false);
+
+        if (blueFireworks.activeSelf == true)
+            blueFireworks.SetActive(false);
 
         startRound();
     }
@@ -322,6 +337,7 @@ public class InGameManagerScript : MonoBehaviour
             rbs.spawnTrapIn(player2, p2returnBat.numTraps);
         }
 
+
         StartCoroutine(RoundText());
 
         player1.GetComponent<playerScript>().OnRoundStart();
@@ -383,8 +399,11 @@ public class InGameManagerScript : MonoBehaviour
 
         if (winningPlayer == player1)
         {
+            redConfetti.SetActive(true);
+            redFireworks.SetActive(true);
+
             redAnim.SetTrigger("GameWin");
-            
+
             foreach (Animator ani in redAnimArray)
             {
                 ani.SetTrigger("GameWin");
@@ -395,9 +414,12 @@ public class InGameManagerScript : MonoBehaviour
         }
         else if(winningPlayer == player2) 
         {
+            blueConfetti.SetActive(true);
+            blueFireworks.SetActive(true);
+
             blueAnim.SetTrigger("GameWin");
 
-            foreach(Animator ani in blueAnimArray)
+            foreach (Animator ani in blueAnimArray)
             {
                 ani.SetTrigger("GameWin");
                 
