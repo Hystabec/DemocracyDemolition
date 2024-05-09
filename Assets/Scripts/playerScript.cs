@@ -33,6 +33,8 @@ public class playerScript : MonoBehaviour
 
     public List<GameObject> blockObjects;
 
+    List<GameObject> placedBlocks = new();
+
     [SerializeField]
     Vector3 locationOne, locationTwo, locationThree;
 
@@ -125,6 +127,12 @@ public class playerScript : MonoBehaviour
             Destroy(go);
         }
         blockObjects.Clear();
+
+        foreach(GameObject go in placedBlocks)
+        {
+            Destroy(go);
+        }
+        placedBlocks.Clear();
 
         selectableObjectsNumber = 0;
 
@@ -283,6 +291,8 @@ public class playerScript : MonoBehaviour
                 selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().ShowOutline(false);
                 selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().Placed();
 
+                placedBlocks.Add(selectableObjects[SelectedIndex]);
+
                 selectableObjects.RemoveAt(SelectedIndex);
 
                 SelectedIndex = 0;
@@ -365,6 +375,10 @@ public class playerScript : MonoBehaviour
     {
         leftStickMoveVector = value.Get<Vector2>();
     }
+    public void DPad(Vector2 val)
+    {
+        leftStickMoveVector += val;
+    }
 
     public void fakeRS(Vector2 value)
     {
@@ -375,6 +389,8 @@ public class playerScript : MonoBehaviour
     {
         rightStickMoveVector = value.Get<Vector2>();
     }
+
+    
 
     public void RT()
     {
@@ -455,7 +471,6 @@ public class playerScript : MonoBehaviour
         }
     }
 
-
     public void CanFight(bool canFight)
     {
         fightingStage = canFight;
@@ -465,7 +480,6 @@ public class playerScript : MonoBehaviour
     {
         currentAmmoText.text = RemainingAmmo + "/3";
     }
-
 
     private IEnumerator waitToSwap()
     {
@@ -480,7 +494,7 @@ public class playerScript : MonoBehaviour
         if (projInHand.enabled == false)
         {
             ProjInHandVisible(true);
-            Debug.Log(gameObject);
+            //Debug.Log(gameObject);
         }
 
     }
@@ -618,7 +632,7 @@ public class playerScript : MonoBehaviour
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
         handleLeftStick();
         handleRightStick();

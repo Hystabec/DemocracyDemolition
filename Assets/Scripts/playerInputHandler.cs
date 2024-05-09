@@ -60,4 +60,64 @@ public class playerInputHandler : MonoBehaviour
         if (PScript != null)
             PScript.RS(value);
     }
+
+    void OnDUp(InputValue value)
+    {
+        if (PScript != null)
+        {
+            if(value.isPressed)
+            {
+                PScript.DPad(new Vector2(0, 1));
+            }
+            else 
+            { 
+                PScript.DPad(new Vector2(0, -1));
+            }
+        }
+    }
+
+    void OnDDown(InputValue value)
+    {
+        if (PScript != null)
+        {
+            if (value.isPressed)
+            {
+                PScript.DPad(new Vector2(0, -1));
+            }
+            else
+            {
+                PScript.DPad(new Vector2(0, 1));
+            }
+        }
+    }
+
+    void OnDLeft(InputValue value)
+    {
+        if (PScript != null)
+        {
+            if (value.isPressed)
+            {
+                PScript.DPad(new Vector2(-1, 0));
+            }
+            else
+            {
+                PScript.DPad(new Vector2(1, 0));
+            }
+        }
+    }
+
+    void OnDRight(InputValue value)
+    {
+        if (PScript != null)
+        {
+            if (value.isPressed)
+            {
+                PScript.DPad(new Vector2(1, 0));
+            }
+            else
+            {
+                PScript.DPad(new Vector2(-1, 0));
+            }
+        }
+    }
 }

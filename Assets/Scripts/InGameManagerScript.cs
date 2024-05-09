@@ -35,6 +35,9 @@ public class InGameManagerScript : MonoBehaviour
     int numJoinedPlayers = 0;
 
     [SerializeField]
+    Camera mainCam;
+
+    [SerializeField]
     float roundTime = 20.0f;
 
     [SerializeField]
@@ -129,8 +132,6 @@ public class InGameManagerScript : MonoBehaviour
 
     public IEnumerator ResetGame()
     {
-        camAnim.SetTrigger("ReturnCamera");
-
         player1.GetComponent<playerScript>().ResetData();
         player2.GetComponent<playerScript>().ResetData();
 
@@ -139,14 +140,27 @@ public class InGameManagerScript : MonoBehaviour
         p2Score = 0;
         gameHasEnded = false;
 
-        
-
-        rematchAnim.SetTrigger("RematchFadeOut");
-        menuButtonAnim.SetTrigger("MenuButtonFadeOut");
         redProgressBar.fillAmount = 0;
         blueProgressBar.fillAmount = 0;
 
-        yield return new WaitForSeconds(4f);
+        //yield return new WaitForSeconds(4f);
+        //yield return new WaitWhile(() => mainCam.GetComponent<cameraAnimationStatus>().isAnimating() == false);
+
+        rematchAnim.SetTrigger("RematchFadeOut");
+        menuButtonAnim.SetTrigger("MenuButtonFadeOut");
+        camAnim.SetTrigger("ReturnCamera");
+
+        cameraAnimationStatus CAS = mainCam.GetComponent<cameraAnimationStatus>();
+
+        yield return new WaitUntil(() => CAS.Started() == true);
+        yield return new WaitUntil(() => CAS.isAnimating() == false);
+
+        //while (CAS.isAnimating() || !CAS.Started())
+        //{
+        //    yield return null;
+        //}
+
+        CAS.Reset();
 
         player1.GetComponent<Animator>().SetBool("ResetGame", true);
         player2.GetComponent<Animator>().SetBool("ResetGame", true);
@@ -197,8 +211,6 @@ public class InGameManagerScript : MonoBehaviour
     public void playerKilled(GameObject callingPlayer)
     {
         screenShakeScript.TriggerShake();
-
-        callingPlayer.GetComponent<playerScript>().ProjInHandVisible(false);
 
         if (callingPlayer == player1)
         {
@@ -272,7 +284,7 @@ public class InGameManagerScript : MonoBehaviour
         StopCoroutine("RoundTime");
 
         endRound();
-
+       
     }
 
     BAT blockTrapSplit(int total, int maxBlock, int maxTrap)
@@ -358,6 +370,7 @@ public class InGameManagerScript : MonoBehaviour
 
         timerScript.animTriggered = false;
 
+
     }
 
     void endRound()
@@ -396,10 +409,12 @@ public class InGameManagerScript : MonoBehaviour
 
         //when game ends player go to UI mode
         player1Script.switchMode(modes.UI);
+        player1Script.ProjInHandVisible(false);
         player1Script.gameEnded = true;
 
 
         player2Script.switchMode(modes.UI);
+        player2Script.ProjInHandVisible(false);
         player2Script.gameEnded = true;
 
         int winner = -1;
@@ -466,17 +481,25 @@ public class InGameManagerScript : MonoBehaviour
         //yield return new WaitForSeconds(camAnim.GetCurrentAnimatorClipInfo(0).Length);
 
         //had to hard code the anim length - no ideal didnt work with the other ways i tried
-        yield return new WaitForSeconds(4.2f);
+        //yield return new WaitForSeconds(4.5f);
+
+        var CAS = mainCam.GetComponent<cameraAnimationStatus>();
+
+        yield return new WaitUntil(() => CAS.Started() == true);
+        yield return new WaitUntil(() => CAS.isAnimating() == false);
+
+        CAS.Reset();
 
         //showButtons
-        foreach(GameObject go in EndUIButtons)
+        foreach (GameObject go in EndUIButtons)
         {
             go.SetActive(true);
             go.transform.localPosition = new Vector3(finalOffset, go.transform.localPosition.y, go.transform.localPosition.z);
-            rematchAnim.SetTrigger("RematchFadeIn");
-            menuButtonAnim.SetTrigger("MenuButtonFadeIn");
+            
         }
 
+        rematchAnim.SetTrigger("RematchFadeIn");
+        menuButtonAnim.SetTrigger("MenuButtonFadeIn");
     }
 
     private IEnumerator RoundText()

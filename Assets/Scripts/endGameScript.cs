@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class endGameScript : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class endGameScript : MonoBehaviour
     [SerializeField]
     Animator camAnim, rematchAnim, menuButtonAnim;
 
+    bool retryPressed = false;
+
     private void Awake()
     {
        
@@ -17,26 +20,41 @@ public class endGameScript : MonoBehaviour
 
     public void Retry()
     {
+
+        if (retryPressed)
+            return;
+
+        retryPressed = true;
+
         Debug.Log("Rest game");
+
         //rematchAnim.SetTrigger("RematchFadeOut");
         //menuButtonAnim.SetTrigger("MenuButtonFadeOut");
 
-        StartCoroutine(ButtonFadeOut());
-        //IGMS.ResetGame();
+        //IGMS.CallResetGame();
 
+        StartCoroutine(ButtonFadeOut());
+
+        //IGMS.ResetGame();
         //zoom out camra - reverse zoom in anim?
     }
 
     private IEnumerator ButtonFadeOut()
     {
         //Delay for animation
-        yield return new WaitForSeconds(1.2f);
+        //menuButtonAnim.SetTrigger("MenuButtonFadeOut");
         IGMS.CallResetGame();
+        yield return new WaitForSeconds(15.0f);
+        retryPressed = false;
     }
 
     public void Exit()
     {
+        if (retryPressed)
+            return;
+
         Debug.Log("Exit game");
         //go to main menu
+        SceneManager.LoadScene(SceneManager.GetSceneByName("Harrison 2").buildIndex);
     }
 }

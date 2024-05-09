@@ -5,27 +5,33 @@ using UnityEngine;
 public class cameraAnimationStatus : MonoBehaviour
 {
     bool isInAnimation = false;
-    
-    
+    bool hasStarted = false;
+
+    public void Reset()
+    {
+        isInAnimation = false;
+        hasStarted = false;
+    }
+
     public bool isAnimating()
     {
         return isInAnimation;
     }
 
-    // Start is called before the first frame update
+    public bool Started()
+    {
+        return hasStarted;
+    }
+
     public void animationStart()
     {
         isInAnimation = true;
+        hasStarted = true;
     }
 
-    // Update is called once per frame
     public void animationFinish()
     {
         isInAnimation = false;
     }
-
-    public void testFunction()
-    {
-        Debug.Log("Success");
-    }
 }
+
