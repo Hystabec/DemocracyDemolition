@@ -192,8 +192,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4284926207
+  m_fontColor: {r: 1, g: 0.78314275, b: 0.4009434, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -879,8 +879,8 @@ Transform:
   m_GameObject: {fileID: 110852061}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.606, y: 3.5, z: 0}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_LocalPosition: {x: 3.66, y: 3.21, z: 0}
+  m_LocalScale: {x: 0.733308, y: 0.733308, z: 0.733308}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 787600936}
@@ -3644,9 +3644,9 @@ ParticleSystem:
         m_RotationOrder: 4
     startSpeed:
       serializedVersion: 2
-      minMaxState: 3
-      scalar: 12
-      minScalar: 9
+      minMaxState: 0
+      scalar: 13
+      minScalar: 13
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -14125,7 +14125,7 @@ Transform:
   m_GameObject: {fileID: 454447933}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.9381808, y: 6.977813, z: 9.960594}
+  m_LocalPosition: {x: 0.9381808, y: 5.03, z: 9.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20776,8 +20776,8 @@ Transform:
   m_GameObject: {fileID: 639330537}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.394, y: 3.5, z: 0}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_LocalPosition: {x: -5.394, y: 3.21, z: 0}
+  m_LocalScale: {x: 0.733308, y: 0.733308, z: 0.733308}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1278357963}
@@ -25738,7 +25738,7 @@ Transform:
   m_GameObject: {fileID: 677515835}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.9381808, y: 6.977813, z: 9.960594}
+  m_LocalPosition: {x: 0.9381808, y: 5.03, z: 9.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -32676,8 +32676,8 @@ ParticleSystem:
         m_RotationOrder: 4
     startSpeed:
       serializedVersion: 2
-      minMaxState: 3
-      scalar: 12
+      minMaxState: 0
+      scalar: 13
       minScalar: 9
       maxCurve:
         serializedVersion: 2
@@ -50725,7 +50725,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 241, y: 145.00002}
+  m_AnchoredPosition: {x: 150, y: 145.00002}
   m_SizeDelta: {x: 250.44708, y: 168.2091}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1497803740
@@ -52595,7 +52595,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCam: {fileID: 313012571}
   roundTime: 20
-  timeBeforeFighting: 6
+  timeBeforeFighting: 11
   roundsNeededToWin: 4
   player1: {fileID: 1303902994}
   player2: {fileID: 1865346978}
@@ -64663,7 +64663,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -267, y: 139}
+  m_AnchoredPosition: {x: -150, y: 139}
   m_SizeDelta: {x: 250.44708, y: 168.2091}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1948988680
@@ -65244,8 +65244,8 @@ Transform:
   m_GameObject: {fileID: 2032277148}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.1, z: 0}
-  m_LocalScale: {x: 1, y: 1.0687263, z: 1.1186559}
+  m_LocalPosition: {x: 0, y: 1.11, z: 0}
+  m_LocalScale: {x: 1, y: 0.6145176, z: 1.1186559}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1207053848}
