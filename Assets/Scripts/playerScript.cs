@@ -108,6 +108,8 @@ public class playerScript : MonoBehaviour
 
     public bool gameEnded;
 
+    float moveTime = 0;
+
     public void ResetData()
     {
         //this should be called by "InGameManagerScript"
@@ -156,7 +158,6 @@ public class playerScript : MonoBehaviour
     {
         //called by the InGameManagerScript at the start of the round when blocks have been added - should probably do through unity events
         gameEnded = false;
-        StartCoroutine(WaitToShowProj());
 
         SelectedIndex = 0;
         selectableObjects[0].GetComponent<GenericBlockScript>().ShowOutline(true);
@@ -457,7 +458,9 @@ public class playerScript : MonoBehaviour
     {
         if (onCooldown) 
         {
-            cooldownbar.fillAmount = Mathf.Lerp(cooldownbar.fillAmount, 1, throwCooldown * Time.deltaTime);
+            moveTime += Time.deltaTime * 0.1f;
+
+            cooldownbar.fillAmount = Mathf.Lerp(cooldownbar.fillAmount, 1, moveTime);
         }
 
         if(!onCooldown)
@@ -466,6 +469,7 @@ public class playerScript : MonoBehaviour
             {
 
                 cooldownbar.fillAmount = 0;
+                moveTime = 0;
             }
 
         }
@@ -487,6 +491,7 @@ public class playerScript : MonoBehaviour
         canSwap = true;
     }
 
+    /*
     private IEnumerator WaitToShowProj()
     {
         yield return new WaitForSeconds(0.9f);
@@ -498,6 +503,7 @@ public class playerScript : MonoBehaviour
         }
 
     }
+    */
 
 
     void handleLeftStick()
