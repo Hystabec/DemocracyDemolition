@@ -39,7 +39,10 @@ public class playerScript : MonoBehaviour
     Vector3 locationOne, locationTwo, locationThree;
 
     [SerializeField]
-    GameObject fireMarker;
+    GameObject fireMarker, rotationMarker;
+
+    Vector3 rotationMarkerOffset = new Vector3(0, 0.5f, 0);
+    Vector3 defaultRotationMarkerPosition = new Vector3(-10, -10, 0);
 
     bool locationOneFree = true;
     bool locationTwoFree = true;
@@ -296,6 +299,8 @@ public class playerScript : MonoBehaviour
 
                 selectableObjects.RemoveAt(SelectedIndex);
 
+                rotationMarker.transform.position = defaultRotationMarkerPosition;
+
                 SelectedIndex = 0;
 
                 if (selectableObjects.Count != 0)
@@ -324,6 +329,7 @@ public class playerScript : MonoBehaviour
                 selectableObjects[SelectedIndex].transform.position = selectedBlockLocation;
                 selectableObjects[SelectedIndex].transform.rotation = selectedBlockRotation;
                 selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().CurrentlyPlacing(false);
+                rotationMarker.transform.position = defaultRotationMarkerPosition;
 
                 hasBeenSelected = false;
             }
@@ -574,6 +580,7 @@ public class playerScript : MonoBehaviour
             else
             {
                 selectableObjects[SelectedIndex].transform.position += (new Vector3(leftStickSensitivity * leftStickMoveVector.x, leftStickSensitivity * leftStickMoveVector.y, 0)) * Time.deltaTime;
+                rotationMarker.transform.position = selectableObjects[SelectedIndex].transform.position + rotationMarkerOffset;
             }
         }
     }
