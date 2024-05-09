@@ -64,7 +64,7 @@ public class InGameManagerScript : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI[] playersAmmoText;
 
-    [SerializeField]
+    [HideInInspector, SerializeField]
     Animator redAnim, blueAnim, camAnim, progressBarAnim, rematchAnim, menuButtonAnim, fightAnim, buildAnim, roundTextAnim, roundTypeAnim, timerAnim;
 
     [SerializeField]
@@ -94,8 +94,11 @@ public class InGameManagerScript : MonoBehaviour
 
     bool gameHasEnded = false;
 
-    [SerializeField]
+    [HideInInspector, SerializeField]
     private GameObject redConfetti, redFireworks, blueConfetti, blueFireworks;
+
+    [HideInInspector, SerializeField]
+    ParticleSystem redCrowdConfetti, redCrowdStreamers, blueCrowdConfetti, blueCrowdStreamers;
 
     [SerializeField]
     private screenShake screenShakeScript;
@@ -219,6 +222,9 @@ public class InGameManagerScript : MonoBehaviour
                 ani.SetTrigger("RoundWin");
             }
 
+            blueCrowdConfetti.Play();
+            blueCrowdConfetti.Play();
+
             redAnim.SetTrigger("Hit");
             progressBarAnim.SetTrigger("BlueRoundWin");
             blueProgressBar.fillAmount = blueProgressBar.fillAmount + 0.25f;
@@ -232,6 +238,9 @@ public class InGameManagerScript : MonoBehaviour
             {
                 ani.SetTrigger("RoundWin");
             }
+
+            redCrowdConfetti.Play();
+            redCrowdStreamers.Play();
 
             blueAnim.SetTrigger("Hit");
             progressBarAnim.SetTrigger("RedRoundWin");
