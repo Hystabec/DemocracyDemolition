@@ -44,7 +44,7 @@ public class endGameScript : MonoBehaviour
         //Delay for animation
         //menuButtonAnim.SetTrigger("MenuButtonFadeOut");
         IGMS.CallResetGame();
-        yield return new WaitForSeconds(15.0f);
+        yield return new WaitForSeconds(5.0f);
         retryPressed = false;
     }
 

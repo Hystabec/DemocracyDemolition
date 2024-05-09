@@ -155,7 +155,7 @@ public class InGameManagerScript : MonoBehaviour
         yield return new WaitUntil(() => CAS.Started() == true);
         yield return new WaitUntil(() => CAS.isAnimating() == false);
 
-        //while (CAS.isAnimating() || !CAS.Started())
+        //while(camAnim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         //{
         //    yield return null;
         //}
@@ -495,7 +495,6 @@ public class InGameManagerScript : MonoBehaviour
         {
             go.SetActive(true);
             go.transform.localPosition = new Vector3(finalOffset, go.transform.localPosition.y, go.transform.localPosition.z);
-            
         }
 
         rematchAnim.SetTrigger("RematchFadeIn");
