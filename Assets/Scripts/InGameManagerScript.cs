@@ -198,6 +198,8 @@ public class InGameManagerScript : MonoBehaviour
     {
         screenShakeScript.TriggerShake();
 
+        callingPlayer.GetComponent<playerScript>().ProjInHandVisible(false);
+
         if (callingPlayer == player1)
         {
             p2Score++;
@@ -270,7 +272,7 @@ public class InGameManagerScript : MonoBehaviour
         StopCoroutine("RoundTime");
 
         endRound();
-       
+
     }
 
     BAT blockTrapSplit(int total, int maxBlock, int maxTrap)
@@ -356,7 +358,6 @@ public class InGameManagerScript : MonoBehaviour
 
         timerScript.animTriggered = false;
 
-
     }
 
     void endRound()
@@ -395,12 +396,10 @@ public class InGameManagerScript : MonoBehaviour
 
         //when game ends player go to UI mode
         player1Script.switchMode(modes.UI);
-        player1Script.ProjInHandVisible(false);
         player1Script.gameEnded = true;
 
 
         player2Script.switchMode(modes.UI);
-        player2Script.ProjInHandVisible(false);
         player2Script.gameEnded = true;
 
         int winner = -1;

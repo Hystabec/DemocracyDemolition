@@ -147,9 +147,13 @@ public class playerScript : MonoBehaviour
     public void OnRoundStart()
     {
         //called by the InGameManagerScript at the start of the round when blocks have been added - should probably do through unity events
+        gameEnded = false;
+        StartCoroutine(WaitToShowProj());
 
         SelectedIndex = 0;
         selectableObjects[0].GetComponent<GenericBlockScript>().ShowOutline(true);
+
+
     }
 
     public void setAmmo(int amount)
@@ -251,10 +255,8 @@ public class playerScript : MonoBehaviour
 
     public void ProjInHandVisible(bool show)
     {
-        if (!gameEnded)
-        {
-            projInHand.enabled = show;
-        }
+        projInHand.enabled = show;
+        
     }
 
     public void A()
@@ -424,7 +426,10 @@ public class playerScript : MonoBehaviour
         yield return new WaitForSeconds(throwCooldown);
         if (RemainingAmmo > 0)
         {
-            ProjInHandVisible(true);
+            if (!gameEnded)
+            {
+                ProjInHandVisible(true);
+            }
         }
         canThrow = true;
         cantThrowIcon.SetActive(false);
@@ -468,7 +473,18 @@ public class playerScript : MonoBehaviour
         canSwap = true;
     }
 
-    
+    private IEnumerator WaitToShowProj()
+    {
+        yield return new WaitForSeconds(0.9f);
+       
+        if (projInHand.enabled == false)
+        {
+            ProjInHandVisible(true);
+            Debug.Log(gameObject);
+        }
+
+    }
+
 
     void handleLeftStick()
     {
@@ -617,6 +633,7 @@ public class playerScript : MonoBehaviour
             if (collision.gameObject.GetComponent<pooledProjectileScript>().owner != this)
             {
                 FindObjectOfType<InGameManagerScript>().playerKilled(this.gameObject);
+
             }
 
             else
