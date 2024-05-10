@@ -58,18 +58,15 @@ public class InGameManagerScript : MonoBehaviour
     [SerializeField]
     Timer timerScript;
 
-    [SerializeField]
+    [HideInInspector, SerializeField]
     TextMeshProUGUI roundText, roundTypeText;
 
-    [SerializeField]
+    [HideInInspector, SerializeField]
     TextMeshProUGUI[] playersAmmoText;
 
     //Feel free to unhide anything, just wanted to tidy up the inspector a bit
     [HideInInspector, SerializeField]
-    Animator redAnim, blueAnim, camAnim, progressBarAnim, rematchAnim, menuButtonAnim, fightAnim, buildAnim, roundTextAnim, roundTypeAnim, timerAnim;
-
-    [SerializeField]
-    Animator[] redAnimArray, blueAnimArray;
+    Animator redAnim, blueAnim, camAnim, progressBarAnim, rematchAnim, menuButtonAnim, fightAnim, buildAnim, roundTextAnim, roundTypeAnim, timerAnim, redCrowdAnim, blueCrowdAnim;
 
     [SerializeField]
     GameObject[] elementToHideWhenGameEnds, EndUIButtons;
@@ -181,16 +178,8 @@ public class InGameManagerScript : MonoBehaviour
         //    go.SetActive(false);
         //}
 
-        foreach(Animator ani in redAnimArray)
-        {
-            ani.SetTrigger("Idle");
-        }
-        
-        foreach (Animator ani in blueAnimArray)
-        {
-            ani.SetTrigger("Idle");
-        }
-
+        redCrowdAnim.SetTrigger("Idle");
+        blueCrowdAnim.SetTrigger("Idle");
 
         if (redConfetti.activeSelf == true)
             redConfetti.SetActive(false);
@@ -218,9 +207,9 @@ public class InGameManagerScript : MonoBehaviour
             p2Score++;
             blueAnim.SetTrigger("RoundWin");
 
-            foreach (Animator ani in blueAnimArray)
+            if (p2Score < 4)
             {
-                ani.SetTrigger("RoundWin");
+                blueCrowdAnim.SetTrigger("RoundWin");
             }
 
             blueCrowdConfetti.Play();
@@ -235,9 +224,9 @@ public class InGameManagerScript : MonoBehaviour
             p1Score++;
             redAnim.SetTrigger("RoundWin");
 
-            foreach (Animator ani in redAnimArray)
+            if (p1Score < 4)
             {
-                ani.SetTrigger("RoundWin");
+                redCrowdAnim.SetTrigger("RoundWin");
             }
 
             redCrowdConfetti.Play();
@@ -438,10 +427,7 @@ public class InGameManagerScript : MonoBehaviour
 
             redAnim.SetTrigger("GameWin");
 
-            foreach (Animator ani in redAnimArray)
-            {
-                ani.SetTrigger("GameWin");
-            }
+            redCrowdAnim.SetTrigger("GameWin");
 
             winner = 1;
             camAnim.SetTrigger("GameWinRed");
@@ -453,11 +439,8 @@ public class InGameManagerScript : MonoBehaviour
 
             blueAnim.SetTrigger("GameWin");
 
-            foreach (Animator ani in blueAnimArray)
-            {
-                ani.SetTrigger("GameWin");
-                
-            }
+            blueCrowdAnim.SetTrigger("GameWin");
+
             winner = 2;
             camAnim.SetTrigger("GameWinBlue");
         }
