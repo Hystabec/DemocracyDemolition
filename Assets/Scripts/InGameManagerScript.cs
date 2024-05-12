@@ -61,12 +61,12 @@ public class InGameManagerScript : MonoBehaviour
     [HideInInspector, SerializeField]
     TextMeshProUGUI roundText, roundTypeText;
 
-    [HideInInspector, SerializeField]
-    TextMeshProUGUI[] playersAmmoText;
+    //[HideInInspector, SerializeField]
+    //TextMeshProUGUI[] playersAmmoText;
 
     //Feel free to unhide anything, just wanted to tidy up the inspector a bit
     [HideInInspector, SerializeField]
-    Animator redAnim, blueAnim, camAnim, canvasAnim, rematchAnim, menuButtonAnim, fightAnim, buildAnim, roundTextAnim, roundTypeAnim, timerAnim, redCrowdAnim, blueCrowdAnim;
+    Animator redAnim, blueAnim, camAnim, canvasAnim, rematchAnim, menuButtonAnim, fightAnim, buildAnim, roundTextAnim, roundTypeAnim, timerAnim, redCrowdAnim, blueCrowdAnim, ammoTextAnim;
 
     [SerializeField]
     GameObject[] elementToHideWhenGameEnds, EndUIButtons;
@@ -520,10 +520,10 @@ public class InGameManagerScript : MonoBehaviour
         canvasAnim.SetTrigger("BuildFlash");
         player1.GetComponent<playerScript>().CanFight(false);
         player2.GetComponent<playerScript>().CanFight(false);
-        
-        foreach (TextMeshProUGUI text in playersAmmoText)
+
+        if (currentRound > 1)
         {
-            text.gameObject.SetActive(false);
+            ammoTextAnim.SetTrigger("FadeOut");
         }
 
         yield return new WaitForSecondsRealtime(timeBeforeFighting);
@@ -539,11 +539,9 @@ public class InGameManagerScript : MonoBehaviour
         fightIcons.SetActive(true);
         buildIcons.SetActive(false);
         fightAnim.SetTrigger("Fight");
-        
-        foreach (TextMeshProUGUI text in playersAmmoText)
-        {
-            text.gameObject.SetActive(true);
-        }
+        ammoTextAnim.SetTrigger("FadeIn");
+
+
 
         StartCoroutine("RoundTime");
 
