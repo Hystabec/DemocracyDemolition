@@ -65,7 +65,7 @@ public class InGameManagerScript : MonoBehaviour
     //TextMeshProUGUI[] playersAmmoText;
 
     //Feel free to unhide anything, just wanted to tidy up the inspector a bit
-    [HideInInspector, SerializeField]
+    [SerializeField]
     Animator redAnim, blueAnim, camAnim, canvasAnim, rematchAnim, menuButtonAnim, fightAnim, buildAnim, roundTextAnim, roundTypeAnim, timerAnim, redCrowdAnim, blueCrowdAnim, ammoTextAnim;
 
     [SerializeField]
@@ -512,7 +512,6 @@ public class InGameManagerScript : MonoBehaviour
     private IEnumerator TimeBeforeFighting()
     {
         StartCoroutine(RoundTypeText("Build!"));
-        roundTypeAnim.SetTrigger("BuildBegin");
         buildIcons.SetActive(true);
         fightIcons.SetActive(false);
         buildAnim.SetTrigger("Build");
@@ -534,12 +533,12 @@ public class InGameManagerScript : MonoBehaviour
         player1.GetComponent<playerScript>().CanFight(true);
         player2.GetComponent<playerScript>().CanFight(true);
         StartCoroutine(RoundTypeText("Fight!"));
-        roundTypeAnim.SetTrigger("FightBegin");
         timerAnim.SetTrigger("Pop");
         fightIcons.SetActive(true);
         buildIcons.SetActive(false);
         fightAnim.SetTrigger("Fight");
         ammoTextAnim.SetTrigger("FadeIn");
+        roundTextAnim.SetTrigger("Fight");
 
 
 
