@@ -84,7 +84,7 @@ public class playerScript : MonoBehaviour
 
     float timeBetweenBothPlayersJoiningAndInputsStarting = 0.2f;
 
-    public Animator anim;
+    public Animator anim, rotationAnim;
 
     [SerializeField]
     TextMeshProUGUI currentAmmoText;
@@ -351,6 +351,7 @@ public class playerScript : MonoBehaviour
         else if (currentMode == modes.Play)
         {
             selectableObjects[SelectedIndex].transform.Rotate(new Vector3(0, 0, -selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().GetRotationAmount()));
+            rotationAnim.SetTrigger("Right");
         }
     }
 
@@ -369,6 +370,7 @@ public class playerScript : MonoBehaviour
         else if (currentMode == modes.Play)
         {
             selectableObjects[SelectedIndex].transform.Rotate(new Vector3(0, 0, selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().GetRotationAmount()));
+            rotationAnim.SetTrigger("Left");
         }
     }
 
