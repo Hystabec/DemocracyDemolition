@@ -260,8 +260,9 @@ public class InGameManagerScript : MonoBehaviour
             {
                 p2Script.despawnProjectile(pooledProj.gameObject);
             }
-
         }
+
+        callingPlayer.GetComponent<playerScript>().ProjInHandVisible(false);
 
 
         roundVictorySound.PlayOneShot(crowdCheer);

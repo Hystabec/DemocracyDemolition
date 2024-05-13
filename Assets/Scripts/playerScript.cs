@@ -497,7 +497,7 @@ public class playerScript : MonoBehaviour
         yield return new WaitForSeconds(throwCooldown);
         if (RemainingAmmo > 0)
         {
-            if (!gameEnded)
+            if (fightingStage)
             {
                 ProjInHandVisible(true);
             }
