@@ -65,8 +65,8 @@ public class InGameManagerScript : MonoBehaviour
     TextMeshProUGUI[] playersAmmoText;
 
     //Feel free to unhide anything, just wanted to tidy up the inspector a bit
-    [HideInInspector, SerializeField]
-    Animator redAnim, blueAnim, camAnim, progressBarAnim, rematchAnim, menuButtonAnim, fightAnim, buildAnim, roundTextAnim, roundTypeAnim, timerAnim, redCrowdAnim, blueCrowdAnim;
+    [SerializeField]
+    Animator redAnim, blueAnim, camAnim, canvasAnim, rematchAnim, menuButtonAnim, fightAnim, buildAnim, roundTextAnim, roundTypeAnim, timerAnim, redCrowdAnim, blueCrowdAnim;
 
     [SerializeField]
     GameObject[] elementToHideWhenGameEnds, EndUIButtons;
@@ -216,7 +216,7 @@ public class InGameManagerScript : MonoBehaviour
             blueCrowdConfetti.Play();
 
             redAnim.SetTrigger("Hit");
-            progressBarAnim.SetTrigger("BlueRoundWin");
+            canvasAnim.SetTrigger("BlueRoundWin");
             blueProgressBar.fillAmount = blueProgressBar.fillAmount + 0.25f;
         }
         else
@@ -233,7 +233,7 @@ public class InGameManagerScript : MonoBehaviour
             redCrowdStreamers.Play();
 
             blueAnim.SetTrigger("Hit");
-            progressBarAnim.SetTrigger("RedRoundWin");
+            canvasAnim.SetTrigger("RedRoundWin");
             redProgressBar.fillAmount = redProgressBar.fillAmount + 0.25f;
         }
 
@@ -517,6 +517,7 @@ public class InGameManagerScript : MonoBehaviour
         fightIcons.SetActive(false);
         buildAnim.SetTrigger("Build");
         timerAnim.SetTrigger("Pop");
+        canvasAnim.SetTrigger("BuildFlash");
         player1.GetComponent<playerScript>().CanFight(false);
         player2.GetComponent<playerScript>().CanFight(false);
         
