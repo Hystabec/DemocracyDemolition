@@ -305,6 +305,8 @@ public class playerScript : MonoBehaviour
         locationOneFree = true;
         locationTwoFree = true;
         locationThreeFree = true;
+
+        rotationMarker.transform.position = defaultRotationMarkerPosition;
     }
 
     public void ProjInHandVisible(bool show)
@@ -569,7 +571,7 @@ public class playerScript : MonoBehaviour
             {
                 if(canSwap)
                 {
-                    if (leftStickMoveVector.y != 0 && leftStickMoveVector.y > 0)
+                    if (leftStickMoveVector.x != 0 && leftStickMoveVector.x > 0)
                     {
                         UIElementIndex--;
 
@@ -580,7 +582,7 @@ public class playerScript : MonoBehaviour
 
                         StartCoroutine(waitToSwap());
                     }
-                    else if (leftStickMoveVector.y != 0 && leftStickMoveVector.y < 0)
+                    else if (leftStickMoveVector.x != 0 && leftStickMoveVector.x < 0)
                     {
 
                         UIElementIndex++;
@@ -602,7 +604,7 @@ public class playerScript : MonoBehaviour
             {
                 if (canSwap)
                 {
-                    if (leftStickMoveVector.y != 0 && leftStickMoveVector.y > 0)
+                    if (leftStickMoveVector.x != 0 && leftStickMoveVector.x > 0)
                     {
                         GenericBlockScript bs = selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>();
                         bs.ShowOutline(false);
@@ -625,7 +627,7 @@ public class playerScript : MonoBehaviour
 
                         StartCoroutine(waitToSwap());
                     }
-                    else if (leftStickMoveVector.y != 0 && leftStickMoveVector.y < 0)
+                    else if (leftStickMoveVector.x != 0 && leftStickMoveVector.x < 0)
                     {
                         GenericBlockScript bs = selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>();
                         bs.ShowOutline(false);
