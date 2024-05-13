@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 class BAT
 {
@@ -165,8 +166,8 @@ public class InGameManagerScript : MonoBehaviour
 
         timerScript.timerReset();
 
-        player1.GetComponent<playerScript>().switchMode(modes.Play);
-        player2.GetComponent<playerScript>().switchMode(modes.Play);
+        player1.GetComponent<playerScript>().SwitchToPlayMode();
+        player2.GetComponent<playerScript>().SwitchToPlayMode();
 
         foreach(GameObject go in elementToHideWhenGameEnds)
         {
@@ -287,7 +288,7 @@ public class InGameManagerScript : MonoBehaviour
     {
         int MinBlocks = total - maxTrap;
 
-        int returnBlock = Random.Range(MinBlocks, maxBlock+1);
+        int returnBlock = UnityEngine.Random.Range(MinBlocks, maxBlock+1);
 
         int returnTrap = total - returnBlock;
 
@@ -404,12 +405,12 @@ public class InGameManagerScript : MonoBehaviour
         var player2Script = player2.GetComponent<playerScript>();
 
         //when game ends player go to UI mode
-        player1Script.switchMode(modes.UI);
+        player1Script.SwitchToUIMode();
         player1Script.ProjInHandVisible(false);
         player1Script.gameEnded = true;
 
 
-        player2Script.switchMode(modes.UI);
+        player2Script.SwitchToUIMode();
         player2Script.ProjInHandVisible(false);
         player2Script.gameEnded = true;
 
@@ -485,6 +486,17 @@ public class InGameManagerScript : MonoBehaviour
         {
             go.SetActive(true);
             go.transform.localPosition = new Vector3(finalOffset, go.transform.localPosition.y, go.transform.localPosition.z);
+        }
+
+        var players = FindObjectsOfType<playerScript>();
+
+        foreach(playerScript player in players)
+        {
+            if (player.GetAssignedControllerIndex() == 0)
+            {
+                player.GiveUIElements(new List<GameObject>(EndUIButtons));
+                break;
+            }
         }
 
         rematchAnim.SetTrigger("RematchFadeIn");

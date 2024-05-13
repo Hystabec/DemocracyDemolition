@@ -17,6 +17,7 @@ public class playerInputHandler : MonoBehaviour
         mPlayerIndex = pInput.playerIndex;
         
         PScript = PScripts.FirstOrDefault(m => m.getPlayerIndex() == mPlayerIndex);
+        PScript.SetAssignedControllerIndex(mPlayerIndex);
     }
 
     void OnA()

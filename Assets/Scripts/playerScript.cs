@@ -26,6 +26,11 @@ public class playerScript : MonoBehaviour
     [SerializeField]
     int thisPlayerIndex = 0;
 
+    int assignedControllerIndex = -1;
+
+    int UIElementIndex = 0;
+    List<GameObject> listOfUIElements = new List<GameObject>();
+
     int SelectedIndex = 0;
     List<GameObject> selectableObjects = new List<GameObject>();
 
@@ -108,7 +113,6 @@ public class playerScript : MonoBehaviour
 
     private bool onCooldown;
 
-
     public bool gameEnded;
 
     float moveTime = 0;
@@ -137,6 +141,9 @@ public class playerScript : MonoBehaviour
         {
             Destroy(go);
         }
+
+        ClearUIElements();
+
         placedBlocks.Clear();
 
         selectableObjectsNumber = 0;
@@ -164,8 +171,6 @@ public class playerScript : MonoBehaviour
 
         SelectedIndex = 0;
         selectableObjects[0].GetComponent<GenericBlockScript>().ShowOutline(true);
-
-
     }
 
     public void setAmmo(int amount)
@@ -181,14 +186,39 @@ public class playerScript : MonoBehaviour
         updateAmmoText();
     }
 
+    public void SetAssignedControllerIndex(int index)
+    {
+        assignedControllerIndex = index;
+    }
+
+    public int GetAssignedControllerIndex()
+    {
+        return assignedControllerIndex;
+    }
+
     public int getPlayerIndex()
     {
         return thisPlayerIndex;
     }
 
-    public void switchMode(modes newMode)
+    //public void switchMode(modes newMode)
+    //{
+    //    StartCoroutine(SwitchEndOfFrame(newMode));
+    //}
+
+    public void SwitchToNoMode()
     {
-        StartCoroutine(SwitchEndOfFrame(newMode));
+        StartCoroutine(SwitchEndOfFrame(modes.None));
+    }
+
+    public void SwitchToUIMode()
+    {
+        StartCoroutine(SwitchEndOfFrame(modes.UI));
+    }
+
+    public void SwitchToPlayMode()
+    {
+        StartCoroutine(SwitchEndOfFrame(modes.Play));
     }
 
     IEnumerator SwitchEndOfFrame(modes newMode) 
@@ -207,6 +237,18 @@ public class playerScript : MonoBehaviour
             // thrownProjectiles.Remove(projectile);
         }
 
+    }
+
+    public void GiveUIElements(List<GameObject> UIList)
+    {
+        listOfUIElements = UIList;
+        UIElementIndex = 0;
+    }
+
+    public void ClearUIElements()
+    {
+        listOfUIElements.Clear();
+        UIElementIndex = 0;
     }
 
     public void AddBlockToList(GameObject blockToAdd)
@@ -267,18 +309,20 @@ public class playerScript : MonoBehaviour
 
     public void ProjInHandVisible(bool show)
     {
-        projInHand.enabled = show;
-        
+        projInHand.enabled = show;  
     }
 
     public void A()
     {
-        if (!(selectableObjects.Count > 0))
-            return;
+        //if (!(selectableObjects.Count > 0))
+        //    return;
 
         if(currentMode == modes.UI)
         {
-
+            if(listOfUIElements.Count > 0)
+            {
+                listOfUIElements[UIElementIndex].GetComponent<GenericUIButton>().ActivateButton();
+            }
         }
         else if (currentMode == modes.Play)
         {
@@ -516,12 +560,40 @@ public class playerScript : MonoBehaviour
 
     void handleLeftStick()
     {
-        if (!(selectableObjects.Count > 0))
-            return;
+        //if (!(selectableObjects.Count > 0))
+        //    return;
 
         if (currentMode == modes.UI)
         {
+            if(listOfUIElements.Count > 0)
+            {
+                if(canSwap)
+                {
+                    if (leftStickMoveVector.y != 0 && leftStickMoveVector.y > 0)
+                    {
+                        UIElementIndex--;
 
+                        if(UIElementIndex < 0)
+                            UIElementIndex = listOfUIElements.Count - 1;
+
+                        canSwap = false;
+
+                        StartCoroutine(waitToSwap());
+                    }
+                    else if (leftStickMoveVector.y != 0 && leftStickMoveVector.y < 0)
+                    {
+
+                        UIElementIndex++;
+
+                        if (UIElementIndex >= listOfUIElements.Count)
+                            UIElementIndex = 0;
+
+                        canSwap = false;
+
+                        StartCoroutine(waitToSwap());
+                    }
+                }
+            }
         }
         else if (currentMode == modes.Play)
         {

@@ -38,7 +38,7 @@ public class controlPCOverride : MonoBehaviour
         //pScript.PCOverride = true;
         Debug.Log("PC control override");
 
-        pScript.switchMode(modes.Play);
+        pScript.SwitchToPlayMode();
         igm.pcControlOverride();
 
         rightStickScreenPos = mainCam.WorldToScreenPoint(rightStickVisualMarkerLcation);
