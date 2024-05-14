@@ -553,7 +553,8 @@ public class InGameManagerScript : MonoBehaviour
         ammoTextAnim.SetTrigger("FadeIn");
         roundTextAnim.SetTrigger("Fight");
 
-
+        player1.GetComponent<playerScript>().ammoUiScript.OnFightStage();
+        player2.GetComponent<playerScript>().ammoUiScript.OnFightStage();
 
         StartCoroutine("RoundTime");
 

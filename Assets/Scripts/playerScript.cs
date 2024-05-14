@@ -104,18 +104,17 @@ public class playerScript : MonoBehaviour
     float throwCooldown = 1.5f;
 
     private bool canThrow = true;
-
-    [SerializeField]
-    private GameObject cantThrowIcon;
-
-    [SerializeField]
-    private UnityEngine.UI.Image cooldownbar;
-
+    public bool gameEnded;
+  /*
     private bool onCooldown;
 
-    public bool gameEnded;
+
 
     float moveTime = 0;
+  */
+
+    [SerializeField]
+    public AmmoUi ammoUiScript;
 
     public void ResetData()
     {
@@ -171,6 +170,7 @@ public class playerScript : MonoBehaviour
 
         SelectedIndex = 0;
         selectableObjects[0].GetComponent<GenericBlockScript>().ShowOutline(true);
+        ammoUiScript.OnRoundStart();
     }
 
     public void setAmmo(int amount)
@@ -491,9 +491,10 @@ public class playerScript : MonoBehaviour
     }
     private IEnumerator ThrowCooldown()
     {
-        onCooldown = true;
         canThrow = false;
-        cantThrowIcon.SetActive(true);
+        ammoUiScript.Thrown();
+        ammoUiScript.DisabledThrowing();
+
         yield return new WaitForSeconds(throwCooldown);
         if (RemainingAmmo > 0)
         {
@@ -503,11 +504,11 @@ public class playerScript : MonoBehaviour
             }
         }
         canThrow = true;
-        cantThrowIcon.SetActive(false);
-        onCooldown = false;
+        ammoUiScript.EnabledThrowing();
 
     }
 
+    /*
     void CooldownBar() 
     {
         if (onCooldown) 
@@ -528,6 +529,7 @@ public class playerScript : MonoBehaviour
 
         }
     }
+    */
 
     public void CanFight(bool canFight)
     {
@@ -725,7 +727,6 @@ public class playerScript : MonoBehaviour
     {
         handleLeftStick();
         handleRightStick();
-        CooldownBar();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
