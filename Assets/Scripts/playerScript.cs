@@ -116,6 +116,14 @@ public class playerScript : MonoBehaviour
     [SerializeField]
     public AmmoUi ammoUiScript;
 
+    [SerializeField]
+    private GameObject rsIcon;
+
+    [SerializeField]
+    private GameObject lsIcon;
+
+    private bool showLS, showRS;
+
     public void ResetData()
     {
         //this should be called by "InGameManagerScript"
@@ -171,6 +179,9 @@ public class playerScript : MonoBehaviour
         SelectedIndex = 0;
         selectableObjects[0].GetComponent<GenericBlockScript>().ShowOutline(true);
         ammoUiScript.OnRoundStart();
+
+        StartCoroutine(showLSIcon());
+        StartCoroutine(showRSIcon());
     }
 
     public void setAmmo(int amount)
@@ -307,6 +318,76 @@ public class playerScript : MonoBehaviour
         locationThreeFree = true;
 
         rotationMarker.transform.position = defaultRotationMarkerPosition;
+    }
+
+    private IEnumerator showLSIcon()
+    {
+        if (!fightingStage)
+        {
+            if (!showLS)
+            {
+                lsIcon.SetActive(false);
+            }
+
+            yield return new WaitForSeconds(3f);
+
+            if (showLS)
+            {
+                lsIcon.SetActive(true);
+                StartCoroutine(showLSIcon());
+            }
+
+            else if (!showLS)
+            {
+                if (lsIcon.activeSelf == true)
+                {
+                    lsIcon.SetActive(false);
+                }
+            }
+        }
+
+        else
+        {
+            lsIcon.SetActive(false);
+            StopCoroutine(showLSIcon());
+        }
+    }
+
+    private IEnumerator showRSIcon()
+    {
+        if (fightingStage)
+        {
+            if (!showRS)
+            {
+                rsIcon.SetActive(false);
+            }
+
+            showRS = true;
+
+            yield return new WaitForSeconds(3f);
+
+
+            if (showRS)
+            {
+                rsIcon.SetActive(true);
+                StartCoroutine(showRSIcon());
+            }
+
+            else if (!showRS)
+            {
+                if (rsIcon.activeSelf == true)
+                {
+                    rsIcon.SetActive(false);
+                }
+            }
+        }
+
+        else
+        {
+            rsIcon.SetActive(false);
+            yield return new WaitForSeconds(1f);
+            StartCoroutine(showRSIcon());
+        }
     }
 
     public void ProjInHandVisible(bool show)
@@ -673,6 +754,7 @@ public class playerScript : MonoBehaviour
         {
             if (rightStickMoveVector.x != 0 || rightStickMoveVector.y != 0)
             {
+
                 FireMarkerMoveVector = (Vector3.up * rightStickMoveVector.x + Vector3.left * rightStickMoveVector.y);
 
                 Quaternion rot = quaternion.LookRotation(Vector3.forward, FireMarkerMoveVector);
@@ -682,7 +764,11 @@ public class playerScript : MonoBehaviour
                 if ((temp >= MinAngle*Mathf.Deg2Rad) && (temp <= MaxAngle * Mathf.Deg2Rad))
                 {
                     //clammping
-                    fireMarker.transform.rotation = rot;
+                    if (fireMarker.transform.rotation != rot)
+                    {
+                        fireMarker.transform.rotation = rot;
+                        showRS = false;
+                    }
                 }
             }
         }
@@ -727,6 +813,35 @@ public class playerScript : MonoBehaviour
     {
         handleLeftStick();
         handleRightStick();
+    }
+
+    private void Update()
+    {
+        if (!fightingStage)
+        {
+            if ((leftStickMoveVector.x == 0) || (leftStickMoveVector.y == 0))
+            {
+                showLS = true;
+            }
+        }
+
+        if(fightingStage)
+        {
+            if(showLS == true)
+            {
+                showLS = false;
+                lsIcon.SetActive(false);
+            }
+        }
+
+        if ((leftStickMoveVector.x != 0) || (leftStickMoveVector.y != 0))
+        {
+            if (lsIcon.activeSelf == true)
+            {
+                showLS = false;
+                lsIcon.SetActive(false);
+            }
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
