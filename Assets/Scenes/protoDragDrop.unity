@@ -68419,7 +68419,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1303902994}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a2f1df829cc07645abe01b5afce4d3c, type: 3}
   m_Name: 
@@ -68734,7 +68734,6 @@ MonoBehaviour:
   - {fileID: 754998917}
   - {fileID: 60505297}
   - {fileID: 351094414}
-  rightToLeft: 1
   coconutImagesList: []
   coolDownBarsActive: []
 --- !u!1 &1306023881
@@ -97276,7 +97275,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1865346978}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a2f1df829cc07645abe01b5afce4d3c, type: 3}
   m_Name: 
@@ -97491,10 +97490,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coconutImages:
-  - {fileID: 2081052656}
-  - {fileID: 1231802699}
   - {fileID: 796725420}
-  rightToLeft: 0
+  - {fileID: 1231802699}
+  - {fileID: 2081052656}
   coconutImagesList: []
   coolDownBarsActive: []
 --- !u!1 &1869428360
@@ -98750,13 +98748,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1925082075}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: -0.707, y: 0.469, z: 0}
+  m_LocalRotation: {x: 1, y: 0, z: 0, w: 0}
+  m_LocalPosition: {x: -0.677, y: 0.03, z: 0}
   m_LocalScale: {x: 0.08, y: 0.08, z: 0.16}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 231040012}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: -180}
 --- !u!212 &1925082078
 SpriteRenderer:
   m_ObjectHideFlags: 0
