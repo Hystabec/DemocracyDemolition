@@ -389,6 +389,7 @@ public class playerScript : MonoBehaviour
 
             if (showRS)
             {
+                Debug.Log("Yo");
                 rsIcon.SetActive(true);
                 StartCoroutine(showRSIcon());
             }
