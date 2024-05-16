@@ -31,7 +31,8 @@ public class GenericBlockScript : MonoBehaviour
     [SerializeField]
     UnityEvent<Collider2D> onTriggerEnterFunc, onTriggerExitFunc, onTriggerStayFunc;
 
-    ParticleSystem placeEffect = null;
+    ParticleSystem redPlaceEffect = null;
+    ParticleSystem bluePlaceEffect = null;
 
     [HideInInspector]
     public bool isPlacing;
@@ -41,7 +42,8 @@ public class GenericBlockScript : MonoBehaviour
     void Awake()
     {
         outline = gameObject.transform.Find("outline")?.gameObject;
-        placeEffect = gameObject.transform.Find("PlaceEffect")?.gameObject.GetComponent<ParticleSystem>();
+        redPlaceEffect = gameObject.transform.Find("RedPlaceEffect")?.gameObject.GetComponent<ParticleSystem>();
+        bluePlaceEffect = gameObject.transform.Find("bluePlaceEffect")?.gameObject.GetComponent<ParticleSystem>();
 
         defaultColour = gameObject.GetComponent<SpriteRenderer>().color;
 
@@ -120,9 +122,9 @@ public class GenericBlockScript : MonoBehaviour
             collider.enabled = true;
         }
 
-        if (placeEffect != null)
+        if (redPlaceEffect != null)
         {
-            placeEffect.Play();
+            redPlaceEffect.Play();
         }
 
         //convers the layerMask into a usable layer int

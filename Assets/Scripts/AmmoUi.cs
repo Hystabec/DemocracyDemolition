@@ -10,6 +10,9 @@ public class AmmoUi : MonoBehaviour
     [SerializeField]
     private GameObject[] coconutImages;
 
+    [SerializeField]
+    private GameObject rtIcon;
+
     public List<GameObject> coconutImagesList;
 
     public List<Image> coolDownBarsActive;
@@ -22,6 +25,8 @@ public class AmmoUi : MonoBehaviour
 
     bool added = false;
 
+    bool onFightStage;
+
 
     void Start()
     {
@@ -30,6 +35,7 @@ public class AmmoUi : MonoBehaviour
 
     public void OnRoundStart()
     {
+        onFightStage = false;
         coconutImagesList = new List<GameObject>(coconutImages);
        
         foreach (var image in coconutImagesList)
@@ -57,6 +63,7 @@ public class AmmoUi : MonoBehaviour
 
 
         onCooldown = false;
+        rtIcon.SetActive(false);
     }
 
     public void OnFightStage()
@@ -66,6 +73,9 @@ public class AmmoUi : MonoBehaviour
             image.GetComponent<SpriteRenderer>().enabled = true;
         }
 
+        //rtIcon.GetComponent<Image>().enabled = true;
+        rtIcon.SetActive(true);
+        onFightStage = true;
     }
 
     // Update is called once per frame
@@ -99,6 +109,11 @@ public class AmmoUi : MonoBehaviour
             }
             onCooldown = true;
         }
+
+        //rtIcon.GetComponent<Image>().enabled = false;
+        rtIcon.SetActive(false);
+
+
     }
 
     public void EnabledThrowing()
@@ -115,6 +130,13 @@ public class AmmoUi : MonoBehaviour
 
             onCooldown = false;
         }
+
+        //   rtIcon.GetComponent<Image>().enabled = true;
+        if (onFightStage)
+        {
+            rtIcon.SetActive(true);
+        }
+
     }
 
     void CooldownBar()

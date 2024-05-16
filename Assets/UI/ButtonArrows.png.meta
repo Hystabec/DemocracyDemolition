@@ -93,19 +93,6 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -124,8 +111,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6901acc9d9b92d042868d0b8954e0045
-      internalID: -1129527752
+      spriteID: cd4c4612ce414024f88f6a57d9f0ca58
+      internalID: 187384606
       vertices: []
       indices: 
       edges: []
@@ -145,8 +132,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cdd190eee28cf2340b083b9139a2ff18
-      internalID: 998870577
+      spriteID: a5cfb2d71a39d1b41acf8bbe0ef76b80
+      internalID: 1783771870
       vertices: []
       indices: 
       edges: []
@@ -162,8 +149,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      ButtonArrows_0: -1129527752
-      ButtonArrows_1: 998870577
+      ButtonArrows_0: 187384606
+      ButtonArrows_1: 1783771870
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

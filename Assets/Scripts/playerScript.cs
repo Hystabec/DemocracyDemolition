@@ -107,6 +107,8 @@ public class playerScript : MonoBehaviour
 
     private bool canThrow = true;
     public bool gameEnded;
+    private bool rsIconRunning = false;
+
   /*
     private bool onCooldown;
 
@@ -117,6 +119,14 @@ public class playerScript : MonoBehaviour
 
     [SerializeField]
     public AmmoUi ammoUiScript;
+
+    [SerializeField]
+    private GameObject rsIcon;
+
+    [SerializeField]
+    private GameObject lsIcon;
+
+    private bool showLS, showRS;
 
     public void ResetData()
     {
@@ -169,6 +179,7 @@ public class playerScript : MonoBehaviour
     {
         //called by the InGameManagerScript at the start of the round when blocks have been added - should probably do through unity events
         gameEnded = false;
+        fightingStage = false;
 
         SelectedIndex = 0;
 
@@ -180,6 +191,12 @@ public class playerScript : MonoBehaviour
 
         selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().ShowOutline(true);
         ammoUiScript.OnRoundStart();
+
+        showLS = true;
+        lsIcon.SetActive(true);
+        showRS = false;
+
+        StartCoroutine(showLSIcon());
     }
 
     public void setAmmo(int amount)
@@ -316,6 +333,81 @@ public class playerScript : MonoBehaviour
         locationThreeFree = true;
 
         rotationMarker.transform.position = defaultRotationMarkerPosition;
+    }
+
+    private IEnumerator showLSIcon()
+    {
+        if (!fightingStage)
+        {
+            if (!showLS)
+            {
+                 lsIcon.SetActive(false);
+               // lsIcon.GetComponent<UnityEngine.UI.Image>().enabled = false;
+            }
+
+            yield return new WaitForSeconds(3f);
+
+            if (showLS)
+            {
+                lsIcon.SetActive(true);
+               // lsIcon.GetComponent<UnityEngine.UI.Image>().enabled = true;
+                StartCoroutine(showLSIcon());
+            }
+
+            else if (!showLS)
+            {
+                if (lsIcon.activeSelf == true)
+                {
+                    lsIcon.SetActive(false);
+                    //lsIcon.GetComponent<UnityEngine.UI.Image>().enabled = false;
+                }
+            }
+        }
+
+        else
+        {
+            lsIcon.SetActive(false);
+           // lsIcon.GetComponent<UnityEngine.UI.Image>().enabled = false;
+            StopCoroutine(showLSIcon());
+        }
+    }
+
+    private IEnumerator showRSIcon()
+    {
+        rsIconRunning = true;
+        if (fightingStage)
+        {
+            if (!showRS)
+            {
+                rsIcon.SetActive(false);
+            }
+
+            showRS = true;
+
+            yield return new WaitForSeconds(3f);
+
+
+            if (showRS)
+            {
+                rsIcon.SetActive(true);
+                StartCoroutine(showRSIcon());
+            }
+
+            else if (!showRS)
+            {
+                if (rsIcon.activeSelf == true)
+                {
+                    rsIcon.SetActive(false);
+                }
+            }
+        }
+
+        else
+        {
+            rsIconRunning = false;
+            StopCoroutine(showRSIcon());
+
+        }
     }
 
     public void ProjInHandVisible(bool show)
@@ -702,6 +794,7 @@ public class playerScript : MonoBehaviour
         {
             if (rightStickMoveVector.x != 0 || rightStickMoveVector.y != 0)
             {
+
                 FireMarkerMoveVector = (Vector3.up * rightStickMoveVector.x + Vector3.left * rightStickMoveVector.y);
 
                 Quaternion rot = quaternion.LookRotation(Vector3.forward, FireMarkerMoveVector);
@@ -711,7 +804,11 @@ public class playerScript : MonoBehaviour
                 if ((temp >= MinAngle*Mathf.Deg2Rad) && (temp <= MaxAngle * Mathf.Deg2Rad))
                 {
                     //clammping
-                    fireMarker.transform.rotation = rot;
+                    if (fireMarker.transform.rotation != rot)
+                    {
+                        fireMarker.transform.rotation = rot;
+                        showRS = false;
+                    }
                 }
             }
         }
@@ -756,6 +853,42 @@ public class playerScript : MonoBehaviour
     {
         handleLeftStick();
         handleRightStick();
+    }
+
+    private void Update()
+    {
+        if (!fightingStage)
+        {
+            if ((leftStickMoveVector.x == 0) || (leftStickMoveVector.y == 0))
+            {
+                showLS = true;
+            }
+        }
+
+        if (fightingStage)
+        {
+            if (!rsIconRunning)
+            {
+                StartCoroutine(showRSIcon());
+            }
+
+            if (showLS == true)
+            {
+                showLS = false;
+                lsIcon.SetActive(false);
+              //  lsIcon.GetComponent<UnityEngine.UI.Image>().enabled = false;
+            }
+        }
+
+        if ((leftStickMoveVector.x != 0) || (leftStickMoveVector.y != 0))
+        {
+            if (lsIcon.activeSelf == true)
+            {
+                showLS = false;
+                lsIcon.SetActive(false);
+               // lsIcon.GetComponent<UnityEngine.UI.Image>().enabled = false;
+            }
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
