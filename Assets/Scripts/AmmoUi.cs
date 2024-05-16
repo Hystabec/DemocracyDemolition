@@ -10,9 +10,6 @@ public class AmmoUi : MonoBehaviour
     [SerializeField]
     private GameObject[] coconutImages;
 
-    [SerializeField]
-    private bool rightToLeft;
-
     public List<GameObject> coconutImagesList;
 
     public List<Image> coolDownBarsActive;
@@ -45,16 +42,10 @@ public class AmmoUi : MonoBehaviour
             }
         }
 
-        if (rightToLeft)
-        {
-            ammoUsed = 2;
-        }
 
-        else
-        {
-            ammoUsed = 0;
-        }
-       
+        ammoUsed = 2;
+        
+
         if(coolDownBarsActive != null)
         {
             foreach(var image in coolDownBarsActive)
@@ -88,13 +79,10 @@ public class AmmoUi : MonoBehaviour
         coconutImagesList[ammoUsed].GetComponent<SpriteRenderer>().enabled = false;
         coconutImagesList.Remove(coconutImagesList[ammoUsed]);
 
-        if (rightToLeft)
-        {
-            ammoUsed--;
-        }
 
-        else
-            ammoUsed++;
+        ammoUsed--;
+        
+
     }
 
     public void DisabledThrowing()
