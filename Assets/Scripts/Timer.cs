@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class Timer : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class Timer : MonoBehaviour
 
     [SerializeField]
     Animator timeText;
+
+
+    UnityEvent timerEndedEvent = new();
 
     public void timerReset()
     {
@@ -46,7 +50,7 @@ public class Timer : MonoBehaviour
         if (!timerRunning)
             return;
 
-        if (currentTime >= 1f)
+        if (currentTime >= 0f)
         {
             currentTime -= Time.deltaTime;
         }
@@ -60,6 +64,12 @@ public class Timer : MonoBehaviour
                 animTriggered = true;
             }
         }
+
+        if(currentTime <= 0)
+        {
+            timerFinished();
+            timerRunning = false;
+        }
     }
 
     void UpdateTimerText()
@@ -69,5 +79,15 @@ public class Timer : MonoBehaviour
         string timeString = string.Format("{0}", roundSeconds);
 
         timerText.text = timeString;
+    }
+
+    public void AddListener(UnityAction eventToAdd)
+    {
+        timerEndedEvent.AddListener(eventToAdd);
+    }
+
+    void timerFinished()
+    {
+        timerEndedEvent.Invoke();
     }
 }

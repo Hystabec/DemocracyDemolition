@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using UnityEngine.Events;
 
 class BAT
 {
@@ -106,6 +107,8 @@ public class InGameManagerScript : MonoBehaviour
     void Awake()
     {
         rbs = GetComponent<randomBlockSpawn>();
+
+        timerScript.AddListener(RoundTimeEnd);
     }
 
     public void pcControlOverride()
@@ -136,7 +139,7 @@ public class InGameManagerScript : MonoBehaviour
 
     public IEnumerator ResetGame()
     {
-        StopCoroutine(RoundTime());
+        //StopCoroutine(RoundTime());
 
         player1.GetComponent<playerScript>().ResetData();
         player2.GetComponent<playerScript>().ResetData();
@@ -281,7 +284,7 @@ public class InGameManagerScript : MonoBehaviour
             gameHasEnded = true;
         }  
 
-        StopCoroutine("RoundTime");
+        //StopCoroutine("RoundTime");
 
         endRound();
        
@@ -364,13 +367,12 @@ public class InGameManagerScript : MonoBehaviour
         player1.GetComponent<playerScript>().thrownProjectiles.Clear();
         player2.GetComponent<playerScript>().thrownProjectiles.Clear();
 
+        //timerScript.StartTime();
+        StartCoroutine(endOfFrame());
+
         StartCoroutine(TimeBeforeFighting());
 
-        timerScript.StartTime();
-
         timerScript.animTriggered = false;
-
-
     }
 
     void endRound()
@@ -537,7 +539,7 @@ public class InGameManagerScript : MonoBehaviour
 
         if (currentRound > 1)
         {
-            ammoTextAnim.SetTrigger("FadeOut");
+            //ammoTextAnim.SetTrigger("FadeOut");
         }
 
         yield return new WaitForSecondsRealtime(timeBeforeFighting);
@@ -552,20 +554,31 @@ public class InGameManagerScript : MonoBehaviour
         fightIcons.SetActive(true);
         buildIcons.SetActive(false);
         fightAnim.SetTrigger("Fight");
-        ammoTextAnim.SetTrigger("FadeIn");
+        //ammoTextAnim.SetTrigger("FadeIn");
         roundTextAnim.SetTrigger("Fight");
 
         player1.GetComponent<playerScript>().ammoUiScript.OnFightStage();
         player2.GetComponent<playerScript>().ammoUiScript.OnFightStage();
 
-        StartCoroutine("RoundTime");
-
+        //StartCoroutine("RoundTime");
     }
 
-    private IEnumerator RoundTime()
+    //private IEnumerator RoundTime()
+    //{
+    //    yield return new WaitForSecondsRealtime(roundTime);
+    //    //Debug.Log("Rounded ended by IEnumerator timer");
+    //    endRound();
+    //}
+
+    IEnumerator endOfFrame()
     {
-        yield return new WaitForSecondsRealtime(roundTime);
-        //Debug.Log("Rounded ended by timer");
+        yield return new WaitForEndOfFrame();
+        timerScript.StartTime();
+    }
+
+    void RoundTimeEnd()
+    {
+        //Debug.Log("Round ended by timer");
         endRound();
     }
 }

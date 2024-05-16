@@ -86606,7 +86606,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCam: {fileID: 313012571}
   roundTime: 20
-  timeBeforeFighting: 11
+  timeBeforeFighting: 10
   roundsNeededToWin: 4
   player1: {fileID: 1303902994}
   player2: {fileID: 1865346978}
@@ -86743,7 +86743,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1f672149b05f08469e32629323f63f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roundTime: 26
+  roundTime: 25.5
   animTriggered: 0
   timerText: {fileID: 4271247}
   timeText: {fileID: 4271249}
