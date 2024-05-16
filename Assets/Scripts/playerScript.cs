@@ -105,6 +105,8 @@ public class playerScript : MonoBehaviour
 
     private bool canThrow = true;
     public bool gameEnded;
+    private bool rsIconRunning = false;
+
   /*
     private bool onCooldown;
 
@@ -175,13 +177,17 @@ public class playerScript : MonoBehaviour
     {
         //called by the InGameManagerScript at the start of the round when blocks have been added - should probably do through unity events
         gameEnded = false;
+        fightingStage = false;
 
         SelectedIndex = 0;
         selectableObjects[0].GetComponent<GenericBlockScript>().ShowOutline(true);
         ammoUiScript.OnRoundStart();
 
+        showLS = true;
+        lsIcon.SetActive(true);
+        showRS = false;
+
         StartCoroutine(showLSIcon());
-        StartCoroutine(showRSIcon());
     }
 
     public void setAmmo(int amount)
@@ -326,7 +332,8 @@ public class playerScript : MonoBehaviour
         {
             if (!showLS)
             {
-                lsIcon.SetActive(false);
+                 lsIcon.SetActive(false);
+               // lsIcon.GetComponent<UnityEngine.UI.Image>().enabled = false;
             }
 
             yield return new WaitForSeconds(3f);
@@ -334,6 +341,7 @@ public class playerScript : MonoBehaviour
             if (showLS)
             {
                 lsIcon.SetActive(true);
+               // lsIcon.GetComponent<UnityEngine.UI.Image>().enabled = true;
                 StartCoroutine(showLSIcon());
             }
 
@@ -342,6 +350,7 @@ public class playerScript : MonoBehaviour
                 if (lsIcon.activeSelf == true)
                 {
                     lsIcon.SetActive(false);
+                    //lsIcon.GetComponent<UnityEngine.UI.Image>().enabled = false;
                 }
             }
         }
@@ -349,12 +358,14 @@ public class playerScript : MonoBehaviour
         else
         {
             lsIcon.SetActive(false);
+           // lsIcon.GetComponent<UnityEngine.UI.Image>().enabled = false;
             StopCoroutine(showLSIcon());
         }
     }
 
     private IEnumerator showRSIcon()
     {
+        rsIconRunning = true;
         if (fightingStage)
         {
             if (!showRS)
@@ -384,9 +395,9 @@ public class playerScript : MonoBehaviour
 
         else
         {
-            rsIcon.SetActive(false);
-            yield return new WaitForSeconds(1f);
-            StartCoroutine(showRSIcon());
+            rsIconRunning = false;
+            StopCoroutine(showRSIcon());
+
         }
     }
 
@@ -825,12 +836,18 @@ public class playerScript : MonoBehaviour
             }
         }
 
-        if(fightingStage)
+        if (fightingStage)
         {
-            if(showLS == true)
+            if (!rsIconRunning)
+            {
+                StartCoroutine(showRSIcon());
+            }
+
+            if (showLS == true)
             {
                 showLS = false;
                 lsIcon.SetActive(false);
+              //  lsIcon.GetComponent<UnityEngine.UI.Image>().enabled = false;
             }
         }
 
@@ -840,6 +857,7 @@ public class playerScript : MonoBehaviour
             {
                 showLS = false;
                 lsIcon.SetActive(false);
+               // lsIcon.GetComponent<UnityEngine.UI.Image>().enabled = false;
             }
         }
     }
