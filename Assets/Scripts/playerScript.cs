@@ -28,6 +28,8 @@ public class playerScript : MonoBehaviour
 
     int assignedControllerIndex = -1;
 
+    [SerializeField] float leftStickDeadZone = 0.2f;
+
     int UIElementIndex = 0;
     List<GameObject> listOfUIElements = new List<GameObject>();
 
@@ -169,7 +171,14 @@ public class playerScript : MonoBehaviour
         gameEnded = false;
 
         SelectedIndex = 0;
-        selectableObjects[0].GetComponent<GenericBlockScript>().ShowOutline(true);
+
+        if (thisPlayerIndex == 0)
+        {
+            selectableObjects.Reverse();
+            SelectedIndex = selectableObjects.Count - 1;
+        }
+
+        selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().ShowOutline(true);
         ammoUiScript.OnRoundStart();
     }
 
@@ -330,31 +339,37 @@ public class playerScript : MonoBehaviour
         {
             if (!hasBeenSelected)
             {
-                hasBeenSelected = true;
-                selectedBlockLocation = selectableObjects[SelectedIndex].transform.position;
-                selectedBlockRotation = selectableObjects[SelectedIndex].transform.rotation;
-                selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().CurrentlyPlacing(true);
-            }
-            else if (selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().CanPlaceBlock())
-            {
-                //remvoe the selected object from the list - it has been placed
-                selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().ShowOutline(false);
-                selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().Placed();
-
-                placedBlocks.Add(selectableObjects[SelectedIndex]);
-
-                selectableObjects.RemoveAt(SelectedIndex);
-
-                rotationMarker.transform.position = defaultRotationMarkerPosition;
-
-                SelectedIndex = 0;
-
-                if (selectableObjects.Count != 0)
+                if (selectableObjects.Count > 0)
                 {
-                    selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().ShowOutline(true);
+                    hasBeenSelected = true;
+                    selectedBlockLocation = selectableObjects[SelectedIndex].transform.position;
+                    selectedBlockRotation = selectableObjects[SelectedIndex].transform.rotation;
+                    selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().CurrentlyPlacing(true);
                 }
+            }
+            else
+            {
+                if (selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().CanPlaceBlock())
+                {
+                    //remvoe the selected object from the list - it has been placed
+                    selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().ShowOutline(false);
+                    selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().Placed();
 
-                hasBeenSelected = false;
+                    placedBlocks.Add(selectableObjects[SelectedIndex]);
+
+                    selectableObjects.RemoveAt(SelectedIndex);
+
+                    rotationMarker.transform.position = defaultRotationMarkerPosition;
+
+                    SelectedIndex = 0;
+
+                    if (selectableObjects.Count != 0)
+                    {
+                        selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().ShowOutline(true);
+                    }
+
+                    hasBeenSelected = false;
+                }
             }
         }
     }
@@ -573,24 +588,35 @@ public class playerScript : MonoBehaviour
             {
                 if(canSwap)
                 {
-                    if (leftStickMoveVector.x != 0 && leftStickMoveVector.x > 0)
+                    if (leftStickMoveVector.y > 0)
                     {
+                        //hide old selected elements
+                        listOfUIElements[UIElementIndex].GetComponent<GenericUIButton>().HideHovered();
+
                         UIElementIndex--;
 
                         if(UIElementIndex < 0)
                             UIElementIndex = listOfUIElements.Count - 1;
 
+                        //show new selected elements
+                        listOfUIElements[UIElementIndex].GetComponent<GenericUIButton>().ShowHovered();
+
                         canSwap = false;
 
                         StartCoroutine(waitToSwap());
                     }
-                    else if (leftStickMoveVector.x != 0 && leftStickMoveVector.x < 0)
+                    else if (leftStickMoveVector.y < 0)
                     {
+                        //hide old selected elements
+                        listOfUIElements[UIElementIndex].GetComponent<GenericUIButton>().HideHovered();
 
                         UIElementIndex++;
 
                         if (UIElementIndex >= listOfUIElements.Count)
                             UIElementIndex = 0;
+
+                        //show new selected elements
+                        listOfUIElements[UIElementIndex].GetComponent<GenericUIButton>().ShowHovered();
 
                         canSwap = false;
 
@@ -604,9 +630,12 @@ public class playerScript : MonoBehaviour
             //this could probably be done better, but oh well it works :)
             if (!hasBeenSelected)
             {
+                if (selectableObjects.Count <= 0 || selectableObjects.Count < SelectedIndex)
+                    return;
+
                 if (canSwap)
                 {
-                    if (leftStickMoveVector.x != 0 && leftStickMoveVector.x > 0)
+                    if (leftStickMoveVector.x > 0 + leftStickDeadZone)
                     {
                         GenericBlockScript bs = selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>();
                         bs.ShowOutline(false);
@@ -629,7 +658,7 @@ public class playerScript : MonoBehaviour
 
                         StartCoroutine(waitToSwap());
                     }
-                    else if (leftStickMoveVector.x != 0 && leftStickMoveVector.x < 0)
+                    else if (leftStickMoveVector.x < 0 - leftStickDeadZone)
                     {
                         GenericBlockScript bs = selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>();
                         bs.ShowOutline(false);
@@ -653,7 +682,7 @@ public class playerScript : MonoBehaviour
 
                         StartCoroutine(waitToSwap());
                     }
-                }
+                }  
             }
             else
             {

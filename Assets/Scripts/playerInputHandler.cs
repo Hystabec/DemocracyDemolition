@@ -13,11 +13,15 @@ public class playerInputHandler : MonoBehaviour
     void Awake()
     {
         pInput = GetComponent<PlayerInput>();
-        var PScripts = FindObjectsOfType<playerScript>();
         mPlayerIndex = pInput.playerIndex;
-        
+
+        var PScripts = FindObjectsOfType<playerScript>();
         PScript = PScripts.FirstOrDefault(m => m.getPlayerIndex() == mPlayerIndex);
-        PScript.SetAssignedControllerIndex(mPlayerIndex);
+
+        if (PScript == null)
+            Destroy(this.gameObject);
+        else
+            PScript.SetAssignedControllerIndex(mPlayerIndex);
     }
 
     void OnA()

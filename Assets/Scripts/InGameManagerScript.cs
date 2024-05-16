@@ -136,6 +136,8 @@ public class InGameManagerScript : MonoBehaviour
 
     public IEnumerator ResetGame()
     {
+        StopCoroutine(RoundTime());
+
         player1.GetComponent<playerScript>().ResetData();
         player2.GetComponent<playerScript>().ResetData();
 
