@@ -64,13 +64,13 @@ public class TNTScript : MonoBehaviour
 
                         //if its placed it can be deleted
                         if(GBS.IsPlaced())
-                            Destroy(col.gameObject);
+                            Destroy(col.gameObject.transform.root.gameObject);
                     }
                     else if(col.gameObject.layer == LayerMask.NameToLayer("projectile"))
                     {
                         //if its anything else delete it 
 
-                        Destroy(col.gameObject);
+                        col.gameObject.GetComponent<pooledProjectileScript>().DespawnProjectile();
                     }  
                 }
             }

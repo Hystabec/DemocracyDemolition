@@ -14,6 +14,14 @@ public class pooledProjectileScript : MonoBehaviour
     [SerializeField]
     GameObject coconutParticles;
 
+    public void DespawnProjectile()
+    {
+        if (owner != null)
+            owner.despawnProjectile(this.gameObject);
+        else
+            gameObject.SetActive(false);
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         bounceCount++;

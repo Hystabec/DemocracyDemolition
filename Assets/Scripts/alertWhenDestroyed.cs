@@ -6,7 +6,7 @@ public class alertWhenDestroyed : MonoBehaviour
 {
     void OnDestroy()
     {
-        Debug.LogError(gameObject.name + " destroyed - if tiggered let me (Eddie) what you did to cause it");
+        Debug.LogError(gameObject.name + " destroyed");
         Debug.Break();
     }
 }
