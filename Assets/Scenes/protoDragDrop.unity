@@ -59854,7 +59854,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 971340152}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -69804,8 +69804,6 @@ MonoBehaviour:
   - {fileID: 60505297}
   - {fileID: 351094414}
   rtIcon: {fileID: 1882430778}
-  lsIcon: {fileID: 0}
-  rsIcon: {fileID: 0}
   coconutImagesList: []
   coolDownBarsActive: []
 --- !u!1 &1306023881
@@ -98787,8 +98785,6 @@ MonoBehaviour:
   - {fileID: 1231802699}
   - {fileID: 2081052656}
   rtIcon: {fileID: 971340152}
-  lsIcon: {fileID: 0}
-  rsIcon: {fileID: 0}
   coconutImagesList: []
   coolDownBarsActive: []
 --- !u!1 &1869428360
@@ -99104,7 +99100,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1882430778}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
