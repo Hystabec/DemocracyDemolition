@@ -45,8 +45,7 @@ public class TNTScript : MonoBehaviour
 
     public void CustomOnCollisionEnter2D(Collision2D other)
     {
-        if(gbs.IsPlaced()) 
-            screenShakeScript.TriggerShake();
+ 
 
         if (other.gameObject.layer == LayerMask.NameToLayer("projectile"))
         {
@@ -77,6 +76,7 @@ public class TNTScript : MonoBehaviour
                     }  
                 }
             }
+            screenShakeScript.TriggerShake();
         }
     }
 }
