@@ -560,6 +560,8 @@ public class InGameManagerScript : MonoBehaviour
         player1.GetComponent<playerScript>().ammoUiScript.OnFightStage();
         player2.GetComponent<playerScript>().ammoUiScript.OnFightStage();
 
+        timerScript.SwitchToFight();
+
         //StartCoroutine("RoundTime");
     }
 
