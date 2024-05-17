@@ -195,6 +195,7 @@ public class playerScript : MonoBehaviour
         showLS = true;
         lsIcon.SetActive(true);
         showRS = false;
+        rsIcon.SetActive(false);
 
         StartCoroutine(showLSIcon());
     }
@@ -382,10 +383,9 @@ public class playerScript : MonoBehaviour
                 rsIcon.SetActive(false);
             }
 
-            showRS = true;
-
             yield return new WaitForSeconds(3f);
-
+            
+            showRS = true;
 
             if (showRS)
             {
@@ -863,6 +863,18 @@ public class playerScript : MonoBehaviour
             {
                 showLS = true;
             }
+
+            if (showRS)
+            {
+                showRS = false;
+                if (rsIcon.activeSelf == true)
+                {
+                    rsIcon.SetActive(false);
+                }
+
+            }
+
+
         }
 
         if (fightingStage)
@@ -877,6 +889,16 @@ public class playerScript : MonoBehaviour
                 showLS = false;
                 lsIcon.SetActive(false);
               //  lsIcon.GetComponent<UnityEngine.UI.Image>().enabled = false;
+            }
+
+            if(showRS == false)
+            {
+                showRS = false;
+
+                if(rsIcon.activeSelf == true)
+                {
+                    rsIcon.SetActive(false);
+                }
             }
         }
 
