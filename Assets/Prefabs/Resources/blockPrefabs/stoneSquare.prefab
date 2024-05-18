@@ -386,6 +386,8 @@ MonoBehaviour:
   type: 1
   TotalBlockHealth: 3
   breakable: 1
+  damagedSprite1: {fileID: -378678107, guid: 4b81a06c3c363054a9573f815b4cc593, type: 3}
+  damagedSprite2: {fileID: -643801090, guid: 4b81a06c3c363054a9573f815b4cc593, type: 3}
   hitEffect: {fileID: 5463619109902700756}
   blockHitSound: {fileID: 8300000, guid: 787827a9f77b59640b75d0d2f3fce776, type: 3}
   aSource: {fileID: -8754529125025624596}
