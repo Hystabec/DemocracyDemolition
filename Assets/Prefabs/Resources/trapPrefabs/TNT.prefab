@@ -10145,6 +10145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionRadius: 2
   aoe: {fileID: 107330722128182832}
+  Explosion: {fileID: 3031242192633059290, guid: 497e811b130fe0646a3cdaa42cb7e54c, type: 3}
 --- !u!50 &8585537266684121296
 Rigidbody2D:
   serializedVersion: 4

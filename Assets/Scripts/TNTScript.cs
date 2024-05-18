@@ -16,6 +16,9 @@ public class TNTScript : MonoBehaviour
 
     private GenericBlockScript gbs;
 
+    [SerializeField]
+    GameObject Explosion;
+
     private void Awake()
     {
         screenShakeScript = FindAnyObjectByType<screenShake>();
@@ -49,7 +52,7 @@ public class TNTScript : MonoBehaviour
         {
             Collider2D[] goInRadius = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
 
-            foreach(Collider2D col in goInRadius)
+            foreach (Collider2D col in goInRadius)
             {
                 if(col.gameObject.layer == LayerMask.NameToLayer("projectile") || 
                     col.gameObject.layer == LayerMask.NameToLayer("Block") || 
@@ -64,12 +67,12 @@ public class TNTScript : MonoBehaviour
 
                         //if its placed it can be deleted
                         if(GBS.IsPlaced())
-                            Destroy(col.gameObject.transform.root.gameObject);
+                            Instantiate(Explosion, transform.position, Quaternion.identity);
+                        Destroy(col.gameObject.transform.root.gameObject);
                     }
                     else if(col.gameObject.layer == LayerMask.NameToLayer("projectile"))
                     {
                         //if its anything else delete it 
-
                         col.gameObject.GetComponent<pooledProjectileScript>().DespawnProjectile();
                     }  
                 }
