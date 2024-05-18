@@ -23,6 +23,9 @@ public class blockScript : MonoBehaviour
     bool breakable;
 
     [SerializeField]
+    private Sprite damagedSprite1 = null, damagedSprite2 = null;
+
+    [SerializeField]
     private ParticleSystem hitEffect = null;
 
     [SerializeField]
@@ -74,6 +77,23 @@ public class blockScript : MonoBehaviour
                 Debug.Log("hit");
 
                 CurrentBlockHealth--;
+
+                if (CurrentBlockHealth == TotalBlockHealth - 1)
+                {
+                    if (damagedSprite1 != null)
+                    {
+                        GetComponent<SpriteRenderer>().sprite = damagedSprite1;
+                    }
+                }
+
+
+                if (CurrentBlockHealth == TotalBlockHealth - 2)
+                {
+                    if (damagedSprite2 != null)
+                    {
+                        GetComponent<SpriteRenderer>().sprite = damagedSprite2;
+                    }
+                }
 
                 if (CurrentBlockHealth <= 0)
                 {

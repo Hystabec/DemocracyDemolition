@@ -701,9 +701,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd4d6c8020f321743b24e10eef8a4cec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
   TotalBlockHealth: 3
   breakable: 0
-  outline: {fileID: 0}
+  damagedSprite1: {fileID: 0}
+  damagedSprite2: {fileID: 0}
+  hitEffect: {fileID: 0}
+  blockHitSound: {fileID: 0}
+  aSource: {fileID: 0}
 --- !u!114 &844847236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -716,9 +721,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd4d6c8020f321743b24e10eef8a4cec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
   TotalBlockHealth: 3
   breakable: 1
-  outline: {fileID: 134344089}
+  damagedSprite1: {fileID: 0}
+  damagedSprite2: {fileID: 0}
+  hitEffect: {fileID: 0}
+  blockHitSound: {fileID: 0}
+  aSource: {fileID: 0}
 --- !u!50 &844847237
 Rigidbody2D:
   serializedVersion: 4
@@ -952,9 +962,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd4d6c8020f321743b24e10eef8a4cec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
   TotalBlockHealth: 3
   breakable: 0
-  outline: {fileID: 0}
+  damagedSprite1: {fileID: 0}
+  damagedSprite2: {fileID: 0}
+  hitEffect: {fileID: 0}
+  blockHitSound: {fileID: 0}
+  aSource: {fileID: 0}
 --- !u!114 &1005468483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -967,9 +982,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd4d6c8020f321743b24e10eef8a4cec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
   TotalBlockHealth: 2
   breakable: 1
-  outline: {fileID: 483615697}
+  damagedSprite1: {fileID: 0}
+  damagedSprite2: {fileID: 0}
+  hitEffect: {fileID: 0}
+  blockHitSound: {fileID: 0}
+  aSource: {fileID: 0}
 --- !u!50 &1005468484
 Rigidbody2D:
   serializedVersion: 4
@@ -1814,9 +1834,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd4d6c8020f321743b24e10eef8a4cec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
   TotalBlockHealth: 1
   breakable: 1
-  outline: {fileID: 1748317048}
+  damagedSprite1: {fileID: 0}
+  damagedSprite2: {fileID: 0}
+  hitEffect: {fileID: 0}
+  blockHitSound: {fileID: 0}
+  aSource: {fileID: 0}
 --- !u!50 &1868527153
 Rigidbody2D:
   serializedVersion: 4
@@ -1989,9 +2014,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd4d6c8020f321743b24e10eef8a4cec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
   TotalBlockHealth: 3
   breakable: 0
-  outline: {fileID: 1746226455}
+  damagedSprite1: {fileID: 0}
+  damagedSprite2: {fileID: 0}
+  hitEffect: {fileID: 0}
+  blockHitSound: {fileID: 0}
+  aSource: {fileID: 0}
 --- !u!50 &1876984189
 Rigidbody2D:
   serializedVersion: 4
