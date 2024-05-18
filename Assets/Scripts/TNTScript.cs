@@ -44,9 +44,7 @@ public class TNTScript : MonoBehaviour
     }
 
     public void CustomOnCollisionEnter2D(Collision2D other)
-    {
-        screenShakeScript.TriggerShake();
-
+    { 
         if (other.gameObject.layer == LayerMask.NameToLayer("projectile"))
         {
             Collider2D[] goInRadius = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
@@ -66,16 +64,17 @@ public class TNTScript : MonoBehaviour
 
                         //if its placed it can be deleted
                         if(GBS.IsPlaced())
-                            Destroy(col.gameObject);
+                            Destroy(col.gameObject.transform.root.gameObject);
                     }
-                    else
+                    else if(col.gameObject.layer == LayerMask.NameToLayer("projectile"))
                     {
                         //if its anything else delete it 
 
-                        Destroy(col.gameObject);
+                        col.gameObject.GetComponent<pooledProjectileScript>().DespawnProjectile();
                     }  
                 }
             }
+            screenShakeScript.TriggerShake();
         }
     }
 }

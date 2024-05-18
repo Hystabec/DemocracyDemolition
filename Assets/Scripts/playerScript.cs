@@ -26,6 +26,13 @@ public class playerScript : MonoBehaviour
     [SerializeField]
     int thisPlayerIndex = 0;
 
+    int assignedControllerIndex = -1;
+
+    [SerializeField] float leftStickDeadZone = 0.2f;
+
+    int UIElementIndex = 0;
+    List<GameObject> listOfUIElements = new List<GameObject>();
+
     int SelectedIndex = 0;
     List<GameObject> selectableObjects = new List<GameObject>();
 
@@ -84,7 +91,7 @@ public class playerScript : MonoBehaviour
 
     float timeBetweenBothPlayersJoiningAndInputsStarting = 0.2f;
 
-    public Animator anim;
+    public Animator anim, rotationAnim;
 
     [SerializeField]
     TextMeshProUGUI currentAmmoText;
@@ -99,19 +106,27 @@ public class playerScript : MonoBehaviour
     float throwCooldown = 1.5f;
 
     private bool canThrow = true;
+    public bool gameEnded;
+    private bool rsIconRunning = false;
 
-    [SerializeField]
-    private GameObject cantThrowIcon;
-
-    [SerializeField]
-    private UnityEngine.UI.Image cooldownbar;
-
+  /*
     private bool onCooldown;
 
 
-    public bool gameEnded;
 
     float moveTime = 0;
+  */
+
+    [SerializeField]
+    public AmmoUi ammoUiScript;
+
+    [SerializeField]
+    private GameObject rsIcon;
+
+    [SerializeField]
+    private GameObject lsIcon;
+
+    private bool showLS, showRS;
 
     public void ResetData()
     {
@@ -137,6 +152,9 @@ public class playerScript : MonoBehaviour
         {
             Destroy(go);
         }
+
+        ClearUIElements();
+
         placedBlocks.Clear();
 
         selectableObjectsNumber = 0;
@@ -161,11 +179,25 @@ public class playerScript : MonoBehaviour
     {
         //called by the InGameManagerScript at the start of the round when blocks have been added - should probably do through unity events
         gameEnded = false;
+        fightingStage = false;
 
         SelectedIndex = 0;
-        selectableObjects[0].GetComponent<GenericBlockScript>().ShowOutline(true);
 
+        if (thisPlayerIndex == 0)
+        {
+            selectableObjects.Reverse();
+            SelectedIndex = selectableObjects.Count - 1;
+        }
 
+        selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().ShowOutline(true);
+        ammoUiScript.OnRoundStart();
+
+        showLS = true;
+        lsIcon.SetActive(true);
+        showRS = false;
+        rsIcon.SetActive(false);
+
+        StartCoroutine(showLSIcon());
     }
 
     public void setAmmo(int amount)
@@ -181,14 +213,39 @@ public class playerScript : MonoBehaviour
         updateAmmoText();
     }
 
+    public void SetAssignedControllerIndex(int index)
+    {
+        assignedControllerIndex = index;
+    }
+
+    public int GetAssignedControllerIndex()
+    {
+        return assignedControllerIndex;
+    }
+
     public int getPlayerIndex()
     {
         return thisPlayerIndex;
     }
 
-    public void switchMode(modes newMode)
+    //public void switchMode(modes newMode)
+    //{
+    //    StartCoroutine(SwitchEndOfFrame(newMode));
+    //}
+
+    public void SwitchToNoMode()
     {
-        StartCoroutine(SwitchEndOfFrame(newMode));
+        StartCoroutine(SwitchEndOfFrame(modes.None));
+    }
+
+    public void SwitchToUIMode()
+    {
+        StartCoroutine(SwitchEndOfFrame(modes.UI));
+    }
+
+    public void SwitchToPlayMode()
+    {
+        StartCoroutine(SwitchEndOfFrame(modes.Play));
     }
 
     IEnumerator SwitchEndOfFrame(modes newMode) 
@@ -207,6 +264,18 @@ public class playerScript : MonoBehaviour
             // thrownProjectiles.Remove(projectile);
         }
 
+    }
+
+    public void GiveUIElements(List<GameObject> UIList)
+    {
+        listOfUIElements = UIList;
+        UIElementIndex = 0;
+    }
+
+    public void ClearUIElements()
+    {
+        listOfUIElements.Clear();
+        UIElementIndex = 0;
     }
 
     public void AddBlockToList(GameObject blockToAdd)
@@ -263,52 +332,136 @@ public class playerScript : MonoBehaviour
         locationOneFree = true;
         locationTwoFree = true;
         locationThreeFree = true;
+
+        rotationMarker.transform.position = defaultRotationMarkerPosition;
+    }
+
+    private IEnumerator showLSIcon()
+    {
+        if (!fightingStage)
+        {
+            if (!showLS)
+            {
+                 lsIcon.SetActive(false);
+               // lsIcon.GetComponent<UnityEngine.UI.Image>().enabled = false;
+            }
+
+            yield return new WaitForSeconds(3f);
+
+            if (showLS)
+            {
+                lsIcon.SetActive(true);
+               // lsIcon.GetComponent<UnityEngine.UI.Image>().enabled = true;
+                StartCoroutine(showLSIcon());
+            }
+
+            else if (!showLS)
+            {
+                if (lsIcon.activeSelf == true)
+                {
+                    lsIcon.SetActive(false);
+                    //lsIcon.GetComponent<UnityEngine.UI.Image>().enabled = false;
+                }
+            }
+        }
+
+        else
+        {
+            lsIcon.SetActive(false);
+           // lsIcon.GetComponent<UnityEngine.UI.Image>().enabled = false;
+            StopCoroutine(showLSIcon());
+        }
+    }
+
+    private IEnumerator showRSIcon()
+    {
+        rsIconRunning = true;
+        if (fightingStage)
+        {
+            if (!showRS)
+            {
+                rsIcon.SetActive(false);
+            }
+
+            yield return new WaitForSeconds(3f);
+            
+            showRS = true;
+
+            if (showRS)
+            {
+                rsIcon.SetActive(true);
+                StartCoroutine(showRSIcon());
+            }
+
+            else if (!showRS)
+            {
+                if (rsIcon.activeSelf == true)
+                {
+                    rsIcon.SetActive(false);
+                }
+            }
+        }
+
+        else
+        {
+            rsIconRunning = false;
+            StopCoroutine(showRSIcon());
+
+        }
     }
 
     public void ProjInHandVisible(bool show)
     {
-        projInHand.enabled = show;
-        
+        projInHand.enabled = show;  
     }
 
     public void A()
     {
-        if (!(selectableObjects.Count > 0))
-            return;
+        //if (!(selectableObjects.Count > 0))
+        //    return;
 
         if(currentMode == modes.UI)
         {
-
+            if(listOfUIElements.Count > 0)
+            {
+                listOfUIElements[UIElementIndex].GetComponent<GenericUIButton>().ActivateButton();
+            }
         }
         else if (currentMode == modes.Play)
         {
             if (!hasBeenSelected)
             {
-                hasBeenSelected = true;
-                selectedBlockLocation = selectableObjects[SelectedIndex].transform.position;
-                selectedBlockRotation = selectableObjects[SelectedIndex].transform.rotation;
-                selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().CurrentlyPlacing(true);
-            }
-            else if (selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().CanPlaceBlock())
-            {
-                //remvoe the selected object from the list - it has been placed
-                selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().ShowOutline(false);
-                selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().Placed();
-
-                placedBlocks.Add(selectableObjects[SelectedIndex]);
-
-                selectableObjects.RemoveAt(SelectedIndex);
-
-                rotationMarker.transform.position = defaultRotationMarkerPosition;
-
-                SelectedIndex = 0;
-
-                if (selectableObjects.Count != 0)
+                if (selectableObjects.Count > 0)
                 {
-                    selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().ShowOutline(true);
+                    hasBeenSelected = true;
+                    selectedBlockLocation = selectableObjects[SelectedIndex].transform.position;
+                    selectedBlockRotation = selectableObjects[SelectedIndex].transform.rotation;
+                    selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().CurrentlyPlacing(true);
                 }
+            }
+            else
+            {
+                if (selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().CanPlaceBlock())
+                {
+                    //remvoe the selected object from the list - it has been placed
+                    selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().ShowOutline(false);
+                    selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().Placed();
 
-                hasBeenSelected = false;
+                    placedBlocks.Add(selectableObjects[SelectedIndex]);
+
+                    selectableObjects.RemoveAt(SelectedIndex);
+
+                    rotationMarker.transform.position = defaultRotationMarkerPosition;
+
+                    SelectedIndex = 0;
+
+                    if (selectableObjects.Count != 0)
+                    {
+                        selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().ShowOutline(true);
+                    }
+
+                    hasBeenSelected = false;
+                }
             }
         }
     }
@@ -351,6 +504,7 @@ public class playerScript : MonoBehaviour
         else if (currentMode == modes.Play)
         {
             selectableObjects[SelectedIndex].transform.Rotate(new Vector3(0, 0, -selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().GetRotationAmount()));
+            rotationAnim.SetTrigger("Right");
         }
     }
 
@@ -369,6 +523,7 @@ public class playerScript : MonoBehaviour
         else if (currentMode == modes.Play)
         {
             selectableObjects[SelectedIndex].transform.Rotate(new Vector3(0, 0, selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().GetRotationAmount()));
+            rotationAnim.SetTrigger("Left");
         }
     }
 
@@ -443,23 +598,24 @@ public class playerScript : MonoBehaviour
     }
     private IEnumerator ThrowCooldown()
     {
-        onCooldown = true;
         canThrow = false;
-        cantThrowIcon.SetActive(true);
+        ammoUiScript.Thrown();
+        ammoUiScript.DisabledThrowing();
+
         yield return new WaitForSeconds(throwCooldown);
         if (RemainingAmmo > 0)
         {
-            if (!gameEnded)
+            if (fightingStage)
             {
                 ProjInHandVisible(true);
             }
         }
         canThrow = true;
-        cantThrowIcon.SetActive(false);
-        onCooldown = false;
+        ammoUiScript.EnabledThrowing();
 
     }
 
+    /*
     void CooldownBar() 
     {
         if (onCooldown) 
@@ -480,6 +636,7 @@ public class playerScript : MonoBehaviour
 
         }
     }
+    */
 
     public void CanFight(bool canFight)
     {
@@ -514,21 +671,63 @@ public class playerScript : MonoBehaviour
 
     void handleLeftStick()
     {
-        if (!(selectableObjects.Count > 0))
-            return;
+        //if (!(selectableObjects.Count > 0))
+        //    return;
 
         if (currentMode == modes.UI)
         {
+            if(listOfUIElements.Count > 0)
+            {
+                if(canSwap)
+                {
+                    if (leftStickMoveVector.y > 0)
+                    {
+                        //hide old selected elements
+                        listOfUIElements[UIElementIndex].GetComponent<GenericUIButton>().HideHovered();
 
+                        UIElementIndex--;
+
+                        if(UIElementIndex < 0)
+                            UIElementIndex = listOfUIElements.Count - 1;
+
+                        //show new selected elements
+                        listOfUIElements[UIElementIndex].GetComponent<GenericUIButton>().ShowHovered();
+
+                        canSwap = false;
+
+                        StartCoroutine(waitToSwap());
+                    }
+                    else if (leftStickMoveVector.y < 0)
+                    {
+                        //hide old selected elements
+                        listOfUIElements[UIElementIndex].GetComponent<GenericUIButton>().HideHovered();
+
+                        UIElementIndex++;
+
+                        if (UIElementIndex >= listOfUIElements.Count)
+                            UIElementIndex = 0;
+
+                        //show new selected elements
+                        listOfUIElements[UIElementIndex].GetComponent<GenericUIButton>().ShowHovered();
+
+                        canSwap = false;
+
+                        StartCoroutine(waitToSwap());
+                    }
+                }
+            }
         }
         else if (currentMode == modes.Play)
         {
             //this could probably be done better, but oh well it works :)
             if (!hasBeenSelected)
             {
+                if (selectableObjects.Count <= 0 || selectableObjects.Count < SelectedIndex)
+                    return;
+
                 if (canSwap)
                 {
-                    if (leftStickMoveVector.y != 0 && leftStickMoveVector.y > 0)
+                    if (leftStickMoveVector.x > 0 + leftStickDeadZone)
                     {
                         GenericBlockScript bs = selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>();
                         bs.ShowOutline(false);
@@ -551,7 +750,7 @@ public class playerScript : MonoBehaviour
 
                         StartCoroutine(waitToSwap());
                     }
-                    else if (leftStickMoveVector.y != 0 && leftStickMoveVector.y < 0)
+                    else if (leftStickMoveVector.x < 0 - leftStickDeadZone)
                     {
                         GenericBlockScript bs = selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>();
                         bs.ShowOutline(false);
@@ -575,7 +774,7 @@ public class playerScript : MonoBehaviour
 
                         StartCoroutine(waitToSwap());
                     }
-                }
+                }  
             }
             else
             {
@@ -595,6 +794,7 @@ public class playerScript : MonoBehaviour
         {
             if (rightStickMoveVector.x != 0 || rightStickMoveVector.y != 0)
             {
+
                 FireMarkerMoveVector = (Vector3.up * rightStickMoveVector.x + Vector3.left * rightStickMoveVector.y);
 
                 Quaternion rot = quaternion.LookRotation(Vector3.forward, FireMarkerMoveVector);
@@ -604,7 +804,11 @@ public class playerScript : MonoBehaviour
                 if ((temp >= MinAngle*Mathf.Deg2Rad) && (temp <= MaxAngle * Mathf.Deg2Rad))
                 {
                     //clammping
-                    fireMarker.transform.rotation = rot;
+                    if (fireMarker.transform.rotation != rot)
+                    {
+                        fireMarker.transform.rotation = rot;
+                        showRS = false;
+                    }
                 }
             }
         }
@@ -649,7 +853,64 @@ public class playerScript : MonoBehaviour
     {
         handleLeftStick();
         handleRightStick();
-        CooldownBar();
+    }
+
+    private void Update()
+    {
+        if (!fightingStage)
+        {
+            if ((leftStickMoveVector.x == 0) || (leftStickMoveVector.y == 0))
+            {
+                showLS = true;
+            }
+
+            if (showRS)
+            {
+                showRS = false;
+                if (rsIcon.activeSelf == true)
+                {
+                    rsIcon.SetActive(false);
+                }
+
+            }
+
+
+        }
+
+        if (fightingStage)
+        {
+            if (!rsIconRunning)
+            {
+                StartCoroutine(showRSIcon());
+            }
+
+            if (showLS == true)
+            {
+                showLS = false;
+                lsIcon.SetActive(false);
+              //  lsIcon.GetComponent<UnityEngine.UI.Image>().enabled = false;
+            }
+
+            if(showRS == false)
+            {
+                showRS = false;
+
+                if(rsIcon.activeSelf == true)
+                {
+                    rsIcon.SetActive(false);
+                }
+            }
+        }
+
+        if ((leftStickMoveVector.x != 0) || (leftStickMoveVector.y != 0))
+        {
+            if (lsIcon.activeSelf == true)
+            {
+                showLS = false;
+                lsIcon.SetActive(false);
+               // lsIcon.GetComponent<UnityEngine.UI.Image>().enabled = false;
+            }
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

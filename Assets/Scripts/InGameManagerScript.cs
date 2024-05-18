@@ -4,6 +4,8 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
+using UnityEngine.Events;
 
 class BAT
 {
@@ -61,12 +63,12 @@ public class InGameManagerScript : MonoBehaviour
     [HideInInspector, SerializeField]
     TextMeshProUGUI roundText, roundTypeText;
 
-    [HideInInspector, SerializeField]
-    TextMeshProUGUI[] playersAmmoText;
+    //[HideInInspector, SerializeField]
+    //TextMeshProUGUI[] playersAmmoText;
 
     //Feel free to unhide anything, just wanted to tidy up the inspector a bit
-    [SerializeField]
-    Animator redAnim, blueAnim, camAnim, canvasAnim, rematchAnim, menuButtonAnim, fightAnim, buildAnim, roundTextAnim, roundTypeAnim, timerAnim, redCrowdAnim, blueCrowdAnim;
+    [HideInInspector, SerializeField]
+    Animator redAnim, blueAnim, camAnim, canvasAnim, rematchAnim, menuButtonAnim, fightAnim, buildAnim, roundTextAnim, roundTypeAnim, timerAnim, redCrowdAnim, blueCrowdAnim, ammoTextAnim;
 
     [SerializeField]
     GameObject[] elementToHideWhenGameEnds, EndUIButtons;
@@ -105,6 +107,8 @@ public class InGameManagerScript : MonoBehaviour
     void Awake()
     {
         rbs = GetComponent<randomBlockSpawn>();
+
+        timerScript.AddListener(RoundTimeEnd);
     }
 
     public void pcControlOverride()
@@ -135,6 +139,8 @@ public class InGameManagerScript : MonoBehaviour
 
     public IEnumerator ResetGame()
     {
+        //StopCoroutine(RoundTime());
+
         player1.GetComponent<playerScript>().ResetData();
         player2.GetComponent<playerScript>().ResetData();
 
@@ -165,8 +171,8 @@ public class InGameManagerScript : MonoBehaviour
 
         timerScript.timerReset();
 
-        player1.GetComponent<playerScript>().switchMode(modes.Play);
-        player2.GetComponent<playerScript>().switchMode(modes.Play);
+        player1.GetComponent<playerScript>().SwitchToPlayMode();
+        player2.GetComponent<playerScript>().SwitchToPlayMode();
 
         foreach(GameObject go in elementToHideWhenGameEnds)
         {
@@ -259,8 +265,9 @@ public class InGameManagerScript : MonoBehaviour
             {
                 p2Script.despawnProjectile(pooledProj.gameObject);
             }
-
         }
+
+        callingPlayer.GetComponent<playerScript>().ProjInHandVisible(false);
 
 
         roundVictorySound.PlayOneShot(crowdCheer);
@@ -277,7 +284,7 @@ public class InGameManagerScript : MonoBehaviour
             gameHasEnded = true;
         }  
 
-        StopCoroutine("RoundTime");
+        //StopCoroutine("RoundTime");
 
         endRound();
        
@@ -287,7 +294,7 @@ public class InGameManagerScript : MonoBehaviour
     {
         int MinBlocks = total - maxTrap;
 
-        int returnBlock = Random.Range(MinBlocks, maxBlock+1);
+        int returnBlock = UnityEngine.Random.Range(MinBlocks, maxBlock+1);
 
         int returnTrap = total - returnBlock;
 
@@ -360,13 +367,12 @@ public class InGameManagerScript : MonoBehaviour
         player1.GetComponent<playerScript>().thrownProjectiles.Clear();
         player2.GetComponent<playerScript>().thrownProjectiles.Clear();
 
+        //timerScript.StartTime();
+        StartCoroutine(endOfFrame());
+
         StartCoroutine(TimeBeforeFighting());
 
-        timerScript.StartTime();
-
         timerScript.animTriggered = false;
-
-
     }
 
     void endRound()
@@ -404,12 +410,12 @@ public class InGameManagerScript : MonoBehaviour
         var player2Script = player2.GetComponent<playerScript>();
 
         //when game ends player go to UI mode
-        player1Script.switchMode(modes.UI);
+        player1Script.SwitchToUIMode();
         player1Script.ProjInHandVisible(false);
         player1Script.gameEnded = true;
 
 
-        player2Script.switchMode(modes.UI);
+        player2Script.SwitchToUIMode();
         player2Script.ProjInHandVisible(false);
         player2Script.gameEnded = true;
 
@@ -487,6 +493,17 @@ public class InGameManagerScript : MonoBehaviour
             go.transform.localPosition = new Vector3(finalOffset, go.transform.localPosition.y, go.transform.localPosition.z);
         }
 
+        var players = FindObjectsOfType<playerScript>();
+
+        foreach(playerScript player in players)
+        {
+            if (player.GetAssignedControllerIndex() == 0)
+            {
+                player.GiveUIElements(new List<GameObject>(EndUIButtons));
+                break;
+            }
+        }
+
         rematchAnim.SetTrigger("RematchFadeIn");
         menuButtonAnim.SetTrigger("MenuButtonFadeIn");
     }
@@ -512,7 +529,6 @@ public class InGameManagerScript : MonoBehaviour
     private IEnumerator TimeBeforeFighting()
     {
         StartCoroutine(RoundTypeText("Build!"));
-        roundTypeAnim.SetTrigger("BuildBegin");
         buildIcons.SetActive(true);
         fightIcons.SetActive(false);
         buildAnim.SetTrigger("Build");
@@ -520,10 +536,10 @@ public class InGameManagerScript : MonoBehaviour
         canvasAnim.SetTrigger("BuildFlash");
         player1.GetComponent<playerScript>().CanFight(false);
         player2.GetComponent<playerScript>().CanFight(false);
-        
-        foreach (TextMeshProUGUI text in playersAmmoText)
+
+        if (currentRound > 1)
         {
-            text.gameObject.SetActive(false);
+            //ammoTextAnim.SetTrigger("FadeOut");
         }
 
         yield return new WaitForSecondsRealtime(timeBeforeFighting);
@@ -534,25 +550,37 @@ public class InGameManagerScript : MonoBehaviour
         player1.GetComponent<playerScript>().CanFight(true);
         player2.GetComponent<playerScript>().CanFight(true);
         StartCoroutine(RoundTypeText("Fight!"));
-        roundTypeAnim.SetTrigger("FightBegin");
         timerAnim.SetTrigger("Pop");
         fightIcons.SetActive(true);
         buildIcons.SetActive(false);
         fightAnim.SetTrigger("Fight");
-        
-        foreach (TextMeshProUGUI text in playersAmmoText)
-        {
-            text.gameObject.SetActive(true);
-        }
+        //ammoTextAnim.SetTrigger("FadeIn");
+        roundTextAnim.SetTrigger("Fight");
 
-        StartCoroutine("RoundTime");
+        player1.GetComponent<playerScript>().ammoUiScript.OnFightStage();
+        player2.GetComponent<playerScript>().ammoUiScript.OnFightStage();
 
+        timerScript.SwitchToFight();
+
+        //StartCoroutine("RoundTime");
     }
 
-    private IEnumerator RoundTime()
+    //private IEnumerator RoundTime()
+    //{
+    //    yield return new WaitForSecondsRealtime(roundTime);
+    //    //Debug.Log("Rounded ended by IEnumerator timer");
+    //    endRound();
+    //}
+
+    IEnumerator endOfFrame()
     {
-        yield return new WaitForSecondsRealtime(roundTime);
-        //Debug.Log("Rounded ended by timer");
+        yield return new WaitForEndOfFrame();
+        timerScript.StartTime();
+    }
+
+    void RoundTimeEnd()
+    {
+        //Debug.Log("Round ended by timer");
         endRound();
     }
 }
