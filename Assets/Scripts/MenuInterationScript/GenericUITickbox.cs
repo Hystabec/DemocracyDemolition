@@ -13,12 +13,12 @@ public class GenericUITickbox : GenericMenuItem
     [SerializeField]
     UnityEngine.UI.Image colourBox;
 
+
     [SerializeField]
-    UnityEvent<bool> OnValueChange;
+    string PlayerPrefBool;
 
     Color boxTrueCol = Color.green, boxFalseCol = Color.red;
 
-    [SerializeField]
     bool currentVal = true;
 
     [SerializeField]
@@ -26,13 +26,17 @@ public class GenericUITickbox : GenericMenuItem
 
     void Awake()
     {
-        if (currentVal)
+        var intRet = PlayerPrefs.GetInt(PlayerPrefBool);
+
+        if (intRet == 1)
         {
+            currentVal = true;
             colourBox.color = boxTrueCol;
             overrideActive(true);
         }
         else
         {
+            currentVal = false; 
             colourBox.color = boxFalseCol;
             overrideActive(false);
         }
@@ -40,12 +44,12 @@ public class GenericUITickbox : GenericMenuItem
 
     void overrideActive(bool val)
     {
-        OnValueChange.Invoke(val);
+        PlayerPrefs.SetInt(PlayerPrefBool, val ? 1 : 0);
     }
 
     public override void Activate()
     {
-        OnValueChange.Invoke(!currentVal);
+        PlayerPrefs.SetInt(PlayerPrefBool, !currentVal ? 1 : 0);
         currentVal = !currentVal;
 
         if(currentVal) 
