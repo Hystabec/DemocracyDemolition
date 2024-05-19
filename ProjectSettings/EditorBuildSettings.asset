@@ -6,12 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 0
-    path: Assets/Resources/Scenes/protoDragDrop.unity
-    guid: 1541499c9cd043e42b8e21caf160cd88
-  - enabled: 1
     path: Assets/Scenes/MMenu.unity
     guid: d89ddfac70d02d94baeceb5645eea8a1
+  - enabled: 1
+    path: Assets/Scenes/protoDragDrop.unity
+    guid: 9c4022aa86250744d83317cf05777e28
   m_configObjects: {}

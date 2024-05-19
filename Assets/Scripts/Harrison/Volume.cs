@@ -26,7 +26,6 @@ public class Volume : MonoBehaviour
     }
     public void ChangeVolume()
     {
-        Debug.Log("volume");
         AudioListener.volume = volumeSlider.value;
         Save();
         text.text = "Volume: " + (int)(100 * volumeSlider.value) + "%";

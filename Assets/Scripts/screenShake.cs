@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class screenShake : MonoBehaviour
 {
-    public bool start = false;
+    bool start = false;
     public AnimationCurve curve;
     public float shakeDuration = 1;
 
@@ -25,8 +26,10 @@ public class screenShake : MonoBehaviour
 
     public void TriggerShake()
     {
-        StartCoroutine(Shaking());
+        var intRet = PlayerPrefs.GetInt("UseScreenShake");
 
+        if(intRet == 1)
+            StartCoroutine(Shaking());
     }
 
     void Update()
