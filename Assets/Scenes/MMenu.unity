@@ -2113,10 +2113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colourBox: {fileID: 1991325828}
-  OnValueChange:
-    m_PersistentCalls:
-      m_Calls: []
-  currentVal: 1
+  PlayerPrefBool: UseScreenShake
   HoveredItems:
   - {fileID: 1945530078}
 --- !u!114 &1230754999
