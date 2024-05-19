@@ -47,37 +47,40 @@ public class TNTScript : MonoBehaviour
     }
 
     public void CustomOnCollisionEnter2D(Collision2D other)
-    { 
-        if (other.gameObject.layer == LayerMask.NameToLayer("projectile"))
+    {
+        if (gbs.IsPlaced())
         {
-            Collider2D[] goInRadius = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
-
-            foreach (Collider2D col in goInRadius)
+            if (other.gameObject.layer == LayerMask.NameToLayer("projectile"))
             {
-                if(col.gameObject.layer == LayerMask.NameToLayer("projectile") || 
-                    col.gameObject.layer == LayerMask.NameToLayer("Block") || 
-                    col.gameObject.layer == LayerMask.NameToLayer("Trap"))
+                Collider2D[] goInRadius = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
+
+                foreach (Collider2D col in goInRadius)
                 {
-                    GenericBlockScript GBS;
-                    col.gameObject.TryGetComponent<GenericBlockScript>(out GBS);
-
-                    if(GBS != null)
+                    if (col.gameObject.layer == LayerMask.NameToLayer("projectile") ||
+                        col.gameObject.layer == LayerMask.NameToLayer("Block") ||
+                        col.gameObject.layer == LayerMask.NameToLayer("Trap"))
                     {
-                        //if its a block checks its placed
+                        GenericBlockScript GBS;
+                        col.gameObject.TryGetComponent<GenericBlockScript>(out GBS);
 
-                        //if its placed it can be deleted
-                        if(GBS.IsPlaced())
-                            Instantiate(Explosion, transform.position, Quaternion.identity);
-                        Destroy(col.gameObject.transform.root.gameObject);
+                        if (GBS != null)
+                        {
+                            //if its a block checks its placed
+
+                            //if its placed it can be deleted
+                            if (GBS.IsPlaced())
+                                Instantiate(Explosion, transform.position, Quaternion.identity);
+                            Destroy(col.gameObject.transform.root.gameObject);
+                        }
+                        else if (col.gameObject.layer == LayerMask.NameToLayer("projectile"))
+                        {
+                            //if its anything else delete it 
+                            col.gameObject.GetComponent<pooledProjectileScript>().DespawnProjectile();
+                        }
                     }
-                    else if(col.gameObject.layer == LayerMask.NameToLayer("projectile"))
-                    {
-                        //if its anything else delete it 
-                        col.gameObject.GetComponent<pooledProjectileScript>().DespawnProjectile();
-                    }  
                 }
+                screenShakeScript.TriggerShake();
             }
-            screenShakeScript.TriggerShake();
         }
     }
 }
