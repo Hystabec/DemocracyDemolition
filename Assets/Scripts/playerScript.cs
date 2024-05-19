@@ -424,7 +424,7 @@ public class playerScript : MonoBehaviour
         {
             if(listOfUIElements.Count > 0)
             {
-                listOfUIElements[UIElementIndex].GetComponent<GenericUIButton>().ActivateButton();
+                listOfUIElements[UIElementIndex].GetComponent<GenericMenuItem>().Activate();
             }
         }
         else if (currentMode == modes.Play)

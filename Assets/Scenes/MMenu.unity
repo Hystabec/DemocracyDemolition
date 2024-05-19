@@ -269,10 +269,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1756578479
+  m_SortingLayer: 3
   m_SortingOrder: 10
-  m_Sprite: {fileID: -1129527752, guid: de0735af74e80224486b716e55d2cfd5, type: 3}
+  m_Sprite: {fileID: 187384606, guid: de0735af74e80224486b716e55d2cfd5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -464,10 +464,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1756578479
+  m_SortingLayer: 3
   m_SortingOrder: 10
-  m_Sprite: {fileID: -1129527752, guid: de0735af74e80224486b716e55d2cfd5, type: 3}
+  m_Sprite: {fileID: 187384606, guid: de0735af74e80224486b716e55d2cfd5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1306,7 +1306,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &608980398
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1319,7 +1319,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f234f3d7492f5004dbd204d21a8891f7, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1570,6 +1570,7 @@ PrefabInstance:
     - {fileID: 6904126309626076785, guid: b8da2e401d8743d4ea0252a5b96cdc26, type: 3}
     - {fileID: 6398472801041767676, guid: b8da2e401d8743d4ea0252a5b96cdc26, type: 3}
     - {fileID: -2784249416038002205, guid: b8da2e401d8743d4ea0252a5b96cdc26, type: 3}
+    - {fileID: 3331335234354423013, guid: b8da2e401d8743d4ea0252a5b96cdc26, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1634,11 +1635,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6235062293522369941, guid: 1e075134642e6a44c97935f82988f0e3, type: 3}
+      propertyPath: onCollisionEnterFunc.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6412431008632115462, guid: 1e075134642e6a44c97935f82988f0e3, type: 3}
       propertyPath: m_Name
       value: Trampoline
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5525443773517606490, guid: 1e075134642e6a44c97935f82988f0e3, type: 3}
+    - {fileID: 6235062293522369941, guid: 1e075134642e6a44c97935f82988f0e3, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1828,6 +1835,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2348921197900577600, guid: 023375b2621edd04eb1022b348f41a1d, type: 3}
+      propertyPath: onTriggerEnterFunc.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6013264750023128056, guid: 023375b2621edd04eb1022b348f41a1d, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.86861545
@@ -1884,7 +1895,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Coconut launcher (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6850949384467072940, guid: 023375b2621edd04eb1022b348f41a1d, type: 3}
+    - {fileID: -2348921197900577600, guid: 023375b2621edd04eb1022b348f41a1d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2642,7 +2655,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: TNT
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -1002868500279694946, guid: 9daf3b99836bbaf469b6f9a71522d765, type: 3}
+    - {fileID: -1057947384533784497, guid: 9daf3b99836bbaf469b6f9a71522d765, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2693,7 +2708,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectableMenuItems:
   - {fileID: 557989076}
-  - {fileID: 0}
   - {fileID: 1152491360}
   timeBetweenSwaps: 0.2
 --- !u!1 &2008191712
