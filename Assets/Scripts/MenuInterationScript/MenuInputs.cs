@@ -15,6 +15,9 @@ public class MenuInputs : MonoBehaviour
     List<GameObject> selectableMenuItems = new();
     int currentMenuItemIndex = 0;
 
+    [SerializeField]
+    Animator redCrowdAnim, blueCrowdAnim;
+
     bool canSwap = true;
     bool canSlide = true;
     bool itemSelected = false;
@@ -102,6 +105,8 @@ public class MenuInputs : MonoBehaviour
                     if (currentMenuItemIndex < 0)
                         currentMenuItemIndex = selectableMenuItems.Count - 1;
 
+
+
                     selectableMenuItems[currentMenuItemIndex].GetComponent<GenericMenuItem>().ShowHovered();
                 }
                 else if(leftStickMoveVector.y < 0)
@@ -115,6 +120,16 @@ public class MenuInputs : MonoBehaviour
                         currentMenuItemIndex = 0;
 
                     selectableMenuItems[currentMenuItemIndex].GetComponent<GenericMenuItem>().ShowHovered();
+                }
+                if (currentMenuItemIndex == 0)
+                {
+                    redCrowdAnim.SetTrigger("GameWin");
+                    blueCrowdAnim.SetTrigger("GameWin");
+                }
+                if (currentMenuItemIndex > 0)
+                {
+                    redCrowdAnim.SetTrigger("Idle");
+                    blueCrowdAnim.SetTrigger("Idle");
                 }
 
                 canSwap = false;
@@ -137,6 +152,12 @@ public class MenuInputs : MonoBehaviour
     void Start()
     {
         selectableMenuItems[currentMenuItemIndex].GetComponent<GenericMenuItem>().ShowHovered();
+        
+        if (currentMenuItemIndex == 0)
+        {
+            redCrowdAnim.SetTrigger("GameWin");
+            blueCrowdAnim.SetTrigger("GameWin");
+        }
     }
 
     void Update()

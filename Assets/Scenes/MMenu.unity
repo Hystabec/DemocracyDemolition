@@ -13796,6 +13796,8 @@ MonoBehaviour:
         m_CallState: 2
   HoveredItems:
   - {fileID: 232132887}
+  redCrowdAnim: {fileID: 1131249951}
+  blueCrowdAnim: {fileID: 1987557133}
 --- !u!95 &557989084
 Animator:
   serializedVersion: 5
@@ -26922,7 +26924,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1131249950}
   - component: {fileID: 1131249949}
-  - component: {fileID: 1131249948}
+  - component: {fileID: 1131249951}
   m_Layer: 0
   m_Name: RedCrowd
   m_TagString: Untagged
@@ -26930,27 +26932,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!95 &1131249948
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1131249947}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 74f1ac7e03b204349a8b3bd8d16e8a19, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!212 &1131249949
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -27023,6 +27004,27 @@ Transform:
   - {fileID: 847537625}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1131249951
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131249947}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 74f1ac7e03b204349a8b3bd8d16e8a19, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1152491360
 GameObject:
   m_ObjectHideFlags: 0
@@ -27201,6 +27203,8 @@ MonoBehaviour:
         m_CallState: 2
   HoveredItems:
   - {fileID: 65870644}
+  redCrowdAnim: {fileID: 0}
+  blueCrowdAnim: {fileID: 1987557133}
 --- !u!95 &1152491367
 Animator:
   serializedVersion: 5
@@ -32150,6 +32154,8 @@ MonoBehaviour:
   - {fileID: 1152491360}
   - {fileID: 1230754996}
   - {fileID: 1452941263}
+  redCrowdAnim: {fileID: 1131249951}
+  blueCrowdAnim: {fileID: 1987557133}
   timeBetweenSwaps: 0.2
   timeBetweenSlides: 0.2
 --- !u!1 &1915372166
