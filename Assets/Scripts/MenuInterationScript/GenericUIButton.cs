@@ -17,9 +17,6 @@ public class GenericUIButton : GenericMenuItem
     [SerializeField]
     GameObject[] HoveredItems;
 
-    [SerializeField]
-    Animator redCrowdAnim, blueCrowdAnim;
-
     public override void Activate()
     {
         HideHovered();
