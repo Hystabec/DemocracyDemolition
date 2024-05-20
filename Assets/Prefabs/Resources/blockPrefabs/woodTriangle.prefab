@@ -201,7 +201,7 @@ MonoBehaviour:
   damagedSprite1: {fileID: 1836897413, guid: 4b81a06c3c363054a9573f815b4cc593, type: 3}
   damagedSprite2: {fileID: 0}
   hitEffect: {fileID: 4821939251369439134}
-  blockHitSound: {fileID: 8300000, guid: 2f7dc3eb36770d949b07af555e48d848, type: 3}
+  blockHitSound: {fileID: 8300000, guid: b6fb8c83b5b00f641ba9a08c32cf11ed, type: 3}
   aSource: {fileID: 8372142708192081311}
 --- !u!82 &8372142708192081311
 AudioSource:

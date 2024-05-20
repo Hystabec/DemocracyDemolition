@@ -10239,7 +10239,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98ac6fcbebae1794583c4faa44f59e23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  start: 0
   curve:
     serializedVersion: 2
     m_Curve:
@@ -87070,7 +87069,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 70a65edb61201d24a9ce72c7248f1175, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0
