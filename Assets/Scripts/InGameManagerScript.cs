@@ -159,6 +159,11 @@ public class InGameManagerScript : MonoBehaviour
         menuButtonAnim.SetTrigger("MenuButtonFadeOut");
         camAnim.SetTrigger("ReturnCamera");
 
+        redConfetti.SetActive(false);
+        blueConfetti.SetActive(false);
+        redFireworks.SetActive(false);
+        blueFireworks.SetActive(false);
+
         cameraAnimationStatus CAS = mainCam.GetComponent<cameraAnimationStatus>();
 
         yield return new WaitUntil(() => CAS.Started() == true);
