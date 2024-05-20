@@ -19,7 +19,7 @@ public class MenuInputs : MonoBehaviour
     bool canSlide = true;
     bool itemSelected = false;
     [SerializeField]
-    float timeBetweenSwaps = 0.5f, timeBetweenSlides = 0.2f;
+    float timeBetweenSwaps = 0.5f, timeBetweenSlides = 0.0f;
 
     public bool GetHasOwner()
     { 
@@ -139,7 +139,7 @@ public class MenuInputs : MonoBehaviour
         selectableMenuItems[currentMenuItemIndex].GetComponent<GenericMenuItem>().ShowHovered();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         handleLeftStick();
     }
