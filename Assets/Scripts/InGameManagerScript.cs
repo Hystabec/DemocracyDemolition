@@ -309,6 +309,7 @@ public class InGameManagerScript : MonoBehaviour
     {
         BAT p1returnBat = new();
         BAT p2returnBat = new();
+        roundVictorySound.Stop();
 
         switch (currentRound)
         {

@@ -15007,6 +15007,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabProjectile: {fileID: 4210951342825297463, guid: 53190b426f572d64f80801dd6540c2fc, type: 3}
   soundPlayer: {fileID: 558891342014245705}
+  fireSoundClip: {fileID: 8300000, guid: c447e1b398e293842be4962e3e458f03, type: 3}
   launchForce: 10
   launcherAnim: {fileID: 2936485352273430607}
   smokeEffect: {fileID: 5502906667137484326}
