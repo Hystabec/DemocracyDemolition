@@ -18,6 +18,7 @@ public class TNTScript : MonoBehaviour
 
     [SerializeField]
     AudioSource soundPlayer;
+    
     [SerializeField]
     AudioClip explosionSoundClip;
 
@@ -68,7 +69,7 @@ public class TNTScript : MonoBehaviour
                 {
                     GenericBlockScript GBS;
                     col.gameObject.TryGetComponent<GenericBlockScript>(out GBS);
-                    soundPlayer?.PlayOneShot(explosionSoundClip);
+                    soundPlayer.PlayOneShot(explosionSoundClip);
 
                     if (GBS != null)
                     {

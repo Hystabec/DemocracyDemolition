@@ -35,7 +35,7 @@ public class Timer : MonoBehaviour
     AudioSource audioSource;
 
     [SerializeField]
-    AudioClip roundEnd, fiveSeconds, roundStart;
+    AudioClip fiveSeconds, fightStart, buildStart;
 
     [SerializeField]
     Image timeProgressBar;
@@ -52,17 +52,17 @@ public class Timer : MonoBehaviour
 
     void Awake()
     {
-        if (roundStart == null || roundEnd == null || fiveSeconds == null)
+        if (fightStart == null || buildStart == null || fiveSeconds == null)
             audioSource = null;
 
         currentTime = roundTime;
         buildTime = defautBuildTime;
         fightTime = deafultFightTime;
-        audioSource?.PlayOneShot(roundStart);
     }
 
     public void StartTime()
     {
+        audioSource?.PlayOneShot(buildStart);
         timerRunning = true;
     }
 
@@ -79,7 +79,6 @@ public class Timer : MonoBehaviour
         if (currentTime >= 0f)
         {
             currentTime -= Time.deltaTime;
-            audioSource?.PlayOneShot(roundEnd);
         }
 
         if (!fighting)
@@ -108,7 +107,7 @@ public class Timer : MonoBehaviour
             {
                 timeText.SetTrigger("RunningOut");
                 animTriggered = true;
-                audioSource?.PlayOneShot(fiveSeconds);
+                audioSource.Play();
             }
         }
 
@@ -136,7 +135,7 @@ public class Timer : MonoBehaviour
     {
         fighting = true;
         timeProgressBar.fillAmount = 1;
-
+        audioSource?.PlayOneShot(fightStart);
     }
 
     void UpdateProgressBarBuild()

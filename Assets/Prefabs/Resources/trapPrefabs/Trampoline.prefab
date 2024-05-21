@@ -5332,6 +5332,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trampolineAnim: {fileID: 6213589489332192321}
   soundPlayer: {fileID: 8458060202210599713}
+  bounceSoundClip: {fileID: 8300000, guid: 03664d5c6be3bb44bb079788fa32325a, type: 3}
 --- !u!114 &6235062293522369941
 MonoBehaviour:
   m_ObjectHideFlags: 0
