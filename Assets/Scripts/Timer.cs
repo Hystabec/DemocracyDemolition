@@ -32,7 +32,7 @@ public class Timer : MonoBehaviour
     UnityEvent timerEndedEvent = new();
 
     [SerializeField]
-    AudioSource audioSource;
+    AudioSource timerAudioSource;
 
     [SerializeField]
     AudioClip fiveSeconds, fightStart, buildStart;
@@ -53,7 +53,7 @@ public class Timer : MonoBehaviour
     void Awake()
     {
         if (fightStart == null || buildStart == null || fiveSeconds == null)
-            audioSource = null;
+            timerAudioSource = null;
 
         currentTime = roundTime;
         buildTime = defautBuildTime;
@@ -62,7 +62,8 @@ public class Timer : MonoBehaviour
 
     public void StartTime()
     {
-        audioSource?.PlayOneShot(buildStart);
+        timerAudioSource.Stop();
+        timerAudioSource?.PlayOneShot(buildStart);
         timerRunning = true;
     }
 
@@ -107,7 +108,7 @@ public class Timer : MonoBehaviour
             {
                 timeText.SetTrigger("RunningOut");
                 animTriggered = true;
-                audioSource.Play();
+                timerAudioSource.Play();
             }
         }
 
@@ -135,7 +136,7 @@ public class Timer : MonoBehaviour
     {
         fighting = true;
         timeProgressBar.fillAmount = 1;
-        audioSource?.PlayOneShot(fightStart);
+        timerAudioSource?.PlayOneShot(fightStart);
     }
 
     void UpdateProgressBarBuild()

@@ -81,7 +81,7 @@ public class InGameManagerScript : MonoBehaviour
     public Image blueProgressBar;
 
     [SerializeField]
-    AudioSource roundVictorySound;
+    AudioSource igmASource;
 
     [SerializeField]
     AudioClip crowdCheer, playerHit;
@@ -107,7 +107,6 @@ public class InGameManagerScript : MonoBehaviour
     void Awake()
     {
         rbs = GetComponent<randomBlockSpawn>();
-
         timerScript.AddListener(RoundTimeEnd);
     }
 
@@ -212,6 +211,8 @@ public class InGameManagerScript : MonoBehaviour
     public void playerKilled(GameObject callingPlayer)
     {
         screenShakeScript.TriggerShake();
+        igmASource.PlayOneShot(playerHit);
+        igmASource.PlayOneShot(crowdCheer);
 
         if (callingPlayer == player1)
         {
@@ -274,10 +275,6 @@ public class InGameManagerScript : MonoBehaviour
 
         callingPlayer.GetComponent<playerScript>().ProjInHandVisible(false);
 
-
-        roundVictorySound.PlayOneShot(crowdCheer);
-        roundVictorySound.PlayOneShot(playerHit);
-
         if (p1Score >= roundsNeededToWin)
         {
             EndGame(player1);
@@ -309,7 +306,6 @@ public class InGameManagerScript : MonoBehaviour
     {
         BAT p1returnBat = new();
         BAT p2returnBat = new();
-        roundVictorySound.Stop();
 
         switch (currentRound)
         {
