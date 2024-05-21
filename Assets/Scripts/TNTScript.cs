@@ -17,8 +17,6 @@ public class TNTScript : MonoBehaviour
     private GenericBlockScript gbs;
 
     [SerializeField]
-    AudioSource soundPlayer;
-    [SerializeField]
     AudioClip explosionSoundClip;
 
     [SerializeField]
@@ -26,9 +24,6 @@ public class TNTScript : MonoBehaviour
 
     private void Awake()
     {
-        if (explosionSoundClip == null)
-            soundPlayer = null;
-
         screenShakeScript = FindAnyObjectByType<screenShake>();
         gbs = GetComponent<GenericBlockScript>();
     }
@@ -68,12 +63,14 @@ public class TNTScript : MonoBehaviour
                 {
                     GenericBlockScript GBS;
                     col.gameObject.TryGetComponent<GenericBlockScript>(out GBS);
-                    soundPlayer?.PlayOneShot(explosionSoundClip);
+                    //soundPlayer?.PlayOneShot(explosionSoundClip);
+
+                    if (col.gameObject == this.gameObject)
+                        continue;
 
                     if (GBS != null)
                     {
                         //if its a block checks its placed
-
                         //if its placed it can be deleted
                         if(GBS.IsPlaced())
                         Destroy(col.gameObject.transform.root.gameObject);
@@ -81,12 +78,15 @@ public class TNTScript : MonoBehaviour
                     else if(col.gameObject.layer == LayerMask.NameToLayer("projectile"))
                     {
                         //if its anything else delete it 
-                        col.gameObject.GetComponent<pooledProjectileScript>().DespawnProjectile();
-                        Instantiate(Explosion, transform.position, Quaternion.identity);
+                        col.gameObject.GetComponent<pooledProjectileScript>().DespawnProjectile(); 
                     }  
                 }
             }
+
             screenShakeScript.TriggerShake();
+            FindFirstObjectByType<soundManager>().PlayOnce(explosionSoundClip);
+            Destroy(this.gameObject);
+            Instantiate(Explosion, transform.position, Quaternion.identity);
         }
     }
 }
