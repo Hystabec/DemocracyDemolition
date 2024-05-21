@@ -13,7 +13,11 @@ public class LauncherTrapScript : MonoBehaviour
     GameObject firePosition;
     float projectileRadius = 0.5f;
 
-    public AudioSource soundPlayer;
+    [SerializeField]
+    AudioSource soundPlayer;
+
+    [SerializeField]
+    AudioClip fireSoundClip;
 
     bool canFire = true;
 
@@ -28,6 +32,9 @@ public class LauncherTrapScript : MonoBehaviour
 
     private void Awake()
     {
+        if (fireSoundClip == null)
+            soundPlayer = null;
+
         firePosition = gameObject.transform.Find("firePosition").gameObject;
 
         spawnedProj = Instantiate(prefabProjectile);
@@ -62,7 +69,7 @@ public class LauncherTrapScript : MonoBehaviour
 
             launcherAnim.SetTrigger("Launch");
             smokeEffect.Play();
-            soundPlayer.Play();
+            soundPlayer?.PlayOneShot(fireSoundClip);
         }
     }
 

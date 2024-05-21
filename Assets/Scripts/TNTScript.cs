@@ -16,13 +16,19 @@ public class TNTScript : MonoBehaviour
 
     private GenericBlockScript gbs;
 
-    public AudioSource soundPlayer;
+    [SerializeField]
+    AudioSource soundPlayer;
+    [SerializeField]
+    AudioClip explosionSoundClip;
 
     [SerializeField]
     GameObject Explosion;
 
     private void Awake()
     {
+        if (explosionSoundClip == null)
+            soundPlayer = null;
+
         screenShakeScript = FindAnyObjectByType<screenShake>();
         gbs = GetComponent<GenericBlockScript>();
     }
@@ -62,7 +68,7 @@ public class TNTScript : MonoBehaviour
                 {
                     GenericBlockScript GBS;
                     col.gameObject.TryGetComponent<GenericBlockScript>(out GBS);
-                    soundPlayer.Play();
+                    soundPlayer?.PlayOneShot(explosionSoundClip);
 
                     if (GBS != null)
                     {
