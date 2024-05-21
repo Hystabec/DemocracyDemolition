@@ -52,7 +52,14 @@ public class LauncherTrapScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //bit scuffed - "reloads" the cannon once the last coconut has despawned
+        if(!canFire)
+        {
+            if (spawnedProj.activeSelf == false)
+            {
+                canFire = true;
+            }
+        }
     }
 
     public void CustomOnTriggerEnter2D(Collider2D other)
@@ -70,6 +77,8 @@ public class LauncherTrapScript : MonoBehaviour
             launcherAnim.SetTrigger("Launch");
             smokeEffect.Play();
             soundPlayer?.PlayOneShot(fireSoundClip);
+
+            canFire = false;
         }
     }
 
