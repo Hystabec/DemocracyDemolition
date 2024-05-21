@@ -29,7 +29,7 @@ public class blockScript : MonoBehaviour
     private ParticleSystem hitEffect = null;
 
     [SerializeField]
-    private AudioClip blockHitSound;
+    private AudioClip blockHitSound, destroySound;
 
     [SerializeField]
     private AudioSource aSource;
@@ -67,7 +67,6 @@ public class blockScript : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("projectile"))
         {
-            aSource.PlayOneShot(blockHitSound);
             if (breakable)
             {
                 if (hitEffect != null)
@@ -82,6 +81,7 @@ public class blockScript : MonoBehaviour
                 {
                     if (damagedSprite1 != null)
                     {
+                        aSource.PlayOneShot(blockHitSound);
                         GetComponent<SpriteRenderer>().sprite = damagedSprite1;
                     }
                 }
@@ -91,12 +91,14 @@ public class blockScript : MonoBehaviour
                 {
                     if (damagedSprite2 != null)
                     {
+                        aSource.PlayOneShot(blockHitSound);
                         GetComponent<SpriteRenderer>().sprite = damagedSprite2;
                     }
                 }
 
                 if (CurrentBlockHealth <= 0)
                 {
+                    aSource.PlayOneShot(destroySound);
                     CurrentBlockHealth = TotalBlockHealth;
                     Debug.Log(gameObject.name + " destroyed");
                     DestroyBlock();

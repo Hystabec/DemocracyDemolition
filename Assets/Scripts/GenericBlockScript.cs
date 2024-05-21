@@ -34,6 +34,12 @@ public class GenericBlockScript : MonoBehaviour
     ParticleSystem redPlaceEffect = null;
     ParticleSystem bluePlaceEffect = null;
 
+    [SerializeField]
+    AudioSource aSource;
+
+    [SerializeField]
+    AudioClip placeSound;
+
     [HideInInspector]
     public bool isPlacing;
 
@@ -117,7 +123,8 @@ public class GenericBlockScript : MonoBehaviour
 
     public void Placed()
     {
-        foreach(var collider in colliders)
+        aSource.PlayOneShot(placeSound);
+        foreach (var collider in colliders)
         {
             collider.enabled = true;
         }

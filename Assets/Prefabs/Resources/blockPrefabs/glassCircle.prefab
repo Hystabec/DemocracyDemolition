@@ -10180,6 +10180,8 @@ MonoBehaviour:
   onTriggerStayFunc:
     m_PersistentCalls:
       m_Calls: []
+  aSource: {fileID: -5859951993428983591}
+  placeSound: {fileID: 8300000, guid: 47758c3faeb7e6d45b49f196a1e51944, type: 3}
   isPlacing: 0
 --- !u!114 &4185677381852709593
 MonoBehaviour:
@@ -10200,6 +10202,7 @@ MonoBehaviour:
   damagedSprite2: {fileID: 0}
   hitEffect: {fileID: 2100247364647253439}
   blockHitSound: {fileID: 8300000, guid: f5125e714fe64c341a8e8e2e29be3295, type: 3}
+  destroySound: {fileID: 8300000, guid: f5125e714fe64c341a8e8e2e29be3295, type: 3}
   aSource: {fileID: -5859951993428983591}
 --- !u!82 &-5859951993428983591
 AudioSource:

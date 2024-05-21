@@ -360,6 +360,7 @@ MonoBehaviour:
   damagedSprite2: {fileID: 0}
   hitEffect: {fileID: 0}
   blockHitSound: {fileID: 8300000, guid: b6fb8c83b5b00f641ba9a08c32cf11ed, type: 3}
+  destroySound: {fileID: 8300000, guid: b7be71ab6427de243af25cd1d83875d0, type: 3}
   aSource: {fileID: -4651303007692238985}
 --- !u!82 &-4651303007692238985
 AudioSource:
@@ -505,6 +506,8 @@ MonoBehaviour:
   onTriggerStayFunc:
     m_PersistentCalls:
       m_Calls: []
+  aSource: {fileID: -4651303007692238985}
+  placeSound: {fileID: 8300000, guid: 47758c3faeb7e6d45b49f196a1e51944, type: 3}
   isPlacing: 0
 --- !u!1 &6569070087608068454
 GameObject:
