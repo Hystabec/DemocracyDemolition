@@ -8,6 +8,12 @@ public class Sceneloader : MonoBehaviour
     Animator fadeAnim;
 
     [SerializeField]
+    AudioClip crowdCheer;
+
+    [SerializeField]
+    AudioSource buttonAudio;
+
+    [HideInInspector, SerializeField]
     ParticleSystem redConfetti, blueConfetti, redStreamers, blueStreamers;
     //Not sure why I can't .Play() when its an array[]
 
@@ -17,6 +23,7 @@ public class Sceneloader : MonoBehaviour
         blueConfetti.Play();
         redStreamers.Play();
         blueStreamers.Play();
+        buttonAudio.PlayOneShot(crowdCheer);
         StartCoroutine(AnimsBeforePlay());
     }
     public void QuitGame()
