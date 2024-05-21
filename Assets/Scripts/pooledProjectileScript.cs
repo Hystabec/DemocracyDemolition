@@ -32,10 +32,7 @@ public class pooledProjectileScript : MonoBehaviour
         {
             bounceCount = 0;
 
-            if(owner != null) 
-                owner.despawnProjectile(this.gameObject);
-            else
-                gameObject.SetActive(false);
+            DespawnProjectile();
         }
 
         

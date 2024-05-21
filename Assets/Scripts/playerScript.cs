@@ -259,7 +259,10 @@ public class playerScript : MonoBehaviour
         if (projectile != null)
         {
             projectile.SetActive(false);
-            projectile.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            var rb = projectile.GetComponent<Rigidbody2D>();
+            rb.velocity = Vector2.zero;
+            projectile.transform.position = Vector3.zero;
+            projectile.transform.rotation = Quaternion.identity;
             projectList.Add(projectile);
             // thrownProjectiles.Remove(projectile);
         }
@@ -572,7 +575,7 @@ public class playerScript : MonoBehaviour
             if (canThrow)
             {
                 GameObject proj = projectList[0];
-                proj.transform.position = fireMarker.transform.GetChild(0).transform.position;
+                proj.transform.position = fireMarker.transform.Find("FireMarker").transform.position;
                 proj.SetActive(true);
                 thrownProjectiles.Add(proj);
 
@@ -581,9 +584,10 @@ public class playerScript : MonoBehaviour
                 anim.SetTrigger("Throw");
                 playerThrowSound.Play();
 
-                Vector3 rotation = fireMarker.transform.GetChild(0).transform.position - fireMarker.transform.position;
+                //Vector3 rotation = fireMarker.transform.GetChild(0).transform.position - fireMarker.transform.position;
+                //proj.GetComponent<Rigidbody2D>().velocity = new Vector2(rotation.x, rotation.y).normalized * throwForce;
 
-                proj.GetComponent<Rigidbody2D>().velocity = new Vector2(rotation.x, rotation.y).normalized * throwForce;
+                proj.GetComponent<Rigidbody2D>().velocity = (fireMarker.transform.right).normalized * throwForce;
                 projectList.Remove(proj);
 
                 RemainingAmmo--;
