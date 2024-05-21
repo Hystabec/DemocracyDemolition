@@ -16,6 +16,8 @@ public class TNTScript : MonoBehaviour
 
     private GenericBlockScript gbs;
 
+    public AudioSource soundPlayer;
+
     [SerializeField]
     GameObject Explosion;
 
@@ -60,8 +62,9 @@ public class TNTScript : MonoBehaviour
                 {
                     GenericBlockScript GBS;
                     col.gameObject.TryGetComponent<GenericBlockScript>(out GBS);
+                    soundPlayer.Play();
 
-                    if(GBS != null)
+                    if (GBS != null)
                     {
                         //if its a block checks its placed
 

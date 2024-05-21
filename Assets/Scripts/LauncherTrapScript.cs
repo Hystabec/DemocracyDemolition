@@ -13,6 +13,8 @@ public class LauncherTrapScript : MonoBehaviour
     GameObject firePosition;
     float projectileRadius = 0.5f;
 
+    public AudioSource soundPlayer;
+
     bool canFire = true;
 
     [SerializeField]
@@ -60,6 +62,7 @@ public class LauncherTrapScript : MonoBehaviour
 
             launcherAnim.SetTrigger("Launch");
             smokeEffect.Play();
+            soundPlayer.Play();
         }
     }
 

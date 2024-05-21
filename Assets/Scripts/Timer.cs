@@ -31,6 +31,12 @@ public class Timer : MonoBehaviour
 
     UnityEvent timerEndedEvent = new();
 
+    public AudioSource roundEnd;
+
+    public AudioSource fiveSeconds;
+
+    public AudioSource roundStart;
+
     [SerializeField]
     Image timeProgressBar;
 
@@ -49,6 +55,7 @@ public class Timer : MonoBehaviour
         currentTime = roundTime;
         buildTime = defautBuildTime;
         fightTime = deafultFightTime;
+        roundStart.Play();
     }
 
     public void StartTime()
@@ -69,6 +76,7 @@ public class Timer : MonoBehaviour
         if (currentTime >= 0f)
         {
             currentTime -= Time.deltaTime;
+            roundEnd.Play();
         }
 
         if (!fighting)
@@ -97,6 +105,7 @@ public class Timer : MonoBehaviour
             {
                 timeText.SetTrigger("RunningOut");
                 animTriggered = true;
+                fiveSeconds.Play();
             }
         }
 
