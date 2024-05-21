@@ -211,8 +211,6 @@ public class InGameManagerScript : MonoBehaviour
     public void playerKilled(GameObject callingPlayer)
     {
         screenShakeScript.TriggerShake();
-        igmASource.PlayOneShot(playerHit);
-        igmASource.PlayOneShot(crowdCheer, 1.3f);
 
         if (callingPlayer == player1)
         {
@@ -396,11 +394,19 @@ public class InGameManagerScript : MonoBehaviour
             currentRound++;
 
             //add a wait time between rounds
-            
-            timerScript.timerReset();
-
-            startRound();
+            StartCoroutine(DelayBetweenRound());
         }
+    }
+
+    IEnumerator DelayBetweenRound()
+    {
+        igmASource.Stop();
+        FindFirstObjectByType<soundManager>().PlayOnce(playerHit, 0.8f);
+        FindFirstObjectByType<soundManager>().PlayOnce(crowdCheer, 0.5f);
+        yield return new WaitForSeconds(2);
+        igmASource.Play();
+        timerScript.timerReset();
+        startRound();
     }
 
     void EndGame(GameObject winningPlayer)
