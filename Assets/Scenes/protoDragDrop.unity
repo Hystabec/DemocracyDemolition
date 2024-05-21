@@ -87192,6 +87192,10 @@ MonoBehaviour:
   animTriggered: 0
   timerText: {fileID: 4271247}
   timeText: {fileID: 4271249}
+  audioSource: {fileID: 1729778783}
+  roundEnd: {fileID: 0}
+  fiveSeconds: {fileID: 0}
+  roundStart: {fileID: 0}
   timeProgressBar: {fileID: 1600841705}
 --- !u!82 &1729778783
 AudioSource:
@@ -88342,7 +88346,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &1776051424
 AudioSource:
   m_ObjectHideFlags: 0
