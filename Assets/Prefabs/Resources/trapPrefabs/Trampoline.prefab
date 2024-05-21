@@ -5331,6 +5331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trampolineAnim: {fileID: 6213589489332192321}
+  soundPlayer: {fileID: 8458060202210599713}
 --- !u!114 &6235062293522369941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5441,7 +5442,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
