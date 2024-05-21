@@ -157,6 +157,8 @@ public class InGameManagerScript : MonoBehaviour
         rematchAnim.SetTrigger("RematchFadeOut");
         menuButtonAnim.SetTrigger("MenuButtonFadeOut");
         camAnim.SetTrigger("ReturnCamera");
+        redAnim.SetTrigger("Idle");
+        blueAnim.SetTrigger("Idle");
 
         redConfetti.SetActive(false);
         blueConfetti.SetActive(false);
@@ -304,6 +306,7 @@ public class InGameManagerScript : MonoBehaviour
     {
         BAT p1returnBat = new();
         BAT p2returnBat = new();
+        igmASource.Play();
 
         switch (currentRound)
         {
@@ -358,6 +361,12 @@ public class InGameManagerScript : MonoBehaviour
             rbs.spawnTrapIn(player2, p2returnBat.numTraps);
         }
 
+        if (currentRound == 1)
+        {
+            player1.GetComponent<Animator>().SetBool("ResetGame", false);
+            player2.GetComponent<Animator>().SetBool("ResetGame", false);
+        }
+
 
         StartCoroutine(RoundText());
 
@@ -404,7 +413,6 @@ public class InGameManagerScript : MonoBehaviour
         FindFirstObjectByType<soundManager>().PlayOnce(playerHit, 0.8f);
         FindFirstObjectByType<soundManager>().PlayOnce(crowdCheer, 0.5f);
         yield return new WaitForSeconds(2);
-        igmASource.Play();
         timerScript.timerReset();
         startRound();
     }
@@ -464,7 +472,8 @@ public class InGameManagerScript : MonoBehaviour
             Debug.Log("No winner, when endgame called");
         }
 
-        
+        igmASource.Stop();
+        FindFirstObjectByType<soundManager>().PlayOnce(crowdCheer, 0.5f);
         StartCoroutine(waitForEndCamPan(winner));
     }
 
