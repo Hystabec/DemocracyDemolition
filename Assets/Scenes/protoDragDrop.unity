@@ -52673,7 +52673,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 1756578479
-  m_SortingOrder: 10
+  m_SortingOrder: 29
   m_TargetDisplay: 0
 --- !u!224 &802356846
 RectTransform:
@@ -87014,6 +87014,7 @@ GameObject:
   - component: {fileID: 1729778784}
   - component: {fileID: 1729778783}
   - component: {fileID: 1729778785}
+  - component: {fileID: 1729778786}
   m_Layer: 0
   m_Name: InGameManager
   m_TagString: Untagged
@@ -87406,6 +87407,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1729778786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1729778777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99334fff0fcebdc42a34a7aa3b4e1223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultVolumeScale: 1
+  defaultClip: {fileID: 0}
+  playOnAwake: 0
 --- !u!1 &1735977456
 GameObject:
   m_ObjectHideFlags: 0

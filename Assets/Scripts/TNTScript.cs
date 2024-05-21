@@ -84,7 +84,7 @@ public class TNTScript : MonoBehaviour
             }
 
             screenShakeScript.TriggerShake();
-            FindFirstObjectByType<soundManager>().PlayOnce(explosionSoundClip);
+            FindFirstObjectByType<soundManager>().PlayOnce(explosionSoundClip, 0.3f);
             Destroy(this.gameObject);
             Instantiate(Explosion, transform.position, Quaternion.identity);
         }

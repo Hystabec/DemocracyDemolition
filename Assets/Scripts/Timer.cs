@@ -63,7 +63,7 @@ public class Timer : MonoBehaviour
     public void StartTime()
     {
         timerAudioSource.Stop();
-        timerAudioSource?.PlayOneShot(buildStart);
+        timerAudioSource?.PlayOneShot(buildStart, 0.3f);
         timerRunning = true;
     }
 
@@ -136,7 +136,7 @@ public class Timer : MonoBehaviour
     {
         fighting = true;
         timeProgressBar.fillAmount = 1;
-        timerAudioSource?.PlayOneShot(fightStart);
+        timerAudioSource?.PlayOneShot(fightStart, 0.3f);
     }
 
     void UpdateProgressBarBuild()

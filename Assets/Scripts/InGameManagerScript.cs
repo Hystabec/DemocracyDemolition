@@ -212,7 +212,7 @@ public class InGameManagerScript : MonoBehaviour
     {
         screenShakeScript.TriggerShake();
         igmASource.PlayOneShot(playerHit);
-        igmASource.PlayOneShot(crowdCheer);
+        igmASource.PlayOneShot(crowdCheer, 1.3f);
 
         if (callingPlayer == player1)
         {
