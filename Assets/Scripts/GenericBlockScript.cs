@@ -133,18 +133,11 @@ public class GenericBlockScript : MonoBehaviour
 
         if (redPlayer)
         {
-            if (redPlaceEffect != null)
-            {
-                redPlaceEffect.Play();
-            }
+            redPlaceEffect?.Play();   
         }
-
         else if(!redPlayer)
         {
-            if (bluePlaceEffect != null)
-            {
-                bluePlaceEffect.Play();
-            }
+            bluePlaceEffect?.Play();
         }
 
         //convers the layerMask into a usable layer int
@@ -159,17 +152,14 @@ public class GenericBlockScript : MonoBehaviour
         {
             redPlayer = true;
         }
-
         else if (player.name == "playerTwo")
         {
             redPlayer = false;
         }
-
         else
         {
             Debug.Log("player missing");
         }
-
     }
 
     public bool CanPlaceBlock()

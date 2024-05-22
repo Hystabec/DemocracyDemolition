@@ -389,11 +389,12 @@ public class InGameManagerScript : MonoBehaviour
         playerScript ps = player1.GetComponent<playerScript>();
         ps.clearAndDeleteBlockList();
         ps.resetAmmo();
-
+        ps.CanFight(false);
 
         ps = player2.GetComponent<playerScript>();
         ps.clearAndDeleteBlockList();
         ps.resetAmmo();
+        ps.CanFight(false);
 
 
         timerScript.StopTimer();

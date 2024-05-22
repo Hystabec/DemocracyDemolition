@@ -596,9 +596,6 @@ public class playerScript : MonoBehaviour
                 updateAmmoText();
 
                 StartCoroutine(ThrowCooldown());
-            
-
-
             }
         }
     }
@@ -927,7 +924,6 @@ public class playerScript : MonoBehaviour
             if (collision.gameObject.GetComponent<pooledProjectileScript>().owner != this)
             {
                 FindObjectOfType<InGameManagerScript>().playerKilled(this.gameObject);
-
             }
 
             else
