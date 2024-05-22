@@ -446,9 +446,11 @@ public class playerScript : MonoBehaviour
             {
                 if (selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().CanPlaceBlock())
                 {
+                    selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().CheckPlayer(gameObject);
                     //remvoe the selected object from the list - it has been placed
                     selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().ShowOutline(false);
                     selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().Placed();
+
 
                     placedBlocks.Add(selectableObjects[SelectedIndex]);
 

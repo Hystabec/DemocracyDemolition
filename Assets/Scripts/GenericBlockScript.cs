@@ -34,6 +34,8 @@ public class GenericBlockScript : MonoBehaviour
     ParticleSystem redPlaceEffect = null;
     ParticleSystem bluePlaceEffect = null;
 
+    private bool redPlayer = true;
+
     [SerializeField]
     AudioSource aSource;
 
@@ -49,7 +51,7 @@ public class GenericBlockScript : MonoBehaviour
     {
         outline = gameObject.transform.Find("outline")?.gameObject;
         redPlaceEffect = gameObject.transform.Find("RedPlaceEffect")?.gameObject.GetComponent<ParticleSystem>();
-        bluePlaceEffect = gameObject.transform.Find("bluePlaceEffect")?.gameObject.GetComponent<ParticleSystem>();
+        bluePlaceEffect = gameObject.transform.Find("BluePlaceEffect")?.gameObject.GetComponent<ParticleSystem>();
 
         defaultColour = gameObject.GetComponent<SpriteRenderer>().color;
 
@@ -129,15 +131,45 @@ public class GenericBlockScript : MonoBehaviour
             collider.enabled = true;
         }
 
-        if (redPlaceEffect != null)
+        if (redPlayer)
         {
-            redPlaceEffect.Play();
+            if (redPlaceEffect != null)
+            {
+                redPlaceEffect.Play();
+            }
+        }
+
+        else if(!redPlayer)
+        {
+            if (bluePlaceEffect != null)
+            {
+                bluePlaceEffect.Play();
+            }
         }
 
         //convers the layerMask into a usable layer int
         gameObject.layer = (int)Mathf.Log(placedLayer.value, 2);
 
         placed = true;
+    }
+
+    public void CheckPlayer(GameObject player)
+    {
+        if (player.name == "playerOne")
+        {
+            redPlayer = true;
+        }
+
+        else if (player.name == "playerTwo")
+        {
+            redPlayer = false;
+        }
+
+        else
+        {
+            Debug.Log("player missing");
+        }
+
     }
 
     public bool CanPlaceBlock()
