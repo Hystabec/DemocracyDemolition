@@ -71,6 +71,11 @@ public class LauncherTrapScript : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("projectile") && canFire)
         {
+            RaycastHit2D ray = Physics2D.Raycast(firePosition.transform.position, Vector2.right, projectileRadius);
+
+            if (ray.collider != null)
+                return;
+
             spawnedProj.transform.position = firePosition.transform.position + (firePosition.transform.right * projectileRadius);
 
             //find the normal of firePosition and apply force in that direction
