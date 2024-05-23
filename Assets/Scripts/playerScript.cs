@@ -460,7 +460,7 @@ public class playerScript : MonoBehaviour
                     selectableObjects.RemoveAt(SelectedIndex);
 
                     rotationMarker.transform.position = defaultRotationMarkerPosition;
-                    APrompt.transform.position = defaultRotationMarkerPosition;
+                    //APrompt.transform.position = defaultRotationMarkerPosition;
 
                     SelectedIndex = 0;
 
@@ -492,7 +492,7 @@ public class playerScript : MonoBehaviour
                 selectableObjects[SelectedIndex].transform.rotation = selectedBlockRotation;
                 selectableObjects[SelectedIndex].GetComponent<GenericBlockScript>().CurrentlyPlacing(false);
                 rotationMarker.transform.position = defaultRotationMarkerPosition;
-                APrompt.transform.position = defaultRotationMarkerPosition;
+                //APrompt.transform.position = defaultRotationMarkerPosition;
 
                 hasBeenSelected = false;
             }
@@ -788,7 +788,6 @@ public class playerScript : MonoBehaviour
             {
                 selectableObjects[SelectedIndex].transform.position += (new Vector3(leftStickSensitivity * leftStickMoveVector.x, leftStickSensitivity * leftStickMoveVector.y, 0)) * Time.deltaTime;
                 rotationMarker.transform.position = selectableObjects[SelectedIndex].transform.position + rotationMarkerOffset;
-                APrompt.transform.position = selectableObjects[SelectedIndex].transform.position + AButtonOffset;
             }
         }
     }
@@ -882,8 +881,6 @@ public class playerScript : MonoBehaviour
                 }
 
             }
-
-
         }
 
         if (fightingStage)
@@ -919,6 +916,15 @@ public class playerScript : MonoBehaviour
                 lsIcon.SetActive(false);
                // lsIcon.GetComponent<UnityEngine.UI.Image>().enabled = false;
             }
+        }
+
+        if((selectableObjects.Count > 0) && !(SelectedIndex > selectableObjects.Count-1))
+        {
+            APrompt.transform.position = selectableObjects[SelectedIndex].transform.position + AButtonOffset;
+        }
+        else
+        {
+            APrompt.transform.position = defaultRotationMarkerPosition;
         }
     }
 
