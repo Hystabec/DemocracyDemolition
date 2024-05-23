@@ -16,10 +16,16 @@ public class pooledProjectileScript : MonoBehaviour
 
     public void DespawnProjectile()
     {
+        bounceCount = 0;
         if (owner != null)
             owner.despawnProjectile(this.gameObject);
         else
             gameObject.SetActive(false);
+    }
+
+    public void ResetBounces()
+    {
+        bounceCount = 0;
     }
 
     void OnCollisionEnter2D(Collision2D collision)

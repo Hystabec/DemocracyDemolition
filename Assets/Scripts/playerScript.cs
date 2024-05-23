@@ -258,6 +258,7 @@ public class playerScript : MonoBehaviour
     {
         if (projectile != null)
         {
+            projectile.GetComponent<pooledProjectileScript>().ResetBounces();
             projectile.SetActive(false);
             var rb = projectile.GetComponent<Rigidbody2D>();
             rb.velocity = Vector2.zero;
