@@ -37,6 +37,7 @@ public class AmmoUi : MonoBehaviour
     {
         onFightStage = false;
         coconutImagesList = new List<GameObject>(coconutImages);
+        added = false;
        
         foreach (var image in coconutImagesList)
         {
@@ -68,6 +69,7 @@ public class AmmoUi : MonoBehaviour
 
     public void OnFightStage()
     {
+        added = true;
         foreach (var image in coconutImagesList)
         {
             image.GetComponent<SpriteRenderer>().enabled = true;
