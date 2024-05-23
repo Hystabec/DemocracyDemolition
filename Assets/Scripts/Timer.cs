@@ -77,14 +77,14 @@ public class Timer : MonoBehaviour
         if (!timerRunning)
             return;
 
-        if (currentTime >= 0f)
+        if (currentTime > 0f)
         {
             currentTime -= Time.deltaTime;
         }
 
         if (!fighting)
         { 
-            if (buildTime >= 0f)
+            if (buildTime > 0f)
             {
                 buildTime -= Time.deltaTime;
             }
@@ -92,7 +92,7 @@ public class Timer : MonoBehaviour
 
         else if(fighting)
         {
-            if (fightTime >= 0f)
+            if (fightTime > 0f)
             {
                 fightTime -= Time.deltaTime;
             }
@@ -112,7 +112,7 @@ public class Timer : MonoBehaviour
             }
         }
 
-        if(currentTime <= 0)
+        if(!(currentTime > 0))
         {
             timerFinished();
             timerRunning = false;
@@ -152,7 +152,11 @@ public class Timer : MonoBehaviour
     void UpdateTimerText()
     {
         int roundSeconds = Mathf.FloorToInt(currentTime % 60f);
-
+        //Stops timer text going to -1
+        if (roundSeconds < 0)
+        {
+            roundSeconds = 0;
+        }
         string timeString = string.Format("{0}", roundSeconds);
 
         timerText.text = timeString;
