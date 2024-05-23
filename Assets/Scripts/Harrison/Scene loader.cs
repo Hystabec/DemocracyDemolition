@@ -33,7 +33,7 @@ public class Sceneloader : MonoBehaviour
     }
     public void Menu()
     {
-        SceneManager.LoadScene("Harrison 2");
+        SceneManager.LoadScene("MMenu");
     }
 
     public IEnumerator AnimsBeforePlay()

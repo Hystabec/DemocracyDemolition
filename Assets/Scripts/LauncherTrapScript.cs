@@ -11,7 +11,7 @@ public class LauncherTrapScript : MonoBehaviour
     GameObject spawnedProj;
 
     GameObject firePosition;
-    float projectileRadius = 0.5f;
+    float projectileRadius = 0.25f;
 
     [SerializeField]
     AudioSource soundPlayer;
@@ -70,7 +70,7 @@ public class LauncherTrapScript : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("projectile") && canFire)
         {
-            RaycastHit2D ray = Physics2D.Raycast(firePosition.transform.position, Vector2.right, projectileRadius);
+            RaycastHit2D ray = Physics2D.Raycast(firePosition.transform.position, firePosition.transform.right, projectileRadius);
 
             if (ray.collider != null)
                 return;
