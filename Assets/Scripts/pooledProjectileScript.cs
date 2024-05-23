@@ -11,8 +11,8 @@ public class pooledProjectileScript : MonoBehaviour
 
     int bounceCount = 0;
 
-    [SerializeField]
-    GameObject coconutParticles;
+    //[SerializeField]
+    //GameObject coconutParticles;
 
     public void DespawnProjectile()
     {
@@ -32,7 +32,7 @@ public class pooledProjectileScript : MonoBehaviour
     {
         bounceCount++;
 
-        coconutParticles.SetActive(true);
+        //coconutParticles.SetActive(true);
 
         if (bounceCount >= maxBounceCount)
         {
