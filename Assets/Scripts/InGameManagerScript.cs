@@ -426,6 +426,9 @@ public class InGameManagerScript : MonoBehaviour
         var player1Script = player1.GetComponent<playerScript>();
         var player2Script = player2.GetComponent<playerScript>();
 
+        player1.GetComponent<playerScript>().ProjInHandVisible(false);
+        player2.GetComponent<playerScript>().ProjInHandVisible(false);
+
         //when game ends player go to UI mode
         player1Script.SwitchToUIMode();
         player1Script.ProjInHandVisible(false);
