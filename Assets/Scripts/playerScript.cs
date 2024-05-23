@@ -275,6 +275,7 @@ public class playerScript : MonoBehaviour
     {
         listOfUIElements = UIList;
         UIElementIndex = 0;
+        UIList[0].GetComponent<GenericUIButton>()?.ShowHovered();
     }
 
     public void ClearUIElements()
