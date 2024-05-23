@@ -10029,7 +10029,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d2403ff2b2242f469d036d6d12a9044, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionRadius: 2
+  explosionRadius: 1.5
   aoe: {fileID: 107330722128182832}
   explosionSoundClip: {fileID: 8300000, guid: 1f7f080542cbcfd44bcc9b8131beee72, type: 3}
   Explosion: {fileID: 3031242192633059290, guid: 497e811b130fe0646a3cdaa42cb7e54c, type: 3}
