@@ -10771,7 +10771,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &335630220
 RectTransform:
   m_ObjectHideFlags: 0
@@ -66647,7 +66647,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 16735576
+    rgba: 4294925656
   m_fontColor: {r: 0.3443396, g: 0.36505488, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -70142,7 +70142,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1303902994}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a2f1df829cc07645abe01b5afce4d3c, type: 3}
   m_Name: 
@@ -87373,7 +87373,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCam: {fileID: 313012571}
   roundTime: 20
-  timeBeforeFighting: 10
+  timeBeforeFighting: 0
   roundsNeededToWin: 4
   player1: {fileID: 1303902994}
   player2: {fileID: 1865346978}
@@ -87413,6 +87413,8 @@ MonoBehaviour:
   blueFireworks: {fileID: 899616763}
   redWinText: {fileID: 247005238}
   blueWinText: {fileID: 1581356387}
+  redFireCentre: {fileID: 16386615}
+  blueFireCentre: {fileID: 231040011}
   redCrowdConfetti: {fileID: 299587092}
   redCrowdStreamers: {fileID: 691532497}
   blueCrowdConfetti: {fileID: 1489035812}

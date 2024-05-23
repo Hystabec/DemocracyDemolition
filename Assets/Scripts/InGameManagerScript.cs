@@ -95,7 +95,7 @@ public class InGameManagerScript : MonoBehaviour
     bool gameHasEnded = false;
 
     [SerializeField]
-    private GameObject redConfetti, redFireworks, blueConfetti, blueFireworks, redWinText, blueWinText;
+    private GameObject redConfetti, redFireworks, blueConfetti, blueFireworks, redWinText, blueWinText, redFireCentre, blueFireCentre;
 
     [SerializeField]
     ParticleSystem redCrowdConfetti, redCrowdStreamers, blueCrowdConfetti, blueCrowdStreamers;
@@ -453,8 +453,6 @@ public class InGameManagerScript : MonoBehaviour
             redConfetti.SetActive(true);
             redFireworks.SetActive(true);
 
-            redAnim.SetTrigger("GameWin");
-
             redCrowdAnim.SetTrigger("GameWin");
 
             winner = 1;
@@ -464,8 +462,6 @@ public class InGameManagerScript : MonoBehaviour
         {
             blueConfetti.SetActive(true);
             blueFireworks.SetActive(true);
-
-            blueAnim.SetTrigger("GameWin");
 
             blueCrowdAnim.SetTrigger("GameWin");
 
@@ -499,11 +495,17 @@ public class InGameManagerScript : MonoBehaviour
         {
             redWinText.SetActive(true);
             finalOffset = endButtonOffset;
+
+            redAnim.SetTrigger("GameWin");
+            redFireCentre.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
         else if(winner == 2)
         {
             blueWinText.SetActive(true);
             finalOffset = -endButtonOffset;
+
+            blueAnim.SetTrigger("GameWin");
+            blueFireCentre.transform.rotation = Quaternion.Euler(-180, 180, 0);
         }
 
         //yield return new WaitUntil(() => camAnim.GetCurrentAnimatorStateInfo(0).IsName(triggerName));
