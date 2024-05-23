@@ -94,10 +94,10 @@ public class InGameManagerScript : MonoBehaviour
 
     bool gameHasEnded = false;
 
-    [HideInInspector, SerializeField]
-    private GameObject redConfetti, redFireworks, blueConfetti, blueFireworks;
+    [SerializeField]
+    private GameObject redConfetti, redFireworks, blueConfetti, blueFireworks, redWinText, blueWinText;
 
-    [HideInInspector, SerializeField]
+    [SerializeField]
     ParticleSystem redCrowdConfetti, redCrowdStreamers, blueCrowdConfetti, blueCrowdStreamers;
 
     [SerializeField]
@@ -164,6 +164,8 @@ public class InGameManagerScript : MonoBehaviour
         blueConfetti.SetActive(false);
         redFireworks.SetActive(false);
         blueFireworks.SetActive(false);
+        redWinText.SetActive(false);
+        blueWinText.SetActive(false);
 
         cameraAnimationStatus CAS = mainCam.GetComponent<cameraAnimationStatus>();
 
@@ -483,14 +485,24 @@ public class InGameManagerScript : MonoBehaviour
 
     IEnumerator waitForEndCamPan(int winner)
     {
+
+        var CAS = mainCam.GetComponent<cameraAnimationStatus>();
+
+        yield return new WaitUntil(() => CAS.Started() == true);
+        yield return new WaitUntil(() => CAS.isAnimating() == false);
+
+        CAS.Reset();
+
         float finalOffset = 0;
 
         if (winner == 1)
         {
+            redWinText.SetActive(true);
             finalOffset = endButtonOffset;
         }
         else if(winner == 2)
         {
+            blueWinText.SetActive(true);
             finalOffset = -endButtonOffset;
         }
 
@@ -500,12 +512,7 @@ public class InGameManagerScript : MonoBehaviour
         //had to hard code the anim length - no ideal didnt work with the other ways i tried
         //yield return new WaitForSeconds(4.5f);
 
-        var CAS = mainCam.GetComponent<cameraAnimationStatus>();
 
-        yield return new WaitUntil(() => CAS.Started() == true);
-        yield return new WaitUntil(() => CAS.isAnimating() == false);
-
-        CAS.Reset();
 
         //showButtons
         foreach (GameObject go in EndUIButtons)

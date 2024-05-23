@@ -2872,8 +2872,8 @@ MonoBehaviour:
 
     press any button'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 91fafa9e96c400343baecb9b709db548, type: 2}
+  m_sharedMaterial: {fileID: 715452797102279233, guid: 91fafa9e96c400343baecb9b709db548, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4733,7 +4733,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 400, y: 100}
+  m_AnchoredPosition: {x: 500, y: 100}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &247005240
@@ -66326,7 +66326,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1756578479
   m_SortingLayer: 3
-  m_SortingOrder: 30
+  m_SortingOrder: 33
   m_Sprite: {fileID: 7482667652216324306, guid: 6052f89770bb2a74ca22a3c4e5489258, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_FlipX: 0
@@ -66647,7 +66647,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294925656
+    rgba: 16735576
   m_fontColor: {r: 0.3443396, g: 0.36505488, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -83191,7 +83191,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 150, y: 145.00002}
+  m_AnchoredPosition: {x: 648, y: -112}
   m_SizeDelta: {x: 250.44708, y: 168.2091}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1497803740
@@ -83251,7 +83251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.92156863, g: 0.9337316, b: 1, a: 1}
+  m_Color: {r: 0.92156863, g: 0.9337316, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -84915,7 +84915,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -400, y: 100}
+  m_AnchoredPosition: {x: -500, y: 100}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1581356389
@@ -87168,8 +87168,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278206975
-  m_fontColor: {r: 1, g: 0.3915094, b: 0.3915094, a: 1}
+    rgba: 4282729983
+  m_fontColor: {r: 1, g: 0.2688679, b: 0.2688679, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -87411,6 +87411,8 @@ MonoBehaviour:
   redFireworks: {fileID: 344264825}
   blueConfetti: {fileID: 454447933}
   blueFireworks: {fileID: 899616763}
+  redWinText: {fileID: 247005238}
+  blueWinText: {fileID: 1581356387}
   redCrowdConfetti: {fileID: 299587092}
   redCrowdStreamers: {fileID: 691532497}
   blueCrowdConfetti: {fileID: 1489035812}
@@ -87645,7 +87647,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 6d19698ccfc99cc4d95b3767a3280821, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 0.05
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -94319,8 +94321,8 @@ MonoBehaviour:
 
     press any button'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 91fafa9e96c400343baecb9b709db548, type: 2}
+  m_sharedMaterial: {fileID: 715452797102279233, guid: 91fafa9e96c400343baecb9b709db548, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -101618,7 +101620,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -150, y: 139}
+  m_AnchoredPosition: {x: -648, y: -112}
   m_SizeDelta: {x: 250.44708, y: 168.2091}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1948988680
@@ -101678,7 +101680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.9198113, b: 0.9198113, a: 1}
+  m_Color: {r: 1, g: 0.9198113, b: 0.9198113, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
