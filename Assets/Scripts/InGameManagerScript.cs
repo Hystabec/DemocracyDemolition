@@ -94,7 +94,7 @@ public class InGameManagerScript : MonoBehaviour
 
     bool gameHasEnded = false;
 
-    [SerializeField]
+    [HideInInspector, SerializeField]
     private GameObject redConfetti, redFireworks, blueConfetti, blueFireworks, redWinText, blueWinText, redFireCentre, blueFireCentre;
 
     [SerializeField]
@@ -580,6 +580,7 @@ public class InGameManagerScript : MonoBehaviour
         player1.GetComponent<playerScript>().CanFight(true);
         player2.GetComponent<playerScript>().CanFight(true);
         StartCoroutine(RoundTypeText("Fight!"));
+        canvasAnim.SetTrigger("BuildFlash");
         timerAnim.SetTrigger("Pop");
         fightIcons.SetActive(true);
         buildIcons.SetActive(false);
