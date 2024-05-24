@@ -215,6 +215,8 @@ public class InGameManagerScript : MonoBehaviour
     public void playerKilled(GameObject callingPlayer)
     {
         screenShakeScript.TriggerShake();
+        FindFirstObjectByType<soundManager>().PlayOnce(playerHit, 0.8f);
+        FindFirstObjectByType<soundManager>().PlayOnce(crowdCheer, 0.5f);
 
         if (callingPlayer == player1)
         {
@@ -413,8 +415,6 @@ public class InGameManagerScript : MonoBehaviour
     IEnumerator DelayBetweenRound()
     {
         igmASource.Stop();
-        FindFirstObjectByType<soundManager>().PlayOnce(playerHit, 0.8f);
-        FindFirstObjectByType<soundManager>().PlayOnce(crowdCheer, 0.5f);
         yield return new WaitForSeconds(2);
         timerScript.timerReset();
         startRound();
@@ -580,7 +580,7 @@ public class InGameManagerScript : MonoBehaviour
         player1.GetComponent<playerScript>().CanFight(true);
         player2.GetComponent<playerScript>().CanFight(true);
         StartCoroutine(RoundTypeText("Fight!"));
-        canvasAnim.SetTrigger("BuildFlash");
+                canvasAnim.SetTrigger("BuildFlash");
         timerAnim.SetTrigger("Pop");
         fightIcons.SetActive(true);
         buildIcons.SetActive(false);
