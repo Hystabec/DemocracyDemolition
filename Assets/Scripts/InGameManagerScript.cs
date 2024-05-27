@@ -107,6 +107,9 @@ public class InGameManagerScript : MonoBehaviour
 
     playerScript pauseMenuOnwer = null;
 
+    bool betweenRounds = false;
+    bool pauseNotHandled = false;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -404,13 +407,13 @@ public class InGameManagerScript : MonoBehaviour
 
         var projectiles = FindObjectsOfType<pooledProjectileScript>();
 
-        foreach(pooledProjectileScript p in projectiles)
+        foreach (pooledProjectileScript p in projectiles)
         {
             p.Pause();
         }
 
         //activate ui elements
-        foreach(GameObject go in pauseMenuUIElements)
+        foreach (GameObject go in pauseMenuUIElements)
         {
             go.SetActive(true);
         }
@@ -467,15 +470,31 @@ public class InGameManagerScript : MonoBehaviour
             currentRound++;
 
             //add a wait time between rounds
-            StartCoroutine(DelayBetweenRound());
+            DelayBetweenRoundPartOne();
         }
+    }
+
+    void DelayBetweenRoundPartOne()
+    {
+        betweenRounds = true;
+        igmASource.Stop();
+        timerScript.StartBetweenRounds(2.0f, DelayBetweenRoundPartTwo);
+    }
+
+    void DelayBetweenRoundPartTwo()
+    {
+        timerScript.timerReset();
+        betweenRounds = false;
+        startRound();
     }
 
     IEnumerator DelayBetweenRound()
     {
+        betweenRounds = true;
         igmASource.Stop();
         yield return new WaitForSeconds(2);
         timerScript.timerReset();
+        betweenRounds = false;
         startRound();
     }
 

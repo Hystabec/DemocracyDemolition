@@ -69,6 +69,18 @@ public class Timer : MonoBehaviour
     List<clockEvent> events = new List<clockEvent>();
     List<int> indexToRemoveThisFrame = new List<int>();
 
+    bool BetweenRounds = false;
+    float BetweenRoundsTime = 2.0f;
+    UnityAction funcToCallAfterTime = null;
+
+    public void StartBetweenRounds(float time,  UnityAction funcToCallAfterTime)
+    {
+        this.funcToCallAfterTime = funcToCallAfterTime;
+        BetweenRoundsTime = time;
+        BetweenRounds = true;
+        timerRunning = true;
+    }
+
     public void AddedEvent(float timeToWaitFromRoundStart, UnityAction eventToCall)
     {
         events.Add(new clockEvent(timeToWaitFromRoundStart, eventToCall));
@@ -170,6 +182,21 @@ public class Timer : MonoBehaviour
     {
         if (!timerRunning)
             return;
+
+        if(BetweenRounds)
+        {
+            if(BetweenRoundsTime > 0.0f)
+                BetweenRoundsTime -= Time.deltaTime;
+            else
+            {
+                funcToCallAfterTime?.Invoke();
+                BetweenRounds = false;
+                BetweenRoundsTime = 2.0f;
+                funcToCallAfterTime = null;
+            }
+
+            return;
+        }
 
         if (currentTime > 0f)
         {
