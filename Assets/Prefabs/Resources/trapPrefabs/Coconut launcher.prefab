@@ -14862,6 +14862,7 @@ MonoBehaviour:
   aSource: {fileID: 558891342014245705}
   placeSound: {fileID: 8300000, guid: 47758c3faeb7e6d45b49f196a1e51944, type: 3}
   isPlacing: 0
+  player2RotationOffset: {x: 0, y: 0, z: -180, w: 0}
 --- !u!50 &6628034045995502314
 Rigidbody2D:
   serializedVersion: 4

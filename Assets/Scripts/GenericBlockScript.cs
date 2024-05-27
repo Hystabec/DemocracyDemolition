@@ -47,6 +47,9 @@ public class GenericBlockScript : MonoBehaviour
 
     SpriteRenderer affectPlayArea = null;
 
+    [SerializeField]
+    Quaternion player2RotationOffset;
+
     void Awake()
     {
         outline = gameObject.transform.Find("outline")?.gameObject;
@@ -62,6 +65,11 @@ public class GenericBlockScript : MonoBehaviour
             collider.enabled = false;
         }
 
+    }
+
+    public Quaternion GetPlayer2RotationOffset()
+    {
+        return player2RotationOffset;
     }
 
     void Start()

@@ -138,8 +138,6 @@ public class InGameManagerScript : MonoBehaviour
         StartCoroutine(ResetGame());
     }
 
-
-
     public IEnumerator ResetGame()
     {
         //StopCoroutine(RoundTime());

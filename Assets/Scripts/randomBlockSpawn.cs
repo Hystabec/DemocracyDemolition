@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class randomBlockSpawn : MonoBehaviour
@@ -43,45 +44,67 @@ public class randomBlockSpawn : MonoBehaviour
 
     public void spawnTrapIn(GameObject ToGiveTo, int numberToGive)
     {
+        playerScript PS = ToGiveTo.GetComponent<playerScript>();
+
+        bool applyOffset = false;
+
+        if (PS.getPlayerIndex() == 1)
+            applyOffset = true;
+
         for (int i = 0; i < numberToGive; i++)
         {
             GameObject thisBlock = Instantiate(randomTrap(), spawnPos, Quaternion.identity);
-            ToGiveTo.GetComponent<playerScript>().AddBlockToList(thisBlock);
+
+            if (applyOffset)
+                thisBlock.transform.rotation = thisBlock.GetComponent<GenericBlockScript>().GetPlayer2RotationOffset();
+
+            PS.AddBlockToList(thisBlock);
         }
     }
 
     public void spawnBlockIn(GameObject ToGiveTo, int numberToGive)
     {
-        for(int i = 0; i < numberToGive; i++)
+        playerScript PS = ToGiveTo.GetComponent<playerScript>();
+
+        bool applyOffset = false;
+
+        if (PS.getPlayerIndex() == 1)
+            applyOffset = true;
+
+        for (int i = 0; i < numberToGive; i++)
         {
             GameObject thisBlock = Instantiate(randomBlock(), spawnPos, Quaternion.identity);
-            ToGiveTo.GetComponent<playerScript>().AddBlockToList(thisBlock);
+
+            if (applyOffset)
+                thisBlock.transform.rotation = thisBlock.GetComponent<GenericBlockScript>().GetPlayer2RotationOffset();
+
+            PS.AddBlockToList(thisBlock);
         }
     }
 
     GameObject randomTrap()
     {
-        return availableTraps[Random.Range(0, availableTraps.Length)];
+        return availableTraps[UnityEngine.Random.Range(0, availableTraps.Length)];
     }
 
     GameObject randomBlock()
     {
-        return availableBlocks[Random.Range(0, availableBlocks.Length)];
+        return availableBlocks[UnityEngine.Random.Range(0, availableBlocks.Length)];
     }
 
     GameObject ChooseBlock()
     {
-        float trap = Random.Range(0f, 1f);
+        float trap = UnityEngine.Random.Range(0f, 1f);
 
         if (trapsAllowed && trap > 0.5f)
         {
    
-            return availableTraps[Random.Range(0, availableTraps.Length)];     
+            return availableTraps[UnityEngine.Random.Range(0, availableTraps.Length)];     
         }
 
         else
         {
-            return availableBlocks[Random.Range(0, availableBlocks.Length)];
+            return availableBlocks[UnityEngine.Random.Range(0, availableBlocks.Length)];
 
         }
     }
