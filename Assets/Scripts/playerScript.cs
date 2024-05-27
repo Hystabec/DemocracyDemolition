@@ -270,8 +270,15 @@ public class playerScript : MonoBehaviour
             projectile.transform.rotation = Quaternion.identity;
             projectList.Add(projectile);
 
-            if(!calledOnRoundEnd)
+            if (!calledOnRoundEnd)
+            {
                 thrownProjectiles.Remove(projectile);
+
+                if(RemainingAmmo <= 0 && thrownProjectiles.Count <= 0)
+                {
+                    outOfAmmoAnProjectilesFinished = true;
+                }
+            }
         }
     }
 

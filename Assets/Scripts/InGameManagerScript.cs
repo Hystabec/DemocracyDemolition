@@ -107,8 +107,28 @@ public class InGameManagerScript : MonoBehaviour
 
     playerScript pauseMenuOnwer = null;
 
-    bool betweenRounds = false;
-    bool pauseNotHandled = false;
+    bool Player1OutOfAmmoNoActiveProjecties = false;
+    bool Player2OutOfAmmoNoActiveProjecties = false;
+       
+    //bool betweenRounds = false;
+    //bool pauseNotHandled = false;
+
+    public void playerOutOfAmmo(GameObject callerGO)
+    {
+        if(callerGO == player1)
+        {
+            Player1OutOfAmmoNoActiveProjecties = true;
+        }
+        else if(callerGO == player2) 
+        {
+            Player2OutOfAmmoNoActiveProjecties = true;
+        }
+
+        if(Player1OutOfAmmoNoActiveProjecties && Player2OutOfAmmoNoActiveProjecties)
+        {
+            endRound();
+        }
+    }
 
     // Start is called before the first frame update
     void Awake()
@@ -456,11 +476,13 @@ public class InGameManagerScript : MonoBehaviour
         ps.clearAndDeleteBlockList();
         ps.resetAmmo();
         ps.CanFight(false);
+        Player1OutOfAmmoNoActiveProjecties = false;
 
         ps = player2.GetComponent<playerScript>();
         ps.clearAndDeleteBlockList();
         ps.resetAmmo();
         ps.CanFight(false);
+        Player2OutOfAmmoNoActiveProjecties = false;
 
 
         timerScript.StopTimer();
@@ -476,7 +498,7 @@ public class InGameManagerScript : MonoBehaviour
 
     void DelayBetweenRoundPartOne()
     {
-        betweenRounds = true;
+        //betweenRounds = true;
         igmASource.Stop();
         timerScript.StartBetweenRounds(2.0f, DelayBetweenRoundPartTwo);
         timerScript.ResumeTimer();
@@ -485,17 +507,17 @@ public class InGameManagerScript : MonoBehaviour
     void DelayBetweenRoundPartTwo()
     {
         timerScript.timerReset();
-        betweenRounds = false;
+        //betweenRounds = false;
         startRound();
     }
 
     IEnumerator DelayBetweenRound()
     {
-        betweenRounds = true;
+        //betweenRounds = true;
         igmASource.Stop();
         yield return new WaitForSeconds(2);
         timerScript.timerReset();
-        betweenRounds = false;
+        //betweenRounds = false;
         startRound();
     }
 
