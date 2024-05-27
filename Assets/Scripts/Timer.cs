@@ -54,7 +54,6 @@ public class Timer : MonoBehaviour
 
     bool fighting = false;
 
-
     UnityEvent timerEndedEvent = new();
 
     [SerializeField]
@@ -236,8 +235,8 @@ public class Timer : MonoBehaviour
 
         if(!(currentTime > 0))
         {
-            timerFinished();
             timerRunning = false;
+            timerFinished();
         }
     }
 

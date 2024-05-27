@@ -266,7 +266,7 @@ public class InGameManagerScript : MonoBehaviour
 
             foreach (GameObject pooledProj in thrownProjectiles)
             {
-                p1Script.despawnProjectile(pooledProj.gameObject);
+                p1Script.despawnProjectile(pooledProj.gameObject, true);
             }
 
         }
@@ -278,7 +278,7 @@ public class InGameManagerScript : MonoBehaviour
             List<GameObject> thrownProjectiles2 = p2Script.thrownProjectiles;
             foreach (GameObject pooledProj in thrownProjectiles2)
             {
-                p2Script.despawnProjectile(pooledProj.gameObject);
+                p2Script.despawnProjectile(pooledProj.gameObject, true);
             }
         }
 
@@ -479,6 +479,7 @@ public class InGameManagerScript : MonoBehaviour
         betweenRounds = true;
         igmASource.Stop();
         timerScript.StartBetweenRounds(2.0f, DelayBetweenRoundPartTwo);
+        timerScript.ResumeTimer();
     }
 
     void DelayBetweenRoundPartTwo()

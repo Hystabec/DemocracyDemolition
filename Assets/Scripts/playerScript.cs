@@ -129,6 +129,8 @@ public class playerScript : MonoBehaviour
 
     private bool showLS, showRS;
 
+    bool outOfAmmoAnProjectilesFinished = false;
+
     public void ResetData()
     {
         //this should be called by "InGameManagerScript"
@@ -210,6 +212,7 @@ public class playerScript : MonoBehaviour
 
     public void resetAmmo()
     {
+        outOfAmmoAnProjectilesFinished = false;
         RemainingAmmo = totalAmmo;
         updateAmmoText();
     }
@@ -255,7 +258,7 @@ public class playerScript : MonoBehaviour
         currentMode = newMode;
     }
 
-    public void despawnProjectile(GameObject projectile)
+    public void despawnProjectile(GameObject projectile, bool calledOnRoundEnd = false)
     {
         if (projectile != null)
         {
@@ -266,9 +269,10 @@ public class playerScript : MonoBehaviour
             projectile.transform.position = Vector3.zero;
             projectile.transform.rotation = Quaternion.identity;
             projectList.Add(projectile);
-            // thrownProjectiles.Remove(projectile);
-        }
 
+            if(!calledOnRoundEnd)
+                thrownProjectiles.Remove(projectile);
+        }
     }
 
     public void GiveUIElements(List<GameObject> UIList)
