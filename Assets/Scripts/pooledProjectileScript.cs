@@ -13,6 +13,32 @@ public class pooledProjectileScript : MonoBehaviour
 
     //[SerializeField]
     //GameObject coconutParticles;
+    
+    Vector2 unPausedVelocity = Vector2.zero;
+    float unPausedGravity = 1.0f;
+    public void Pause()
+    {
+        Rigidbody2D rb = this.gameObject.GetComponent<Rigidbody2D>();
+
+        //rb.freezeRotation = true;
+        unPausedGravity = rb.gravityScale;
+        rb.gravityScale = 0.0f;
+
+        unPausedVelocity = rb.velocity;
+        rb.velocity = Vector2.zero;
+    }
+
+    public void UnPause()
+    {
+        Rigidbody2D rb = this.gameObject.GetComponent<Rigidbody2D>();
+
+        //rb.freezeRotation = false;
+        rb.gravityScale = unPausedGravity;
+        unPausedGravity = 1.0f;
+
+        rb.velocity = unPausedVelocity;
+        unPausedVelocity = Vector2.zero;
+    }
 
     public void DespawnProjectile()
     {

@@ -500,6 +500,11 @@ public class playerScript : MonoBehaviour
         }
     }
 
+    public void StartButton()
+    {
+        FindObjectOfType<InGameManagerScript>()?.PauseRound(this);
+    }
+
     public void RB()
     {
         if (!hasBeenSelected)

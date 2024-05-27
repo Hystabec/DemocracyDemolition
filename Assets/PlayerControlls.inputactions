@@ -112,6 +112,15 @@
                     "processors": "",
                     "interactions": "Press(behavior=2)",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "StartButton",
+                    "type": "Button",
+                    "id": "fbebcf76-a6a8-472b-b860-9634bc130629",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -464,6 +473,17 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "DRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "95b4dc08-2be4-47c3-a929-1fa912992399",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StartButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

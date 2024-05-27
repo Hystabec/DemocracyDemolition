@@ -73,6 +73,8 @@ public class InGameManagerScript : MonoBehaviour
     [SerializeField]
     GameObject[] elementToHideWhenGameEnds, EndUIButtons;
 
+    [SerializeField]
+    GameObject[] pauseMenuUIElements;
 
     [SerializeField]
     float endButtonOffset = 266.0f;
@@ -102,6 +104,8 @@ public class InGameManagerScript : MonoBehaviour
 
     [SerializeField]
     private screenShake screenShakeScript;
+
+    playerScript pauseMenuOnwer = null;
 
     // Start is called before the first frame update
     void Awake()
@@ -383,9 +387,66 @@ public class InGameManagerScript : MonoBehaviour
         //timerScript.StartTime();
         StartCoroutine(endOfFrame());
 
-        StartCoroutine(TimeBeforeFighting());
+        //StartCoroutine(TimeBeforeFighting());
+        TimeBeforeFightingPartOne();
+        timerScript.AddedEvent(timeBeforeFighting, TimeBeforeFightingPartTwo);
 
         timerScript.animTriggered = false;
+    }
+
+    public void PauseRound(playerScript caller)
+    {
+        //pause time
+        timerScript.StopTimer();
+
+        player1.GetComponent<playerScript>().SwitchToUIMode();
+        player2.GetComponent<playerScript>().SwitchToUIMode();
+
+        //find all projectiles and freeze there velocitys
+
+        var projectiles = FindObjectsOfType<pooledProjectileScript>();
+
+        foreach(pooledProjectileScript p in projectiles)
+        {
+            p.Pause();
+        }
+
+        //activate ui elements
+        foreach(GameObject go in pauseMenuUIElements)
+        {
+            go.SetActive(true);
+        }
+
+        //assing the calling player the UI elements
+        caller.GiveUIElements(new List<GameObject>(pauseMenuUIElements));
+
+        pauseMenuOnwer = caller;
+    }
+
+    public void UnpauseRound()
+    {
+        timerScript.ResumeTimer();
+
+        player1.GetComponent<playerScript>().SwitchToPlayMode();
+        player2.GetComponent<playerScript>().SwitchToPlayMode();
+
+        var projectiles = FindObjectsOfType<pooledProjectileScript>();
+
+        foreach (pooledProjectileScript p in projectiles)
+        {
+            p.UnPause();
+        }
+
+        //deactivate ui elements
+        foreach (GameObject go in pauseMenuUIElements)
+        {
+            go.SetActive(false);
+        }
+
+        //clear the calling players ui elements
+        pauseMenuOnwer.ClearUIElements();
+
+        pauseMenuOnwer = null;
     }
 
     void endRound()
@@ -554,7 +615,47 @@ public class InGameManagerScript : MonoBehaviour
       //  roundTypeText.alpha = 0;
     }
 
+    void TimeBeforeFightingPartOne()
+    {
+        StartCoroutine(RoundTypeText("Build!"));
+        buildIcons.SetActive(true);
+        fightIcons.SetActive(false);
+        buildAnim.SetTrigger("Build");
+        timerAnim.SetTrigger("Pop");
+        canvasAnim.SetTrigger("BuildFlash");
+        player1.GetComponent<playerScript>().CanFight(false);
+        player2.GetComponent<playerScript>().CanFight(false);
 
+        if (currentRound > 1)
+        {
+            //ammoTextAnim.SetTrigger("FadeOut");
+        }
+    }
+
+    void TimeBeforeFightingPartTwo()
+    {
+        player1.GetComponent<playerScript>().ProjInHandVisible(true);
+        player2.GetComponent<playerScript>().ProjInHandVisible(true);
+
+        player1.GetComponent<playerScript>().CanFight(true);
+        player2.GetComponent<playerScript>().CanFight(true);
+        StartCoroutine(RoundTypeText("Fight!"));
+        canvasAnim.SetTrigger("BuildFlash");
+        timerAnim.SetTrigger("Pop");
+        fightIcons.SetActive(true);
+        buildIcons.SetActive(false);
+        fightAnim.SetTrigger("Fight");
+        //ammoTextAnim.SetTrigger("FadeIn");
+        roundTextAnim.SetTrigger("Fight");
+
+        player1.GetComponent<playerScript>().ammoUiScript.OnFightStage();
+        player2.GetComponent<playerScript>().ammoUiScript.OnFightStage();
+
+        timerScript.SwitchToFight();
+
+        timerScript.RemoveEvent(TimeBeforeFightingPartTwo, timeBeforeFighting);
+        //StartCoroutine("RoundTime");
+    }
 
     private IEnumerator TimeBeforeFighting()
     {

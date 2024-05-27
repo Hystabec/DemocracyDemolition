@@ -36,6 +36,12 @@ public class playerInputHandler : MonoBehaviour
             PScript.B();
     }
 
+    void OnStartButton()
+    {
+        if (PScript != null)
+            PScript.StartButton();
+    }
+
     void OnRB()
     {
         if (PScript != null)

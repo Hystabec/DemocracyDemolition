@@ -5,6 +5,31 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
+struct clockEvent
+{
+    public clockEvent(float timeFromStart, UnityAction action)
+    {
+        this.timeFromStart = timeFromStart;
+        this.action = action;
+        this.markedForDeletion = false;
+    }
+
+    public float timeFromStart { get; }
+    public UnityAction action { get; }
+
+    private bool markedForDeletion;
+
+    public void MarkForDeletion()
+    {
+        this.markedForDeletion = true;
+    }
+
+    public bool isMarkedForDeletion()
+    {
+        return this.markedForDeletion;
+    }
+}
+
 public class Timer : MonoBehaviour
 {
     [SerializeField]
@@ -13,6 +38,7 @@ public class Timer : MonoBehaviour
     float defautBuildTime = 10f, deafultFightTime = 15f;
 
     float currentTime = 26f;
+    float timePassed = 0;
 
     float buildTime;
     float fightTime;
@@ -40,9 +66,72 @@ public class Timer : MonoBehaviour
     [SerializeField]
     Image timeProgressBar;
 
+    List<clockEvent> events = new List<clockEvent>();
+    List<int> indexToRemoveThisFrame = new List<int>();
+
+    public void AddedEvent(float timeToWaitFromRoundStart, UnityAction eventToCall)
+    {
+        events.Add(new clockEvent(timeToWaitFromRoundStart, eventToCall));
+    }
+
+    public void RemoveEvent(UnityAction actionToRemove)
+    {
+        for (int index = 0; index < events.Count; index++)
+        {
+            if (events[index].action == actionToRemove)
+            {
+                indexToRemoveThisFrame.Add(index);
+                events[index].MarkForDeletion();
+            }
+        }
+    }
+
+    public void RemoveEvent(UnityAction actionToRemove, float timeToWaitFromRoundStart)
+    {
+        //removes only the first element that matches both the action and the time
+
+        for(int index = 0; index < events.Count; index++)
+        {
+            if (events[index].action == actionToRemove && events[index].timeFromStart == timeToWaitFromRoundStart)
+            {
+                indexToRemoveThisFrame.Add(index);
+                events[index].MarkForDeletion();
+                return;
+            }
+        }
+    }
+
+    void asyncRemoveEvents()
+    {
+        //this should happen once all of the current frame events have been ran - so that if an event removes itself or something else then it wont throw a null ref
+
+        indexToRemoveThisFrame.Reverse();
+
+        foreach(int index in indexToRemoveThisFrame)
+        {
+            events.RemoveAt(index);
+        }
+
+        indexToRemoveThisFrame.Clear();
+    }
+
+    void runEvents()
+    {
+        //this is a very inefficient function - however it will only be use once or twice so it should be fine
+        foreach (clockEvent CE in events)
+        {
+            if (timePassed > CE.timeFromStart && !CE.isMarkedForDeletion())
+            {
+                CE.action.Invoke();
+            }
+        }
+
+        asyncRemoveEvents();
+    }
 
     public void timerReset()
     {
+        timePassed = 0.0f;
         currentTime = roundTime;
         buildTime = defautBuildTime;
         fightTime = deafultFightTime;
@@ -72,6 +161,11 @@ public class Timer : MonoBehaviour
         timerRunning = false;
     }
 
+    public void ResumeTimer()
+    {
+        timerRunning = true;
+    }
+
     void Update()
     {
         if (!timerRunning)
@@ -80,6 +174,7 @@ public class Timer : MonoBehaviour
         if (currentTime > 0f)
         {
             currentTime -= Time.deltaTime;
+            timePassed += Time.deltaTime;
         }
 
         if (!fighting)
@@ -99,7 +194,7 @@ public class Timer : MonoBehaviour
 
         }
 
-
+        runEvents();
         UpdateTimerText();
 
         if (currentTime <= 6f)

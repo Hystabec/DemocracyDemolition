@@ -70,6 +70,12 @@ public class controlPCOverride : MonoBehaviour
             pScript.B();
         }
 
+        if(Input.GetKeyUp(KeyCode.Escape))
+        {
+            //Start button
+            pScript.StartButton();
+        }
+
         if (Input.GetKeyUp(KeyCode.Q))
         {
             //LB
