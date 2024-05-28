@@ -99,7 +99,7 @@ public class InGameManagerScript : MonoBehaviour
     [HideInInspector, SerializeField]
     private GameObject redConfetti, redFireworks, blueConfetti, blueFireworks, redWinText, blueWinText, redFireCentre, blueFireCentre;
 
-    [SerializeField]
+    [HideInInspector, SerializeField]
     ParticleSystem redCrowdConfetti, redCrowdStreamers, blueCrowdConfetti, blueCrowdStreamers;
 
     [SerializeField]
