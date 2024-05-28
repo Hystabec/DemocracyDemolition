@@ -74,7 +74,9 @@ public class InGameManagerScript : MonoBehaviour
     GameObject[] elementToHideWhenGameEnds, EndUIButtons;
 
     [SerializeField]
-    GameObject[] pauseMenuUIElements;
+    GameObject[] pauseMenuUIElements, objectsToShowOnPause;
+
+    bool gameIsPause = false;
 
     [SerializeField]
     float endButtonOffset = 266.0f;
@@ -415,16 +417,30 @@ public class InGameManagerScript : MonoBehaviour
         timerScript.animTriggered = false;
     }
 
+    public bool IsRoundPause()
+    {
+        return gameIsPause;
+    }
+
     public void PauseRound(playerScript caller)
     {
+        if (gameIsPause)
+            return;
+
+        gameIsPause = true;
         //pause time
         timerScript.StopTimer();
 
         player1.GetComponent<playerScript>().SwitchToUIMode();
         player2.GetComponent<playerScript>().SwitchToUIMode();
 
-        //find all projectiles and freeze there velocitys
+        foreach(GameObject go in objectsToShowOnPause)
+        {
+            go.SetActive(true);
+        }
 
+        //find all projectiles and freeze there velocitys
+        
         var projectiles = FindObjectsOfType<pooledProjectileScript>();
 
         foreach (pooledProjectileScript p in projectiles)
@@ -444,12 +460,27 @@ public class InGameManagerScript : MonoBehaviour
         pauseMenuOnwer = caller;
     }
 
+    public playerScript GetPauseMenuOwner()
+    {
+        return pauseMenuOnwer;
+    }
+
     public void UnpauseRound()
     {
+        if (!gameIsPause)
+            return;
+
+        gameIsPause = false;
+
         timerScript.ResumeTimer();
 
         player1.GetComponent<playerScript>().SwitchToPlayMode();
         player2.GetComponent<playerScript>().SwitchToPlayMode();
+
+        foreach (GameObject go in objectsToShowOnPause)
+        {
+            go.SetActive(false);
+        }
 
         var projectiles = FindObjectsOfType<pooledProjectileScript>();
 

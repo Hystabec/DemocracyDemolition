@@ -513,7 +513,15 @@ public class playerScript : MonoBehaviour
 
     public void StartButton()
     {
-        FindObjectOfType<InGameManagerScript>()?.PauseRound(this);
+        InGameManagerScript GMS = FindObjectOfType<InGameManagerScript>();
+
+        if (!GMS.IsRoundPause())
+            GMS.PauseRound(this);
+        else
+        {
+            if(GMS.GetPauseMenuOwner() == this)
+                GMS.UnpauseRound();
+        }
     }
 
     public void RB()

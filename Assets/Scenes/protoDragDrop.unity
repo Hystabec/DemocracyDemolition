@@ -51311,7 +51311,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1729778779}
         m_TargetAssemblyTypeName: InGameManagerScript, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: UnpauseRound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -88469,8 +88469,9 @@ MonoBehaviour:
   pauseMenuUIElements:
   - {fileID: 705266808}
   - {fileID: 1405455367}
-  - {fileID: 726018854}
+  objectsToShowOnPause:
   - {fileID: 455305088}
+  - {fileID: 726018854}
   endButtonOffset: 266
   redProgressBar: {fileID: 1776949178}
   blueProgressBar: {fileID: 1590926355}
