@@ -166,6 +166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
   maxBounceCount: 3
+  breakEffect: {fileID: 0}
 --- !u!96 &3331335234354423013
 TrailRenderer:
   serializedVersion: 3
@@ -300,6 +301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32d6055d72104da45a42a0c4d800b14f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  breakEffect: {fileID: 0}
 --- !u!114 &-2784249416038002205
 MonoBehaviour:
   m_ObjectHideFlags: 0

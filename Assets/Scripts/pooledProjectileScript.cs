@@ -11,9 +11,9 @@ public class pooledProjectileScript : MonoBehaviour
 
     int bounceCount = 0;
 
-    //[SerializeField]
-    //GameObject coconutParticles;
-    
+    [SerializeField]
+    AudioClip breakSoundClip;
+
     Vector2 unPausedVelocity = Vector2.zero;
     float unPausedGravity = 1.0f;
     public void Pause()
@@ -57,17 +57,21 @@ public class pooledProjectileScript : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         bounceCount++;
-
         //coconutParticles.SetActive(true);
 
-        if (bounceCount >= maxBounceCount)
-        {
-            bounceCount = 0;
 
-            DespawnProjectile();
-        }
+    if (bounceCount >= maxBounceCount)
+    {
+        bounceCount = 0;
+        FindFirstObjectByType<soundManager>().PlayOnce(breakSoundClip, 0.5f);
+        DespawnProjectile();
+    }
 
-        
+
+
+
+
+
 
         /*if (collision.gameObject.layer == LayerMask.NameToLayer("Block"))
         {

@@ -8,6 +8,9 @@ public class Projectile : MonoBehaviour
 
     private int bounceCount = 0;
 
+    [SerializeField]
+    ParticleSystem breakEffect;
+
     void Start()
     {
         col = GetComponent<PolygonCollider2D>();
