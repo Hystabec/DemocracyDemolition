@@ -280,7 +280,7 @@ public class InGameManagerScript : MonoBehaviour
             redProgressBar.fillAmount = redProgressBar.fillAmount + 0.25f;
         }
 
-        var p1Script = player1.GetComponent<playerScript>();
+        /*var p1Script = player1.GetComponent<playerScript>();
 
         if (p1Script.thrownProjectiles.Count > 0)
         {
@@ -302,7 +302,7 @@ public class InGameManagerScript : MonoBehaviour
             {
                 p2Script.despawnProjectile(pooledProj.gameObject, true);
             }
-        }
+        }*/
 
         callingPlayer.GetComponent<playerScript>().ProjInHandVisible(false);
 
@@ -503,6 +503,31 @@ public class InGameManagerScript : MonoBehaviour
 
     void endRound()
     {
+        //despawn projectiles
+        var p1Script = player1.GetComponent<playerScript>();
+
+        if (p1Script.thrownProjectiles.Count > 0)
+        {
+            List<GameObject> thrownProjectiles = p1Script.thrownProjectiles;
+
+            foreach (GameObject pooledProj in thrownProjectiles)
+            {
+                p1Script.despawnProjectile(pooledProj.gameObject, true);
+            }
+
+        }
+
+        var p2Script = player2.GetComponent<playerScript>();
+
+        if (p2Script.thrownProjectiles.Count > 0)
+        {
+            List<GameObject> thrownProjectiles2 = p2Script.thrownProjectiles;
+            foreach (GameObject pooledProj in thrownProjectiles2)
+            {
+                p2Script.despawnProjectile(pooledProj.gameObject, true);
+            }
+        }
+
         playerScript ps = player1.GetComponent<playerScript>();
         ps.clearAndDeleteBlockList();
         ps.resetAmmo();
