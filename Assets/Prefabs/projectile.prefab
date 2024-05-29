@@ -166,6 +166,8 @@ MonoBehaviour:
   owner: {fileID: 0}
   maxBounceCount: 3
   breakSoundClip: {fileID: 8300000, guid: c8da93710234bfd4bbd3a0a7249b46ed, type: 3}
+  trail: {fileID: 2361140333868703084}
+  testColour: {r: 0.023584902, g: 1, b: 0.14475356, a: 0}
 --- !u!1001 &500911763745245483
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -325,6 +327,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fdae6b0e1cd43fc439d5aa8edb8c5dbc, type: 3}
+--- !u!96 &2361140333868703084 stripped
+TrailRenderer:
+  m_CorrespondingSourceObject: {fileID: 7662746852851901495, guid: fdae6b0e1cd43fc439d5aa8edb8c5dbc, type: 3}
+  m_PrefabInstance: {fileID: 5373919389234870619}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4344707030108866624 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8563734535985279259, guid: fdae6b0e1cd43fc439d5aa8edb8c5dbc, type: 3}

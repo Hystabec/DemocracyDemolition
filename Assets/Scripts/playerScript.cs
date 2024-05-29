@@ -87,6 +87,7 @@ public class playerScript : MonoBehaviour
     [SerializeField]
     float throwForce = 10.0f;
 
+    public Color playerColour;
 
     private bool fightingStage = false;
 

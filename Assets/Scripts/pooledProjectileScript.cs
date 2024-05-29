@@ -16,6 +16,10 @@ public class pooledProjectileScript : MonoBehaviour
 
     Vector2 unPausedVelocity = Vector2.zero;
     float unPausedGravity = 1.0f;
+
+    public TrailRenderer trail;
+    public Color testColour;
+
     public void Pause()
     {
         Rigidbody2D rb = this.gameObject.GetComponent<Rigidbody2D>();
@@ -26,6 +30,18 @@ public class pooledProjectileScript : MonoBehaviour
 
         unPausedVelocity = rb.velocity;
         rb.velocity = Vector2.zero;
+    }
+
+    //Changes the colour of the trail depending on who throws it
+    public void Start()
+    {
+        playerScript pScript = owner.GetComponent<playerScript>();
+        if (pScript != null)
+        {
+            Color colour = pScript.playerColour;
+            trail.startColor = colour;
+            trail.endColor = colour;
+        }
     }
 
     public void UnPause()
