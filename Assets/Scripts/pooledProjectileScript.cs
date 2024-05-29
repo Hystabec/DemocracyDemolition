@@ -18,7 +18,6 @@ public class pooledProjectileScript : MonoBehaviour
     float unPausedGravity = 1.0f;
 
     public TrailRenderer trail;
-    public Color testColour;
 
     public void Pause()
     {
