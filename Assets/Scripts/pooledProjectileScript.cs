@@ -56,20 +56,23 @@ public class pooledProjectileScript : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        bounceCount++;
-        //coconutParticles.SetActive(true);
+        if (!collision.gameObject.CompareTag("Trampoline"))
+        {
+
+            bounceCount++;
+            //coconutParticles.SetActive(true);
 
 
-    if (bounceCount >= maxBounceCount)
-    {
-        bounceCount = 0;
-        FindFirstObjectByType<soundManager>().PlayOnce(breakSoundClip, 0.5f);
-        DespawnProjectile();
-    }
+            if (bounceCount >= maxBounceCount)
+            {
+                bounceCount = 0;
+                FindFirstObjectByType<soundManager>().PlayOnce(breakSoundClip, 0.5f);
+                DespawnProjectile();
+            }
 
 
 
-
+        }
 
 
 

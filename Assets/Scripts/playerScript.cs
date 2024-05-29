@@ -957,16 +957,21 @@ public class playerScript : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("projectile"))
         {
-                      
-            if (collision.gameObject.GetComponent<pooledProjectileScript>().owner != this)
-            {
-                FindObjectOfType<InGameManagerScript>().playerKilled(this.gameObject);
-            }
+            /*           
+             if (collision.gameObject.GetComponent<pooledProjectileScript>().owner != this)
+             {
+                 FindObjectOfType<InGameManagerScript>().playerKilled(this.gameObject);
+             }
 
-            else
-            {
-                Debug.Log("Own projectile");
-            }
+             else
+             {
+                 Debug.Log("Own projectile");
+             }
+
+             */
+
+            FindObjectOfType<InGameManagerScript>().playerKilled(this.gameObject);
+
         }
     }
 }
