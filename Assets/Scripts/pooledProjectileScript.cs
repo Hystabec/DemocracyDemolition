@@ -34,7 +34,8 @@ public class pooledProjectileScript : MonoBehaviour
     //Changes the colour of the trail depending on who throws it
     public void Start()
     {
-        playerScript pScript = owner.GetComponent<playerScript>();
+        playerScript pScript = null;
+        owner?.TryGetComponent<playerScript>(out pScript);
         if (pScript != null)
         {
             Color colour = pScript.playerColour;
