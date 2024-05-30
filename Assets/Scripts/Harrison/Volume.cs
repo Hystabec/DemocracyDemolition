@@ -28,6 +28,7 @@ public class Volume : MonoBehaviour
     {
         AudioListener.volume = volumeSlider.value;
         Save();
+        FindObjectOfType<adjustVolume>().UpdateVolumeFromPref();
         text.text = "Volume: " + (int)(100 * volumeSlider.value) + "%";
     }
 
