@@ -68,7 +68,7 @@ public class LauncherTrapScript : MonoBehaviour
 
     public void CustomOnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("projectile") && canFire)
+        if (other.gameObject.layer == LayerMask.NameToLayer("projectile") && canFire) 
         {
             RaycastHit2D ray = Physics2D.Raycast(firePosition.transform.position, firePosition.transform.right, projectileRadius);
 

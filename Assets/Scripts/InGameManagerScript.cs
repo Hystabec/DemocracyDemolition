@@ -528,6 +528,16 @@ public class InGameManagerScript : MonoBehaviour
             }
         }
 
+        var projectiles = FindObjectsOfType<pooledProjectileScript>();
+
+        foreach (pooledProjectileScript p in projectiles)
+        {
+            if(p.owner == null)
+            {
+                p.gameObject.SetActive(false);
+            }
+        }
+
         playerScript ps = player1.GetComponent<playerScript>();
         ps.clearAndDeleteBlockList();
         ps.resetAmmo();
