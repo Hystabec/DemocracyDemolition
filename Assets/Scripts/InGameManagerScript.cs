@@ -733,6 +733,9 @@ public class InGameManagerScript : MonoBehaviour
         player1.GetComponent<playerScript>().ProjInHandVisible(true);
         player2.GetComponent<playerScript>().ProjInHandVisible(true);
 
+        player1.GetComponent<playerScript>().tlScript.SetVisible();
+        player2.GetComponent<playerScript>().tlScript.SetVisible();
+
         player1.GetComponent<playerScript>().CanFight(true);
         player2.GetComponent<playerScript>().CanFight(true);
         StartCoroutine(RoundTypeText("Fight!"));

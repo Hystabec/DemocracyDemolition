@@ -13,11 +13,21 @@ public class TrajectoryLine : MonoBehaviour
     [SerializeField]
     private int numberPoints;
 
-    Vector2 mousePos;
-    
+    [SerializeField]
+    private float force;
+
+    private Vector2 direction;
+
+    [SerializeField]
+    private playerScript pScript;
+
+    [SerializeField]
+    private GameObject fireCentre;
     
     void Start()
     {
+        force = pScript.GetThrowForce();
+
         points = new GameObject[numberPoints];
 
         for( int i = 0; i < numberPoints; i++ )
@@ -25,12 +35,39 @@ public class TrajectoryLine : MonoBehaviour
             points[i] = Instantiate(pointPrefab, transform.position, Quaternion.identity);
         }
 
-
     }
 
     void Update()
     {
         
+        for(int i =0; i < points.Length; i++)
+        {
+            points[i].transform.position = PointPosition(i * 0.1f);
+        }
+        direction = fireCentre.transform.right;
+    }
+
+    Vector2 PointPosition(float t)
+    {
+        Vector2 currentPointPos = (Vector2)transform.position + (direction.normalized * force * t) + 0.5f * Physics2D.gravity * (t * t);
+
+        return currentPointPos;
+    }
+
+    public void SetInvisible()
+    {
+        for (int i = 0; i < points.Length; i++)
+        {
+            points[i].GetComponent<SpriteRenderer>().enabled = false;
+        }
+    }
+
+    public void SetVisible()
+    {
+        for (int i = 0; i < points.Length; i++)
+        {
+            points[i].GetComponent<SpriteRenderer>().enabled = true;
+        }
     }
 
 

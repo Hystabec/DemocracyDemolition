@@ -111,6 +111,8 @@ public class playerScript : MonoBehaviour
     public bool gameEnded;
     private bool rsIconRunning = false;
 
+    public TrajectoryLine tlScript;
+
   /*
     private bool onCooldown;
 
@@ -131,6 +133,11 @@ public class playerScript : MonoBehaviour
     private bool showLS, showRS;
 
     bool outOfAmmoAnProjectilesFinished = false;
+
+    public float GetThrowForce()
+    {
+        return throwForce;
+    }
 
     public void ResetData()
     {
@@ -200,6 +207,8 @@ public class playerScript : MonoBehaviour
         lsIcon.SetActive(true);
         showRS = false;
         rsIcon.SetActive(false);
+
+        tlScript.SetInvisible();
 
         StartCoroutine(showLSIcon());
     }
@@ -635,6 +644,7 @@ public class playerScript : MonoBehaviour
         canThrow = false;
         ammoUiScript.Thrown();
         ammoUiScript.DisabledThrowing();
+        tlScript.SetInvisible();
 
         yield return new WaitForSeconds(throwCooldown);
         if (RemainingAmmo > 0)
@@ -646,6 +656,7 @@ public class playerScript : MonoBehaviour
         }
         canThrow = true;
         ammoUiScript.EnabledThrowing();
+        tlScript.SetVisible();
 
     }
 

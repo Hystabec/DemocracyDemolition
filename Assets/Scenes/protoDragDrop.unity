@@ -69113,6 +69113,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1224607315}
   - component: {fileID: 1224607316}
+  - component: {fileID: 1224607317}
   m_Layer: 9
   m_Name: FireMarker
   m_TagString: Untagged
@@ -69187,6 +69188,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1224607317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1224607314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6f001ed8d4e1644892535cf9b6c26e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointPrefab: {fileID: 2817701793428516152, guid: 031a62ba4fdaca44783e689344abb739, type: 3}
+  numberPoints: 4
+  force: 1
+  pScript: {fileID: 1303902995}
+  fireCentre: {fileID: 16386615}
 --- !u!1 &1227414213
 GameObject:
   m_ObjectHideFlags: 0
@@ -70817,6 +70835,7 @@ MonoBehaviour:
   MaxAngle: 160
   throwCooldown: 1.5
   gameEnded: 0
+  tlScript: {fileID: 1224607317}
   ammoUiScript: {fileID: 1303903004}
   rsIcon: {fileID: 906999003}
   lsIcon: {fileID: 981711434}
@@ -70846,7 +70865,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1303902994}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a2f1df829cc07645abe01b5afce4d3c, type: 3}
   m_Name: 
@@ -100772,6 +100791,7 @@ MonoBehaviour:
   MaxAngle: -50
   throwCooldown: 1.5
   gameEnded: 0
+  tlScript: {fileID: 1224607317}
   ammoUiScript: {fileID: 1865346988}
   rsIcon: {fileID: 144040891}
   lsIcon: {fileID: 1835976219}
