@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class TrajectoryLine : MonoBehaviour
@@ -73,8 +72,11 @@ public class TrajectoryLine : MonoBehaviour
         }
     }
 
-    public void SetVisible()
+    public void SetVisible(bool gameHasEnded = false)
     {
+        if (gameHasEnded)
+            return;
+
         for (int i = 0; i < points.Length; i++)
         {
             if (i == 0)

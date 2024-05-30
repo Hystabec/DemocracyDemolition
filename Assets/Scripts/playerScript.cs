@@ -656,7 +656,7 @@ public class playerScript : MonoBehaviour
         }
         canThrow = true;
         ammoUiScript.EnabledThrowing();
-        tlScript.SetVisible();
+        tlScript.SetVisible(gameEnded);
 
     }
 
