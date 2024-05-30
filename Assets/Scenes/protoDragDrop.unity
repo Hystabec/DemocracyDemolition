@@ -4027,6 +4027,7 @@ GameObject:
   m_Component:
   - component: {fileID: 204436786}
   - component: {fileID: 204436787}
+  - component: {fileID: 204436788}
   m_Layer: 9
   m_Name: FireMarker
   m_TagString: Untagged
@@ -4101,6 +4102,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &204436788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204436785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6f001ed8d4e1644892535cf9b6c26e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointPrefab: {fileID: 2817701793428516152, guid: 031a62ba4fdaca44783e689344abb739, type: 3}
+  numberPoints: 4
+  force: 1
+  pScript: {fileID: 1865346980}
+  fireCentre: {fileID: 231040011}
 --- !u!1 &205946612
 GameObject:
   m_ObjectHideFlags: 0
@@ -61462,16 +61480,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10dbadc88cdde804bbaac3cedd18b226, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  elementsToDisable:
-  - {fileID: 0}
-  - {fileID: 636991115}
-  - {fileID: 1543693433}
-  - {fileID: 1391658361}
-  - {fileID: 1869428360}
-  - {fileID: 4271245}
-  - {fileID: 298309875}
-  - {fileID: 1847258687}
-  - {fileID: 1559377904}
 --- !u!1 &985795005
 GameObject:
   m_ObjectHideFlags: 0
@@ -70879,7 +70887,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1303902994}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a2f1df829cc07645abe01b5afce4d3c, type: 3}
   m_Name: 
@@ -100805,7 +100813,7 @@ MonoBehaviour:
   MaxAngle: -50
   throwCooldown: 1.5
   gameEnded: 0
-  tlScript: {fileID: 1224607317}
+  tlScript: {fileID: 204436788}
   ammoUiScript: {fileID: 1865346988}
   rsIcon: {fileID: 144040891}
   lsIcon: {fileID: 1835976219}
@@ -100880,7 +100888,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1865346978}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a2f1df829cc07645abe01b5afce4d3c, type: 3}
   m_Name: 

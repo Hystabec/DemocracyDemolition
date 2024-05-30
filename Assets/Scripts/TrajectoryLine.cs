@@ -32,6 +32,9 @@ public class TrajectoryLine : MonoBehaviour
 
         for( int i = 0; i < numberPoints; i++ )
         {
+            if (i == 0)
+                continue;
+
             points[i] = Instantiate(pointPrefab, transform.position, Quaternion.identity);
         }
 
@@ -42,6 +45,9 @@ public class TrajectoryLine : MonoBehaviour
         
         for(int i =0; i < points.Length; i++)
         {
+            if (i == 0)
+                continue;
+
             points[i].transform.position = PointPosition(i * 0.1f);
         }
         direction = fireCentre.transform.right;
@@ -58,6 +64,9 @@ public class TrajectoryLine : MonoBehaviour
     {
         for (int i = 0; i < points.Length; i++)
         {
+            if (i == 0)
+                continue;
+
             points[i].GetComponent<SpriteRenderer>().enabled = false;
         }
     }
@@ -66,6 +75,9 @@ public class TrajectoryLine : MonoBehaviour
     {
         for (int i = 0; i < points.Length; i++)
         {
+            if (i == 0)
+                continue;
+
             points[i].GetComponent<SpriteRenderer>().enabled = true;
         }
     }
