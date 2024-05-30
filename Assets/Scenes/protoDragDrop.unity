@@ -4115,8 +4115,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointPrefab: {fileID: 2817701793428516152, guid: 031a62ba4fdaca44783e689344abb739, type: 3}
-  numberPoints: 4
+  numberPoints: 7
   force: 1
+  lengthOfTrej: 2
   pScript: {fileID: 1865346980}
   fireCentre: {fileID: 231040011}
 --- !u!1 &205946612
@@ -69223,8 +69224,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointPrefab: {fileID: 2817701793428516152, guid: 031a62ba4fdaca44783e689344abb739, type: 3}
-  numberPoints: 4
+  numberPoints: 7
   force: 1
+  lengthOfTrej: 2
   pScript: {fileID: 1303902995}
   fireCentre: {fileID: 16386615}
 --- !u!1 &1227414213
