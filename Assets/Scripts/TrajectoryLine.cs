@@ -15,6 +15,8 @@ public class TrajectoryLine : MonoBehaviour
 
     [SerializeField]
     private float force;
+    [SerializeField]
+    float lengthOfTrej= 2.0f;
 
     private Vector2 direction;
 
@@ -55,7 +57,7 @@ public class TrajectoryLine : MonoBehaviour
 
     Vector2 PointPosition(float t)
     {
-        Vector2 currentPointPos = (Vector2)transform.position + (direction.normalized * force * t) + 0.5f * Physics2D.gravity * (t * t);
+        Vector2 currentPointPos = (Vector2)transform.position + (direction.normalized * (force) * (t /lengthOfTrej)) + 0.5f * Physics2D.gravity * ((t/lengthOfTrej) * (t/ lengthOfTrej));
 
         return currentPointPos;
     }
